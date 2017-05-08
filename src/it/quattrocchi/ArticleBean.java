@@ -5,7 +5,7 @@ import com.mysql.jdbc.Blob;
 public class ArticleBean {
 	
 	public ArticleBean(){
-		codice="";
+		nome="";
 		tipo="";
 		marca="";
 		prezzo=-1;
@@ -16,12 +16,12 @@ public class ArticleBean {
 		img3=null;
 	}
 	
-	public String getCodice(){
-		return codice;
+	public String getNome(){
+		return nome;
 	}
 	
-	public void setCodice(String codice){
-		this.codice=codice;
+	public void setNome(String nome){
+		this.nome=nome;
 	}
 	
 	public String getTipo(){
@@ -88,7 +88,7 @@ public class ArticleBean {
 		this.img3=img3;
 	}
 	
-	String codice;
+	String nome;
 	String tipo;
 	String marca;
 	float prezzo;

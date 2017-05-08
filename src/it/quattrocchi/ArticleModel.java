@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import com.mysql.jdbc.Blob;
+
 public class ArticleModel {
 	
 	private static final String TABLE_NAME = "Articolo";
@@ -36,7 +38,7 @@ public class ArticleModel {
 		}
 
 		try {
-			connection = DriverMaagerConnectionPool.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = preparedStatement.executeQuery();
@@ -44,15 +46,15 @@ public class ArticleModel {
 			while (rs.next()) {
 				ArticleBean bean = new ArticleBean();
 
-				bean.setCodice(rs.getInt("CODE"));
-				bean.setTipo(rs.getString("NAME"));
-				bean.setMarca(rs.getString("DESCRIPTION"));
-				bean.setPrezzo(rs.getInt("PRICE"));
-				bean.setGradazione(rs.getInt("QUANTITY"));
-				bean.setNumeroPezziDisponibili(rs.getInt("PRICE"));
-				bean.setImg1(rs.getInt("QUANTITY"));
-				bean.setImg2(rs.getInt("QUANTITY"));
-				bean.setImg3(rs.getInt("QUANTITY"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setTipo(rs.getString("Tipo"));
+				bean.setMarca(rs.getString("Marca"));
+				bean.setPrezzo(rs.getFloat("Prezzo"));
+				bean.setGradazione(rs.getFloat("Gradazione"));
+				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
+				bean.setImg1((Blob) rs.getBlob("Img1"));
+				bean.setImg2((Blob) rs.getBlob("Img2"));
+				bean.setImg3((Blob) rs.getBlob("Img3"));
 				products.add(bean);
 			}
 
@@ -61,7 +63,7 @@ public class ArticleModel {
 				if (preparedStatement != null)
 					preparedStatement.close();
 			} finally {
-				DriverMaagerConnectionPool.releaseConnection(connection);
+				DriverManagerConnectionPool.releaseConnection(connection);
 			}
 		}
 		return products;
