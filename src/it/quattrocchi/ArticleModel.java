@@ -7,19 +7,52 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import it.quattrocchi.DriverManagerConnectionPool;
+
 public class ArticleModel {
 	
 	private static final String TABLE_NAME = "Articolo";
 	
 	public void doSave(ArticleBean product) throws SQLException{
 		
+		Connection conn = null;
+		PreparedStatement stm = null;
+		
+		String query = "INSERT INTO" + TABLE_NAME + "(?,?,?,?,?,?,?,?,?)";
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, product.getNome());
+			stm.setString(2, product.getMarca());
+			stm.setString(3, product.getTipo());
+			stm.setInt(4, product.getNumeroPezziDisponibili());
+			stm.setFloat(5, product.getPrezzo());
+			stm.setFloat(6,product.getGradazione());
+			stm.setString(7, product.getImg1());
+			stm.setString(8, product.getImg2());
+			stm.setString(9, product.getImg3());
+			
+			stm.executeUpdate();
+			
+			conn.commit();
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
 	}
 
 	public boolean doDelete(int code) throws SQLException{
 		return false;
 	}
 
-	public ArticleBean doRetrieveByKey(int code) throws SQLException{
+	public ArticleBean doRetrieveByKey(String nome) throws SQLException{
 		return null;
 	}
 	
