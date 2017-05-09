@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import com.mysql.jdbc.Blob;
-
 public class ArticleModel {
 	
 	private static final String TABLE_NAME = "Articolo";

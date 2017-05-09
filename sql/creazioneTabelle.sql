@@ -1,5 +1,5 @@
-create schema quattrocchiBD;
-use quattrocchiBD;
+create schema quattrocchiDB;
+use quattrocchiDB;
 
 create table Cliente(
 	CF char(16) primary key,
@@ -75,22 +75,23 @@ create table Esecuzione(
 
 create table Utilizzo(
 	Ordine varchar(36) not null, 
-	CartcaCredito char(16) not null,
+	CartaCredito decimal(16) not null,
     primary key(Ordine, CartaCredito),
     foreign key (Ordine) references Ordine(Codice),
-    foreign key (CartaCredito) references CartaCredito(CC)
+    foreign key (CartaCredito) references CartaCredito(NumeroCC)
 );
 
 create table Articolo(
-	Nome varchar(20) primary key,
-    Marca varchar(30) not null,
-    Tipo varchar(15) not null,
+	Nome varchar(40) not null,
+    Marca varchar(20) not null,
+    Tipo varchar(20) not null,
     NumeroPezziDisponibili decimal(3) not null,
     Prezzo decimal(6,2) not null,
     Gradazione decimal(4,2),
     img1 varchar(30),
     img2 varchar(30),
-    img3 varchar(30)
+    img3 varchar(30),
+    primary key(Nome, Marca)
 );
 
 create table Appartenenza(
