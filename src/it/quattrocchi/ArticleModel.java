@@ -48,12 +48,73 @@ public class ArticleModel {
 		}
 	}
 
-	public boolean doDelete(int code) throws SQLException{
-		return false;
+	public boolean doDelete(String nome) throws SQLException{
+		
+		Connection conn = null;
+		PreparedStatement stm = null;
+		
+		String query = "DELETE FROM" + TABLE_NAME + "WHERE NOME = ?";
+		
+		int result = 0;
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			
+			result = stm.executeUpdate();
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return (result != 0);
 	}
 
 	public ArticleBean doRetrieveByKey(String nome) throws SQLException{
-		return null;
+		
+		Connection conn = null;
+		PreparedStatement stm  = null;
+		
+		ArticleBean bean = new ArticleBean();
+		
+		String query = "SELECT * FROM " + TABLE_NAME + "WHERE NOME = ?";
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				bean.setNome(rs.getString("nome"));
+				bean.setMarca(rs.getString("marca"));
+				bean.setTipo(rs.getString("tipo"));
+				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
+				bean.setPrezzo(rs.getFloat("prezzo"));
+				bean.setGradazione(rs.getFloat("gradazione"));
+				bean.setImg1(rs.getString("img1"));
+				bean.setImg2(rs.getString("img2"));
+				bean.setImg3(rs.getString("img3"));	
+			}
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		
+		return bean;
 	}
 	
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{
