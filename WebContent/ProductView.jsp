@@ -1,12 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%
+	Collection<?> products = (Collection<?>) request.getAttribute("products");
+	ArticleBean product = (ArticleBean) request.getAttribute("product");
+	Cart cart = (Cart) request.getAttribute("cart");
+%>
+
 <!DOCTYPE html>
 <html>
-
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.Cart"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>quattrocchi.it</title>
+<link type="text/css" rel="stylesheet" href="css/materialize.css">
 </head>
 
 <body>
@@ -57,7 +64,7 @@
 		<input type="hidden" name="action" value="insert"> 
 		
 			<label
-			for="code">Codice:</label> <br> <input name="code" type="text"
+			for="code">Code:</label> <br> <input name="code" type="text"
 			maxlength="20" required placeholder="enter code"><br> 
 			
 			<label
@@ -76,5 +83,23 @@
 			type="submit" value="Send"><input type="reset" value="Reset">
 
 	</form>
+	
+	<% if(cart != null) { %>
+		<h2>Cart</h2>
+		<table>
+		<tr>
+			<th>Name</th>
+			<th>Action</th>
+		</tr>
+		<% ArrayList<ArticleBean> prodcart = cart.getProducts(); 	
+		   for(ArticleBean beancart: prodcart) {
+		%>
+		<tr>
+			<td><%=beancart.getNome()%></td>
+			<td><a href="product?action=deleteC&id=<%=beancart.getNome()%>">Delete from cart</a></td>
+		</tr>
+		<%} %>
+	</table>		
+	<% } %>	
 </body>
 </html>
