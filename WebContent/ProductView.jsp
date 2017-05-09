@@ -9,14 +9,31 @@
 
 <!DOCTYPE html>
 <html>
-<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.Cart"%>
+<%@ page contentType="text/html; charset=UTF-8"
+	import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.Cart"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>quattrocchi.it</title>
-<link type="text/css" rel="stylesheet" href="css/materialize.css">
+
+<!--Import Google Icon Font-->
+<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+	
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+	media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
+ 	
+ 	<!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+	
 	<h2>Products</h2>
 	<a href="product">List</a>
 	<table>
@@ -61,32 +78,22 @@
 	</table>
 	<h2>Insert</h2>
 	<form method="post">
-		<input type="hidden" name="action" value="insert"> 
-		
-			<label
+		<input type="hidden" name="action" value="insert"> <label
 			for="code">Code:</label> <br> <input name="code" type="text"
-			maxlength="20" required placeholder="enter code"><br> 
-			
-			<label
+			maxlength="20" required placeholder="enter code"><br> <label
 			for="brand">Brand:</label> <br> <input name="brand" type="text"
-			maxlength="20" required placeholder="enter brand"><br> 
-			
-			<label
+			maxlength="20" required placeholder="enter brand"><br> <label
 			for="price">Price:</label> <br> <input name="price"
-			type="number" min="0" value="0" required><br> 
-			
-			<label
+			type="number" min="0" value="0" required><br> <label
 			for="quantity">Quantity:</label><br> <input name="quantity"
-			type="number" min="1" value="1" required><br> 
-			
-			<input
+			type="number" min="1" value="1" required><br> <input
 			type="submit" value="Send"><input type="reset" value="Reset">
 
 	</form>
-	
+
 	<% if(cart != null) { %>
-		<h2>Cart</h2>
-		<table>
+	<h2>Cart</h2>
+	<table>
 		<tr>
 			<th>Name</th>
 			<th>Action</th>
@@ -96,10 +103,11 @@
 		%>
 		<tr>
 			<td><%=beancart.getNome()%></td>
-			<td><a href="product?action=deleteC&id=<%=beancart.getNome()%>">Delete from cart</a></td>
+			<td><a href="product?action=deleteC&id=<%=beancart.getNome()%>">Delete
+					from cart</a></td>
 		</tr>
 		<%} %>
-	</table>		
-	<% } %>	
+	</table>
+	<% } %>
 </body>
 </html>
