@@ -52,9 +52,9 @@ public class ArticleModel {
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setGradazione(rs.getFloat("Gradazione"));
 				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
-				bean.setImg1((Blob) rs.getBlob("Img1"));
-				bean.setImg2((Blob) rs.getBlob("Img2"));
-				bean.setImg3((Blob) rs.getBlob("Img3"));
+				bean.setImg1(rs.getString("Img1"));
+				bean.setImg2(rs.getString("Img2"));
+				bean.setImg3(rs.getString("Img3"));
 				products.add(bean);
 			}
 

@@ -88,9 +88,9 @@ create table Articolo(
     NumeroPezziDisponibili decimal(3) not null,
     Prezzo decimal(6,2) not null,
     Gradazione decimal(4,2),
-    img1 blob,
-    img2 blob,
-    img3 blob
+    img1 varchar(30),
+    img2 varchar(30),
+    img3 varchar(30)
 );
 
 create table Appartenenza(
