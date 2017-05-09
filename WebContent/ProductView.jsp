@@ -19,7 +19,7 @@
 <!--Import Google Icon Font-->
 <link href="http://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-	
+
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="css/materialize.min.css"
 	media="screen,projection" />
@@ -29,11 +29,37 @@
 </head>
 
 <body>
- 	
- 	<!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.min.js"></script>
-	
+
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript"
+		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/materialize.min.js"></script>
+
+	<div id="index-banner" class="parallax-container">
+		<div class="section no-pad-bot">
+			<div class="container">
+				<br>
+				<br>
+				<h1 class="header center teal-text text-lighten-2">quattrocchi.it</h1>
+				<div class="row center">
+					<h5 class="header col s12 light">vuoi vedere Luca Reccia nudo?</h5>
+				</div>
+				<div class="row center">
+					<a href="http://materializecss.com/getting-started.html"
+						id="download-button"
+						class="btn-large waves-effect waves-light teal lighten-1">Clicca
+						qui</a>
+				</div>
+				<br>
+				<br>
+
+			</div>
+		</div>
+		<div class="parallax">
+			<img src="image/welcomeimage.JPG" alt="welcome image">
+		</div>
+	</div>
+
 	<h2>Products</h2>
 	<a href="product">List</a>
 	<table>
