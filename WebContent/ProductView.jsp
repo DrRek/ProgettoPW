@@ -19,81 +19,96 @@
 <!-- CSS  -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-	
+
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
-	
+
 <link href="css/style.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
-	
+
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
-    
-    <div class="full-panel" id="home">  
-    
-    	<div id="copertina">
-    		<h1>quattrocchi.it</h1>
-    	</div>    
-    
-    </div> 
 
-    <div class="my-container">
+	<div class="full-panel" id="home">
 
-			<div class="row">
+		<div id="copertina">
+			<h1>quattrocchi.it</h1>
+		</div>
 
-			  <div class="col-md-12 full-panel intro">
-			  	<div class="in-panel" id="intro">
-			  		<h2>quattrocchi.it</h2>
-			  		<p><strong>un rivoluzionario sito di ecommerce nel mondo dell'ottica</strong> 
-			  		<br> <br> With a population of 3.3 million people, Berlin is Germany's largest city and is the second most populous city proper and the seventh most populous urban area in the European Union. 
-			  		<br> <br> Located in northeastern Germany on the River Spree, it is the center of the Berlin-Brandenburg Metropolitan Region, which has about 4½ million residents from over 180 nations. 
-			  		<br> <br> Due to its location in the European Plain, Berlin is influenced by a temperate seasonal climate. Around one third of the city's area is composed of forests, parks, gardens, rivers and lakes.
-			  		<br/><cite><a href="http://en.wikipedia.org/wiki/Berlin">Wikipedia</a></cite></p>
-			  	</div>
-			  </div>
-			  
-			  
-			  <div class="col-md-12 full-panel people">
-			  	<div class="in-panel" id="people">
-			  		
-			  	</div>
-			  </div>
-			  		
-			
-			  <div class="col-md-12 full-panel work">
-			  	<div class="in-panel" id="work">
-			  		<h2>04. Work</h2>
-			  		<p><strong>Industries that do business in the creative arts and entertainment are an important and sizable sector of the economy of Berlin.</strong>  <br> <br> The creative arts sector comprises music, film, advertising, architecture, art, design, fashion, performing arts, publishing, R&D, software, TV, radio, and video games. <br> <br>  Around 22,600 creative enterprises, predominantly SMEs, generated over 18,6 billion Euro in total revenue. Berlin's creative industries have contributed an estimated 20% of Berlin's gross domestic product in 2005.			  		
-			  		<br/><cite><a href="http://en.wikipedia.org/wiki/Berlin">Wikipedia</a></cite></p>
-			  	</div>
-			  </div>
-			  		
-			  		
-			  <div class="col-md-12 full-panel street">
-			  	<div class="in-panel" id="street">
-			  		
-			  	</div>
-			  </div>
-			  		 
+	</div>
+
+	<div class="my-container">
+
+		<div class="row">
+
+			<div class="col-md-12 full-panel intro">
+				<div class="in-panel" id="intro">
+					<h2>quattrocchi.it</h2>
+					<p>
+						<strong>un rivoluzionario sito di ecommerce nel mondo
+							dell'ottica</strong> <br> <br> With a population of 3.3 million
+						people, Berlin is Germany's largest city and is the second most
+						populous city proper and the seventh most populous urban area in
+						the European Union. <br> <br> Located in northeastern
+						Germany on the River Spree, it is the center of the
+						Berlin-Brandenburg Metropolitan Region, which has about 4½ million
+						residents from over 180 nations. <br> <br> Due to its
+						location in the European Plain, Berlin is influenced by a
+						temperate seasonal climate. Around one third of the city's area is
+						composed of forests, parks, gardens, rivers and lakes. <br />
+						<cite><a href="http://en.wikipedia.org/wiki/Berlin">Wikipedia</a></cite>
+					</p>
+				</div>
 			</div>
 
 
+			<div class="col-md-12 full-panel people">
+				<div class="in-panel" id="people"></div>
+			</div>
 
-    </div><!-- /.container -->
 
+			<div class="col-md-12 full-panel work">
+				<div class="in-panel" id="work">
+					<h2>04. Work</h2>
+					<p>
+						<strong>Industries that do business in the creative arts
+							and entertainment are an important and sizable sector of the
+							economy of Berlin.</strong> <br> <br> The creative arts sector
+						comprises music, film, advertising, architecture, art, design,
+						fashion, performing arts, publishing, RD, software, TV, radio,
+						and video games. <br> <br> Around 22,600 creative
+						enterprises, predominantly SMEs, generated over 18,6 billion Euro
+						in total revenue. Berlin's creative industries have contributed an
+						estimated 20% of Berlin's gross domestic product in 2005. <br />
+						<cite><a href="http://en.wikipedia.org/wiki/Berlin">Wikipedia</a></cite>
+					</p>
+				</div>
+			</div>
+
+
+			<div class="col-md-12 full-panel street">
+				<div class="in-panel" id="street"></div>
+			</div>
+
+		</div>
+
+
+
+	</div>
+	<!-- /.container -->
 
 
 	<h2>Products</h2>
-	<a href="product">List</a>
+	<a href="article">List</a>
 	<table>
 		<thead>
 			<tr>
-				<th>Codice articolo |Sort</a></th>
-				<th>marca |Sort</a></th>
-				<th>prezzo|Sort</a></th>
+				<th>Codice articolo |<a>Sort</a></th>
+				<th>marca |<a>Sort</a></th>
+				<th>prezzo|<a>Sort</a></th>
 				<th>numero pezzi disponibili</th>
 				<th>Action</th>
 			</tr>
@@ -115,8 +130,8 @@
 		<thead>
 			<tr>
 				<th>Codice articolo <a href="product?sort=code">Sort</a></th>
-				<th>marca <a href="product?sort=name">Sort</a></th>
-				<th>prezzo <a href="product?sort=description">Sort</a></th>
+				<th>marca <a href="article?sort=name">Sort</a></th>
+				<th>prezzo <a href="articlet?sort=description">Sort</a></th>
 				<th>numero pezzi disponibili</th>
 			</tr>
 		</thead>
@@ -157,7 +172,7 @@
 		%>
 		<tr>
 			<td><%=beancart.getNome()%></td>
-			<td><a href="product?action=deleteC&id=<%=beancart.getNome()%>">Delete
+			<td><a href="article?action=deleteC&id=<%=beancart.getNome()%>">Delete
 					from cart</a></td>
 		</tr>
 		<%
@@ -167,7 +182,8 @@
 	<%
 		}
 	%>
-	  <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"
+		type="text/javascript"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
