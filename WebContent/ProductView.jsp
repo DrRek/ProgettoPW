@@ -30,10 +30,12 @@
 
 <body>
 
+<%@ include file="header.jsp" %>
+
 	<div class="full-panel" id="home">
 
 		<div id="copertina">
-			<h1>quattrocchi.it</h1>
+			<center>quattrocchi.it</center>
 		</div>
 
 	</div>
