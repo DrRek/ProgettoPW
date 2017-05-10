@@ -24,8 +24,8 @@ public class DriverManagerConnectionPool  {
 		String ip = "localhost";
 		String port = "3306";
 		String db = "QuattrocchiDB";
-		String username = "root";
-		String password = "werty5";
+		String username = "progetto";
+		String password = "pw";
 
 		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db, username, password);
 
