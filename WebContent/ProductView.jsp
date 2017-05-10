@@ -103,7 +103,7 @@
 
 	<h2>Products</h2>
 	<a href="article">List</a>
-	<table>
+	<table class="table-bordered">
 		<thead>
 			<tr>
 				<th>Nome</th>
@@ -140,7 +140,7 @@
 		%>
 	</table>
 	<h2>Details</h2>
-	<table>
+	<table class="table-bordered">
 		<thead>
 			<tr>
 				<th>Codice articolo <a href="product?sort=code">Sort</a></th>
