@@ -100,76 +100,88 @@
 	</div>
 	<!-- /.container -->
 
-
-	<h2>Products</h2>
-	<a href="article">List</a>
-	<table class="table-bordered">
-		<thead>
+	<div class="container">
+		<h2>Products</h2>
+		<a href="article">List</a>
+		<table class="table-bordered">
+			<thead>
+				<tr>
+					<th><a href="article?sort=name">Nome</a></th>
+					<th><a href="article?sort=type">Tipo</a></th>
+					<th><a href="articlet?sort=brand">Marca</a></th>
+					<th><a href="articlet?sort=price">Prezzo</a></th>
+					<th>Disponibilità</th>
+				</tr>
+			</thead>
+			<%
+				if (products != null && products.size() != 0) {
+					Iterator<?> it = products.iterator();
+					while (it.hasNext()) {
+						ArticleBean bean = (ArticleBean) it.next();
+			%>
 			<tr>
-				<th>Nome</th>
-				<th>Tipo</th>
-				<th>Marca</th>
-				<th>Prezzo</th>
-				<th>Disponibilità</th>
+				<td><%=bean.getNome()%></td>
+				<td><%=bean.getTipo()%></td>
+				<td><%=bean.getMarca()%></td>
+				<td><%=bean.getPrezzo()%></td>
+				<td><%=bean.getNumeroPezziDisponibili()%></td>
+				<td><a href="product?action=delete&id=<%=bean.getNome()%>">Delete</a><br>
+					<a href="product?action=read&id=<%=bean.getNome()%>">Details</a></td>
 			</tr>
-		</thead>
-		<%
-			if (products != null && products.size() != 0) {
-				Iterator<?> it = products.iterator();
-				while (it.hasNext()) {
-					ArticleBean bean = (ArticleBean) it.next();
-		%>
-		<tr>
-			<td><%=bean.getNome()%></td>
-			<td><%=bean.getTipo()%></td>
-			<td><%=bean.getMarca()%></td>
-			<td><%=bean.getPrezzo()%></td>
-			<td><%=bean.getNumeroPezziDisponibili()%></td>
-			<td><a href="product?action=delete&id=<%=bean.getNome()%>">Delete</a><br>
-				<a href="product?action=read&id=<%=bean.getNome()%>">Details</a></td>
-		</tr>
-		<%
+			<%
+					}
+				} else {
+			%>
+			<tr>
+				<td colspan="6">No products available</td>
+			</tr>
+			<%
 				}
-			} else {
-		%>
-		<tr>
-			<td colspan="6">No products available</td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
-	<h2>Details</h2>
-	<table class="table-bordered">
-		<thead>
+			%>
+		</table>
+		<h2>Details</h2>
+		<table class="table-bordered">
+			<thead>
+				<tr>
+					<th><a href="article?sort=name">Nome</a></th>
+					<th><a href="article?sort=type">Tipo</a></th>
+					<th><a href="articlet?sort=brand">Marca</a></th>
+					<th><a href="articlet?sort=price">Prezzo</a></th>
+					<th>Disponibilità</th>
+				</tr>
+			</thead>
 			<tr>
-				<th>Codice articolo <a href="product?sort=code">Sort</a></th>
-				<th>marca <a href="article?sort=name">Sort</a></th>
-				<th>prezzo <a href="articlet?sort=description">Sort</a></th>
-				<th>numero pezzi disponibili</th>
+				<td>(nome)</td>
+				<td>(tipo)</td>
+				<td>(marca)</td>
+				<td>(prezzo)</td>
+				<td>(numero pezzi disponibili)</td>
 			</tr>
-		</thead>
-		<tr>
-			<td>(codice articolo)</td>
-			<td>(marca)</td>
-			<td>(prezzo)</td>
-			<td>(numero pezzi disponibili)</td>
-		</tr>
-	</table>
-	<h2>Insert</h2>
-	<form action="article" method="post">
-		<input type="hidden" name="action" value="insert"> <label
-			for="code">Code:</label> <br> <input name="code" type="text"
-			maxlength="20" required placeholder="enter code"><br> <label
-			for="brand">Brand:</label> <br> <input name="brand" type="text"
-			maxlength="20" required placeholder="enter brand"><br> <label
-			for="price">Price:</label> <br> <input name="price"
-			type="number" min="0" value="0" required><br> <label
-			for="quantity">Quantity:</label><br> <input name="quantity"
-			type="number" min="1" value="1" required><br> <input
-			type="submit" value="Send"><input type="reset" value="Reset">
-
-	</form>
+		</table>
+		<h2>Insert</h2>
+		<form action="article" method="post">
+			<input type="hidden" name="action" value="insert">
+				
+				<label for="code">Code:</label> <br> 
+				<input name="code" type="text"
+				maxlength="20" required placeholder="enter code"><br>
+				
+				<label for="brand">Brand:</label> <br> 
+				<input name="brand" type="text"
+				maxlength="20" required placeholder="enter brand"><br> 
+				
+				<label for="price">Price:</label> <br> 
+				<input name="price"type="number" min="0" value="0" required><br> 
+				
+				<label for="quantity">Quantity:</label><br>
+				<input name="quantity"
+				type="number" min="1" value="1" required><br> 
+				
+				<input type="submit" value="Send">
+				<input type="reset" value="Reset">
+	
+		</form>
+	</div>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"
 		type="text/javascript"></script>
 	<script src="js/bootstrap.min.js"></script>
