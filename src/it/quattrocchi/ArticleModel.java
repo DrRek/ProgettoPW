@@ -1,5 +1,10 @@
 package it.quattrocchi;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -128,7 +133,8 @@ public class ArticleModel {
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
 		}
-
+		
+		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
@@ -137,7 +143,7 @@ public class ArticleModel {
 
 			while (rs.next()) {
 				ArticleBean bean = new ArticleBean();
-
+				
 				bean.setNome(rs.getString("Nome"));
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setMarca(rs.getString("Marca"));

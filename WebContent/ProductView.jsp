@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	Collection<?> products = (Collection<?>) request.getAttribute("products");
-	ArticleBean product = (ArticleBean) request.getAttribute("product");
-	Cart cart = (Cart) request.getAttribute("cart");
+	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
 %>
 
 <!DOCTYPE html>
@@ -106,24 +104,38 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Codice articolo |<a>Sort</a></th>
-				<th>marca |<a>Sort</a></th>
-				<th>prezzo|<a>Sort</a></th>
-				<th>numero pezzi disponibili</th>
-				<th>Action</th>
+				<th>Nome</th>
+				<th>Tipo</th>
+				<th>Marca</th>
+				<th>Prezzo</th>
+				<th>Disponibilità</th>
 			</tr>
 		</thead>
+		<%
+			if (products != null && products.size() != 0) {
+				Iterator<?> it = products.iterator();
+				while (it.hasNext()) {
+					ArticleBean bean = (ArticleBean) it.next();
+		%>
 		<tr>
-			<td>(codice articolo)</td>
-			<td>(marca)</td>
-			<td>(prezzo)</td>
-			<td>(numero pezzi disponibili)</td>
-			<td>Delete<br> Details
-			</td>
+			<td><%=bean.getNome()%></td>
+			<td><%=bean.getTipo()%></td>
+			<td><%=bean.getMarca()%></td>
+			<td><%=bean.getPrezzo()%></td>
+			<td><%=bean.getNumeroPezziDisponibili()%></td>
+			<td><a href="product?action=delete&id=<%=bean.getNome()%>">Delete</a><br>
+				<a href="product?action=read&id=<%=bean.getNome()%>">Details</a></td>
 		</tr>
+		<%
+				}
+			} else {
+		%>
 		<tr>
-			<td colspan="5">(se non ci sono prodotti) No products available</td>
+			<td colspan="6">No products available</td>
 		</tr>
+		<%
+			}
+		%>
 	</table>
 	<h2>Details</h2>
 	<table>
@@ -156,32 +168,6 @@
 			type="submit" value="Send"><input type="reset" value="Reset">
 
 	</form>
-
-	<%
-		if (cart != null) {
-	%>
-	<h2>Cart</h2>
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Action</th>
-		</tr>
-		<%
-			ArrayList<ArticleBean> prodcart = cart.getProducts();
-				for (ArticleBean beancart : prodcart) {
-		%>
-		<tr>
-			<td><%=beancart.getNome()%></td>
-			<td><a href="article?action=deleteC&id=<%=beancart.getNome()%>">Delete
-					from cart</a></td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
-	<%
-		}
-	%>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"
 		type="text/javascript"></script>
 	<script src="js/bootstrap.min.js"></script>
