@@ -139,35 +139,33 @@
 			}
 		%>
 	</table>
-	<h2>Details</h2>
-	<table class="table-bordered">
-		<thead>
-			<tr>
-				<th>Codice articolo <a href="product?sort=code">Sort</a></th>
-				<th>marca <a href="article?sort=name">Sort</a></th>
-				<th>prezzo <a href="articlet?sort=description">Sort</a></th>
-				<th>numero pezzi disponibili</th>
-			</tr>
-		</thead>
-		<tr>
-			<td>(codice articolo)</td>
-			<td>(marca)</td>
-			<td>(prezzo)</td>
-			<td>(numero pezzi disponibili)</td>
-		</tr>
-	</table>
 	<h2>Insert</h2>
 	<form action="article" method="post">
-		<input type="hidden" name="action" value="insert"> <label
-			for="code">Code:</label> <br> <input name="code" type="text"
-			maxlength="20" required placeholder="enter code"><br> <label
-			for="brand">Brand:</label> <br> <input name="brand" type="text"
-			maxlength="20" required placeholder="enter brand"><br> <label
-			for="price">Price:</label> <br> <input name="price"
-			type="number" min="0" value="0" required><br> <label
-			for="quantity">Quantity:</label><br> <input name="quantity"
-			type="number" min="1" value="1" required><br> <input
-			type="submit" value="Send"><input type="reset" value="Reset">
+	
+		<input type="hidden" name="action" value="insert"> 
+	
+		<label for="nome">Nome:</label><br> 
+		<input name="nome" type="text" maxlength="40" required placeholder="inserisci il nome"><br> 
+		
+		<label for="marca">Marca:</label><br>
+		<input type="text" name="marca" maxlength="20" required placeholder="inserisci la marca"></input><br>
+		
+		<label for="tipo">Tipo:</label><br> 
+		<select name="tipo">
+  			<option value="Lente a contatto">Lente a contatto</option>
+  			<option value="Occhiale">Occhiale</option>
+		</select><br>
+
+		<label for="numeroPezziDisponibili">Disponibilità:</label><br> 
+		<input name="numeroPezziDisponibili" type="number" min="1" value="1" required><br>
+		
+		<label for="prezzo">Prezzo:</label><br> 
+		<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
+		
+		<label for="gradazione">Grazione:</label><br> 
+		<input name="gradazione" type="number" min="-20,00" value="0,00"><br>
+
+		<input type="submit" value="Send"><input type="reset" value="Reset">
 
 	</form>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"

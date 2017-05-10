@@ -23,7 +23,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		
-		String query = "INSERT INTO" + TABLE_NAME + "(?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO " + TABLE_NAME + " values (?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();

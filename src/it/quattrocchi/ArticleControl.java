@@ -28,9 +28,26 @@ public class ArticleControl extends HttpServlet{
 		String action = request.getParameter("action");
 		
 		try {
+			request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+			
 			if (action != null) {
-				if (action.equalsIgnoreCase("show")) {
-					request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+				if (action.equalsIgnoreCase("insert")) {
+					String nome = request.getParameter("nome");
+					String marca = request.getParameter("marca");
+					String tipo = request.getParameter("tipo");
+					int numeroPezziDisponibili = Integer.parseInt(request.getParameter("numeroPezziDisponibili"));
+					float prezzo = Integer.parseInt(request.getParameter("prezzo"));
+					float gradazione = Integer.parseInt(request.getParameter("gradazione"));
+
+					ArticleBean bean = new ArticleBean();
+					bean.setNome(nome);
+					bean.setMarca(marca);
+					bean.setTipo(tipo);
+					bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
+					bean.setPrezzo(prezzo);
+					bean.setGradazione(gradazione);
+					
+					model.doSave(bean);
 				}
 			}
 		} catch (SQLException e) {
