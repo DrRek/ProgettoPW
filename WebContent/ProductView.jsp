@@ -143,7 +143,7 @@
 		</tr>
 	</table>
 	<h2>Insert</h2>
-	<form method="post">
+	<form action="article" method="post">
 		<input type="hidden" name="action" value="insert"> <label
 			for="code">Code:</label> <br> <input name="code" type="text"
 			maxlength="20" required placeholder="enter code"><br> <label
