@@ -23,7 +23,7 @@ public class DriverManagerConnectionPool  {
 		Connection newConnection = null;
 		String ip = "localhost";
 		String port = "3306";
-		String db = "QuattrocchiDB";
+		String db = "quattrocchidb";
 		String username = "progetto";
 		String password = "pw";
 
