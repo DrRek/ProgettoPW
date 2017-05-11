@@ -57,6 +57,14 @@ public class ArticleControl extends HttpServlet{
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
 					model.doDelete(nome, marca);
+				} else if(action.equalsIgnoreCase("addCart")){
+					String nome = request.getParameter("nome");
+					String marca = request.getParameter("marca");
+					cart.addProduct(model.doRetrieveByKey(nome, marca));
+				} else if(action.equalsIgnoreCase("delCart")){
+					String nome = request.getParameter("nome");
+					String marca = request.getParameter("marca");
+					cart.deleteProduct(model.doRetrieveByKey(nome, marca));
 				}
 			}
 			
