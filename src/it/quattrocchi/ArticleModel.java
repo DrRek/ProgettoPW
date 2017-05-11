@@ -16,7 +16,7 @@ import it.quattrocchi.DriverManagerConnectionPool;
 
 public class ArticleModel {
 	
-	private static final String TABLE_NAME = "Articolo";
+	private static final String TABLE_NAME = "quattrocchidb.articolo";
 	
 	public void doSave(ArticleBean product) throws SQLException{
 		

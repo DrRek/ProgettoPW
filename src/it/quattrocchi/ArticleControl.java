@@ -34,7 +34,6 @@ public class ArticleControl extends HttpServlet{
 		String action = request.getParameter("action");
 		
 		try {
-			request.setAttribute("articoli", null);//model.doRetrieveAll("Nome"));
 			
 			if (action != null) {
 				if (action.equalsIgnoreCase("insert")) {
@@ -57,10 +56,12 @@ public class ArticleControl extends HttpServlet{
 				} else if(action.equalsIgnoreCase("delete")){
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
-					System.out.println("prova");
 					model.doDelete(nome, marca);
 				}
 			}
+			
+			request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+			
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
