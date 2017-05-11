@@ -52,6 +52,7 @@
 			<td><%=bean.getPrezzo()%></td>
 			<td><%=bean.getNumeroPezziDisponibili()%></td>
 			<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
+				<a href="article?cart=add&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Aggiungi</a>
 			</td>
 		</tr>
 		<%
