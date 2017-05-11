@@ -23,7 +23,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		
-		String query = "INSERT INTO" + TABLE_NAME + "(?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO " + TABLE_NAME + " values (?,?,?,?,?,?,?,?,?)";
 		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
@@ -53,12 +53,12 @@ public class ArticleModel {
 		}
 	}
 
-	public boolean doDelete(String nome) throws SQLException{
+	public boolean doDelete(String nome, String marca) throws SQLException{
 		
 		Connection conn = null;
 		PreparedStatement stm = null;
 		
-		String query = "DELETE FROM" + TABLE_NAME + "WHERE NOME = ?";
+		String query = "DELETE FROM " + TABLE_NAME + " WHERE Nome = ? AND Marca = ?;";
 		
 		int result = 0;
 		
@@ -66,6 +66,7 @@ public class ArticleModel {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, nome);
+			stm.setString(2, marca);
 			
 			result = stm.executeUpdate();
 		}

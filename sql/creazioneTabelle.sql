@@ -1,6 +1,11 @@
 create schema quattrocchiDB;
 use quattrocchiDB;
 
+create user if not exists
+	progetto@localhost identified by 'pw';
+    
+grant all on quattrocchiDB.* to progetto@localhost;
+
 create table Cliente(
 	CF char(16) primary key,
 	Nome varchar(20) not null,
