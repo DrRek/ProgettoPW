@@ -60,7 +60,11 @@ public class ArticleControl extends HttpServlet{
 				}
 			}
 			
-			request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+			String sort = request.getParameter("sort");
+			if(sort == null)
+				request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+			else
+				request.setAttribute("articoli", model.doRetrieveAll(sort));
 			
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());

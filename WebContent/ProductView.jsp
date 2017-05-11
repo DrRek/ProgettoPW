@@ -22,22 +22,20 @@
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
 
-<link href="css/style.css" type="text/css" rel="stylesheet"
-	media="screen,projection" />
-
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
+<div class="container">
 <h2>Products</h2>
 	<table class="table-bordered">
 		<thead>
 			<tr>
-				<th>Nome</th>
-				<th>Tipo</th>
-				<th>Marca</th>
-				<th>Prezzo</th>
+				<th><a href="article?sort=nome">Nome</a></th>
+				<th><a href="article?sort=tipo">Tipo</a></th>
+				<th><a href="article?sort=marca">Marca</a></th>
+				<th><a href="article?sort=prezzo">Prezzo</a></th>
 				<th>Disponibilità</th>
 			</tr>
 		</thead>
@@ -54,7 +52,7 @@
 			<td><%=bean.getPrezzo()%></td>
 			<td><%=bean.getNumeroPezziDisponibili()%></td>
 			<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
-				<a href="product?action=read&nome=<%=bean.getNome()%>">Details</a></td>
+			</td>
 		</tr>
 		<%
 				}
@@ -109,11 +107,12 @@
 		<label for="prezzo">Prezzo:</label><br> 
 		<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
 		
-		<label for="gradazione">Grazione:</label><br> 
+		<label for="gradazione">Gradazione:</label><br> 
 		<input name="gradazione" type="number" min="-20,00" value="0,00"><br>
 
 		<input type="submit" value="Send"><input type="reset" value="Reset">
 
 	</form>
+	</div>
 </body>
 </html>
