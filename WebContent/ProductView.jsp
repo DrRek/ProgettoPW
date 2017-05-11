@@ -102,7 +102,6 @@
 
 
 	<h2>Products</h2>
-	<a href="article">List</a>
 	<table class="table-bordered">
 		<thead>
 			<tr>
