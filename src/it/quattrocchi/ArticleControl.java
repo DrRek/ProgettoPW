@@ -77,7 +77,7 @@ public class ArticleControl extends HttpServlet{
 		request.getSession().setAttribute("cart", cart);
 		request.setAttribute("cart", cart);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ArticleView.jsp");
 		dispatcher.forward(request, response);
 	}
 
