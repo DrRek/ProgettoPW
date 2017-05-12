@@ -74,6 +74,7 @@
 			<tr>
 				<th>Nome</th>
 				<th>Marca</th>
+				<th>Numero Prodotti </th>
 			</tr>
 			<% List<ArticleBean> prodcart = cart.getProducts(); 	
 			   for(ArticleBean beancart: prodcart) {
@@ -81,6 +82,7 @@
 			<tr>
 				<td><%=beancart.getNome()%></td>
 				<td><%=beancart.getMarca()%></td>
+				<td><%=cart.numeroProdottiStessoTipo(beancart.getNome(), beancart.getMarca())%></td>
 				<td><a href="article?action=delCart&nome=<%=beancart.getNome()%>&marca=<%=beancart.getMarca()%>">Delete from cart</a></td>
 			</tr>
 			<%} %>

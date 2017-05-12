@@ -14,11 +14,23 @@ public class Cart {
 	public void deleteProduct(ArticleBean product) {
 		for(ArticleBean prod : products) {
 			if(prod.getNome().equalsIgnoreCase(product.getNome())&&prod.getMarca().equalsIgnoreCase(product.getMarca())) {
-				products.remove(prod);
+					products.remove(prod);
 				break;
 			}
 		}
  	}
+	
+	public int numeroProdottiStessoTipo(String nome, String marca) {
+		int i=0, j=0;
+		while(i<products.size()) {
+			if(nome.equalsIgnoreCase(products.get(i).getNome()) && marca.equalsIgnoreCase(products.get(i).getMarca())) {
+				j++;
+			}
+			i++;
+		}
+		
+		return j;
+	}
 	
 	public ArrayList<ArticleBean> getProducts() {
 		return  products;
