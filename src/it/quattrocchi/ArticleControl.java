@@ -57,6 +57,14 @@ public class ArticleControl extends HttpServlet{
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
 					model.doDelete(nome, marca);
+				} else if(action.equalsIgnoreCase("addCart")){
+					String nome = request.getParameter("nome");
+					String marca = request.getParameter("marca");
+					cart.addProduct(model.doRetrieveByKey(nome, marca));
+				} else if(action.equalsIgnoreCase("delCart")){
+					String nome = request.getParameter("nome");
+					String marca = request.getParameter("marca");
+					cart.deleteProduct(model.doRetrieveByKey(nome, marca));
 				}
 			}
 			
@@ -69,7 +77,7 @@ public class ArticleControl extends HttpServlet{
 		request.getSession().setAttribute("cart", cart);
 		request.setAttribute("cart", cart);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ArticleView.jsp");
 		dispatcher.forward(request, response);
 	}
 

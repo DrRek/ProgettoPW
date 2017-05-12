@@ -82,19 +82,20 @@ public class ArticleModel {
 		return (result != 0);
 	}
 
-	public ArticleBean doRetrieveByKey(String nome) throws SQLException{
+	public ArticleBean doRetrieveByKey(String nome, String marca) throws SQLException{
 		
 		Connection conn = null;
 		PreparedStatement stm  = null;
 		
 		ArticleBean bean = new ArticleBean();
 		
-		String query = "SELECT * FROM " + TABLE_NAME + "WHERE NOME = ?";
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE nome = ? and marca = ?;";
 		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, nome);
+			stm.setString(2, marca);
 			
 			ResultSet rs = stm.executeQuery();
 			

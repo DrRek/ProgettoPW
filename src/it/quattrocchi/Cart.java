@@ -3,9 +3,6 @@ package it.quattrocchi;
 import java.util.ArrayList;
 
 public class Cart {
-
-private ArrayList<ArticleBean> products;
-	
 	public Cart() {
 		products = new ArrayList<ArticleBean>();
 	}
@@ -16,7 +13,7 @@ private ArrayList<ArticleBean> products;
 	
 	public void deleteProduct(ArticleBean product) {
 		for(ArticleBean prod : products) {
-			if(prod.getNome() == product.getNome()) {
+			if(prod.getNome().equalsIgnoreCase(product.getNome())&&prod.getMarca().equalsIgnoreCase(product.getMarca())) {
 				products.remove(prod);
 				break;
 			}
@@ -26,4 +23,11 @@ private ArrayList<ArticleBean> products;
 	public ArrayList<ArticleBean> getProducts() {
 		return  products;
 	}
+	
+	public boolean isEmpty(){
+		if(products.isEmpty()) return true;
+		return false;
+	}
+
+	private ArrayList<ArticleBean> products;
 }

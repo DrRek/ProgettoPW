@@ -30,6 +30,7 @@
 </head>
 
 <body>
+<h1><a href="article">Quattrocchi.it</a></h1>
 <h2>Products</h2>
 	<table class="table-bordered">
 		<thead>
@@ -54,6 +55,7 @@
 			<td><%=bean.getPrezzo()%></td>
 			<td><%=bean.getNumeroPezziDisponibili()%></td>
 			<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
+<<<<<<< HEAD:WebContent/ProductView.jsp
 <<<<<<< HEAD
 <<<<<<< HEAD
 				<a href="article?cart=add&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Aggiungi</a>
@@ -64,6 +66,9 @@
 =======
 				<a href="product?action=read&nome=<%=bean.getNome()%>">Details</a></td>
 >>>>>>> parent of 984bd74... aggiunto il sort by ecc.
+=======
+				<a href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add to cart</a></td>
+>>>>>>> origin/master:WebContent/ArticleView.jsp
 		</tr>
 		<%
 				}
@@ -77,19 +82,20 @@
 		%>
 	</table>
 	
-	<% if(cart != null) { %>
+	<% if(cart != null&&!cart.isEmpty()) { %>
 		<h2>Cart</h2>
-		<table>
+		<table class="table-bordered">
 		<tr>
-			<th>Name</th>
-			<th>Action</th>
+			<th>Nome</th>
+			<th>Marca</th>
 		</tr>
 		<% List<ArticleBean> prodcart = cart.getProducts(); 	
 		   for(ArticleBean beancart: prodcart) {
 		%>
 		<tr>
 			<td><%=beancart.getNome()%></td>
-			<td><a href="product?action=deleteC&nome=<%=beancart.getNome()%>">Delete</a></td>
+			<td><%=beancart.getMarca()%></td>
+			<td><a href="article?action=delCart&nome=<%=beancart.getNome()%>&marca=<%=beancart.getMarca()%>">Delete from cart</a></td>
 		</tr>
 		<%} %>
 	</table>		
