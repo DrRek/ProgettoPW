@@ -8,7 +8,8 @@ public class Cart {
 	}
 	
 	public void addProduct(ArticleBean product) {
-		products.add(product);
+		if(product.getNumeroPezziDisponibili() > numeroProdottiStessoTipo(product.getNome(), product.getMarca()))
+			products.add(product);
 	}
 	
 	public void deleteProduct(ArticleBean product) {
