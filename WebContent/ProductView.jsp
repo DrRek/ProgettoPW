@@ -55,8 +55,12 @@
 			<td><%=bean.getNumeroPezziDisponibili()%></td>
 			<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<a href="article?cart=add&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Aggiungi</a>
 			</td>
+=======
+				<a href="product?action=read&nome=<%=bean.getNome()%>">Details</a></td>
+>>>>>>> parent of 984bd74... aggiunto il sort by ecc.
 =======
 				<a href="product?action=read&nome=<%=bean.getNome()%>">Details</a></td>
 >>>>>>> parent of 984bd74... aggiunto il sort by ecc.
