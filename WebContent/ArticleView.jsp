@@ -33,10 +33,10 @@
 	<table class="table-bordered">
 		<thead>
 			<tr>
-				<th>Nome</th>
-				<th>Tipo</th>
-				<th>Marca</th>
-				<th>Prezzo</th>
+				<th><a href="article?sort=nome">Nome</a></th>
+				<th><a href="article?sort=tipo">Tipo</a></th>
+				<th><a href="article?sort=marca">Marca</a></th>
+				<th><a href="article?sort=prezzo">Prezzo</a></th>
 				<th>Disponibilità</th>
 			</tr>
 		</thead>
