@@ -27,94 +27,95 @@
 </head>
 
 <body>
-<h1><a href="article">Quattrocchi.it</a></h1>
-
-<h2>Products</h2>
-	<table class="table-bordered">
-		<thead>
-			<tr>
-				<th><a href="article?sort=nome">Nome</a></th>
-				<th><a href="article?sort=tipo">Tipo</a></th>
-				<th><a href="article?sort=marca">Marca</a></th>
-				<th><a href="article?sort=prezzo">Prezzo</a></th>
-				<th>Disponibilità</th>
-			</tr>
-		</thead>
-		<%
-			if (products != null && products.size() != 0) {
-				Iterator<?> it = products.iterator();
-				while (it.hasNext()) {
-					ArticleBean bean = (ArticleBean) it.next();
-		%>
-		<tr>
-			<td><%=bean.getNome()%></td>
-			<td><%=bean.getTipo()%></td>
-			<td><%=bean.getMarca()%></td>
-			<td><%=bean.getPrezzo()%></td>
-			<td><%=bean.getNumeroPezziDisponibili()%></td>
-			<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
-				<a href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add to cart</a></td>
-
-		</tr>
-		<%
-				}
-			} else {
-		%>
-		<tr>
-			<td colspan="6">No products available</td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
-	
-	<% if(cart != null&&!cart.isEmpty()) { %>
-		<h2>Cart</h2>
+<div class="container">
+	<h1><a href="article">Quattrocchi.it</a></h1>
+	<h2>Products</h2>
 		<table class="table-bordered">
-		<tr>
-			<th>Nome</th>
-			<th>Marca</th>
-		</tr>
-		<% List<ArticleBean> prodcart = cart.getProducts(); 	
-		   for(ArticleBean beancart: prodcart) {
-		%>
-		<tr>
-			<td><%=beancart.getNome()%></td>
-			<td><%=beancart.getMarca()%></td>
-			<td><a href="article?action=delCart&nome=<%=beancart.getNome()%>&marca=<%=beancart.getMarca()%>">Delete from cart</a></td>
-		</tr>
-		<%} %>
-	</table>		
-	<% } %>	
+			<thead>
+				<tr>
+					<th><a href="article?sort=nome">Nome</a></th>
+					<th><a href="article?sort=tipo">Tipo</a></th>
+					<th><a href="article?sort=marca">Marca</a></th>
+					<th><a href="article?sort=prezzo">Prezzo</a></th>
+					<th>Disponibilità</th>
+				</tr>
+			</thead>
+			<%
+				if (products != null && products.size() != 0) {
+					Iterator<?> it = products.iterator();
+					while (it.hasNext()) {
+						ArticleBean bean = (ArticleBean) it.next();
+			%>
+			<tr>
+				<td><%=bean.getNome()%></td>
+				<td><%=bean.getTipo()%></td>
+				<td><%=bean.getMarca()%></td>
+				<td><%=bean.getPrezzo()%></td>
+				<td><%=bean.getNumeroPezziDisponibili()%></td>
+				<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
+					<a href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add to cart</a></td>
 	
-	<h2>Insert</h2>
-	<form action="article" method="post">
+			</tr>
+			<%
+					}
+				} else {
+			%>
+			<tr>
+				<td colspan="6">No products available</td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+		
+		<% if(cart != null&&!cart.isEmpty()) { %>
+			<h2>Cart</h2>
+			<table class="table-bordered">
+			<tr>
+				<th>Nome</th>
+				<th>Marca</th>
+			</tr>
+			<% List<ArticleBean> prodcart = cart.getProducts(); 	
+			   for(ArticleBean beancart: prodcart) {
+			%>
+			<tr>
+				<td><%=beancart.getNome()%></td>
+				<td><%=beancart.getMarca()%></td>
+				<td><a href="article?action=delCart&nome=<%=beancart.getNome()%>&marca=<%=beancart.getMarca()%>">Delete from cart</a></td>
+			</tr>
+			<%} %>
+		</table>		
+		<% } %>	
+		
+		<h2>Insert</h2>
+		<form action="article" method="post">
+		
+			<input type="hidden" name="action" value="insert"> 
+		
+			<label for="nome">Nome:</label><br> 
+			<input name="nome" type="text" maxlength="40" required placeholder="inserisci il nome"><br> 
+			
+			<label for="marca">Marca:</label><br>
+			<input type="text" name="marca" maxlength="20" required placeholder="inserisci la marca"></input><br>
+			
+			<label for="tipo">Tipo:</label><br> 
+			<select name="tipo">
+	  			<option value="Lente a contatto">Lente a contatto</option>
+	  			<option value="Occhiale">Occhiale</option>
+			</select><br>
 	
-		<input type="hidden" name="action" value="insert"> 
+			<label for="numeroPezziDisponibili">Disponibilità:</label><br> 
+			<input name="numeroPezziDisponibili" type="number" min="1" value="1" required><br>
+			
+			<label for="prezzo">Prezzo:</label><br> 
+			<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
+			
+			<label for="gradazione">Gradazione:</label><br> 
+			<input name="gradazione" type="number" min="-20,00" value="0,00"><br>
 	
-		<label for="nome">Nome:</label><br> 
-		<input name="nome" type="text" maxlength="40" required placeholder="inserisci il nome"><br> 
-		
-		<label for="marca">Marca:</label><br>
-		<input type="text" name="marca" maxlength="20" required placeholder="inserisci la marca"></input><br>
-		
-		<label for="tipo">Tipo:</label><br> 
-		<select name="tipo">
-  			<option value="Lente a contatto">Lente a contatto</option>
-  			<option value="Occhiale">Occhiale</option>
-		</select><br>
-
-		<label for="numeroPezziDisponibili">Disponibilità:</label><br> 
-		<input name="numeroPezziDisponibili" type="number" min="1" value="1" required><br>
-		
-		<label for="prezzo">Prezzo:</label><br> 
-		<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
-		
-		<label for="gradazione">Gradazione:</label><br> 
-		<input name="gradazione" type="number" min="-20,00" value="0,00"><br>
-
-		<input type="submit" value="Send"><input type="reset" value="Reset">
-
-	</form>
+			<input type="submit" value="Send"><input type="reset" value="Reset">
+	
+		</form>
+</div>
 </body>
 </html>

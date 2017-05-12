@@ -25,6 +25,7 @@ public class ArticleControl extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		
 		Cart cart = (Cart)request.getSession().getAttribute("cart");
 		if(cart == null) {
 			cart = new Cart();
@@ -36,7 +37,9 @@ public class ArticleControl extends HttpServlet{
 		try {
 			
 			if (action != null) {
+				//aggiunta del prodotto nel catalogo
 				if (action.equalsIgnoreCase("insert")) {
+					
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
 					String tipo = request.getParameter("tipo");
@@ -53,23 +56,42 @@ public class ArticleControl extends HttpServlet{
 					bean.setGradazione(gradazione);
 					
 					model.doSave(bean);
-				} else if(action.equalsIgnoreCase("delete")){
+					
+				} 
+				
+				//cancellazione del prodotto nel catalogo
+				else if(action.equalsIgnoreCase("delete")){
+					
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
+					
 					model.doDelete(nome, marca);
-				} else if(action.equalsIgnoreCase("addCart")){
+					
+				} 
+				
+				//aggiunta prodotto al carrello
+				else if(action.equalsIgnoreCase("addCart")){
+					
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
+					
 					cart.addProduct(model.doRetrieveByKey(nome, marca));
-				} else if(action.equalsIgnoreCase("delCart")){
+					
+				} 
+				
+				//rimozione prodotto dal carrello
+				else if(action.equalsIgnoreCase("delCart")){
+					
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
+					
 					cart.deleteProduct(model.doRetrieveByKey(nome, marca));
 				}
 			}
 			
 			String sort = request.getParameter("sort");
 			
+			//se non è stato indicato nessun ordinamento, default: by nome
 			if(sort== null)
 				request.setAttribute("articoli", model.doRetrieveAll("Nome"));
 			else 
@@ -78,7 +100,8 @@ public class ArticleControl extends HttpServlet{
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
-
+		
+		//aggiornamento dell'attributo cart della sessione
 		request.getSession().setAttribute("cart", cart);
 		request.setAttribute("cart", cart);
 
