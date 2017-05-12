@@ -22,15 +22,13 @@
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
 
-<link href="css/style.css" type="text/css" rel="stylesheet"
-	media="screen,projection" />
-
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <body>
 <h1><a href="article">Quattrocchi.it</a></h1>
+
 <h2>Products</h2>
 	<table class="table-bordered">
 		<thead>
@@ -55,20 +53,8 @@
 			<td><%=bean.getPrezzo()%></td>
 			<td><%=bean.getNumeroPezziDisponibili()%></td>
 			<td><a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a><br>
-<<<<<<< HEAD:WebContent/ProductView.jsp
-<<<<<<< HEAD
-<<<<<<< HEAD
-				<a href="article?cart=add&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Aggiungi</a>
-			</td>
-=======
-				<a href="product?action=read&nome=<%=bean.getNome()%>">Details</a></td>
->>>>>>> parent of 984bd74... aggiunto il sort by ecc.
-=======
-				<a href="product?action=read&nome=<%=bean.getNome()%>">Details</a></td>
->>>>>>> parent of 984bd74... aggiunto il sort by ecc.
-=======
 				<a href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add to cart</a></td>
->>>>>>> origin/master:WebContent/ArticleView.jsp
+
 		</tr>
 		<%
 				}
@@ -124,7 +110,7 @@
 		<label for="prezzo">Prezzo:</label><br> 
 		<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
 		
-		<label for="gradazione">Grazione:</label><br> 
+		<label for="gradazione">Gradazione:</label><br> 
 		<input name="gradazione" type="number" min="-20,00" value="0,00"><br>
 
 		<input type="submit" value="Send"><input type="reset" value="Reset">
