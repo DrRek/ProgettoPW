@@ -64,7 +64,7 @@ public class ArticleControl extends HttpServlet{
 					
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
-					
+
 					model.doDelete(nome, marca);
 					
 				} 

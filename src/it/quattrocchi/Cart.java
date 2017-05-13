@@ -32,17 +32,21 @@ public class Cart {
 		
 		return j;
 	}
-	
-	public ArrayList<ArticleBean> getProductsDifferenti() {
+	//restituisce una lista di prodotti presenti nel carrello
+	public ArrayList<ArticleBean> getProductsDistinti() {
+		
 		ArrayList<ArticleBean> prod = new ArrayList<ArticleBean>();
 		int i, j;
+		boolean found;
+		
 		for(i=0; i<products.size(); i++) {
-			boolean find = false;
+			found = false;
 			for(j=i-1; j>=0; j--) {
+				
 				if(products.get(i).getNome().equals(products.get(j).getNome()) && products.get(i).getMarca().equals(products.get(j).getMarca()))
-						find=true;
+						found = true;
 			}
-			if(find == false)
+			if(found == false)
 				prod.add(products.get(i));
 		}
 		return prod;
