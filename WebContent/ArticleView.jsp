@@ -76,7 +76,7 @@
 				<th>Marca</th>
 				<th>Numero Prodotti </th>
 			</tr>
-			<% List<ArticleBean> prodcart = cart.getProducts(); 	
+			<% List<ArticleBean> prodcart = cart.getProductsDifferenti(); 	
 			   for(ArticleBean beancart: prodcart) {
 			%>
 			<tr>

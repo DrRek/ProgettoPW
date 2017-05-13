@@ -33,6 +33,21 @@ public class Cart {
 		return j;
 	}
 	
+	public ArrayList<ArticleBean> getProductsDifferenti() {
+		ArrayList<ArticleBean> prod = new ArrayList<ArticleBean>();
+		int i, j;
+		for(i=0; i<products.size(); i++) {
+			boolean find = false;
+			for(j=i-1; j>=0; j--) {
+				if(products.get(i).getNome().equals(products.get(j).getNome()) && products.get(i).getMarca().equals(products.get(j).getMarca()))
+						find=true;
+			}
+			if(find == false)
+				prod.add(products.get(i));
+		}
+		return prod;
+	}
+	
 	public ArrayList<ArticleBean> getProducts() {
 		return  products;
 	}
