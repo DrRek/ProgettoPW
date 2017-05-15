@@ -7,14 +7,15 @@ create user if not exists
 grant all on quattrocchiDB.* to progetto@localhost;
 
 create table Cliente(
-	CF char(16) primary key,
+	User varchar(16) primary key,
+    Pwd varchar(10) not null,
 	Nome varchar(20) not null,
 	Cognome varchar(20) not null,
 	DataNascita date not null,
     Stato varchar(20) not null,
 	Cap decimal(5) not null,
 	Indirizzo varchar(35) not null,
-	Email varchar(30) not null
+	Email varchar(30) not null unique
 );
 
 create table CartaCredito(
