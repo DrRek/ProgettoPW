@@ -29,7 +29,7 @@ create table CartaCredito(
 create table Sottoscrizione(
 	Cliente char(16) not null,
 	CartaCredito decimal(16) not null,
-    foreign key (Cliente) references Cliente(CF) on delete cascade on update cascade,
+    foreign key (Cliente) references Cliente(User) on delete cascade on update cascade,
     foreign key (CartaCredito) references CartaCredito(NumeroCC) on delete cascade on update cascade
 );
 
@@ -59,7 +59,7 @@ create table Associazione(
 	Cliente char(16) not null,
     Prescrizione varchar(36) not null,
     primary key(Cliente, Prescrizione),
-    foreign key (Cliente) references Cliente(CF) on delete cascade on update cascade,
+    foreign key (Cliente) references Cliente(User) on delete cascade on update cascade,
     foreign key (Prescrizione) references Prescrizione(Codice) on delete cascade on update cascade
 );
 
@@ -76,7 +76,7 @@ create table Esecuzione(
 	Cliente char(16) not null,
     primary key(Ordine, Cliente),
     foreign key (Ordine) references Ordine(Codice),
-    foreign key (Cliente) references Cliente(CF)
+    foreign key (Cliente) references Cliente(User)
 );
 
 create table Utilizzo(
