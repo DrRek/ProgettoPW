@@ -88,13 +88,20 @@ public class ArticleBean {
 		this.img3=img3;
 	}
 	
-	String nome;
-	String tipo;
-	String marca;
-	float prezzo;
-	float gradazione;
-	int numeroPezziDisponibili;
-	String img1;
+	public boolean equals(Object o){
+		ArticleBean a = (ArticleBean) o;
+		if((a.getNome().equals(nome)) && (a.getMarca().equals(marca)))
+			return true;
+		return false;
+	}
+	
+	private String nome;
+	private String tipo;
+	private String marca;
+	private float prezzo;
+	private float gradazione;
+	private int numeroPezziDisponibili;
+	private String img1;
 	String img2;
 	String img3;
 }

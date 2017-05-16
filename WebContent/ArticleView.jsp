@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8"
-	import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.Cart"%>
+	import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -67,27 +67,8 @@
 				}
 			%>
 		</table>
-		
-		<% if(cart != null&&!cart.isEmpty()) { %>
-			<h2>Cart</h2>
-			<table class="table-bordered">
-			<tr>
-				<th>Nome</th>
-				<th>Marca</th>
-				<th>Numero Prodotti </th>
-			</tr>
-			<% List<ArticleBean> prodcart = cart.getProductsDistinti(); 	
-			   for(ArticleBean beancart: prodcart) {
-			%>
-			<tr>
-				<td><%=beancart.getNome()%></td>
-				<td><%=beancart.getMarca()%></td>
-				<td><%=cart.numeroProdottiStessoTipo(beancart.getNome(), beancart.getMarca())%></td>
-				<td><a href="article?action=delCart&nome=<%=beancart.getNome()%>&marca=<%=beancart.getMarca()%>">Delete from cart</a></td>
-			</tr>
-			<%} %>
-		</table>		
-		<% } %>	
+	
+		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		
 		<h2>Insert</h2>
 		<form action="article" method="post">
@@ -118,6 +99,30 @@
 			<input type="submit" value="Send"><input type="reset" value="Reset">
 	
 		</form>
+		
+		<% if(cart != null&&!cart.isEmpty()) { %>
+			<h2>Cart</h2>
+			<table class="table-bordered">
+			<tr>
+				<th>Nome</th>
+				<th>Marca</th>
+				<th>Numero Prodotti </th>
+			</tr>
+			<% List<CartArticle> prodcart = cart.getProducts(); 	
+			   for(CartArticle beancart: prodcart) {
+			%>
+			<tr>
+				<td><%=beancart.getArticle().getNome()%></td>
+				<td><%=beancart.getArticle().getMarca()%></td>
+				<!-- non ancora logicamente corretto -->
+				<td><input name="numeroPezziDisponibili" type="number" min="1" value ="<%=beancart.getQuantity()%>"></td>
+				
+				<td><a href="article?action=delCart&nome=<%=beancart.getArticle().getNome()%>&marca=<%=beancart.getArticle().getMarca()%>">Delete from cart</a></td>
+			</tr>
+			<%} %>
+		</table>		
+		<% } %>	
+		
 </div>
 </body>
 </html>
