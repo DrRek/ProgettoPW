@@ -53,22 +53,7 @@ public class ArticleModel {
 	public boolean doDelete(String nome, String marca) throws SQLException{
 		
 		Connection conn = null;
-		
-		try{
-			conn = DriverManagerConnectionPool.getConnection();
-			java.sql.Statement stm = conn.createStatement();
-			System.out.println("DELETE FROM articolo WHERE nome='"+nome+"' and marca='"+marca+"';");
-			stm.executeUpdate("DELETE FROM articolo WHERE nome='"+nome+"' and marca='"+marca+"';");
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		
-		return true;
-		
-		/**
-		Connection conn = null;
 		PreparedStatement stm = null;
-		
 		
 		String query = "DELETE FROM " + TABLE_NAME + " WHERE Nome = ? AND Marca = ?;";
 		
@@ -81,6 +66,7 @@ public class ArticleModel {
 			stm.setString(2, marca);
 			
 			result = stm.executeUpdate();
+			conn.commit();
 		}
 		
 		finally {
@@ -91,7 +77,7 @@ public class ArticleModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-		return (result != 0);*/
+		return (result != 0);
 	}
 
 	public ArticleBean doRetrieveByKey(String nome, String marca) throws SQLException{
