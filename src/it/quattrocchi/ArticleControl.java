@@ -67,7 +67,7 @@ public class ArticleControl extends HttpServlet{
 						bean.setPrezzo(prezzo);
 						bean.setGradazione(gradazione);
 						
-						model.doUpdate(bean);
+					/**	model.doUpdate(bean); **/
 					}
 				} 
 
