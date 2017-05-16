@@ -3,7 +3,7 @@
 
 <%
 	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
-	Cart cart = (Cart) request.getAttribute("cart");
+	Cart cart = (Cart) request.getSession().getAttribute("cart");
 %>
 
 <!DOCTYPE html>
@@ -123,7 +123,11 @@
 			</tr>
 			<%} %>
 		</table>
-		<h3>Prezzo totale: <%=cart.getPrezzo()%>€</h3>		
+		<h3>Prezzo totale: <%=cart.getPrezzo()%>€</h3>
+		<form action='article' method='post'>
+			<input type="hidden" name="action" value="checkout"></input>
+			<input type="submit" value="Checkout"> 
+		</form>	
 		<% } %>	
 		
 </div>

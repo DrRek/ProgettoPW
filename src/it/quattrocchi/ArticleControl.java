@@ -25,7 +25,6 @@ public class ArticleControl extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
 		Cart cart = (Cart)request.getSession().getAttribute("cart");
 		if(cart == null) {
 			cart = new Cart();
@@ -37,8 +36,14 @@ public class ArticleControl extends HttpServlet{
 		try {
 
 			if (action != null) {
+				
+				if(action.equalsIgnoreCase("checkout")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartCheckout.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}
 				//aggiunta del prodotto nel catalogo
-				if (action.equalsIgnoreCase("insert")) {
+				else if (action.equalsIgnoreCase("insert")) {
 
 					String nome = request.getParameter("nome");
 					String marca = request.getParameter("marca");
@@ -103,7 +108,7 @@ public class ArticleControl extends HttpServlet{
 
 			String sort = request.getParameter("sort");
 
-			//se non è stato indicato nessun ordinamento, default: by nome
+			//se non ï¿½ stato indicato nessun ordinamento, default: by nome
 			if(sort== null)
 				request.setAttribute("articoli", model.doRetrieveAll("Nome"));
 			else 
