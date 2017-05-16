@@ -32,6 +32,14 @@ public class Cart {
 	public ArrayList<CartArticle> getProducts() {
 		return  products;
 	}
+	
+	public double getPrezzo(){
+		float tot = 0;
+		for(CartArticle ca : products){
+			tot+=ca.getPrezzo();
+		}
+		return Math.floor(tot * 100) / 100;
+	}
 
 	public boolean isEmpty(){
 		if(products.isEmpty()) return true;

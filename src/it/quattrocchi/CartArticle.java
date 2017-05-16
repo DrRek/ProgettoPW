@@ -38,6 +38,9 @@ public class CartArticle extends ArticleBean{
 		return numero;
 	}
 	
+	public float getPrezzo(){
+		return (float)Math.floor((articolo.getPrezzo()*numero) * 100) / 100;
+	}
 	
 	private int numero;
 	private ArticleBean articolo;
