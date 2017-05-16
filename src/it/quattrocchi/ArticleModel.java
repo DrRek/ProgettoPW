@@ -50,6 +50,41 @@ public class ArticleModel {
 		}
 	}
 
+	public void doUpdate(ArticleBean product) throws SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stm = null;
+		
+		String query = "update " + TABLE_NAME + " set Tipo=?, NumeroPezziDisponibili=?, Prezzo=?, Gradazione=?, img1=?, img2=?, img3=? where Nome=? and Marca=?;";
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, product.getTipo());
+			stm.setInt(2, product.getNumeroPezziDisponibili());
+			stm.setFloat(3, product.getPrezzo());
+			stm.setFloat(4, product.getGradazione());
+			stm.setString(5, product.getImg1());
+			stm.setString(6,product.getImg2());
+			stm.setString(7, product.getImg3());
+			stm.setString(8, product.getNome());
+			stm.setString(9, product.getMarca());
+			
+			stm.executeUpdate();
+			
+			conn.commit();
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+	}
+	
 	public boolean doDelete(String nome, String marca) throws SQLException{
 		
 		Connection conn = null;
