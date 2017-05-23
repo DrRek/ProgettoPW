@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8"
-	import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.*"%>
+	import="java.util.*, it.quattrocchi.control.*, it.quattrocchi.support.*, it.quattrocchi.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -28,7 +28,7 @@
 
 <body>
 <div class="container">
-	<h1><a href="article">Quattrocchi.it</a></h1>
+	<h1><a href="article">Quattrocchi.it</a></h1><h6><a href="jsp/AccessView.jsp">Login</a></h6>
 	<h2>Products</h2>
 		<table class="table-bordered">
 			<thead>

@@ -1,4 +1,4 @@
-package it.quattrocchi;
+package it.quattrocchi.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

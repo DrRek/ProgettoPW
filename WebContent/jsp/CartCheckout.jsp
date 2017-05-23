@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8"
-	import="java.util.*,it.quattrocchi.ArticleBean, it.quattrocchi.*"%>
+	import="java.util.*,it.quattrocchi.support.*, it.quattrocchi.*"%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 

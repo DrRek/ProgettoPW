@@ -1,4 +1,4 @@
-package it.quattrocchi;
+package it.quattrocchi.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import it.quattrocchi.model.ArticleModel;
+import it.quattrocchi.support.ArticleBean;
+import it.quattrocchi.support.Cart;
 
 @WebServlet("/article")
 
@@ -120,9 +124,8 @@ public class ArticleControl extends HttpServlet{
 
 		//aggiornamento dell'attributo cart della sessione
 		request.getSession().setAttribute("cart", cart);
-		request.setAttribute("cart", cart);
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ArticleView.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleView.jsp");
 		dispatcher.forward(request, response);
 	}
 

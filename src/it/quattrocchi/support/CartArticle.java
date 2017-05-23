@@ -1,4 +1,4 @@
-package it.quattrocchi;
+package it.quattrocchi.support;
 
 public class CartArticle extends ArticleBean{
 	

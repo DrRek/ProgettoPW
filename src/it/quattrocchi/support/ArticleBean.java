@@ -1,6 +1,4 @@
-package it.quattrocchi;
-
-import com.mysql.jdbc.Blob;
+package it.quattrocchi.support;
 
 public class ArticleBean {
 	

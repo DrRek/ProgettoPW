@@ -1,4 +1,4 @@
-package it.quattrocchi;
+package it.quattrocchi.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 import com.mysql.jdbc.Statement;
 
-import it.quattrocchi.DriverManagerConnectionPool;
+import it.quattrocchi.support.ArticleBean;
 
 public class ArticleModel {
 	
