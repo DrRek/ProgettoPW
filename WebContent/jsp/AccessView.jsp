@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%
-	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
-	Cart cart = (Cart) request.getSession().getAttribute("cart");
-%>
+
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +16,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-<link href="../css/bootstrap.css" type="text/css" rel="stylesheet"
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
 
 <!--Let browser know website is optimized for mobile-->
@@ -29,61 +26,70 @@
 <body>
 <div class="container">
 	<h1><a href="article">Quattrocchi.it</a></h1>
+	<script type="text/javascript" src="js/access-validation.js"></script>
 	<h1>Login</h1>
-	<form name='login' onSubmit="return formValidation();" action='access' method="post">
-		<ul>
+	<form name='login' onSubmit="return loginValidation();" action='access' method="post">
+		
 			<input type="hidden" name="action" value="login"> 
 			
-			<li><label for="userid">Username:</label></li>
-			<li><input type="text" name="userid" size="12" /><span id="userid"></span> </li>
+			<label for="userid">Username:</label>
+			<input type="text" name="userid" size="12" /><span id="userid"></span><br>
 			
-			<li><label for="passid">Password:</label></li>
-			<li><input type="password" name="passid" size="12" /><span id="passid"></span></li>
+			<label for="passid">Password:</label>
+			<input type="password" name="passid" size="12" /><span id="passid"></span><br>
 			
-			<li><input name="submit" value="Login" type="submit"></li>
-		</ul>
+			<%
+				if(request.getAttribute("loginFailed") != null){
+			%>
+				<h6>Parametri errati.</h6>
+			<%
+				}
+			%>
+			
+			<input name="submit" value="Login" type="submit">
+		
 	</form>
 	<h1>Registration</h1>
-	<form name='registration' onSubmit="return formValidation();" action='access' method="post">
-		<ul>
+	<form name='registration' onSubmit="return registerValidation();" action='access' method="post">
+		
 			<input type="hidden" name="action" value="create"> 
 			
-			<li><label for="userid">Username:</label></li>
-			<li><input type="text" name="userid" size="12" /><span id="userid"></span> </li>
+			<label for="user">Username:</label>
+			<input type="text" name="user" size="12" /><span id="user"></span><br>
 			
-			<li><label for="passid">Password:</label></li>
-			<li><input type="password" name="passid" size="12" /><span id="passid"></span></li>
+			<label for="pass">Password:</label>
+			<input type="password" name="pass" size="12" /><span id="pass"></span><br>
 			
-			<li><label for="nome">Nome:</label></li>
-			<li><input type="text" name="nome" size="50" /><span id="nome"></span></li>
+			<label for="nome">Nome:</label>
+			<input type="text" name="nome" size="50" /><span id="nome"></span><br>
 			
-			<li><label for="nome">Cognome:</label></li>
-			<li><input type="text" name="cognome" size="50" /><span id="cognome"></span></li>
+			<label for="nome">Cognome:</label>
+			<input type="text" name="cognome" size="50" /><span id="cognome"></span><br>
 			
-			<li><label for="nascita">Data di nascita:</label></li>
-			<li><input type="date" name="nascita" size="50" /><span id="nascita"></span></li>
+			<label for="nascita">Data di nascita:</label>
+			<input type="date" name="nascita" size="50" /><span id="nascita"></span><br>
 			
-			<li><label for="stato">Stato:</label></li>
-			<li><select name="stato">
+			<label for="stato">Stato:</label>
+			<select name="stato">
 					<option selected="" value="Default">(Please select a country)</option>
 					<option value="AF">Australia</option>
 					<option value="AL">Canada</option>
 					<option value="IT">Italia</option>
 					<option value="AS">Russia</option>
 					<option value="AD">USA</option>
-			</select><span id="stato"></span></li>
+			</select><span id="stato"></span><br>
 			
-			<li><label for="cap">CAP:</label></li>
-			<li><input type="text" name="cap" /><span id="cap"></span></li>
+			<label for="cap">CAP:</label>
+			<input type="text" name="cap" /><span id="cap"></span><br>
 			
-			<li><label for="indirizzo">Indirizzo:</label></li>
-			<li><input type="text" name="indirizzo" size="50" /><span id="indirizzo"></span></li>
+			<label for="indirizzo">Indirizzo:</label>
+			<input type="text" name="indirizzo" size="50" /><span id="indirizzo"></span><br>
 			
-			<li><label for="email">Email:</label></li>
-			<li><input type="text" name="email" size="50" /><span id="email"></span></li>
+			<label for="email">Email:</label>
+			<input type="text" name="email" size="50" /><span id="email"></span><br>
 		
-			<li><input name="submit" value="Register" type="submit"></li>
-		</ul>
+			<input name="submit" value="Register" type="submit">
+		
 	</form>
 </div>
 </body>

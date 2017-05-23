@@ -1,17 +1,17 @@
-function formValidation()
+function registerValidation()
 {
-	var uid = document.registration.userid;
-	var passid = document.registration.passid;
+	var uid = document.registration.user;
+	var pass = document.registration.pass;
 	var uname = document.registration.nome;
 	var ulastname = document.registration.cognome;
 	var uadd = document.registration.indirizzo;
 	var ucountry = document.registration.stato;
-	var uzip = document.registration.zip;
+	var ucap = document.registration.cap;
 	var uemail = document.registration.email;
 
-	if(userid_validation(uid,5,12))
+	if(user_validation(uid,5,12))
 	{
-		if(passid_validation(passid,7,12))
+		if(pass_validation(pass,7,12))
 		{
 			if(allLetter(uname))
 			{
@@ -21,7 +21,7 @@ function formValidation()
 					{ 
 						if(countryselect(ucountry))
 						{
-							if(allnumeric(uzip))
+							if(allnumeric(ucap))
 							{
 								if(ValidateEmail(uemail))
 								{
@@ -37,24 +37,24 @@ function formValidation()
 	return false;
 } 
 
-function userid_validation(uid,mx,my)
+function user_validation(uid,mx,my)
 {
 	var uid_len = uid.value.length;
 	if (uid_len == 0 || uid_len >= my || uid_len < mx)
 	{
-		document.getElementById("userid").innerHTML = "Username non dovrebbe essere vuoto, lunghezza tra "+mx+" e "+my;
+		document.getElementById("user").innerHTML = "Username non dovrebbe essere vuoto, lunghezza tra "+mx+" e "+my;
 		uid.focus();
 		return false;
 	}
 	return true;
 }
-function passid_validation(passid,mx,my)
+function pass_validation(pass,mx,my)
 {
-	var passid_len = passid.value.length;
-	if (passid_len == 0 ||passid_len >= my || passid_len < mx)
+	var pass_len = pass.value.length;
+	if (pass_len == 0 ||pass_len >= my || pass_len < mx)
 	{
-		document.getElementById("passid").innerHTML = "Password non dovrebbe essere vuoto, lunghezza tra "+mx+" e "+my;
-		passid.focus();
+		document.getElementById("pass").innerHTML = "Password non dovrebbe essere vuoto, lunghezza tra "+mx+" e "+my;
+		pass.focus();
 		return false;
 	}
 	return true;
@@ -100,7 +100,7 @@ function countryselect(ucountry)
 		return true;
 	}
 }
-function allnumeric(uzip)
+function allnumeric(ucap)
 { 
 	var numbers = /^[0-9]+$/;
 	if(uzip.value.match(numbers))
@@ -109,8 +109,8 @@ function allnumeric(uzip)
 	}
 	else
 	{
-		document.getElementById("zip").innerHTML ="Il codice postale può contenere solo numeri";
-		uzip.focus();
+		document.getElementById("cap").innerHTML ="Il codice postale può contenere solo numeri";
+		ucap.focus();
 		return false;
 	}
 }

@@ -1,7 +1,10 @@
 package it.quattrocchi.control;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,9 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.quattrocchi.model.AccessModel;
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
+import it.quattrocchi.support.UserBean;
 
 @WebServlet("/access")
 
@@ -40,20 +45,53 @@ public class AccessControl extends HttpServlet{
 			if(action.equalsIgnoreCase("login")){
 				String userid = request.getParameter("userid");
 				String passid = request.getParameter("passid");
-				UserBean user = model.doRetrieveByKey(userid, passid);
+				UserBean user;
+				try {
+					user = model.doRetrieveByKey(userid, passid);
+				} catch (SQLException e) {
+					user=null;
+				}
 				if(user!=null){ //restituisce true se l'utente esiste
 					request.getSession().setAttribute("user", user);
 					
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("article");
 					dispatcher.forward(request, response);
 				} else {
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleView.jsp");
+					request.setAttribute("loginFailed", true);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/AccessView.jsp");
 					dispatcher.forward(request, response);
 				}
 			}
 			else if(action.equalsIgnoreCase("register")){
+				UserBean newUser = new UserBean();
+				newUser.setUser(request.getParameter("user"));
+				newUser.setPassword(request.getParameter("pass"));
+				newUser.setNome(request.getParameter("nome"));
+				newUser.setCognome(request.getParameter("cognome"));
 				
+		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		        java.util.Date parsed=null;
+				try {
+					parsed = format.parse(request.getParameter("nascita"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+		        Date dataNascita = new java.sql.Date(parsed.getTime());
+				newUser.setDataDiNascita(dataNascita);
+				
+				newUser.setStato(request.getParameter("stato"));
+				newUser.setCap(request.getParameter("cap"));
+				newUser.setIndirizzo(request.getParameter("indirizzo"));
+				newUser.setEmail(request.getParameter("email"));
+				
+				try {
+					model.doSave(newUser);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/AccessView.jsp");
+		dispatcher.forward(request, response);
 	}
 }
