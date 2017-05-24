@@ -51,7 +51,7 @@ public void doSave(UserBean user) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm  = null;
 		
-		UserBean bean = new UserBean();
+		UserBean bean = null;
 		
 		String query = "SELECT * FROM " + TABLE_NAME + " WHERE User = ? and Pwd = ?;";
 		
@@ -64,6 +64,7 @@ public void doSave(UserBean user) throws SQLException{
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {
+				bean = new UserBean();
 				bean.setUser(rs.getString("User"));
 				bean.setNome(rs.getString("Nome"));
 				bean.setCognome(rs.getString("Cognome"));

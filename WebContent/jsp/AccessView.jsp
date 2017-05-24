@@ -52,7 +52,7 @@
 	<h1>Registration</h1>
 	<form name='registration' onSubmit="return registerValidation();" action='access' method="post">
 		
-			<input type="hidden" name="action" value="create"> 
+			<input type="hidden" name="action" value="register"> 
 			
 			<label for="user">Username:</label>
 			<input type="text" name="user" size="12" /><span id="user"></span><br>

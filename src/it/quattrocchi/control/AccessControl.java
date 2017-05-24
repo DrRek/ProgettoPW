@@ -14,9 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.AccessModel;
-import it.quattrocchi.model.ArticleModel;
-import it.quattrocchi.support.ArticleBean;
-import it.quattrocchi.support.Cart;
 import it.quattrocchi.support.UserBean;
 
 @WebServlet("/access")
@@ -54,7 +51,7 @@ public class AccessControl extends HttpServlet{
 				if(user!=null){ //restituisce true se l'utente esiste
 					request.getSession().setAttribute("user", user);
 					
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("article");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 					dispatcher.forward(request, response);
 				} else {
 					request.setAttribute("loginFailed", true);
@@ -83,7 +80,7 @@ public class AccessControl extends HttpServlet{
 				newUser.setCap(request.getParameter("cap"));
 				newUser.setIndirizzo(request.getParameter("indirizzo"));
 				newUser.setEmail(request.getParameter("email"));
-				
+				System.out.println(newUser);
 				try {
 					model.doSave(newUser);
 				} catch (SQLException e) {
