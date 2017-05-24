@@ -4,6 +4,7 @@
 <%
 	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
+	UserBean user = (UserBean) request.getSession().getAttribute("user");
 %>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@
 
 <body>
 <div class="container">
-	<h1><a href="article">Quattrocchi.it</a></h1><h6><a href="access">Login</a></h6>
+	<h1><a href="article">Quattrocchi.it</a></h1><h5><a href="access">Login</a></h5><%if (user!=null){ %><h6>Benvenuto, <%=user.getUser()%></h6><%} %>
 	<h2>Products</h2>
 		<table class="table-bordered">
 			<thead>
