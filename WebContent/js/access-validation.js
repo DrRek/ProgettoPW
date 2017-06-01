@@ -75,7 +75,7 @@ function allLetter(uname)
 }
 function alphanumeric(uadd)
 { 
-	var letters = /^[0-9a-zA-Z]+$/;
+	var letters = /^[0-9a-zA-Z ]+$/;
 	if(uadd.value.match(letters))
 	{
 		return true;

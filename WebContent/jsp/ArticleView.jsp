@@ -29,7 +29,7 @@
 
 <body>
 <div class="container">
-	<%@ include file="Header.jsp"%>
+	<%@ include file="header.jsp"%>
 	
 	<h1><a href="article">Quattrocchi.it</a></h1>
 	<h5><a href="access">Login / Register</a></h5>

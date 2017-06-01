@@ -26,23 +26,88 @@
 </head>
 
 <body>
-<div class="container">
-	<h1><a href="article">Quattrocchi.it</a></h1>
-	<%if(user==null){%>
+	<h1>
+		<a href="article">Quattrocchi.it</a>
+	</h1>
+	<%
+		if (user == null) {
+	%>
+	<div class="container">
+		<h1>
+			<a href="article">Quattrocchi.it</a>
+		</h1>
+
 		<a href="access">Login is required!</a>
-	<%}else{%>
-		Ciao, <%=user.getUser()%><br>
-		I tuoi dati:<br>
-		<ul>
-			<li>Nome: <%=user.getNome() %></li>
-			<li>Cognome: <%=user.getCognome() %></li>
-			<li>Stato: <%=user.getStato() %></li>
-			<li>Cap: <%=user.getCap()%></li>
-			<li>Indirizzo: <%=user.getIndirizzo() %></li>
-			<li>Email: <%=user.getEmail() %></li>
-			<li>Data di Nascita: <%=user.getDataDiNascita() %></li>
-		</ul>
-	<%}%>
-</div>
+	</div>
+	<%
+		} else {
+	%>
+	<div class="container">
+
+		<h2>
+			Ciao,
+			<%=user.getUser()%></h2>
+		<table class="table-bordered">
+			<thead>
+				<th colspan="2">I tuoi dati:<br></th>
+			</thead>
+			<tr>
+				<td>Nome:</td>
+				<td><%=user.getNome()%></td>
+			</tr>
+			<tr>
+				<td>Cognome:</td>
+				<td><%=user.getCognome()%></td>
+			</tr>
+			<tr>
+				<td>Stato:</td>
+				<td><%=user.getStato()%></td>
+			</tr>
+			<tr>
+				<td>Cap:</td>
+				<td><%=user.getCap()%></td>
+			</tr>
+			<tr>
+				<td>Indirizzo:</td>
+				<td><%=user.getIndirizzo()%></td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><%=user.getEmail()%></td>
+			</tr>
+			<tr>
+				<td>Data di nascita:</td>
+				<td><%=user.getDataDiNascita()%></td>
+			</tr>
+		</table>
+		<p>
+			<a>Modifica</a>&lt-- magari un giorno ci viene voglia di
+			implementarlo
+		</p>
+	</div>
+	<div class="container">
+		<h2>Carte di credito</h2>
+		<table class="table-bordered">
+			<thead>
+				<th>Numero carta</th>
+				<th>Circuito</th>
+				<th>Scadenza</th>
+				<th>Opzioni</th>
+			</thead>
+			<tr>
+				<td>4534-23423-23423-2342</td>
+				<td>Lucareccia express</td>
+				<td>20/20</td>
+				<td><a>modifica</a> <a>rimuovi</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="container">
+	<h2>Aggiungi carta</h2>
+	</div>
+	
+	<%
+		}
+	%>
 </body>
 </html>
