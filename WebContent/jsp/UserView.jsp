@@ -33,10 +33,6 @@
 		if (user == null) {
 	%>
 	<div class="container">
-		<h1>
-			<a href="article">Quattrocchi.it</a>
-		</h1>
-
 		<a href="access">Login is required!</a>
 	</div>
 	<%
@@ -90,20 +86,37 @@
 		<table class="table-bordered">
 			<thead>
 				<th>Numero carta</th>
+				<th>Intestatario</th>
 				<th>Circuito</th>
 				<th>Scadenza</th>
 				<th>Opzioni</th>
 			</thead>
 			<tr>
 				<td>4534-23423-23423-2342</td>
+				<td>Luca Reccia</td>
 				<td>Lucareccia express</td>
 				<td>20/20</td>
-				<td><a>modifica</a> <a>rimuovi</a></td>
+				<td><a>rimuovi</a></td>
 			</tr>
 		</table>
 	</div>
 	<div class="container">
 	<h2>Aggiungi carta</h2>
+	<form name='cc' onSubmit="return ccValidation();" action='user' method="post"> //ccvalidation() deve ancora essere scritta, su user va ancora implementata
+	<label for="numcc">Numero carta di credito:</label> 
+			<input name="numcc" type="text" maxlength="50" required placeholder="ES. 1234-5678-9012-3456"><br> 
+	<label for="intestatario">Intestatario:</label>
+			<input name="intestatario" type="text" maxlength="50" required placeholder="inserisci nome e cognome"><br> 
+	<label for="circuito">Circuito:</label>
+			<input name="circuito" type="text" maxlength="50" required placeholder="ES. Mastercard"><br> 
+	<label for="scadenza">Scadenza:</label> 
+		<input name="scadenza" type="text" maxlength="50" required placeholder="ES. 20/20"><br> 	
+		<label for="scadenza">Scadenza:</label> 
+	<input name="cvv" type="text" maxlength="50" required placeholder="ES. 570"><br> 
+	
+	<input name="submit" value="Aggiungi" type="submit">
+	
+	</form>	
 	</div>
 	
 	<%
