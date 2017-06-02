@@ -6,6 +6,11 @@ create user if not exists
     
 grant all on quattrocchiDB.* to progetto@localhost;
 
+create table Amministratore(
+	User varchar(16) primary key,
+    Pwd varchar(10) not null
+);
+
 create table Cliente(
 	User varchar(16) primary key,
     Pwd varchar(10) not null,

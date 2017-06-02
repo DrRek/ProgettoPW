@@ -3,7 +3,11 @@
 -- luca desktop C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\
 
 use quattrocchiDB;
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Articolo.csv'
+LOAD DATA LOCAL INFILE 'C:\\Users\\Carlo Palmiero\\workspace web\\ProgettoPW\\sql\\csv\\Articolo.csv'
 	INTO TABLE Articolo
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+	();
+LOAD DATA LOCAL INFILE 'C:\\Users\\Carlo Palmiero\\workspace web\\ProgettoPW\\sql\\csv\\Amministratore.csv'
+	INTO TABLE Amministratore
 		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 	();

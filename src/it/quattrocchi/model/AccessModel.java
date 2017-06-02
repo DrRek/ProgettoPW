@@ -10,14 +10,14 @@ import it.quattrocchi.support.UserBean;
 public class AccessModel {
 
 	private static final String TABLE_NAME = "quattrocchidb.cliente";
-	
-public void doSave(UserBean user) throws SQLException{
-		
+
+	public void doSave(UserBean user) throws SQLException{
+
 		Connection conn = null;
 		PreparedStatement stm = null;
-		
+
 		String query = "INSERT INTO " + TABLE_NAME + " values (?,?,?,?,?,?,?,?,?)";
-		
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
@@ -30,12 +30,12 @@ public void doSave(UserBean user) throws SQLException{
 			stm.setString(7,user.getCap());
 			stm.setString(8, user.getIndirizzo());
 			stm.setString(9, user.getEmail());
-			
+
 			stm.executeUpdate();
-			
+
 			conn.commit();
 		}
-		
+
 		finally {
 			try {
 				if (stm != null)
@@ -45,24 +45,24 @@ public void doSave(UserBean user) throws SQLException{
 			}
 		}
 	}
-	
+
 	public UserBean doRetrieveByKey(String userid, String passid) throws SQLException {
 
 		Connection conn = null;
 		PreparedStatement stm  = null;
-		
+
 		UserBean bean = null;
-		
+
 		String query = "SELECT * FROM " + TABLE_NAME + " WHERE User = ? and Pwd = ?;";
-		
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, userid);
 			stm.setString(2, passid);
-			
+
 			ResultSet rs = stm.executeQuery();
-			
+
 			while(rs.next()) {
 				bean = new UserBean();
 				bean.setUser(rs.getString("User"));
@@ -83,8 +83,37 @@ public void doSave(UserBean user) throws SQLException{
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-		
+
 		return bean;
 	}
 
+	public boolean isAdmin(String userid, String passid) throws SQLException {
+		Connection conn = null;
+		PreparedStatement stm  = null;
+		boolean isAdmin = false;
+
+		String query = "SELECT * FROM " + "quattrocchidb.Amministratore" + " WHERE User = ? and Pwd = ?;";		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, userid);
+			stm.setString(2, passid);
+
+			ResultSet rs = stm.executeQuery();
+			if(rs.next())
+				isAdmin = true;
+		}
+
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		
+		return isAdmin;
+		
+	}
 }
