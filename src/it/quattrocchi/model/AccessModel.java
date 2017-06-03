@@ -62,8 +62,8 @@ public class AccessModel {
 			stm.setString(2, passid);
 
 			ResultSet rs = stm.executeQuery();
-
-			while(rs.next()) {
+					
+			if(rs.next()) {
 				bean = new UserBean();
 				bean.setUser(rs.getString("User"));
 				bean.setNome(rs.getString("Nome"));

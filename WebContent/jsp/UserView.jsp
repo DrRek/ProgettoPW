@@ -4,7 +4,6 @@
 <%
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
-
 %>
 
 <!DOCTYPE html>
@@ -38,7 +37,7 @@
 		<a href="access">Login is required!</a>
 	</div>
 	<%
-		} else if(user != null){
+		} else if (user != null) {
 	%>
 	<div class="container">
 
@@ -106,8 +105,9 @@
 		<h2>Aggiungi carta</h2>
 		<form name='cc' onSubmit="return ccValidation();" action='user'
 			method="post">
-			//ccvalidation() deve ancora essere scritta, su user va ancora
-			implementata <label for="numcc">Numero carta di credito:</label> <input
+			<!-- 	//ccvalidation() deve ancora essere scritta, su user va ancora
+			implementata -->
+			<label for="numcc">Numero carta di credito:</label> <input
 				name="numcc" type="text" maxlength="50" required
 				placeholder="ES. 1234-5678-9012-3456"><br> <label
 				for="intestatario">Intestatario:</label> <input name="intestatario"
@@ -125,8 +125,7 @@
 	</div>
 
 	<%
-		}
-		else if(admin != null){
+		} else if (admin != null) {
 	%>
 	<div class="container">
 		<h2>
