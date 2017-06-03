@@ -136,7 +136,7 @@
 		<h3>Insert</h3>
 		<form action="user" method="post">
 
-			<input type="hidden" name="user" value="insert"> <label
+			<input type="hidden" name="action" value="insert"> <label
 				for="nome">Nome:</label><br> <input name="nome" type="text"
 				maxlength="40" required placeholder="inserisci il nome"><br>
 

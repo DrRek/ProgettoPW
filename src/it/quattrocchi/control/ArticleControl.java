@@ -42,9 +42,6 @@ public class ArticleControl extends HttpServlet {
 			if (action.equalsIgnoreCase("checkout"))
 				checkout(request,response);
 
-			else if (action.equalsIgnoreCase("insert"))
-				insert(request, response);
-
 			else if (action.equalsIgnoreCase("delete"))
 				delete(request, response);
 
@@ -79,55 +76,6 @@ public class ArticleControl extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
-		String tipo = request.getParameter("tipo");
-		int numeroPezziDisponibili = Integer.parseInt(request.getParameter("numeroPezziDisponibili"));
-		float prezzo = Integer.parseInt(request.getParameter("prezzo"));
-		float gradazione = Integer.parseInt(request.getParameter("gradazione"));
-		ArticleBean bean = null;
-
-		try {
-			
-			bean = model.doRetrieveByKey(nome, marca);
-	
-		} catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-
-		if (bean == null) {
-			bean = new ArticleBean();
-			bean.setNome(nome);
-			bean.setMarca(marca);
-			bean.setTipo(tipo);
-			bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
-			bean.setPrezzo(prezzo);
-			bean.setGradazione(gradazione);
-			
-			try {
-			
-				model.doSave(bean);
-			
-			} catch (SQLException e) {
-				System.out.println("Error:" + e.getMessage());
-			}
-			
-		} else {
-			bean.setTipo(tipo);
-			bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
-			bean.setPrezzo(prezzo);
-			bean.setGradazione(gradazione);
-			
-			try {
-			
-				model.doUpdate(bean);
-			
-			} catch (SQLException e) {
-				System.out.println("Error:" + e.getMessage());
-			}
-		}
-	}
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nome = request.getParameter("nome");

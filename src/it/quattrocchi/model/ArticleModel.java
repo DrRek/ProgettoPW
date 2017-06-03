@@ -120,7 +120,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm  = null;
 		
-		ArticleBean bean = new ArticleBean();
+		ArticleBean bean = null;
 		
 		String query = "SELECT * FROM " + TABLE_NAME + " WHERE nome = ? and marca = ?;";
 		
@@ -133,6 +133,7 @@ public class ArticleModel {
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {
+				bean = new ArticleBean();
 				bean.setNome(rs.getString("nome"));
 				bean.setMarca(rs.getString("marca"));
 				bean.setTipo(rs.getString("tipo"));
