@@ -27,9 +27,7 @@
 </head>
 
 <body>
-	<h1>
-		<a href="article">Quattrocchi.it</a>
-	</h1>
+	<%@ include file="header.jsp"%>
 	<%
 		if (user == null && admin == null) {
 	%>

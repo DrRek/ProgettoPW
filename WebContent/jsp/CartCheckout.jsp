@@ -26,31 +26,37 @@
 </head>
 
 <body>
-<div class="container">
-	<h1><a href="article">Quattrocchi.it</a></h1>
-	<h2>Cart</h2>
-	<table class="table-bordered">
-		<tr>
-			<th>Nome</th>
-			<th>Marca</th>
-			<th>Numero Prodotti</th>
-			<th>Prezzo</th>
-		</tr>
-		<% List<CartArticle> prodcart = cart.getProducts(); 	
-		   for(CartArticle beancart : prodcart) {
-		%>
-		<tr>
-			<td><%=beancart.getArticle().getNome()%></td>
-			<td><%=beancart.getArticle().getMarca()%></td>
-			<!-- non ancora logicamente corretto -->
-			<td><input name="numeroPezziDisponibili" type="number" min="1" value ="<%=beancart.getQuantity()%>"></td>
-			<td><%=beancart.getPrezzo()%>€</td>
-		</tr>
-		<%} %>
-	</table>
-	<h3>Prezzo totale: <%=cart.getPrezzo()%>€</h3>
-	<input type="button" value="Completa il pagamento!">
-		
-</div>
+	<%@ include file="header.jsp"%>
+		<h2>Cart</h2>
+		<table class="table-bordered">
+			<tr>
+				<th>Nome</th>
+				<th>Marca</th>
+				<th>Numero Prodotti</th>
+				<th>Prezzo</th>
+			</tr>
+			<%
+				List<CartArticle> prodcart = cart.getProducts();
+				for (CartArticle beancart : prodcart) {
+			%>
+			<tr>
+				<td><%=beancart.getArticle().getNome()%></td>
+				<td><%=beancart.getArticle().getMarca()%></td>
+				<!-- non ancora logicamente corretto -->
+				<td><input name="numeroPezziDisponibili" type="number" min="1"
+					value="<%=beancart.getQuantity()%>"></td>
+				<td><%=beancart.getPrezzo()%>€</td>
+			</tr>
+			<%
+				}
+			%>
+		</table>
+		<h3>
+			Prezzo totale:
+			<%=cart.getPrezzo()%>€
+		</h3>
+		<input type="button" value="Completa il pagamento!">
+
+	</div>
 </body>
 </html>

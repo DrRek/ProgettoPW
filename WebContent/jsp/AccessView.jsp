@@ -28,17 +28,13 @@
 </head>
 
 <body>
-	<div class="container">
-		<h1>
-			<a href="article">Quattrocchi.it</a>
-		</h1>
-	</div>
+	<%@ include file="header.jsp"%>
 	<% if(user != null || admin !=  null) {%>
-	
+
 	<div class="container">
 		<h2>effettua prima il logout</h2>
 	</div>
-	
+
 	<%}
 		else{%>
 	<div class="container">

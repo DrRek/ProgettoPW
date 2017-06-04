@@ -29,35 +29,9 @@
 </head>
 
 <body>
-	<div class="container">
 		<%@ include file="header.jsp"%>
-
-		<h1>
-			<a href="article">Quattrocchi.it</a>
-		</h1>
-		<h5>
-			<a href="access">Login / Register</a>
-		</h5>
-		<%
-			if (user != null) {
-		%><h6>
-			<a href="user">Benvenuto, <%=user.getUser()%></a> <br> <a
-				href="user?action=logout">logout</a>
-		</h6>
-		<%
-			}
-		%>
-		<%
-			if (admin != null) {
-		%><h6>
-			<a href="user">Benvenuto, <%=admin.getUser()%></a> <br> <a
-				href="user?action=logout">logout</a>
-
-		</h6>
-		<%
-			}
-		%>
-
+	
+	<div class="container">
 		<h2>Products</h2>
 		<table class="table-bordered">
 			<thead>
