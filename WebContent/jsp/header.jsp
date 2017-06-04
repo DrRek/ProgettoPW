@@ -50,7 +50,7 @@
 					<%
         } 
        else if (adm != null){%>
-					<li><a href="user">Benvenuto, <%=adm.getUser() %>>
+					<li><a href="user">Benvenuto, <%=adm.getUser() %>
 					</a></li>
 					<li><a href="user?action=logout">logout</a></li>
 					<%

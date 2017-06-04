@@ -67,6 +67,7 @@ public class AccessControl extends HttpServlet{
 		}
 
 		if(isAdmin){
+			request.getSession().invalidate();
 			AdminBean admin = new AdminBean();
 			admin.setUser(userid);
 			admin.setPassword(passid);

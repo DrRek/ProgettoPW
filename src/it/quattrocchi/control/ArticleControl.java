@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.ArticleModel;
-import it.quattrocchi.support.ArticleBean;
+import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.Cart;
 
 @WebServlet("/article")
@@ -36,14 +36,12 @@ public class ArticleControl extends HttpServlet {
 		}
 
 		String action = request.getParameter("action");
-
-		if (action != null) {
+		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
+		
+		if (action != null && admin == null) {
 
 			if (action.equalsIgnoreCase("checkout"))
 				checkout(request,response);
-
-			else if (action.equalsIgnoreCase("delete"))
-				delete(request, response);
 
 			else if (action.equalsIgnoreCase("addCart"))
 				cart = addCart(request, response, cart);
@@ -52,7 +50,12 @@ public class ArticleControl extends HttpServlet {
 				cart = delCart(request, response, cart);
 
 		}
-
+		else if(action != null && admin != null){
+			
+			if (action.equalsIgnoreCase("delete"))
+				delete(request, response);
+		}
+		
 		String sort = request.getParameter("sort");
 		
 		try {
