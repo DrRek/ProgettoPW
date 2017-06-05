@@ -115,7 +115,7 @@
 				maxlength="50" required placeholder="ES. Mastercard"><br>
 			<label for="scadenza">Scadenza:</label> <input name="scadenza"
 				type="text" maxlength="50" required placeholder="ES. 20/20"><br>
-			<label for="scadenza">Scadenza:</label> <input name="cvv" type="text"
+			<label for="cvv">Cvv:</label> <input name="cvv" type="text"
 				maxlength="50" required placeholder="ES. 570"><br> <input
 				name="submit" value="Aggiungi" type="submit">
 

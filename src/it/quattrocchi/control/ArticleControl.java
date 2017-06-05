@@ -29,14 +29,15 @@ public class ArticleControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
-		if (cart == null) {
+		
+		if (cart == null && admin == null) {
 			cart = new Cart();
 			request.getSession().setAttribute("cart", cart);
 		}
 
 		String action = request.getParameter("action");
-		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
 		
 		if (action != null && admin == null) {
 
@@ -68,7 +69,8 @@ public class ArticleControl extends HttpServlet {
 			System.out.println("Error:" + e.getMessage());
 		}
 
-		request.getSession().setAttribute("cart", cart);
+		if(admin == null)
+			request.getSession().setAttribute("cart", cart);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleView.jsp");
 		dispatcher.forward(request, response);
