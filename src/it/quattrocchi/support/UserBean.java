@@ -3,6 +3,12 @@ package it.quattrocchi.support;
 import java.sql.Date;
 
 public class UserBean {
+	//Importante modificare questo metodo quando si implementerà la scelta delle tante carte di credito
+	public String getCart() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+	
 	public UserBean(){
 		setUser(null);
 		setNome(null);

@@ -111,7 +111,7 @@ public class AccessControl extends HttpServlet{
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		Date dataNascita = new java.sql.Date(parsed.getTime());
+		java.sql.Date dataNascita = new java.sql.Date(parsed.getTime());
 		newUser.setDataDiNascita(dataNascita);
 
 		newUser.setStato(request.getParameter("stato"));
