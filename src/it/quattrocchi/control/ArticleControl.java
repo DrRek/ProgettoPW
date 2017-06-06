@@ -125,7 +125,7 @@ public class ArticleControl extends HttpServlet {
 	
 	private void checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CartCheckout.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
 		dispatcher.forward(request, response);
 	}
 }
