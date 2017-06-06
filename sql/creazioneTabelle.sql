@@ -40,7 +40,7 @@ create table Sottoscrizione(
 
 create table Prescrizione(
 	Codice varchar(36) primary key,
-    TIpoPrescrizione varchar(20),
+    TipoPrescrizione varchar(20),
     SferaSinistra decimal(4,2),
     CilindroSinistra decimal(3,2),
     AsseSinistra decimal(3),
