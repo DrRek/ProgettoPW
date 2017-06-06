@@ -57,8 +57,7 @@
 			<%=cart.getPrezzo()%>€
 		</h3>
 		<form name='checkout' action='checkout' method="post">
-<!-- bisogna scegliere la carta di credito con la quale pagare, o in alternativa aggiungerne una -->
-			<input type="hidden" name="action" value="checkout"> <input
+			<input type="hidden" name="action" value="submit"> <input
 				name="submit" value="Completa il pagamento!" type="submit">
 
 		</form>

@@ -6,7 +6,7 @@ public class UserBean {
 	//Importante modificare questo metodo quando si implementerà la scelta delle tante carte di credito
 	public String getCart() {
 		// TODO Auto-generated method stub
-		return "";
+		return "1111222233334444";
 	}
 	
 	public UserBean(){
@@ -83,8 +83,6 @@ public class UserBean {
 	public void setDataDiNascita(Date dataDiNascita) {
 		this.dataDiNascita = dataDiNascita;
 	}
-	
-	
 
 	public String getPassword() {
 		return password;

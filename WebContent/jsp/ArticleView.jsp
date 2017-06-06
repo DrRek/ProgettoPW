@@ -118,7 +118,7 @@
 			Prezzo totale:
 			<%=cart.getPrezzo()%>€
 		</h3>
-		<form action='article' method='post'>
+		<form action='checkout' method='post'>
 			<input type="hidden" name="action" value="checkout"></input> <input
 				type="submit" value="Checkout">
 		</form>
@@ -128,4 +128,5 @@
 
 	</div>
 </body>
+
 </html>

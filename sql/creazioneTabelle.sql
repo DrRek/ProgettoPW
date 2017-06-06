@@ -71,9 +71,7 @@ create table Associazione(
 create table Ordine(
 	Codice varchar(36) primary key,
     DataEsecuzione date not null,
-    Costo decimal(8,2) not null,
-    CartaCredito decimal(16) not null,
-    foreign key (CartaCredito) references CartaCredito(NumeroCC)
+    Costo decimal(8,2) not null
 );
 
 create table Esecuzione(
@@ -107,7 +105,7 @@ create table Articolo(
 
 create table Appartenenza(
 	Ordine varchar(36),
-    Articolo varchar(20),
+    Articolo varchar(40),
     Prescrizione varchar(36),
     PrezzoVendita decimal (6,2) not null,
     primary key(Ordine, Articolo),

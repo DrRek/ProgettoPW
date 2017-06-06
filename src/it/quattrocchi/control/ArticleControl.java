@@ -41,17 +41,11 @@ public class ArticleControl extends HttpServlet {
 		
 		if (action != null && admin == null) {
 
-			if (action.equalsIgnoreCase("checkout"))
-				checkout(request,response);
-
-			else if (action.equalsIgnoreCase("addCart"))
+			if (action.equalsIgnoreCase("addCart"))
 				cart = addCart(request, response, cart);
 
 			else if (action.equalsIgnoreCase("delCart"))
 				cart = delCart(request, response, cart);
-
-		}
-		else if(action != null && admin != null){
 			
 			if (action.equalsIgnoreCase("delete"))
 				delete(request, response);
@@ -121,11 +115,5 @@ public class ArticleControl extends HttpServlet {
 			System.out.println("Error:" + e.getMessage());
 		}
 		return cart;
-	}
-	
-	private void checkout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
-		dispatcher.forward(request, response);
 	}
 }

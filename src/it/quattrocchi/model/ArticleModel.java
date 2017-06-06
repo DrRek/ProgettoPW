@@ -23,6 +23,7 @@ public class ArticleModel {
 		String query = "INSERT INTO " + TABLE_NAME + " values (?,?,?,?,?,?,?,?,?)";
 		
 		try {
+			System.out.println("gg");
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, product.getNome());

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +37,19 @@ public class CheckoutControl extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+	
+		String action = request.getParameter("action");
+		if (action != null) {
+			if (action.equalsIgnoreCase("checkout"))
+				summaryCheckout(request,response);
+			else if (action.equalsIgnoreCase("submit")){
+				addOrder(request, response);
+				done(request, response);
+			}
+		}
+	}
+	
+	private void addOrder(HttpServletRequest request, HttpServletResponse response){
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		
@@ -55,21 +68,8 @@ public class CheckoutControl extends HttpServlet {
 			ordine.setCodice(codice);
 			ordine.setCosto(costo);
 			
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			java.util.Date parsed=null;
-			try {
-				parsed = format.parse(dataEsecuzione.toString());
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			java.sql.Date rightDate = new java.sql.Date(parsed.getTime());
+			java.sql.Date rightDate = new java.sql.Date(dataEsecuzione.getTime());
 			ordine.setDataEsecuzione(rightDate);
-			try {
-				model.doSave(ordine);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			ordine.setOrdinati(cart.getProducts());
 			
 			
@@ -81,5 +81,17 @@ public class CheckoutControl extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private void done(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
+		dispatcher.forward(request, response);
+	}
+	
+	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
+		dispatcher.forward(request, response);
 	}
 }
