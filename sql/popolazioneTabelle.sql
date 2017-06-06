@@ -15,3 +15,7 @@ LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\CartaCre
 	INTO TABLE CartaCredito
 		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 	();
+LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Cliente.csv'
+	INTO TABLE Cliente
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+	();
