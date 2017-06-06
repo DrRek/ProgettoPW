@@ -29,7 +29,7 @@
 </head>
 
 <body>
-		<%@ include file="header.jsp"%>
+		<%@ include file="../jsp/header.jsp"%>
 	
 	<div class="container">
 		<h2>Products</h2>
