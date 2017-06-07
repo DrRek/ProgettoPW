@@ -46,4 +46,5 @@ public class OrderBean {
 	private double costo;
 	private UserBean cliente;
 	private ArrayList<CartArticle> ordinati;
+	//va aggiunta la carta di credito
 }

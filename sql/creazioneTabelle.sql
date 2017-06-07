@@ -26,68 +26,45 @@ create table Cliente(
 create table CartaCredito(
 	NumeroCC decimal(16) primary key,
 	Intestatario varchar(40) not null,
-    Circuito varchar(20) not null,
-    DataScadenza date not null,
-    CvcCvv decimal(3) not null
-);
-
-create table Sottoscrizione(
+    	Circuito varchar(20) not null,
+    	DataScadenza date not null,
+    	CvcCvv decimal(3) not null
 	Cliente char(16) not null,
-	CartaCredito decimal(16) not null,
     foreign key (Cliente) references Cliente(User) on delete cascade on update cascade,
-    foreign key (CartaCredito) references CartaCredito(NumeroCC) on delete cascade on update cascade
 );
 
 create table Prescrizione(
 	Codice varchar(36) primary key,
-    TipoPrescrizione varchar(20),
-    SferaSinistra decimal(4,2),
-    CilindroSinistra decimal(3,2),
-    AsseSinistra decimal(3),
-    SferaDestra decimal(4,2),
-    CilindroDestra decimal(3,2),
-    AsseDestra decimal(3),
-    AddizioneVicinanza decimal(3,2),
-    PrismaOrizSinistra decimal(3,2),
-    PrismaOrizSinistraBaseDirection varchar(3),
-    PrismaVertSinistra decimal(3,2),
-    PrismaVertSinistraBaseDirection varchar(3),
-    PrismaOrizDestra decimal(3,2),
-    PrismaOrizDestraBaseDirection varchar(3),
-    PrismaVertDestra decimal(3,2),
-    PrismaVertDestraBaseDirection varchar(3),
-    PDSinistra decimal(3,1),
-    PDDestra decimal(3,1)
-);
-
-create table Associazione(
 	Cliente char(16) not null,
-    Prescrizione varchar(36) not null,
-    primary key(Cliente, Prescrizione),
-    foreign key (Cliente) references Cliente(User) on delete cascade on update cascade,
-    foreign key (Prescrizione) references Prescrizione(Codice) on delete cascade on update cascade
+    	TipoPrescrizione varchar(20),
+    	SferaSinistra decimal(4,2),
+    	CilindroSinistra decimal(3,2),
+    	AsseSinistra decimal(3),
+    	SferaDestra decimal(4,2),
+    	CilindroDestra decimal(3,2),
+    	AsseDestra decimal(3),
+    	AddizioneVicinanza decimal(3,2),
+    	PrismaOrizSinistra decimal(3,2),
+    	PrismaOrizSinistraBaseDirection varchar(3),
+    	PrismaVertSinistra decimal(3,2),
+    	PrismaVertSinistraBaseDirection varchar(3),
+    	PrismaOrizDestra decimal(3,2),
+    	PrismaOrizDestraBaseDirection varchar(3),
+    	PrismaVertDestra decimal(3,2),
+    	PrismaVertDestraBaseDirection varchar(3),
+    	PDSinistra decimal(3,1),
+    	PDDestra decimal(3,1),
+    foreign key (Cliente) references Cliente(User) on delete cascade on update cascade
 );
 
 create table Ordine(
 	Codice varchar(36) primary key,
-    DataEsecuzione date not null,
-    Costo decimal(8,2) not null
-);
-
-create table Esecuzione(
-	Ordine varchar(36) not null, 
+   	DataEsecuzione date not null,
+    	Costo decimal(8,2) not null
+    	CartaCredito decimal(16) not null,
 	Cliente char(16) not null,
-    primary key(Ordine, Cliente),
-    foreign key (Ordine) references Ordine(Codice),
-    foreign key (Cliente) references Cliente(User)
-);
-
-create table Utilizzo(
-	Ordine varchar(36) not null, 
-	CartaCredito decimal(16) not null,
-    primary key(Ordine, CartaCredito),
-    foreign key (Ordine) references Ordine(Codice),
     foreign key (CartaCredito) references CartaCredito(NumeroCC)
+    foreign key (Cliente) references Cliente(User)
 );
 
 create table Articolo(
