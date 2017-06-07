@@ -28,9 +28,9 @@ create table CartaCredito(
 	Intestatario varchar(40) not null,
     	Circuito varchar(20) not null,
     	DataScadenza date not null,
-    	CvcCvv decimal(3) not null
+    	CvcCvv decimal(3) not null,
 	Cliente char(16) not null,
-    foreign key (Cliente) references Cliente(User) on delete cascade on update cascade,
+    foreign key (Cliente) references Cliente(User) on delete cascade on update cascade
 );
 
 create table Prescrizione(
@@ -60,10 +60,10 @@ create table Prescrizione(
 create table Ordine(
 	Codice varchar(36) primary key,
    	DataEsecuzione date not null,
-    	Costo decimal(8,2) not null
+    	Costo decimal(8,2) not null,
     	CartaCredito decimal(16) not null,
 	Cliente char(16) not null,
-    foreign key (CartaCredito) references CartaCredito(NumeroCC)
+    foreign key (CartaCredito) references CartaCredito(NumeroCC),
     foreign key (Cliente) references Cliente(User)
 );
 
