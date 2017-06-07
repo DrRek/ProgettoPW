@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -125,6 +126,9 @@ public class UserControl extends HttpServlet{
 		ccBean.setCvcCvv(request.getParameter("cvv"));
 		
 		ccModel.doSave(ccBean);
+		
+		ArrayList<CreditCardBean> cc = ccModel.doRetrieveByCliente(((UserBean) request.getSession().getAttribute("user")).getUser());
+		request.getSession().setAttribute("ccards", cc);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
