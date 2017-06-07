@@ -85,6 +85,7 @@ public class CheckoutControl extends HttpServlet {
 	
 	private void done(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		request.getSession().removeAttribute("cart");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 		dispatcher.forward(request, response);
 	}
