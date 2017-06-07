@@ -2,6 +2,8 @@ package it.quattrocchi.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.ArticleModel;
+import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.support.ArticleBean;
+import it.quattrocchi.support.CreditCardBean;
+import it.quattrocchi.support.UserBean;
 
 @WebServlet("/user")
 
@@ -20,6 +25,7 @@ public class UserControl extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	static ArticleModel model = new ArticleModel();
+	static CreditCardModel ccModel = new CreditCardModel();
 
 	public UserControl(){
 		super();
@@ -43,6 +49,9 @@ public class UserControl extends HttpServlet{
 
 				else if(action.equals("logout"))
 					logout(request,response);
+				
+				else if(action.equalsIgnoreCase("addCard"))
+					addCard(request,response);
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -93,6 +102,31 @@ public class UserControl extends HttpServlet{
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.getSession().invalidate();
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
+		dispatcher.forward(request, response);
+	}
+	
+	private void addCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
+		CreditCardBean ccBean = new CreditCardBean();
+		ccBean.setCliente(((UserBean) request.getSession().getAttribute("user")).getUser());
+		ccBean.setNumeroCC(request.getParameter("numcc"));
+		ccBean.setIntestatario(request.getParameter("intestatario"));
+		ccBean.setCircuito(request.getParameter("circuito"));
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date parsed=null;
+		try {
+			parsed = format.parse(request.getParameter("scadenza"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		java.sql.Date dataScadenza = new java.sql.Date(parsed.getTime());
+		ccBean.setDataScadenza(dataScadenza);
+		
+		ccBean.setCvcCvv(request.getParameter("cvv"));
+		
+		ccModel.doSave(ccBean);
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}
 }

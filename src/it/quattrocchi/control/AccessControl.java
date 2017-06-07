@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.AccessModel;
+import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.support.AdminBean;
+import it.quattrocchi.support.CreditCardBean;
 import it.quattrocchi.support.UserBean;
 
 @WebServlet("/access")
@@ -24,6 +27,7 @@ public class AccessControl extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	static AccessModel model = new AccessModel();
+	static CreditCardModel ccModel = new CreditCardModel();
 
 	public AccessControl(){
 		super();
@@ -58,6 +62,7 @@ public class AccessControl extends HttpServlet{
 		String userid = request.getParameter("userid");
 		String passid = request.getParameter("passid");
 		UserBean user;
+		ArrayList<CreditCardBean> cc = null;
 		boolean isAdmin;
 
 		try{
@@ -79,12 +84,14 @@ public class AccessControl extends HttpServlet{
 
 			try {
 				user = model.doRetrieveByKey(userid, passid);
+				cc = ccModel.doRetrieveByCliente(user.getUser());
 			} catch (SQLException e) {
 				user = null;
 			}
 
 			if(user!=null){ //restituisce true se l'utente esiste
 				request.getSession().setAttribute("user", user);
+				request.getSession().setAttribute("ccards", cc);
 
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 				dispatcher.forward(request, response);

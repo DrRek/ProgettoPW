@@ -4,6 +4,7 @@
 <%
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
+	Collection<?> cc = (Collection<?>) request.getSession().getAttribute("ccards");
 %>
 
 <!DOCTYPE html>
@@ -90,13 +91,21 @@
 				<th>Scadenza</th>
 				<th>Opzioni</th>
 			</thead>
+			<%
+				if (cc != null && cc.size() != 0) {
+					Iterator<?> it = cc.iterator();
+					while (it.hasNext()) {
+						CreditCardBean bean = (CreditCardBean) it.next();
+			%>
 			<tr>
-				<td>4534-23423-23423-2342</td>
-				<td>Luca Reccia</td>
-				<td>Lucareccia express</td>
-				<td>20/20</td>
+				<td><%=bean.getNumeroCC()%></td>
+				<td><%=bean.getIntestatario() %></td>
+				<td><%=bean.getCircuito() %></td>
+				<td><%=bean.getDataScadenza() %></td>
 				<td><a>rimuovi</a></td>
 			</tr>
+			<% 	}
+					}%>
 		</table>
 	</div>
 	<div class="container">
@@ -107,17 +116,18 @@
 			implementata -->
 			<label for="numcc">Numero carta di credito:</label> <input
 				name="numcc" type="text" maxlength="50" required
-				placeholder="ES. 1234-5678-9012-3456"><br> <label
+				placeholder="ES. 1234567890123456"><br> <label
 				for="intestatario">Intestatario:</label> <input name="intestatario"
 				type="text" maxlength="50" required
 				placeholder="inserisci nome e cognome"><br> <label
 				for="circuito">Circuito:</label> <input name="circuito" type="text"
 				maxlength="50" required placeholder="ES. Mastercard"><br>
 			<label for="scadenza">Scadenza:</label> <input name="scadenza"
-				type="text" maxlength="50" required placeholder="ES. 20/20"><br>
+				type="text" maxlength="50" required placeholder="ES. 2017-07-06"><br>
 			<label for="cvv">Cvv:</label> <input name="cvv" type="text"
-				maxlength="50" required placeholder="ES. 570"><br> <input
-				name="submit" value="Aggiungi" type="submit">
+				maxlength="50" required placeholder="ES. 570"><br> 
+				<input type="hidden" name="action" value="addCard"><input
+				name="addCard" value="Aggiungi" type="submit">
 
 		</form>
 	</div>
