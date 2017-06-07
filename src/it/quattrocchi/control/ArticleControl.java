@@ -39,16 +39,25 @@ public class ArticleControl extends HttpServlet {
 
 		String action = request.getParameter("action");
 		
-		if (action != null && admin == null) {
+		if (action != null)
+			if (action.equalsIgnoreCase("description"))
+				descript(request, response);
+			
+		
+		else if (action != null && admin == null) {
 
-			if (action.equalsIgnoreCase("addCart"))
-				cart = addCart(request, response, cart);
+				if (action.equalsIgnoreCase("addCart"))
+					cart = addCart(request, response, cart);
 
-			else if (action.equalsIgnoreCase("delCart"))
-				cart = delCart(request, response, cart);
+				else if (action.equalsIgnoreCase("delCart"))
+					cart = delCart(request, response, cart);
+		}
+		
+		else if(action != null && admin != null) {
 			
 			if (action.equalsIgnoreCase("delete"))
 				delete(request, response);
+			
 		}
 		
 		String sort = request.getParameter("sort");
@@ -115,5 +124,10 @@ public class ArticleControl extends HttpServlet {
 			System.out.println("Error:" + e.getMessage());
 		}
 		return cart;
+	}
+	
+	private void descript(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleDescriptionView.jsp");
+		dispatcher.forward(request, response);
 	}
 }

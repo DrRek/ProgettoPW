@@ -50,7 +50,11 @@
 						ArticleBean bean = (ArticleBean) it.next();
 			%>
 			<tr>
-				<td><%=bean.getNome()%></td>
+				<td>
+					<a href="article?action=description&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">
+					<%=bean.getNome()%>
+					</a>
+				</td>
 				<td><%=bean.getTipo()%></td>
 				<td><%=bean.getMarca()%></td>
 				<td><%=bean.getPrezzo()%></td>
