@@ -40,8 +40,10 @@ public class ArticleControl extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if (action != null)
-			if (action.equalsIgnoreCase("description"))
+			if (action.equalsIgnoreCase("description")){
 				descript(request, response);
+				return;
+			}
 			
 		
 		else if (action != null && admin == null) {
