@@ -110,25 +110,34 @@
 	</div>
 	<div class="container">
 		<h2>Aggiungi carta</h2>
-		<form name='cc' onSubmit="return ccValidation();" action='user'
-			method="post">
-			<!-- 	//ccvalidation() deve ancora essere scritta, su user va ancora
-			implementata -->
-			<label for="numcc">Numero carta di credito:</label> <input
-				name="numcc" type="text" maxlength="50" required
-				placeholder="ES. 1234567890123456"><br> <label
-				for="intestatario">Intestatario:</label> <input name="intestatario"
-				type="text" maxlength="50" required
-				placeholder="inserisci nome e cognome"><br> <label
-				for="circuito">Circuito:</label> <input name="circuito" type="text"
-				maxlength="50" required placeholder="ES. Mastercard"><br>
-			<label for="scadenza">Scadenza:</label> <input name="scadenza"
-				type="text" maxlength="50" required placeholder="ES. 2017-07-06"><br>
-			<label for="cvv">Cvv:</label> <input name="cvv" type="text"
-				maxlength="50" required placeholder="ES. 570"><br> 
-				<input type="hidden" name="action" value="addCard"><input
-				name="addCard" value="Aggiungi" type="submit">
+		<script type="text/javascript" src="js/creditcard-validation.js"></script>
 
+		<form name='cc' onSubmit="return ccValidation();"  action='user'
+			method="post"> 
+					
+		<input type="hidden" name="action" value="addCard"> 
+		
+			<label for="numcc">Numero carta di credito:</label> <input
+				name="numcc" type="text" maxlength="50"
+				placeholder="ES. 1234567890123456"> <span id="numcc"></span><br>
+
+			<label for="intestatario">Intestatario:</label> <input
+				name="intestatario" type="text" maxlength="50" 
+				placeholder="inserisci nome e cognome"><span
+				id="intestatario"></span> <br>
+				
+				 <label for="circuito">Circuito:</label>
+			<input name="circuito" type="text" maxlength="50" 
+				placeholder="ES. Mastercard"><span id="circuito"></span> <br> 
+				
+				<label
+				for="scadenza">Scadenza:</label> <input name="scadenza" type="text"
+				maxlength="50"  placeholder="ES. 2017-07-06"><span id="scadenza"></span> <br>
+				
+			<label for="cvv">Cvv:</label> <input name="cvv" type="text"
+				maxlength="50" placeholder="ES. 570"> <span id="cvv"></span><br> 
+				
+			 <input name="addCard" value="Aggiungi" type="submit">
 		</form>
 	</div>
 

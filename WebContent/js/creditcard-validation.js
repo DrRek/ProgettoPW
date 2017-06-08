@@ -1,10 +1,11 @@
 function ccValidation()
 {
-	var numcc = document.cc.numcc;
-	var intestatario = document.cc.intestatario;
-	var circuito = document.cc.circuito;
-	var scadenza = document.cc.scadenza;
-	var cvv = document.cc.cvv;
+	alert("qui");
+	var numcc = $("input[name='numcc']").val();
+	var intestatario = $("input[name='intestatario']").val();
+	var circuito = $("input[name='circuito']").val();
+	var scadenza = $("input[name='scadenza']").val();
+	var cvv = $("input[name='cvv']").val();
 
 	if(numcc_validation(numcc, 16))
 	{
@@ -14,7 +15,7 @@ function ccValidation()
 			{
 				if(cvv_validation(cvv))
 				{
-					
+					return true;
 				}
 			}
 		}
@@ -29,7 +30,7 @@ function numcc_validation(numcc,mx)
 	
 	if (numcc_len != mx)
 	{
-		document.getElementById("numcc").innerHTML = "Il numero CC deve contenere esattamente" + mx + "caratteri";
+		$("#numcc").html( "Il numero CC deve contenere esattamente" + mx + "caratteri");
 		numcc.focus();
 		return false;
 	}
@@ -39,7 +40,7 @@ function numcc_validation(numcc,mx)
 	}
 	else
 	{
-		document.getElementById("numcc").innerHTML ="Il numero CC può contenere solo numeri";
+		$("#numcc").html("Il numero CC può contenere solo numeri");
 		numcc.focus();
 		return false;
 	}
@@ -53,7 +54,7 @@ function intestatario_validation(intestatario)
 	}
 	else
 	{
-		document.getElementById("intestatario").innerHTML = "È consentito usare solo caratteri alfabetici";
+		$("#intestatario").html( "È consentito usare solo caratteri alfabetici");
 		intestatario.focus();
 		return false;
 	}
@@ -66,7 +67,7 @@ function circuito_validation(circuito)
 	}
 	else
 	{
-		document.getElementById("circuito").innerHTML = "Si accettano solo Visa, Mastercard e American Express";
+		$("#circuito").html( "Si accettano solo Visa, Mastercard e American Express");
 		circuito.focus();
 		return false;
 	}
@@ -80,7 +81,7 @@ function cvv_validation(cvv)
 	}
 	else
 	{
-		document.getElementById("cvv").innerHTML ="Il CVV può contenere solo numeri e deve averne esattamente 3";
+		$("#cvv").html("Il CVV può contenere solo numeri e deve averne esattamente 3");
 		cvv.focus();
 		return false;
 	}

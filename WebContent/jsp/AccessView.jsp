@@ -63,13 +63,19 @@
 		<form name='registration' onSubmit="return registerValidation();"
 			action='access' method="post">
 
-			<input type="hidden" name="action" value="register"> <label
+			<input type="hidden" name="action" value="register"> 
+			
+			<label
 				for="user">Username:</label> <input type="text" name="user"
-				size="12" /><span id="user"></span><br> <label for="pass">Password:</label>
+				size="12" /><span id="user"></span><br> 
+				
+			<label for="pass">Password:</label>
 			<input type="password" name="pass" size="12" /><span id="pass"></span><br>
 
 			<label for="nome">Nome:</label> <input type="text" name="nome"
-				size="50" /><span id="nome"></span><br> <label for="nome">Cognome:</label>
+				size="50" /><span id="nome"></span><br> 
+				
+			<label for="nome">Cognome:</label>
 			<input type="text" name="cognome" size="50" /><span id="cognome"></span><br>
 
 			<label for="nascita">Data di nascita:</label> <input type="date"
@@ -82,14 +88,18 @@
 				<option value="IT">Italia</option>
 				<option value="AS">Russia</option>
 				<option value="AD">USA</option>
-			</select><span id="stato"></span><br> <label for="cap">CAP:</label> <input
-				type="text" name="cap" /><span id="cap"></span><br> <label
-				for="indirizzo">Indirizzo:</label> <input type="text"
+			</select><span id="stato"></span><br> 
+			
+			<label for="cap">CAP:</label> <input
+				type="text" name="cap" /><span id="cap"></span><br> 
+				
+			<label for="indirizzo">Indirizzo:</label> <input type="text"
 				name="indirizzo" size="50" /><span id="indirizzo"></span><br>
 
 			<label for="email">Email:</label> <input type="text" name="email"
-				size="50" /><span id="email"></span><br> <input name="submit"
-				value="Register" type="submit">
+				size="50" /><span id="email"></span><br> 
+				
+			<input name="submit" value="Register" type="submit">
 
 		</form>
 	</div>
