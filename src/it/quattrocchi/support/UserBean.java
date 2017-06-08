@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class UserBean {
 	//Importante modificare questo metodo quando si implementerà la scelta delle tante carte di credito
-	public String getCart() {
+	public String getCard() {
 		// TODO Auto-generated method stub
 		return "1111222233334444";
 	}

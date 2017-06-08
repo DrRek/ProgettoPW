@@ -84,7 +84,8 @@ public class AccessControl extends HttpServlet{
 
 			try {
 				user = model.doRetrieveByKey(userid, passid);
-				cc = ccModel.doRetrieveByCliente(user.getUser());
+				if(user != null)
+					cc = ccModel.doRetrieveByCliente(user.getUser());
 			} catch (SQLException e) {
 				user = null;
 			}

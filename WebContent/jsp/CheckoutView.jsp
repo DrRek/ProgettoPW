@@ -70,7 +70,31 @@
 			<% 	}
 					}%>
 		</select>
-		
+	</div>
+	<div class="container">
+		<h2>Aggiungi carta</h2>
+		<form name='cc' onSubmit="return ccValidation();" action='user'
+			method="post">
+			<!-- 	//ccvalidation() deve ancora essere scritta, su user va ancora
+			implementata -->
+			<label for="numcc">Numero carta di credito:</label> <input
+				name="numcc" type="text" maxlength="50" required
+				placeholder="ES. 1234567890123456"><br> <label
+				for="intestatario">Intestatario:</label> <input name="intestatario"
+				type="text" maxlength="50" required
+				placeholder="inserisci nome e cognome"><br> <label
+				for="circuito">Circuito:</label> <input name="circuito" type="text"
+				maxlength="50" required placeholder="ES. Mastercard"><br>
+			<label for="scadenza">Scadenza:</label> <input name="scadenza"
+				type="text" maxlength="50" required placeholder="ES. 2017-07-06"><br>
+			<label for="cvv">Cvv:</label> <input name="cvv" type="text"
+				maxlength="50" required placeholder="ES. 570"><br> <input
+				type="hidden" name="action" value="addCard"><input
+				name="addCard" value="Aggiungi" type="submit">
+
+		</form>
+	</div>
+	<div class="container">
 		<h3>
 			Prezzo totale:
 			<%=cart.getPrezzo()%>€

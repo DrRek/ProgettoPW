@@ -37,42 +37,46 @@ public class CheckoutControl extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
-		String action = request.getParameter("action");
-		if (action != null) {
-			if (action.equalsIgnoreCase("checkout"))
-				summaryCheckout(request,response);
-			else if (action.equalsIgnoreCase("submit")){
-				addOrder(request, response);
-				done(request, response);
+
+		if(request.getSession().getAttribute("user") == null)
+			response.sendRedirect("access");
+		else{
+			String action = request.getParameter("action");
+			if (action != null) {
+				if (action.equalsIgnoreCase("checkout"))
+					summaryCheckout(request,response);
+				else if (action.equalsIgnoreCase("submit")){
+					addOrder(request, response);
+					done(request, response);
+				}
 			}
 		}
 	}
-	
+
 	private void addOrder(HttpServletRequest request, HttpServletResponse response){
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
-		
+
 		if(cart!=null&&user!=null){
 			//Crea il bean OrderBean
-		    String codice = UUID.randomUUID().toString();
-		    while(!CheckoutModel.isUniqueCod(codice)){
-			    codice = UUID.randomUUID().toString();
-		    }
+			String codice = UUID.randomUUID().toString();
+			while(!CheckoutModel.isUniqueCod(codice)){
+				codice = UUID.randomUUID().toString();
+			}
 			Date dataEsecuzione = new Date();
 			double costo = cart.getPrezzo();
-			String cc = user.getCart();
+			String cc = user.getCard();
 			OrderBean ordine = new OrderBean();
 			ordine.setCc(cc);
 			ordine.setCliente(user);
 			ordine.setCodice(codice);
 			ordine.setCosto(costo);
-			
+
 			java.sql.Date rightDate = new java.sql.Date(dataEsecuzione.getTime());
 			ordine.setDataEsecuzione(rightDate);
 			ordine.setOrdinati(cart.getProducts());
-			
-			
+
+
 			//Chiama il model per salvare
 			try {
 				model.doSave(ordine);
@@ -82,7 +86,7 @@ public class CheckoutControl extends HttpServlet {
 			}
 		}
 	}
-	
+
 	private void done(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getSession().getAttribute("user") == null) {
@@ -95,7 +99,7 @@ public class CheckoutControl extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 	}
-	
+
 	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
