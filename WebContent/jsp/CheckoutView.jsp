@@ -3,6 +3,7 @@
 
 <%
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
+	Collection<?> cc = (Collection<?>) request.getSession().getAttribute("ccards");
 %>
 
 <!DOCTYPE html>
@@ -52,6 +53,24 @@
 				}
 			%>
 		</table>
+
+		<select name="stato">
+			<option selected="" value="Default">(Please select a credit
+				card)</option>
+			<%
+				if (cc != null && cc.size() != 0) {
+					int i=0;
+					Iterator<?> it = cc.iterator();
+					while (it.hasNext()) {
+						i++;
+						CreditCardBean bean = (CreditCardBean) it.next();
+			%>
+
+			<option value=<%=i%>><%=bean.getNumeroCC() %></option>
+			<% 	}
+					}%>
+		</select>
+		
 		<h3>
 			Prezzo totale:
 			<%=cart.getPrezzo()%>€
