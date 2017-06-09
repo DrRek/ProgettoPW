@@ -1,6 +1,5 @@
 function ccValidation()
 {
-	alert("qui");
 	var numcc = $("input[name='numcc']").val();
 	var intestatario = $("input[name='intestatario']").val();
 	var circuito = $("input[name='circuito']").val();
