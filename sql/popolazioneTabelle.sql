@@ -11,11 +11,11 @@ LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Amminist
 	INTO TABLE Amministratore
 		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 	();
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\CartaCredito.csv'
-	INTO TABLE CartaCredito
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
-	();
 LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Cliente.csv'
 	INTO TABLE Cliente
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+	();
+LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\CartaCredito.csv'
+	INTO TABLE CaBrtaCredito
 		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 	();

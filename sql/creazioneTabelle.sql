@@ -26,10 +26,10 @@ create table Cliente(
 create table CartaCredito(
 	NumeroCC decimal(16) primary key,
 	Intestatario varchar(40) not null,
-    	Circuito varchar(20) not null,
-    	DataScadenza date not null,
-    	CvcCvv decimal(3) not null,
-	Cliente char(16) not null,
+	Circuito varchar(20) not null,
+	DataScadenza date not null,
+	CvcCvv decimal(3) not null,
+	Cliente varchar(16) not null,
     foreign key (Cliente) references Cliente(User) on delete cascade on update cascade
 );
 
