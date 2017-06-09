@@ -4,7 +4,7 @@
 <%
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
-	Collection<?> cc = (Collection<?>) request.getSession().getAttribute("ccards");
+	Collection<?> cc = (Collection<?>) user.getCards();
 %>
 
 <!DOCTYPE html>
