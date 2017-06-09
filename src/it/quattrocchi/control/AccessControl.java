@@ -1,12 +1,9 @@
 package it.quattrocchi.control;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.quattrocchi.model.AccessModel;
+import it.quattrocchi.model.UserModel;
 import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.support.AdminBean;
-import it.quattrocchi.support.CreditCardBean;
 import it.quattrocchi.support.UserBean;
 
 @WebServlet("/access")
@@ -26,7 +22,7 @@ public class AccessControl extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
-	static AccessModel model = new AccessModel();
+	static UserModel model = new UserModel();
 	static CreditCardModel ccModel = new CreditCardModel();
 
 	public AccessControl(){
@@ -62,7 +58,6 @@ public class AccessControl extends HttpServlet{
 		String userid = request.getParameter("userid");
 		String passid = request.getParameter("passid");
 		UserBean user;
-		ArrayList<CreditCardBean> cc = null;
 		boolean isAdmin;
 
 		try{
@@ -83,23 +78,20 @@ public class AccessControl extends HttpServlet{
 		else{
 
 			try {
-				user = model.doRetrieveByKey(userid, passid);
-				if(user != null)
-					cc = ccModel.doRetrieveByCliente(user.getUser());
+				user = model.doRetrieveIdentifiedByKey(userid, passid);
+				if(user!=null){ //restituisce true se l'utente esiste
+					user.setCards(ccModel.doRetrieveByCliente(user));
+					request.getSession().setAttribute("user", user);
+	
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
+					dispatcher.forward(request, response);
+				} else {
+					request.setAttribute("loginFailed", true);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/AccessView.jsp");
+					dispatcher.forward(request, response);
+				}
 			} catch (SQLException e) {
 				user = null;
-			}
-
-			if(user!=null){ //restituisce true se l'utente esiste
-				request.getSession().setAttribute("user", user);
-				request.getSession().setAttribute("ccards", cc);
-
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
-				dispatcher.forward(request, response);
-			} else {
-				request.setAttribute("loginFailed", true);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/AccessView.jsp");
-				dispatcher.forward(request, response);
 			}
 		}
 	}

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -108,7 +106,8 @@ public class UserControl extends HttpServlet{
 	
 	private void addCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
 		CreditCardBean ccBean = new CreditCardBean();
-		ccBean.setCliente(((UserBean) request.getSession().getAttribute("user")).getUser());
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
+		ccBean.setCliente(user);
 		ccBean.setNumeroCC(request.getParameter("numcc"));
 		ccBean.setIntestatario(request.getParameter("intestatario"));
 		ccBean.setCircuito(request.getParameter("circuito"));
@@ -127,8 +126,7 @@ public class UserControl extends HttpServlet{
 		
 		ccModel.doSave(ccBean);
 		
-		ArrayList<CreditCardBean> cc = ccModel.doRetrieveByCliente(((UserBean) request.getSession().getAttribute("user")).getUser());
-		request.getSession().setAttribute("ccards", cc);
+		user.setCards(ccModel.doRetrieveByCliente(user));
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);

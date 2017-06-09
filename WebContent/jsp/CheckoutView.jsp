@@ -3,7 +3,7 @@
 
 <%
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
-	Collection<?> cc = (Collection<?>) request.getSession().getAttribute("ccards");
+	UserBean user = (UserBean) request.getSession().getAttribute("user");
 %>
 
 <!DOCTYPE html>
@@ -54,24 +54,25 @@
 			%>
 		</table>
 
-		<select name="stato">
-			<option selected="" value="Default">(Please select a credit
-				card)</option>
-			<%
-				if (cc != null && cc.size() != 0) {
-					int i = 0;
-					Iterator<?> it = cc.iterator();
-					while (it.hasNext()) {
-						i++;
-						CreditCardBean bean = (CreditCardBean) it.next();
-			%>
+		<form name='checkout' action='checkout' method="post">
+			<select name="carta">
+				<option selected="" value="Default">(Please select a credit card)</option>
+				<%
+					ArrayList<CreditCardBean> cc = user.getCards();
+					if (cc != null && cc.size() != 0) {
+						for(CreditCardBean c : cc) {
+				%>
+	
+				<option value=<%=c.getNumeroCC()%>><%=c.getNumeroCC()%></option>
+				<%		
+						}
+					}
+				%>
+			</select>
+			<input type="hidden" name="action" value="submit">
+			<input name="submit" value="Completa il pagamento!" type="submit">
 
-			<option value=<%=i%>><%=bean.getNumeroCC()%></option>
-			<%
-				}
-				}
-			%>
-		</select>
+		</form>
 	</div>
 	
 	<div class="container">
@@ -79,11 +80,6 @@
 			Prezzo totale:
 			<%=cart.getPrezzo()%>€
 		</h3>
-		<form name='checkout' action='checkout' method="post">
-			<input type="hidden" name="action" value="submit"> <input
-				name="submit" value="Completa il pagamento!" type="submit">
-
-		</form>
 	</div>
 </body>
 </html>

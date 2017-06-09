@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.quattrocchi.support.CreditCardBean;
+import it.quattrocchi.support.UserBean;
 
 
 public class CreditCardModel {
@@ -28,7 +29,7 @@ public class CreditCardModel {
 			stm.setString(3, creditCard.getCircuito());
 			stm.setDate(4, creditCard.getDataScadenza());
 			stm.setString(5, creditCard.getCvcCvv());
-			stm.setString(6, creditCard.getCliente());
+			stm.setString(6, creditCard.getCliente().getUser());
 
 			stm.executeUpdate();
 
@@ -45,7 +46,7 @@ public class CreditCardModel {
 		}
 	}
 	
-	public ArrayList<CreditCardBean> doRetrieveByCliente(String user) throws SQLException{
+	public ArrayList<CreditCardBean> doRetrieveByCliente(UserBean user) throws SQLException{
 		
 		ArrayList<CreditCardBean> cc = new ArrayList<CreditCardBean>();
 		
@@ -57,7 +58,7 @@ public class CreditCardModel {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
-			stm.setString(1, user);
+			stm.setString(1, user.getUser());
 			
 			ResultSet rs = stm.executeQuery();
 			
@@ -68,7 +69,7 @@ public class CreditCardModel {
 				bean.setIntestatario(rs.getString("Intestatario"));
 				bean.setDataScadenza(rs.getDate("DataScadenza"));
 				bean.setCvcCvv(rs.getString("CvcCvv"));
-				bean.setCliente(rs.getString("Cliente"));
+				bean.setCliente(user);
 				
 				cc.add(bean);
 			}

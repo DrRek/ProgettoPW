@@ -1,14 +1,9 @@
 package it.quattrocchi.support;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class UserBean {
-	//Importante modificare questo metodo quando si implementerà la scelta delle tante carte di credito
-	public String getCard() {
-		// TODO Auto-generated method stub
-		return "1111222233334444";
-	}
-	
 	public UserBean(){
 		setUser(null);
 		setNome(null);
@@ -19,6 +14,14 @@ public class UserBean {
 		setEmail(null);
 		setDataDiNascita(null);
 		setPassword(null);
+	}
+	
+	public void setCards(ArrayList<CreditCardBean> cc) {
+		this.cc = cc;
+	}
+	
+	public ArrayList<CreditCardBean> getCards() {
+		return cc;
 	}
 	
 	public String getUser() {
@@ -93,7 +96,7 @@ public class UserBean {
 	}
 
 
-
+	private ArrayList<CreditCardBean> cc;
 	private String user, nome, cognome, stato, cap, indirizzo, email, password;
 	private Date dataDiNascita;
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
@@ -56,6 +57,7 @@ public class CheckoutControl extends HttpServlet {
 	private void addOrder(HttpServletRequest request, HttpServletResponse response){
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
+		String carta = (String) request.getParameter("carta");
 
 		if(cart!=null&&user!=null){
 			//Crea il bean OrderBean
@@ -65,9 +67,8 @@ public class CheckoutControl extends HttpServlet {
 			}
 			Date dataEsecuzione = new Date();
 			double costo = cart.getPrezzo();
-			String cc = user.getCard();
 			OrderBean ordine = new OrderBean();
-			ordine.setCc(cc);
+			ordine.setCc(carta);
 			ordine.setCliente(user);
 			ordine.setCodice(codice);
 			ordine.setCosto(costo);
