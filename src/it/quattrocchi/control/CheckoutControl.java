@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
@@ -16,11 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CheckoutModel;
-import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
-import it.quattrocchi.support.CartArticle;
 import it.quattrocchi.support.OrderBean;
 import it.quattrocchi.support.UserBean;
 
@@ -31,7 +27,6 @@ public class CheckoutControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	static CheckoutModel model = new CheckoutModel();
-	static ArticleModel aModel = new ArticleModel();
 
 	public CheckoutControl() {
 		super();
@@ -53,12 +48,6 @@ public class CheckoutControl extends HttpServlet {
 					summaryCheckout(request,response);
 				else if (action.equalsIgnoreCase("submit")){
 					addOrder(request, response);
-					try {
-						updateCatalogo(request,response);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
 					done(request, response);
 				}
 			}
@@ -116,18 +105,5 @@ public class CheckoutControl extends HttpServlet {
 	{
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
 		dispatcher.forward(request, response);
-	}
-	
-	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
-	{
-		Cart cart = (Cart) request.getSession().getAttribute("cart");
-		ArrayList<CartArticle> cArticle = cart.getProducts();
-		
-		for(int i = 0; i<cArticle.size(); i++) {
-			ArticleBean bean = aModel.doRetrieveByKey(cArticle.get(i).getArticle().getNome(), cArticle.get(i).getArticle().getMarca());
-			int num = bean.getNumeroPezziDisponibili() - cArticle.get(i).getQuantity();
-			bean.setNumeroPezziDisponibili(num);		
-			aModel.doUpdate(bean);
-		}
 	}
 }
