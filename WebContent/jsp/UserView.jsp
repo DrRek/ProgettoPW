@@ -4,7 +4,6 @@
 <%
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
-	Collection<?> cc = (Collection<?>) user.getCards();
 %>
 
 <!DOCTYPE html>
@@ -93,6 +92,7 @@
 				<th>Opzioni</th>
 			</thead>
 			<%
+				Collection<?> cc = (Collection<?>) user.getCards();
 				if (cc != null && cc.size() != 0) {
 					Iterator<?> it = cc.iterator();
 					while (it.hasNext()) {
