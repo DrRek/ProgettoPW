@@ -33,7 +33,7 @@ public class CreditCardBean {
 		return dataScadenza;
 	}
 	
-	public String getCliente() {
+	public UserBean getCliente() {
 		return cliente;
 	}
 	
@@ -57,10 +57,11 @@ public class CreditCardBean {
 		this.dataScadenza = dataScadenza;
 	}
 	
-	public void setCliente(String cliente) {
-		this.cliente = cliente;
+	public void setCliente(UserBean user) {
+		this.cliente = user;
 	}
 	
-	private String numeroCC, intestatario, circuito, cvcCvv, cliente;
+	private String numeroCC, intestatario, circuito, cvcCvv;
+	private UserBean cliente;
 	private Date dataScadenza;
 }

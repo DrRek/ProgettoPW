@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import it.quattrocchi.support.UserBean;
 
-public class AccessModel {
+public class UserModel {
 
 	private static final String TABLE_NAME = "quattrocchidb.cliente";
 
@@ -46,7 +46,7 @@ public class AccessModel {
 		}
 	}
 
-	public UserBean doRetrieveByKey(String userid, String passid) throws SQLException {
+	public UserBean doRetrieveIdentifiedByKey(String userid, String passid) throws SQLException {
 
 		Connection conn = null;
 		PreparedStatement stm  = null;
@@ -60,6 +60,46 @@ public class AccessModel {
 			stm = conn.prepareStatement(query);
 			stm.setString(1, userid);
 			stm.setString(2, passid);
+
+			ResultSet rs = stm.executeQuery();
+					
+			if(rs.next()) {
+				bean = new UserBean();
+				bean.setUser(rs.getString("User"));
+				bean.setNome(rs.getString("Nome"));
+				bean.setCognome(rs.getString("Cognome"));
+				bean.setDataDiNascita(rs.getDate("DataNascita"));
+				bean.setStato(rs.getString("Stato"));
+				bean.setCap(rs.getString("Cap"));
+				bean.setIndirizzo(rs.getString("indirizzo"));
+				bean.setEmail(rs.getString("email"));
+			}
+		}
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+
+		return bean;
+	}
+	
+	public UserBean doRetrieveByKey(String userid) throws SQLException {
+
+		Connection conn = null;
+		PreparedStatement stm  = null;
+
+		UserBean bean = null;
+
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE User = ?;";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, userid);
 
 			ResultSet rs = stm.executeQuery();
 					
