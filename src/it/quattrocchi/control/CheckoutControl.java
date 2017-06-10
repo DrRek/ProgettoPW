@@ -53,12 +53,7 @@ public class CheckoutControl extends HttpServlet {
 					summaryCheckout(request,response);
 				else if (action.equalsIgnoreCase("submit")){
 					addOrder(request, response);
-					try {
-						updateCatalogo(request,response);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					updateCatalogo(request,response);
 					done(request, response);
 				}
 			}
@@ -118,16 +113,26 @@ public class CheckoutControl extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
-	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
+	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		ArrayList<CartArticle> cArticle = cart.getProducts();
+		ArticleBean bean = new ArticleBean();
 		
 		for(int i = 0; i<cArticle.size(); i++) {
-			ArticleBean bean = aModel.doRetrieveByKey(cArticle.get(i).getArticle().getNome(), cArticle.get(i).getArticle().getMarca());
+			try {
+			bean = aModel.doRetrieveByKey(cArticle.get(i).getArticle().getNome(), cArticle.get(i).getArticle().getMarca());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 			int num = bean.getNumeroPezziDisponibili() - cArticle.get(i).getQuantity();
 			bean.setNumeroPezziDisponibili(num);		
-			aModel.doUpdate(bean);
+			try {
+				aModel.doUpdate(bean);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
