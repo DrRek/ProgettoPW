@@ -54,27 +54,43 @@
 			%>
 		</table>
 
-		<form name='checkout' action='checkout' method="post">
+
+		<script>
+			function controllaCarta() {
+				if ($("select[name='carta']").val() == "default") {
+					$("#warning").html("selezionare una carta");
+					return false
+				} else
+					return true;
+			}
+		</script>
+
+		<form name='checkout' onSubmit="return controllaCarta();"
+			action='checkout' method="post">
+			
 			<select name="carta">
-				<option selected="" value="Default">(Please select a credit card)</option>
+				<option selected="" value="default">(Please select a credit
+					card)</option>
 				<%
 					ArrayList<CreditCardBean> cc = user.getCards();
 					if (cc != null && cc.size() != 0) {
-						for(CreditCardBean c : cc) {
+						for (CreditCardBean c : cc) {
 				%>
-	
+
 				<option value=<%=c.getNumeroCC()%>><%=c.getNumeroCC()%></option>
-				<%		
-						}
+				<%
+					}
 					}
 				%>
-			</select>
-			<input type="hidden" name="action" value="submit">
-			<input name="submit" value="Completa il pagamento!" type="submit">
+			</select><span id="warning"></span> 
+			
+			<input type="hidden" name="action"
+				value="submit"> <input name="submit"
+				value="Completa il pagamento!" type="submit">
 
 		</form>
 	</div>
-	
+
 	<div class="container">
 		<h3>
 			Prezzo totale:
