@@ -51,6 +51,9 @@ public class UserControl extends HttpServlet{
 				
 				else if(action.equalsIgnoreCase("addCard"))
 					addCard(request,response);
+				
+				else if(action.equalsIgnoreCase("delCard"))
+					delCard(request,response);
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -105,12 +108,13 @@ public class UserControl extends HttpServlet{
 	}
 	
 	private void addCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-		CreditCardBean ccBean = new CreditCardBean();
+		
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
-		ccBean.setCliente(user);
-		ccBean.setNumeroCC(request.getParameter("numcc"));
-		ccBean.setIntestatario(request.getParameter("intestatario"));
-		ccBean.setCircuito(request.getParameter("circuito"));
+		String numeroCC = request.getParameter("numcc");
+		String intestatario = request.getParameter("intestatario");
+		String circuito = request.getParameter("circuito");
+		String stato = "attiva";
+		String cvcCvv = request.getParameter("cvv");
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date parsed=null;
@@ -120,11 +124,48 @@ public class UserControl extends HttpServlet{
 			e.printStackTrace();
 		}
 		java.sql.Date dataScadenza = new java.sql.Date(parsed.getTime());
-		ccBean.setDataScadenza(dataScadenza);
 		
-		ccBean.setCvcCvv(request.getParameter("cvv"));
+		CreditCardBean bean = ccModel.doRetrieveByKey(numeroCC);
 		
-		ccModel.doSave(ccBean);
+		if(bean == null){
+			bean = new CreditCardBean();
+			bean.setNumeroCC(numeroCC);
+			bean.setCircuito(circuito);
+			bean.setCliente(user);
+			bean.setCvcCvv(cvcCvv);
+			bean.setDataScadenza(dataScadenza);
+			bean.setIntestatario(intestatario);
+			bean.setStato(stato);
+			ccModel.doSave(bean);
+		}
+		
+		else {
+			bean.setNumeroCC(numeroCC);
+			bean.setCircuito(circuito);
+			bean.setCliente(user);
+			bean.setCvcCvv(cvcCvv);
+			bean.setDataScadenza(dataScadenza);
+			bean.setIntestatario(intestatario);
+			bean.setStato(stato);
+			ccModel.doUpdate(bean);
+		}
+		
+		user.setCards(ccModel.doRetrieveByCliente(user));
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void delCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		
+		String numeroCC = request.getParameter("numeroCC");
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
+
+		try {
+			ccModel.doDelete(numeroCC);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		user.setCards(ccModel.doRetrieveByCliente(user));
 		

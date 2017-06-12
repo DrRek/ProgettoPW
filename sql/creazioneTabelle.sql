@@ -30,6 +30,7 @@ create table CartaCredito(
 	DataScadenza date not null,
 	CvcCvv decimal(3) not null,
 	Cliente varchar(16) not null,
+    Stato varchar(16) not null,
     foreign key (Cliente) references Cliente(User) on delete cascade on update cascade
 );
 

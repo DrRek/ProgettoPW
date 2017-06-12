@@ -11,6 +11,7 @@ public class CreditCardBean {
 		cvcCvv = "";
 		cliente = null;
 		dataScadenza = null;
+		stato="";
 	}
 	
 	public String getNumeroCC() {
@@ -37,6 +38,10 @@ public class CreditCardBean {
 		return cliente;
 	}
 	
+	public String getStato() {
+		return stato;
+	}
+	
 	public void setNumeroCC(String numeroCC) {
 		this.numeroCC = numeroCC;
 	}
@@ -61,7 +66,11 @@ public class CreditCardBean {
 		this.cliente = user;
 	}
 	
-	private String numeroCC, intestatario, circuito, cvcCvv;
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
+	
+	private String numeroCC, intestatario, circuito, cvcCvv, stato;
 	private UserBean cliente;
 	private Date dataScadenza;
 }

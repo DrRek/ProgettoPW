@@ -103,7 +103,7 @@
 				<td><%=bean.getIntestatario() %></td>
 				<td><%=bean.getCircuito() %></td>
 				<td><%=bean.getDataScadenza() %></td>
-				<td><a>rimuovi</a></td>
+				<td><a href="user?action=delCard&numeroCC=<%=bean.getNumeroCC()%>">rimuovi</a></td>
 			</tr>
 			<% 	}
 					}%>
