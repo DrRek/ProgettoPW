@@ -41,16 +41,21 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<li><img src="image/cart.png" alt="carrello:" style="max-height: 50px;"></li>
+					<%
+						if (adm == null) {
+					%>
+					<li><img src="image/cart.png" alt="carrello:"
+						style="max-height: 50px;"></li>
 					<%
 						if (crt == null) {
 					%>
 					<li><a href="checkout?action=checkout">0</a></li>
 					<%
 						} else {
-						%>
+					%>
 					<li><a href="checkout?action=checkout"><%=crt.getNumberOfProducts()%></a></li>
 					<%
+						}
 						}
 						if (usr == null && adm == null) {
 					%>
