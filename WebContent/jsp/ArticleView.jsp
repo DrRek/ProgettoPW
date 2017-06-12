@@ -87,49 +87,6 @@
 			%>
 		</table>
 
-		<%
-			if (cart != null && !cart.isEmpty()) {
-		%>
-		<h2>Cart</h2>
-		<table class="table-bordered">
-			<tr>
-				<th>Nome</th>
-				<th>Marca</th>
-				<th>Numero Prodotti</th>
-				<th>Prezzo</th>
-			</tr>
-			<%
-				List<CartArticle> prodcart = cart.getProducts();
-					for (CartArticle beancart : prodcart) {
-			%>
-			<tr>
-				<td><%=beancart.getArticle().getNome()%></td>
-				<td><%=beancart.getArticle().getMarca()%></td>
-				<!-- non ancora logicamente corretto -->
-				<td><input name="numeroPezziDisponibili" type="number" min="1"
-					value="<%=beancart.getQuantity()%>"></td>
-				<td><%=beancart.getPrezzo()%>€</td>
-
-				<td><a
-					href="article?action=delCart&nome=<%=beancart.getArticle().getNome()%>&marca=<%=beancart.getArticle().getMarca()%>">Delete
-						from cart</a></td>
-			</tr>
-			<%
-				}
-			%>
-		</table>
-		<h3>
-			Prezzo totale:
-			<%=cart.getPrezzo()%>€
-		</h3>
-		<form action='checkout' method='post'>
-			<input type="hidden" name="action" value="checkout"></input> <input
-				type="submit" value="Checkout">
-		</form>
-		<%
-			}
-		%>
-
 	</div>
 </body>
 

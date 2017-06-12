@@ -4,6 +4,7 @@
 <%
 	UserBean usr = (UserBean) request.getSession().getAttribute("user");
 	AdminBean adm = (AdminBean) request.getSession().getAttribute("admin");
+	Cart crt = (Cart) request.getSession().getAttribute("cart");
 %>
 
 <!DOCTYPE html>
@@ -40,7 +41,13 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<%if(usr == null && adm == null){ %>
+					<%if(crt == null) {%>
+					<li><a href="checkout?action=checkout">0</a></li>
+					<%}
+					else {%>
+					<li><a href="checkout?action=checkout"><%=crt.getNumberOfProducts() %></a></li>
+					<%}
+					if(usr == null && adm == null){ %>
 					<li><a href="access">Login / Register</a></li>
 					<%}
       else if (usr != null){%>

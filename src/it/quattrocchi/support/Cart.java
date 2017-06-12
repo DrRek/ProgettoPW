@@ -46,5 +46,15 @@ public class Cart {
 		return false;
 	}
 
+	public int getNumberOfProducts()
+	{
+		int n = 0;
+		for(CartArticle c : products)
+		{
+			n += c.getQuantity();
+		}
+		return n;
+	}
+	
 	private ArrayList<CartArticle> products;
 }

@@ -30,12 +30,20 @@
 	<%@ include file="header.jsp"%>
 	<div class="container">
 		<h2>Cart</h2>
+	</div>
+	<%if(cart == null){ %>
+	<div class="container">
+		<h3>empty cart</h3>
+	</div>
+	<%} else{ %>
+	<div class="container">
 		<table class="table-bordered">
 			<tr>
 				<th>Nome</th>
 				<th>Marca</th>
 				<th>Numero Prodotti</th>
 				<th>Prezzo</th>
+				<th>Opzioni</th>
 			</tr>
 			<%
 				List<CartArticle> prodcart = cart.getProducts();
@@ -48,13 +56,18 @@
 				<td><input name="numeroPezziDisponibili" type="number" min="1"
 					value="<%=beancart.getQuantity()%>"></td>
 				<td><%=beancart.getPrezzo()%>€</td>
+				<!-- il delete cart si dovrà fare con ajax -->
+				<td><a
+					href="article?action=delCart&nome=<%=beancart.getArticle().getNome()%>&marca=<%=beancart.getArticle().getMarca()%>">Delete
+						from cart</a></td>
 			</tr>
 			<%
 				}
 			%>
 		</table>
 
-
+		<% if(cart.getNumberOfProducts() != 0){
+				%>
 		<script>
 			function controllaCarta() {
 				if ($("select[name='carta']").val() == "default") {
@@ -67,7 +80,7 @@
 
 		<form name='checkout' onSubmit="return controllaCarta();"
 			action='checkout' method="post">
-			
+
 			<select name="carta">
 				<option selected="" value="default">(Please select a credit
 					card)</option>
@@ -82,20 +95,19 @@
 					}
 					}
 				%>
-			</select><span id="warning"></span> 
-			
-			<input type="hidden" name="action"
+			</select><span id="warning"></span> <input type="hidden" name="action"
 				value="submit"> <input name="submit"
 				value="Completa il pagamento!" type="submit">
 
 		</form>
 	</div>
-
+	<% } %>
 	<div class="container">
 		<h3>
 			Prezzo totale:
 			<%=cart.getPrezzo()%>€
 		</h3>
 	</div>
+	<%} %>
 </body>
 </html>
