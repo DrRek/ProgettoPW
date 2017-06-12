@@ -39,11 +39,11 @@
 				</button>
 				<a class="navbar-brand  navbar-brand-left" href="article">Quattrocchi.it</a>
 			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-centered">
 				<li><a href="article?action=category&type=occhiale">Occhiali</a>
 				<li><a href="article?action=category&type=lente">Lentine</a>
 			</ul>
-			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<%
 						if (adm == null) {
