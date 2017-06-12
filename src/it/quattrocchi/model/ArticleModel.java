@@ -203,4 +203,48 @@ public class ArticleModel {
 		}
 		return products;
 	}
+	
+	public Collection<ArticleBean> doRetrieveByType(String type) throws SQLException{
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String selectSQL = "";
+
+		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
+		
+		if(type.equalsIgnoreCase("occhiale"))
+			selectSQL = "SELECT * FROM " + ArticleModel.TABLE_NAME +  " WHERE Tipo='Occhiale';";
+		else
+			selectSQL = "SELECT * FROM " + ArticleModel.TABLE_NAME + " WHERE Tipo='Lente a contatto';";
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ArticleBean bean = new ArticleBean();
+				
+				bean.setNome(rs.getString("Nome"));
+				bean.setTipo(rs.getString("Tipo"));
+				bean.setMarca(rs.getString("Marca"));
+				bean.setPrezzo(rs.getFloat("Prezzo"));
+				bean.setGradazione(rs.getFloat("Gradazione"));
+				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
+				bean.setImg1(rs.getString("Img1"));
+				bean.setImg2(rs.getString("Img2"));
+				bean.setImg3(rs.getString("Img3"));
+				products.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return products;
+	}
 }

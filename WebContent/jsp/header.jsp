@@ -40,6 +40,12 @@
 				<a class="navbar-brand  navbar-brand-centered" href="article">Quattrocchi.it</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-left">
+					<li><a href="article?action=category&type=occhiale">Occhiali</a>
+					<li><a href="article?action=category&type=lente">Lentine</a>
+				</ul>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
 					<%
 						if (adm == null) {
