@@ -41,28 +41,35 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav navbar-right">
-					<%if(crt == null) {%>
+					<li><img src="image/cart.png" alt="carrello:" style="max-height: 50px;"></li>
+					<%
+						if (crt == null) {
+					%>
 					<li><a href="checkout?action=checkout">0</a></li>
-					<%}
-					else {%>
-					<li><a href="checkout?action=checkout"><%=crt.getNumberOfProducts() %></a></li>
-					<%}
-					if(usr == null && adm == null){ %>
+					<%
+						} else {
+						%>
+					<li><a href="checkout?action=checkout"><%=crt.getNumberOfProducts()%></a></li>
+					<%
+						}
+						if (usr == null && adm == null) {
+					%>
 					<li><a href="access">Login / Register</a></li>
-					<%}
-      else if (usr != null){%>
-					<li><a href="user">Benvenuto, <%=usr.getUser() %>
+					<%
+						} else if (usr != null) {
+					%>
+					<li><a href="user">Benvenuto, <%=usr.getUser()%>
 					</a></li>
 					<li><a href="user?action=logout">logout</a></li>
 					<%
-        } 
-       else if (adm != null){%>
-					<li><a href="user">Benvenuto, <%=adm.getUser() %>
+						} else if (adm != null) {
+					%>
+					<li><a href="user">Benvenuto, <%=adm.getUser()%>
 					</a></li>
 					<li><a href="user?action=logout">logout</a></li>
 					<%
-        } 
-        %>
+						}
+					%>
 				</ul>
 			</div>
 		</div>
