@@ -12,21 +12,20 @@
 <%@ page contentType="text/html; charset=UTF-8"
 	import="java.util.*, it.quattrocchi.control.*, it.quattrocchi.support.*, it.quattrocchi.*"%>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<!-- CSS  -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-
-<link href="css/bootstrap.css" type="text/css" rel="stylesheet"
-	media="screen,projection" />
-
-<link href="css/header.css" type="text/css" rel="stylesheet"
-	media="screen,projection" />
-
-<!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet">
+	
+	<link href="css/bootstrap.css" type="text/css" rel="stylesheet"
+		media="screen,projection" />
+	
+	<link href="css/header.css" type="text/css" rel="stylesheet"
+		media="screen,projection" />
+	
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 	<nav class="navbar navbar-default ">
@@ -43,6 +42,10 @@
 			<ul class="nav navbar-nav navbar-centered">
 				<li><a href="article?action=category&type=occhiale">Occhiali</a>
 				<li><a href="article?action=category&type=lente">Lentine</a>
+				<li>
+					<form name="ricerca" target="article" method="get">
+						<input name="daCercare" type="text" />
+					</form>
 			</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<%

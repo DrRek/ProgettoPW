@@ -31,6 +31,34 @@
 <body>
 		<%@ include file="../jsp/header.jsp"%>
 	
+	<!--  search.js gestisce questa parte--> <!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
+	<div id='daMettereASinistra'>
+		<form action="article" method='get'>
+
+			<input type="radio" name="tipo" value="Occhiale" autocomplete="off"> Occhiali<br>
+			<input type="radio" name="tipo" value="Lente a contatto" autocomplete="off"> Lenti a contatto<br>
+			<div id='daMostrareSeOcchiali'>
+				<select name="marcaO">
+					<option selected value="">Tutte</option>
+					<option value="GreenVision">GreenVision</option>
+					<option value="RayBan">RayBan</option>
+				</select>
+			</div>
+			<div id='daMostrareSeLentine'>
+				<select name="marcaL">
+					<option selected value="">Tutte</option>
+					<option value="GreenVision">GreenVision</option>
+					<option value="Acuve">Acuve</option>
+				</select>
+			</div>
+			<div id='perIlPrezzo'>
+				<input type="text" name="prezzoMin" value="0">
+				<input type="text" name="prezzoMax" value="Max">
+			</div>
+			<input type='submit' value='Search!' />
+		</form>
+	</div>
+	
 	<div class="container">
 		<h2>Products</h2>
 		<table class="table-bordered">
@@ -54,7 +82,7 @@
 				<td>
 					<a href="article?action=description&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">
 					<%=bean.getNome()%>
-					</a>
+					</a> 
 				</td>
 				<td><%=bean.getTipo()%></td>
 				<td><%=bean.getMarca()%></td>
@@ -90,6 +118,8 @@
 		</table>
 
 	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/search.js"></script>
 </body>
 
 </html>

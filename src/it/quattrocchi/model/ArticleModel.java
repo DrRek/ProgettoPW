@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import com.mysql.jdbc.Statement;
-
 import it.quattrocchi.support.ArticleBean;
 
 public class ArticleModel {
@@ -203,20 +201,67 @@ public class ArticleModel {
 		}
 		return products;
 	}
-	
-	public Collection<ArticleBean> doRetrieveByType(String type) throws SQLException{
+
+	public Collection<ArticleBean> doRetrieve(String search, String tipo, String marca, double da, double a, String order) throws SQLException{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String selectSQL = "";
 
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
+
+		boolean isFirst=true;
+		String selectSQL = "SELECT * FROM " + ArticleModel.TABLE_NAME;
+		if(search!=null && !search.equalsIgnoreCase("")){
+			if(isFirst){
+				selectSQL+=" WHERE";
+				isFirst=false;
+			} else {
+				selectSQL+=" AND";
+			}
+			selectSQL+=" Nome LIKE '%"+search+"%'";
+		}
+		if(tipo!=null && !tipo.equalsIgnoreCase("")){
+			if(isFirst){
+				selectSQL+=" WHERE";
+				isFirst=false;
+			} else {
+				selectSQL+=" AND";
+			}
+			selectSQL+=" Tipo = '"+tipo+"'";
+		}
+		if(marca!=null && !marca.equalsIgnoreCase("")){
+			if(isFirst){
+				selectSQL+=" WHERE";
+				isFirst=false;
+			} else {
+				selectSQL+=" AND";
+			}
+			selectSQL+=" Marca = '"+marca+"'";
+		}
+		if(da!= 0){
+			if(isFirst){
+				selectSQL+=" WHERE";
+				isFirst=false;
+			} else {
+				selectSQL+=" AND";
+			}
+			selectSQL+=" Prezzo > "+da;
+		}
+		if(a!= 0){
+			if(isFirst){
+				selectSQL+=" WHERE";
+				isFirst=false;
+			} else {
+				selectSQL+=" AND";
+			}
+			selectSQL+=" Prezzo < "+a;
+		}
+		if (order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+		selectSQL+=";";
 		
-		if(type.equalsIgnoreCase("occhiale"))
-			selectSQL = "SELECT * FROM " + ArticleModel.TABLE_NAME +  " WHERE Tipo='Occhiale';";
-		else
-			selectSQL = "SELECT * FROM " + ArticleModel.TABLE_NAME + " WHERE Tipo='Lente a contatto';";
 		
-		try {
+		try{
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 
@@ -229,7 +274,6 @@ public class ArticleModel {
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setMarca(rs.getString("Marca"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
-				bean.setGradazione(rs.getFloat("Gradazione"));
 				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
 				bean.setImg1(rs.getString("Img1"));
 				bean.setImg2(rs.getString("Img2"));

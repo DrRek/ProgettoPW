@@ -2,7 +2,6 @@ package it.quattrocchi.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,48 +27,62 @@ public class ArticleControl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
-		
+	
+		//Crea un carrello vuoto se non esiste e se non si e' admin
 		if (cart == null && admin == null) {
 			cart = new Cart();
 			request.getSession().setAttribute("cart", cart);
 		}
-
+		
+		//In base a questo parametro viene deciso il da farsi
 		String action = request.getParameter("action");
 		
-		if (action != null)
+		//TO DO: mi sa che questo non ha più senso di esistere, poi si vede
+		if (action != null){
 			if (action.equalsIgnoreCase("description")){
 				descript(request, response);
 				return;
 			}
-		
-		else if (action != null && admin == null) {
-
+			if(admin==null){
 				if (action.equalsIgnoreCase("addCart"))
 					cart = addCart(request, response, cart);
-
 				else if (action.equalsIgnoreCase("delCart"))
 					cart = delCart(request, response, cart);
-		}
-		
-		else if(action != null && admin != null) {
-			
-			if (action.equalsIgnoreCase("delete"))
-				delete(request, response);
-		}
-		
-		String sort = request.getParameter("sort");
-		
-		try {
-			if (sort == null)
-				request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+				else if (action.equalsIgnoreCase("delete"))
+					delete(request, response);
+			}
+		} else { //Alla fine per questa pagina conterà solo questo else, controllare che altri pezzi di codice siano usati
+			String search = request.getParameter("daCercare");
+			String tipo = request.getParameter("tipo");
+			String marcaO = request.getParameter("marcaO");
+			String marca;
+			if(marcaO==null||marcaO.equalsIgnoreCase(""))
+				marca = request.getParameter("marcaL");
 			else
-				request.setAttribute("articoli", model.doRetrieveAll(sort));
-		
-		} catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
+				marca = marcaO;
+			String stringda = request.getParameter("prezzoMin");
+			double da;
+			if(stringda==null)da=0;
+			else da=Double.parseDouble(stringda);
+			String stringa = request.getParameter("prezzoMax");
+			double a;
+			if(stringa==null)a=0;
+			else{
+				try{
+					a=Double.parseDouble(stringda);
+				} catch (Exception e){
+					a=0;
+				}
+			}
+			String sort = request.getParameter("sort");
+			try {
+				request.setAttribute("articoli", model.doRetrieve(search, tipo, marca, da, a, sort));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		if(admin == null)

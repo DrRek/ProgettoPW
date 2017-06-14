@@ -74,7 +74,6 @@ create table Articolo(
     Tipo varchar(20) not null,
     NumeroPezziDisponibili decimal(3) not null,
     Prezzo decimal(6,2) not null,
-    Gradazione decimal(4,2),
     img1 varchar(30),
     img2 varchar(30),
     img3 varchar(30),
