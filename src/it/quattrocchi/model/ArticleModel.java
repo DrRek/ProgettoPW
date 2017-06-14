@@ -18,7 +18,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		
-		String query = "INSERT INTO " + TABLE_NAME + " values (?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO " + TABLE_NAME + " values (?,?,?,?,?,?,?,?)";
 		
 		try {
 			System.out.println("gg");
@@ -29,10 +29,9 @@ public class ArticleModel {
 			stm.setString(3, product.getTipo());
 			stm.setInt(4, product.getNumeroPezziDisponibili());
 			stm.setFloat(5, product.getPrezzo());
-			stm.setFloat(6,product.getGradazione());
-			stm.setString(7, product.getImg1());
-			stm.setString(8, product.getImg2());
-			stm.setString(9, product.getImg3());
+			stm.setString(6, product.getImg1());
+			stm.setString(7, product.getImg2());
+			stm.setString(8, product.getImg3());
 			
 			stm.executeUpdate();
 			
@@ -54,7 +53,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		
-		String query = "update " + TABLE_NAME + " set Tipo=?, NumeroPezziDisponibili=?, Prezzo=?, Gradazione=?, img1=?, img2=?, img3=? where Nome=? and Marca=?;";
+		String query = "update " + TABLE_NAME + " set Tipo=?, NumeroPezziDisponibili=?, Prezzo=?, img1=?, img2=?, img3=? where Nome=? and Marca=?;";
 		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
@@ -62,12 +61,11 @@ public class ArticleModel {
 			stm.setString(1, product.getTipo());
 			stm.setInt(2, product.getNumeroPezziDisponibili());
 			stm.setFloat(3, product.getPrezzo());
-			stm.setFloat(4, product.getGradazione());
-			stm.setString(5, product.getImg1());
-			stm.setString(6,product.getImg2());
-			stm.setString(7, product.getImg3());
-			stm.setString(8, product.getNome());
-			stm.setString(9, product.getMarca());
+			stm.setString(4, product.getImg1());
+			stm.setString(5,product.getImg2());
+			stm.setString(6, product.getImg3());
+			stm.setString(7, product.getNome());
+			stm.setString(8, product.getMarca());
 			
 			stm.executeUpdate();
 			
@@ -138,7 +136,6 @@ public class ArticleModel {
 				bean.setTipo(rs.getString("tipo"));
 				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
 				bean.setPrezzo(rs.getFloat("prezzo"));
-				bean.setGradazione(rs.getFloat("gradazione"));
 				bean.setImg1(rs.getString("img1"));
 				bean.setImg2(rs.getString("img2"));
 				bean.setImg3(rs.getString("img3"));	

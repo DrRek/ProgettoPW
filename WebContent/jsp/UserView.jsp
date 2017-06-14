@@ -285,9 +285,6 @@
 				required><br> <label for="prezzo">Prezzo:</label><br>
 			<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
 
-			<label for="gradazione">Gradazione:</label><br> <input
-				name="gradazione" type="number" min="-20,00" value="0,00"><br>
-
 			<input type="submit" value="Send"><input type="reset"
 				value="Reset">
 
