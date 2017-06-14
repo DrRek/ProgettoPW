@@ -38,6 +38,8 @@
 	<%}
 		else{%>
 	<div class="container">
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/access-validation.js"></script>
 		<h1>Login</h1>
 		<form name='login' onSubmit="return loginValidation();"
@@ -65,8 +67,7 @@
 
 			<input type="hidden" name="action" value="register"> 
 			
-			<label
-				for="user">Username:</label> <input type="text" name="user"
+			<label for="user">Username:</label> <input type="text" name="user"
 				size="12" /><span id="user"></span><br> 
 				
 			<label for="pass">Password:</label>
@@ -79,8 +80,9 @@
 			<input type="text" name="cognome" size="50" /><span id="cognome"></span><br>
 
 			<label for="nascita">Data di nascita:</label> <input type="date"
-				name="nascita" size="50" /><span id="nascita"></span><br> <label
-				for="stato">Stato:</label> <select name="stato">
+				name="nascita" size="50" /><span id="nascita"></span><br> 
+				
+			<label for="stato">Stato:</label> <select name="stato">
 				<option selected="" value="Default">(Please select a
 					country)</option>
 				<option value="AF">Australia</option>
@@ -92,14 +94,13 @@
 			
 			<label for="cap">CAP:</label> <input
 				type="text" name="cap" /><span id="cap"></span><br> 
-				
+			
 			<label for="indirizzo">Indirizzo:</label> <input type="text"
 				name="indirizzo" size="50" /><span id="indirizzo"></span><br>
 
 			<label for="email">Email:</label> <input type="text" name="email"
-				size="50" /><span id="email"></span><br> 
-				
-			<input name="submit" value="Register" type="submit">
+				size="50" /><span id="email"></span><br> <input name="submit"
+				value="Register" type="submit">
 
 		</form>
 	</div>

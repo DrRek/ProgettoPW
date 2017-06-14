@@ -31,11 +31,15 @@
 	<div class="container">
 		<h2>Cart</h2>
 	</div>
-	<%if(cart == null){ %>
+	<%
+		if (cart == null) {
+	%>
 	<div class="container">
 		<h3>empty cart</h3>
 	</div>
-	<%} else{ %>
+	<%
+		} else {
+	%>
 	<div class="container">
 		<table class="table-bordered">
 			<tr>
@@ -47,7 +51,7 @@
 			</tr>
 			<%
 				List<CartArticle> prodcart = cart.getProducts();
-				for (CartArticle beancart : prodcart) {
+					for (CartArticle beancart : prodcart) {
 			%>
 			<tr>
 				<td><%=beancart.getArticle().getNome()%></td>
@@ -66,8 +70,11 @@
 			%>
 		</table>
 
-		<% if(cart.getNumberOfProducts() != 0){
-				%>
+		<%
+			if (cart.getNumberOfProducts() != 0) {
+		%>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script>
 			function controllaCarta() {
 				if ($("select[name='carta']").val() == "default") {
@@ -86,14 +93,14 @@
 					card)</option>
 				<%
 					ArrayList<CreditCardBean> cc = user.getCards();
-					if (cc != null && cc.size() != 0) {
-						for (CreditCardBean c : cc) {
+							if (cc != null && cc.size() != 0) {
+								for (CreditCardBean c : cc) {
 				%>
 
 				<option value=<%=c.getNumeroCC()%>><%=c.getNumeroCC()%></option>
 				<%
 					}
-					}
+							}
 				%>
 			</select><span id="warning"></span> <input type="hidden" name="action"
 				value="submit"> <input name="submit"
@@ -101,13 +108,17 @@
 
 		</form>
 	</div>
-	<% } %>
+	<%
+		}
+	%>
 	<div class="container">
 		<h3>
 			Prezzo totale:
 			<%=cart.getPrezzo()%>€
 		</h3>
 	</div>
-	<%} %>
+	<%
+		}
+	%>
 </body>
 </html>

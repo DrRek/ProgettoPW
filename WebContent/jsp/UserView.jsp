@@ -24,7 +24,6 @@
 	
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -111,6 +110,7 @@
 	</div>
 	<div class="container">
 		<h2>Aggiungi carta</h2>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/creditcard-validation.js"></script>
 
 		<form name='cc' onSubmit="return ccValidation();"  action='user'
