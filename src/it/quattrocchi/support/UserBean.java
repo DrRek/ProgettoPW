@@ -94,8 +94,16 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public ArrayList<PrescriptionBean> getPrescriptions() {
+		return this.prescriptions;
+	}
+	
+	public void setPrescriptions(ArrayList<PrescriptionBean> prescriptions) {
+		this.prescriptions = prescriptions;
+	}
 
-
+	private ArrayList<PrescriptionBean> prescriptions;
 	private ArrayList<CreditCardBean> cc;
 	private String user, nome, cognome, stato, cap, indirizzo, email, password;
 	private Date dataDiNascita;

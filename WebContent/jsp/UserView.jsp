@@ -141,6 +141,122 @@
 			 <input name="addCard" value="Aggiungi" type="submit">
 		</form>
 	</div>
+	
+	<div class="container">
+		<h2>Prescrizioni</h2>
+		<table class="table-bordered">
+			<thead>
+				<th>Codice</th>
+				<th>Tipo</th>
+			</thead>
+			<%
+				Collection<?> pres = (Collection<?>) user.getPrescriptions();
+				if (pres != null && pres.size() != 0) {
+					Iterator<?> it = pres.iterator();
+					while (it.hasNext()) {
+						PrescriptionBean bean = (PrescriptionBean) it.next();
+			%>
+			<tr>
+				<td><%=bean.getCodice()%></td>
+				<td><%=bean.getTipo() %></td>
+				<td><a href="user?action=delPres&codice=<%=bean.getCodice()%>">rimuovi</a></td>
+			</tr>
+			<% 	}
+					}%>
+		</table>
+	</div>
+	
+	<div class="container">
+		<h2>Aggiungi Prescrizione</h2>
+		<script type="text/javascript" src="js/prescription-validation.js"></script>
+
+		<form name='presc' onSubmit="return presValidation();"  action='user'
+			method="post"> 
+					
+		<input type="hidden" name="action" value="addPrescription"> 
+		
+			<label for="tipoP">Tipo Prescrizione:</label> <input
+				name="tipoP" type="text" maxlength="50"
+				placeholder="ES. Oculistica"> <span id="tipoP"></span><br>
+
+			<label for="sferaSX">Sfera Sinistra:</label> <input
+				name="sferaSX" type="number" 
+				placeholder="Gradazione Occhio SX"><span
+				id="sferaSX"></span> <br>
+				
+				 <label for="cilindroSX">Cilindro Sinistra:</label>
+			<input name="cilindroSX" type="number" 
+				placeholder="Valore Astigmatismo SX"><span id="cilindroSX"></span> <br> 
+				
+				<label
+				for="asseSX">Asse Sinistra:</label> <input name="asseSX" type="number"
+				 placeholder="Gradi Orientamento Lente"><span id="asseSX"></span> <br>
+				
+				<label for="sferaDX">Sfera Destra:</label> <input
+				name="sferaDX" type="number" 
+				placeholder="Gradazione Occhio DX"><span
+				id="sferaDX"></span> <br>
+				
+				 <label for="cilindroDX">Cilindro Destra:</label>
+			<input name="cilindroDX" type="number" 
+				placeholder="Valore Astigmatismo DX"><span id="cilindroDX"></span> <br> 
+				
+				<label
+				for="asseDX">Asse Destra:</label> <input name="asseDX" type="number"
+				  placeholder="Gradi Orientamento Lente"><span id="asseDX"></span> <br>
+				  
+				 <label
+				 for="addVicinanza">Addizione Vicinanza</label> <input name="addVicinanza" type="number"
+				 placeholder="Aggiunta Diottrie Positive"> <span id="addVicinanza"></span> <br>
+				 
+				 <label
+				for="prismaOrizSX">Prisma Orizzontale SX:</label> <input name="prismaOrizSX" type="number"
+				  placeholder="Prisma Oriz SX"><span id="prismaOrizSX"></span> <br>
+				  
+				  <label
+				for="prismaOrizSXBD">Prisma Oriz SX BaseDirection:</label> <input name="prismaOrizSXBD" type="text"
+					maxlength="3"
+				  placeholder="PrismaOrizSXBaseDirection"><span id="prismaOrizSXBD"></span> <br>
+				  
+				  <label
+				for="prismaOrizDX">Prisma Orizzontale DX:</label> <input name="prismaOrizDX" type="number"
+				  placeholder="Prisma Oriz DX"><span id="prismaOrizDX"></span> <br>
+				  
+				  <label
+				for="prismaOrizDXBD">Prisma Oriz DX BaseDirection:</label> <input name="prismaOrizDXBD" type="text"
+				maxlength="3"
+				  placeholder="PrismaOrizDXBaseDirection"><span id="prismaOrizDXBD"></span> <br>
+				  
+				  <label
+				for="prismaVertSX">Prisma Verticale SX:</label> <input name="prismaVertSX" type="number"
+				  placeholder="Prisma Vert SX"><span id="prismaVertSX"></span> <br>
+				  
+				  <label
+				for="prismaVertSXBD">Prisma Vert SX BaseDirection:</label> <input name="prismaVertSXBD" type="text"
+				maxlength="3"
+				  placeholder="PrismaVertSXBaseDirection"><span id="prismaVertSXBD"></span> <br>
+			
+			 	<label
+				for="prismaVertDX">Prisma Verticale DX:</label> <input name="prismaVertDX" type="number"
+				  placeholder="Prisma Vert DX"><span id="prismaVertDX"></span> <br>
+				  
+				  <label
+				for="prismaVertSXBD">Prisma Vert DX BaseDirection:</label> <input name="prismaVertDXBD" type="text"
+				maxlength="3"
+				  placeholder="PrismaVertDXBaseDirection"><span id="prismaVertDXBD"></span> <br>
+				  
+				  <label
+				  for="pdSX">Pupillar Distance SX: </label> <input name="pdSX" type="number"
+				  	placeholder="Pupillar Distance"><span id="pdSX"></span> <br>
+				  	
+				  <label
+				  for="pdDX">Pupillar Distance DX: </label> <input name="pdDX" type="number"
+				  	placeholder="Pupillar Distance"><span id="pdDX"></span> <br>
+				  				 
+			 <input name="addPrescription" value="Aggiungi" type="submit">
+		</form>
+	</div>
+	
 
 	<%
 		} else if (admin != null) {
