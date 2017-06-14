@@ -48,6 +48,7 @@
 					Iterator<?> it = products.iterator();
 					while (it.hasNext()) {
 						ArticleBean bean = (ArticleBean) it.next();
+						if(bean.getNumeroPezziDisponibili() > 0){
 			%>
 			<tr>
 				<td>
@@ -76,7 +77,8 @@
 
 			</tr>
 			<%
-				}
+						}
+					}
 				} else {
 			%>
 			<tr>
