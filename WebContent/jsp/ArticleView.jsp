@@ -48,7 +48,7 @@
 					Iterator<?> it = products.iterator();
 					while (it.hasNext()) {
 						ArticleBean bean = (ArticleBean) it.next();
-						if(bean.getNumeroPezziDisponibili() > 0){
+						if(bean.getNumeroPezziDisponibili() > 0 || admin != null){
 			%>
 			<tr>
 				<td>
