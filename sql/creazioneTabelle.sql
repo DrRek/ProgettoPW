@@ -69,12 +69,11 @@ create table Ordine(
 );
 
 create table Articolo(
-	Nome varchar(40) not null,
+	Nome varchar(40) primary key,
     Marca varchar(20) not null,
     Tipo varchar(1) not null,
     Prezzo decimal(6,2) not null,
-    img1 varchar(30),
-    primary key(Nome, Marca)
+    img1 varchar(30)
 );
 
 create table Occhiale(
@@ -96,6 +95,7 @@ create table Lentine(
     NumeroPezzi decimal(2),
     Raggio decimal(3,1),
     Diametro decimal(3,1),
+    colore char(2),
     primary key(Nome, Modello),
     foreign key (Nome) references Articolo(Nome)
 );

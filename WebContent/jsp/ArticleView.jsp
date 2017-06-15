@@ -33,30 +33,115 @@
 	
 	<!--  search.js gestisce questa parte--> <!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
 	<div id='daMettereASinistra'>
-		<form action="article" method='get'>
 
 			<input type="radio" name="tipo" value="Occhiale" autocomplete="off"> Occhiali<br>
 			<input type="radio" name="tipo" value="Lente a contatto" autocomplete="off"> Lenti a contatto<br>
 			<div id='daMostrareSeOcchiali'>
-				<select name="marcaO">
-					<option selected value="">Tutte</option>
-					<option value="GreenVision">GreenVision</option>
-					<option value="RayBan">RayBan</option>
-				</select>
+				<form action="article" method='get'>
+					<input type="hidden" name="daCercare" value="O" />
+					<label for="marca">Marca:</label> 
+					<select name="marca">
+						<option selected value="">Tutte</option>
+						<option value="GreenVision">GreenVision</option>
+						<option value="Lindberg">Lindberg</option>
+						<option value="Oakley">Oakley</option>
+						<option value="Persol">Persol</option>
+						<option value="RayBan">RayBan</option>
+					</select>
+					<label for="prezzoMin">Prezzo:</label> 
+					<div>
+						<input type="text" name="prezzoMin" value="0" />
+						<input type="text" name="prezzoMax" value="Max" />
+					</div>
+					<label for="sesso">Sesso:</label> 
+					<select name="sesso">
+						<option selected value="U">Unisex</option>
+						<option value="M">Man</option>
+						<option value="F">Woman</option>
+					</select>
+					<label for="colore">Colore:</label> 
+					<input type="text" name="colore" value=""/>
+					<input type='submit' value='Search!' />
+				</form>
 			</div>
 			<div id='daMostrareSeLentine'>
-				<select name="marcaL">
-					<option selected value="">Tutte</option>
-					<option value="GreenVision">GreenVision</option>
-					<option value="Acuve">Acuve</option>
-				</select>
+				<form action="article" method='get'>
+					<input type="hidden" name="daCercare" value="L" />
+					<label for="marca">Marca:</label>
+					<select name="marca">
+						<option selected value="">Tutte</option>
+						<option value="Acuvue">Acuvue</option>
+						<option value="Alcon">Alcon</option>
+						<option value="Biotrue">Biotrue</option>
+						<option value="Frequency">Frequency</option>
+						<option value="GreenVision">GreenVision</option>
+					</select>
+					<label for="prezzoMin">Prezzo:</label> 
+					<div>
+						<input type="text" name="prezzoMin" value="0" />
+						<input type="text" name="prezzoMax" value="Max" />
+					</div>
+					<label for="gradazione">Gradazione:</label>
+					<select name="gradazione">
+						<option value="+8.00">+8.00</option>
+						<option value="+7.50">+7.50</option>
+						<option value="+7.00">+7.00</option>
+						<option value="+6.50">+6.50</option>
+						<option value="+6.00">+6.00</option>
+						<option value="+5.50">+5.50</option>
+						<option value="+5.00">+5.00</option>
+						<option value="+4.50">+4.50</option>
+						<option value="+4.00">+4.00</option>
+						<option value="+3.50">+3.50</option>
+						<option value="+3.00">+3.00</option>
+						<option value="+2.50">+2.50</option>
+						<option value="+2.00">+2.00</option>
+						<option value="+1.50">+1.50</option>
+						<option value="+1.00">+1.00</option>
+						<option value="+0.50">+0.50</option>
+						<option selected value="0">±0.00</option>
+						<option value="-0.50">-0.50</option>
+						<option value="-1.00">-1.00</option>
+						<option value="-1.50">-1.50</option>
+						<option value="-2.00">-2.00</option>
+						<option value="-2.50">-2.50</option>
+						<option value="-3.00">-3.00</option>
+						<option value="-3.50">-3.50</option>
+						<option value="-4.00">-4.00</option>
+						<option value="-4.50">-4.50</option>
+						<option value="-5.00">-5.00</option>
+						<option value="-5.50">-5.50</option>
+						<option value="-6.00">-6.00</option>
+						<option value="-6.50">-6.50</option>
+						<option value="-7.00">-7.00</option>
+						<option value="-8.50">-7.50</option>
+						<option value="-8.00">-8.00</option>
+					</select>
+					<label for="tipo">Tipo:</label>
+					<select name="tipo">
+						<option selected value="">Tutte</option>
+						<option value="G">Giornaliere</option>
+						<option value="Q">Quindicinali</option>
+						<option value="M">Mensili</option>
+					</select>
+					<label for="raggio">Raggio:</label>
+					<input type="text" name="raggio" value="" />
+					<label for="diametro">Diametro:</label>
+					<input type="text" name="diametro" value="" />
+					<label for="colore">Colore:</label>
+					<select name="colore">
+						<option selected value="">Tutte</option>
+						<option value="Ve">Verdi</option>
+						<option value="Bl">Blu</option>
+						<option value="Ma">Marroni</option>
+						<option value="Ve">Verdi</option>
+						<option value="Vi">Viola</option>
+						<option value="Ro">Rosso</option>
+						<option value="Pa">Particolari</option>
+					</select>
+					<input type='submit' value='Search!' />
+				</form>
 			</div>
-			<div id='perIlPrezzo'>
-				<input type="text" name="prezzoMin" value="0">
-				<input type="text" name="prezzoMax" value="Max">
-			</div>
-			<input type='submit' value='Search!' />
-		</form>
 	</div>
 	
 	<div class="container">
@@ -65,10 +150,9 @@
 			<thead>
 				<tr>
 					<th><a href="article?sort=nome">Nome</a></th>
-					<th><a href="article?sort=tipo">Tipo</a></th>
 					<th><a href="article?sort=marca">Marca</a></th>
+					<th><a href="article?sort=tipo">Tipo</a></th>
 					<th><a href="article?sort=prezzo">Prezzo</a></th>
-					<th>Disponibilità</th>
 				</tr>
 			</thead>
 			<%
@@ -76,7 +160,6 @@
 					Iterator<?> it = products.iterator();
 					while (it.hasNext()) {
 						ArticleBean bean = (ArticleBean) it.next();
-						if(bean.getNumeroPezziDisponibili() > 0 || admin != null){
 			%>
 			<tr>
 				<td>
@@ -84,28 +167,18 @@
 					<%=bean.getNome()%>
 					</a> 
 				</td>
-				<td><%=bean.getTipo()%></td>
 				<td><%=bean.getMarca()%></td>
+				<td><%=bean.getTipo()%></td>
 				<td><%=bean.getPrezzo()%></td>
-				<td><%=bean.getNumeroPezziDisponibili()%></td>
 				<td>
-					<%
-						if (admin != null) {
-					%><a
-					href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a>
-
-					<%
-						} else {
-					%><a
-					href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add
-						to cart</a> <%
- 	}
- %>
+					<% if (admin != null) { %>
+						<a href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a>
+					<% } else { %>
+						<a href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add to cart</a>
+					<% } %>
 				</td>
-
 			</tr>
-			<%
-						}
+			<%		
 					}
 				} else {
 			%>
