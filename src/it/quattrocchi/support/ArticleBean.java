@@ -11,7 +11,6 @@ public class ArticleBean {
 		img1=null;
 		img2=null;
 		img3=null;
-		tipologia=null;
 		descrizione=null;
 		sesso=null;
 		prezzo=0;
@@ -79,11 +78,7 @@ public class ArticleBean {
 	}
 	
 	public String getTipologia() {
-		return tipologia;
-	}
-
-	public void setTipologia(String tipologia) {
-		this.tipologia = tipologia;
+		return lentine.get(0).getTipologia();
 	}
 
 	public double getRaggio() {
@@ -145,7 +140,7 @@ public class ArticleBean {
 		return lentine;
 	}
 
-	public void setLentine(String modello, double gradazione, double raggio, double diametro, int disponibilita, String colore) {
+	public void setLentine(String modello, double gradazione, double raggio, double diametro, int disponibilita, String colore, String tipologia) {
 		SingleContactLenseBean trovata = new SingleContactLenseBean();
 		trovata.setNome(nome);
 		trovata.setMarca(marca);
@@ -155,10 +150,11 @@ public class ArticleBean {
 		trovata.setDiametro(diametro);
 		trovata.setDisponibilita(disponibilita);
 		trovata.setColore(colore);
+		trovata.setTipologia(tipologia);
 		lentine.add(trovata);
 	}
 
-	private String nome, marca, tipo, img1, img2, img3, tipologia, descrizione, sesso;
+	private String nome, marca, tipo, img1, img2, img3, descrizione, sesso;
 	private double prezzo, raggio, diametro;
 	private int numeroPezziNelPacco, numeroPezziDisponibili;
 	private ArrayList<SingleContactLenseBean> lentine;

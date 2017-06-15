@@ -78,35 +78,32 @@ public class UserControl extends HttpServlet{
 	}
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
-
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
 		String tipo = request.getParameter("tipo");
-		int numeroPezziDisponibili = Integer.parseInt(request.getParameter("numeroPezziDisponibili"));
-		float prezzo = Integer.parseInt(request.getParameter("prezzo"));
-		float gradazione = Integer.parseInt(request.getParameter("gradazione"));
-
-		ArticleBean bean = model.doRetrieveByKey(nome, marca);
-
-		if(bean == null){
-			bean = new ArticleBean();
-			bean.setNome(nome);
-			bean.setMarca(marca);
-			bean.setTipo(tipo);
-			bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
-			bean.setPrezzo(prezzo);
-			//bean.setGradazione(gradazione);
-
-			model.doSave(bean);
-		}
-		else
-		{
-			bean.setTipo(tipo);
-			bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
-			bean.setPrezzo(prezzo);
-			//bean.setGradazione(gradazione);
-
-			//model.doUpdate(bean); 
+		ArticleBean toAdd = new ArticleBean();
+		toAdd.setTipo(tipo);
+		try{
+			if(tipo.equalsIgnoreCase("O")){
+				toAdd.setNome(request.getParameter("nome"));
+				toAdd.setMarca(request.getParameter("marca"));
+				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
+				toAdd.setSesso(request.getParameter("sesso"));
+				toAdd.setDescrizione(request.getParameter("descrizione"));
+				toAdd.setNumeroPezziDisponibili(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
+			} else if(tipo.equalsIgnoreCase("L")){
+				toAdd.setNome(request.getParameter("nome"));
+				toAdd.setMarca(request.getParameter("marca"));
+				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
+				toAdd.setLentine(null,
+						Double.parseDouble(request.getParameter("gradazione")),
+						Double.parseDouble(request.getParameter("raggio")),
+						Double.parseDouble(request.getParameter("diametro")),
+						Integer.parseInt(request.getParameter("numeroPezziDisponibili")),
+						request.getParameter("colore"),
+						request.getParameter("tipologia"));
+			}
+			model.doSave(toAdd);
+		} catch (SQLException e){
+			e.printStackTrace();
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");

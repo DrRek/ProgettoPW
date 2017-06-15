@@ -274,14 +274,13 @@
 			<input type="radio" name="tipo" value="Occhiale" autocomplete="off"> Occhiali<br>
 			<input type="radio" name="tipo" value="Lente a contatto" autocomplete="off"> Lenti a contatto<br>
 			<div id='daMostrareSeOcchiali'>
-				<form action="article" method='get'>
+				<form action="user" method='get'>
 					<input type="hidden" name="action" value="insert" />
 					<input type="hidden" name="tipo" value="O" />
 					<label for="nome">Nome:</label> 
 					<input type="text" name="nome" />
 					<label for="marca">Marca:</label> 
 					<select name="marca">
-						<option selected value="">Tutte</option>
 						<option value="GreenVision">GreenVision</option>
 						<option value="Lindberg">Lindberg</option>
 						<option value="Oakley">Oakley</option>
@@ -292,7 +291,7 @@
 					<input type="number" step="0.01" min="0" name="prezzo" placeholder="Prezzo" />
 					<label for="sesso">Sesso:</label> 
 					<select name="sesso">
-						<option selected value="any">Any</option>
+						<option selected value="U">Any</option>
 						<option value="M">Man</option>
 						<option value="F">Woman</option>
 					</select>
@@ -304,14 +303,13 @@
 				</form>
 			</div>
 			<div id='daMostrareSeLentine'>
-				<form action="article" method='get'>
+				<form action="user" method='get'>
 					<input type="hidden" name="action" value="insert" />
 					<input type="hidden" name="tipo" value="L" />
 					<label for="nome">Nome:</label> 
 					<input type="text" name="nome" />
 					<label for="marca">Marca:</label>
 					<select name="marca">
-						<option selected value="">Tutte</option>
 						<option value="Acuvue">Acuvue</option>
 						<option value="Alcon">Alcon</option>
 						<option value="Biotrue">Biotrue</option>
@@ -376,6 +374,8 @@
 						<option value="Ro">Rosso</option>
 						<option value="Pa">Particolari</option>
 					</select>
+					<label for="numeroPezziDisponibili">Numero pezzi disponibili:</label> 
+					<input type="number" step="1" min="1" name="numeroPezziDisponibili" placeholder="Numero Pezzi Disponibili" />
 					<input type='submit' value='Insert!' />
 				</form>
 			</div>

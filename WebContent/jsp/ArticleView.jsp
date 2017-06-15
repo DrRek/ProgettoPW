@@ -102,7 +102,8 @@
 						<option value="+1.50">+1.50</option>
 						<option value="+1.00">+1.00</option>
 						<option value="+0.50">+0.50</option>
-						<option selected value="0">±0.00</option>
+						<option selected value="">Tutte</option>
+						<option  value="0">±0.00</option>
 						<option value="-0.50">-0.50</option>
 						<option value="-1.00">-1.00</option>
 						<option value="-1.50">-1.50</option>

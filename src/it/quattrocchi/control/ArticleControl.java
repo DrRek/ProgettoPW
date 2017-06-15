@@ -43,7 +43,6 @@ public class ArticleControl extends HttpServlet {
 		//TO DO: mi sa che questo non ha più senso di esistere, poi si vede
 		if (action != null){
 			if (action.equalsIgnoreCase("description")){
-				descript(request, response);
 				return;
 			}
 			if(admin==null){
@@ -71,7 +70,7 @@ public class ArticleControl extends HttpServlet {
 						String sesso = request.getParameter("sesso");
 						String colore = request.getParameter("colore");
 						request.setAttribute("articoli", model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort));
-					} else if(tipo.equalsIgnoreCase("O")){
+					} else if(tipo.equalsIgnoreCase("L")){
 						String marca = request.getParameter("marca");
 						String prezzoMin = request.getParameter("prezzoMin");
 						String prezzoMax = request.getParameter("prezzoMax");
@@ -136,10 +135,5 @@ public class ArticleControl extends HttpServlet {
 			System.out.println("Error:" + e.getMessage());
 		}
 		return cart;
-	}
-	
-	private void descript(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleDescriptionView.jsp");
-		dispatcher.forward(request, response);
 	}
 }
