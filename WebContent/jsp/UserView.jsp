@@ -24,6 +24,9 @@
 	
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 </head>
 
 <body>
@@ -110,7 +113,6 @@
 	</div>
 	<div class="container">
 		<h2>Aggiungi carta</h2>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/creditcard-validation.js"></script>
 
 		<form name='cc' onSubmit="return ccValidation();"  action='user'
@@ -180,37 +182,37 @@
 				placeholder="ES. Oculistica"> <span id="tipoP"></span><br>
 
 			<label for="sferaSX">Sfera Sinistra:</label> <input
-				name="sferaSX" type="number" 
+				name="sferaSX" type="number" step="0.01" step="0.01" min="-10" max="10"
 				placeholder="Gradazione Occhio SX"><span
 				id="sferaSX"></span> <br>
 				
 				 <label for="cilindroSX">Cilindro Sinistra:</label>
-			<input name="cilindroSX" type="number" 
+			<input name="cilindroSX" type="number" step="0.01" min="-10" max="10"
 				placeholder="Valore Astigmatismo SX"><span id="cilindroSX"></span> <br> 
 				
 				<label
-				for="asseSX">Asse Sinistra:</label> <input name="asseSX" type="number"
+				for="asseSX">Asse Sinistra:</label> <input name="asseSX" type="number" step="0.01" min="0" max="180"
 				 placeholder="Gradi Orientamento Lente"><span id="asseSX"></span> <br>
 				
 				<label for="sferaDX">Sfera Destra:</label> <input
-				name="sferaDX" type="number" 
+				name="sferaDX" type="number" step="0.01" min="-10" max="10"
 				placeholder="Gradazione Occhio DX"><span
 				id="sferaDX"></span> <br>
 				
 				 <label for="cilindroDX">Cilindro Destra:</label>
-			<input name="cilindroDX" type="number" 
+			<input name="cilindroDX" type="number" type="number" step="0.01" min="-10" max="10"
 				placeholder="Valore Astigmatismo DX"><span id="cilindroDX"></span> <br> 
 				
 				<label
-				for="asseDX">Asse Destra:</label> <input name="asseDX" type="number"
+				for="asseDX">Asse Destra:</label> <input name="asseDX" type="number" step="0.01" min="0" max="180"
 				  placeholder="Gradi Orientamento Lente"><span id="asseDX"></span> <br>
 				  
 				 <label
-				 for="addVicinanza">Addizione Vicinanza</label> <input name="addVicinanza" type="number"
+				 for="addVicinanza">Addizione Vicinanza</label> <input name="addVicinanza" type="number" step="0.01" min="-10" max="10"
 				 placeholder="Aggiunta Diottrie Positive"> <span id="addVicinanza"></span> <br>
 				 
 				 <label
-				for="prismaOrizSX">Prisma Orizzontale SX:</label> <input name="prismaOrizSX" type="number"
+				for="prismaOrizSX">Prisma Orizzontale SX:</label> <input name="prismaOrizSX" type="number" step="0.01" min="-10" max="10"
 				  placeholder="Prisma Oriz SX"><span id="prismaOrizSX"></span> <br>
 				  
 				  <label
@@ -219,7 +221,7 @@
 				  placeholder="PrismaOrizSXBaseDirection"><span id="prismaOrizSXBD"></span> <br>
 				  
 				  <label
-				for="prismaOrizDX">Prisma Orizzontale DX:</label> <input name="prismaOrizDX" type="number"
+				for="prismaOrizDX">Prisma Orizzontale DX:</label> <input name="prismaOrizDX" type="number" step="0.01" min="-10" max="10"
 				  placeholder="Prisma Oriz DX"><span id="prismaOrizDX"></span> <br>
 				  
 				  <label
@@ -228,7 +230,7 @@
 				  placeholder="PrismaOrizDXBaseDirection"><span id="prismaOrizDXBD"></span> <br>
 				  
 				  <label
-				for="prismaVertSX">Prisma Verticale SX:</label> <input name="prismaVertSX" type="number"
+				for="prismaVertSX">Prisma Verticale SX:</label> <input name="prismaVertSX" type="number" step="0.01" min="-10" max="10"
 				  placeholder="Prisma Vert SX"><span id="prismaVertSX"></span> <br>
 				  
 				  <label
@@ -237,7 +239,7 @@
 				  placeholder="PrismaVertSXBaseDirection"><span id="prismaVertSXBD"></span> <br>
 			
 			 	<label
-				for="prismaVertDX">Prisma Verticale DX:</label> <input name="prismaVertDX" type="number"
+				for="prismaVertDX">Prisma Verticale DX:</label> <input name="prismaVertDX" type="number" step="0.01" min="-10" max="10"
 				  placeholder="Prisma Vert DX"><span id="prismaVertDX"></span> <br>
 				  
 				  <label
@@ -246,11 +248,11 @@
 				  placeholder="PrismaVertDXBaseDirection"><span id="prismaVertDXBD"></span> <br>
 				  
 				  <label
-				  for="pdSX">Pupillar Distance SX: </label> <input name="pdSX" type="number"
+				  for="pdSX">Pupillar Distance SX: </label> <input name="pdSX" type="number" step="0.01" min="-10" max="10"
 				  	placeholder="Pupillar Distance"><span id="pdSX"></span> <br>
 				  	
 				  <label
-				  for="pdDX">Pupillar Distance DX: </label> <input name="pdDX" type="number"
+				  for="pdDX">Pupillar Distance DX: </label> <input name="pdDX" type="number" step="0.01" min="-10" max="10"
 				  	placeholder="Pupillar Distance"><span id="pdDX"></span> <br>
 				  				 
 			 <input name="addPrescription" value="Aggiungi" type="submit">

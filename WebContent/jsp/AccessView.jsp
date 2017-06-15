@@ -25,6 +25,9 @@
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -38,8 +41,6 @@
 	<%}
 		else{%>
 	<div class="container">
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/access-validation.js"></script>
 		<h1>Login</h1>
 		<form name='login' onSubmit="return loginValidation();"
