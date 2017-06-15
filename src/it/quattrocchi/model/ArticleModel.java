@@ -177,14 +177,10 @@ public class ArticleModel {
 				ArticleBean bean = new ArticleBean();
 				
 				bean.setNome(rs.getString("Nome"));
-				bean.setTipo(rs.getString("Tipo"));
 				bean.setMarca(rs.getString("Marca"));
+				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
-				bean.setGradazione(rs.getFloat("Gradazione"));
-				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
 				bean.setImg1(rs.getString("Img1"));
-				bean.setImg2(rs.getString("Img2"));
-				bean.setImg3(rs.getString("Img3"));
 				products.add(bean);
 			}
 
@@ -285,5 +281,48 @@ public class ArticleModel {
 			}
 		}
 		return products;
+	}
+
+	public Collection<ArticleBean> doRetrieve(String daCercare) {
+		Connection conn = null;
+		PreparedStatement stm = null;
+		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
+		daCercare = "%"+daCercare+"%";
+		String sql = "select * from articolo left join occhiale on articolo.nome = occhiale.nome and articolo.marca = occhiale.marca where (articolo.Nome LIKE ?) or (occhiale.Descrizione LIKE ?) or (articolo.Marca LIKE ?)";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(sql);
+			stm.setString(1, daCercare);
+			stm.setString(2, daCercare);
+			stm.setString(3, daCercare);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()){
+				ArticleBean bean = new ArticleBean();
+				
+				bean.setNome(rs.getString("Nome"));
+				bean.setMarca(rs.getString("Marca"));
+				bean.setTipo(rs.getString("Tipo"));
+				bean.setPrezzo(rs.getFloat("Prezzo"));
+				bean.setImg1(rs.getString("Img1"));
+				products.add(bean);
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+			
+		return products;
+	}
+
+	public Object doRetrieveGlasses(String daCercare, String marca, String prezzoMin, String prezzoMax, String sesso,
+			String colore, String sort) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object doRetrieveContactLenses(String daCercare, String marca, String prezzoMin, String prezzoMax,
+			String gradazione, String tipologia, String raggio, String diametro, String colore, String sort) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

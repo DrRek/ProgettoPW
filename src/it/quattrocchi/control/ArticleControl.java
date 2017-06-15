@@ -55,33 +55,38 @@ public class ArticleControl extends HttpServlet {
 					delete(request, response);
 			}
 		} else { //Alla fine per questa pagina conterà solo questo else, controllare che altri pezzi di codice siano usati
-			String search = request.getParameter("daCercare");
-			String tipo = request.getParameter("tipo");
-			String marcaO = request.getParameter("marcaO");
-			String marca;
-			if(marcaO==null||marcaO.equalsIgnoreCase(""))
-				marca = request.getParameter("marcaL");
-			else
-				marca = marcaO;
-			String stringda = request.getParameter("prezzoMin");
-			double da;
-			if(stringda==null)da=0;
-			else da=Double.parseDouble(stringda);
-			String stringa = request.getParameter("prezzoMax");
-			double a;
-			if(stringa==null)a=0;
-			else{
-				try{
-					a=Double.parseDouble(stringda);
-				} catch (Exception e){
-					a=0;
+			String daCercare = request.getParameter("daCercare");
+			if(daCercare!=null){
+				request.setAttribute("daCercare", daCercare);
+				
+				String tipo = request.getParameter("tipo");
+				String sort = request.getParameter("sort");
+				if(tipo==null){
+					request.setAttribute("articoli", model.doRetrieve(daCercare));
+				} else if(tipo.equalsIgnoreCase("O")){
+					String marca = request.getParameter("marca");
+					String prezzoMin = request.getParameter("prezzoMin");
+					String prezzoMax = request.getParameter("prezzoMax");
+					String sesso = request.getParameter("sesso");
+					String colore = request.getParameter("colore");
+					//request.setAttribute("articoli", model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort));
+				} else if(tipo.equalsIgnoreCase("O")){
+					String marca = request.getParameter("marca");
+					String prezzoMin = request.getParameter("prezzoMin");
+					String prezzoMax = request.getParameter("prezzoMax");
+					String gradazione = request.getParameter("gradazione");
+					String tipologia = request.getParameter("tipologia");
+					String raggio = request.getParameter("raggio");
+					String diametro = request.getParameter("diametro");
+					String colore = request.getParameter("colore");
+				//	request.setAttribute("articoli", model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, sort));
 				}
-			}
-			String sort = request.getParameter("sort");
-			try {
-				request.setAttribute("articoli", model.doRetrieve(search, tipo, marca, da, a, sort));
-			} catch (SQLException e) {
-				e.printStackTrace();
+			}else{
+				try {
+					request.setAttribute("articoli", model.doRetrieveAll("Nome"));
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 

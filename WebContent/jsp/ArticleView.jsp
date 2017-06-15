@@ -3,6 +3,7 @@
 
 <%
 	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
+	String daCercare = (String) request.getAttribute("daCercare");
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
@@ -38,7 +39,8 @@
 			<input type="radio" name="tipo" value="Lente a contatto" autocomplete="off"> Lenti a contatto<br>
 			<div id='daMostrareSeOcchiali'>
 				<form action="article" method='get'>
-					<input type="hidden" name="daCercare" value="O" />
+					<input type="hidden" name="tipo" value="O" />
+					<input type="hidden" name="daCercare" value="<%=daCercare%>" />
 					<label for="marca">Marca:</label> 
 					<select name="marca">
 						<option selected value="">Tutte</option>
@@ -66,7 +68,8 @@
 			</div>
 			<div id='daMostrareSeLentine'>
 				<form action="article" method='get'>
-					<input type="hidden" name="daCercare" value="L" />
+					<input type="hidden" name="tipo" value="L" />
+					<input type="hidden" name="daCercare" value="<%=daCercare%>" />
 					<label for="marca">Marca:</label>
 					<select name="marca">
 						<option selected value="">Tutte</option>
@@ -117,8 +120,8 @@
 						<option value="-8.50">-7.50</option>
 						<option value="-8.00">-8.00</option>
 					</select>
-					<label for="tipo">Tipo:</label>
-					<select name="tipo">
+					<label for="tipologia">Tipo:</label>
+					<select name="tipologia">
 						<option selected value="">Tutte</option>
 						<option value="G">Giornaliere</option>
 						<option value="Q">Quindicinali</option>
