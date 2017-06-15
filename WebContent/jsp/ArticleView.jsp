@@ -40,7 +40,7 @@
 			<div id='daMostrareSeOcchiali'>
 				<form action="article" method='get'>
 					<input type="hidden" name="tipo" value="O" />
-					<input type="hidden" name="daCercare" value="<%=daCercare%>" />
+					<input type="hidden" name="daCercare" <% if(daCercare!=null){%>value="<%=daCercare%>" <%} %>/>
 					<label for="marca">Marca:</label> 
 					<select name="marca">
 						<option selected value="">Tutte</option>
@@ -69,7 +69,7 @@
 			<div id='daMostrareSeLentine'>
 				<form action="article" method='get'>
 					<input type="hidden" name="tipo" value="L" />
-					<input type="hidden" name="daCercare" value="<%=daCercare%>" />
+					<input type="hidden" name="daCercare" <% if(daCercare!=null){%>value="<%=daCercare%>" <%} %>/>
 					<label for="marca">Marca:</label>
 					<select name="marca">
 						<option selected value="">Tutte</option>
