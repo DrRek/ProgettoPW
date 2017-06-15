@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.Cart;
@@ -52,6 +54,17 @@ public class ArticleControl extends HttpServlet {
 					cart = delCart(request, response, cart);
 				else if (action.equalsIgnoreCase("delete"))
 					delete(request, response);
+			}
+			if(action.equalsIgnoreCase("ajax")){
+				response.setContentType("application/json");
+				response.setHeader("Cache-Control", "no-cache");
+				try {
+					String thisa = new Gson().toJson(model.doRetrieveAll("Nome"));
+					response.getWriter().write(thisa);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				return;
 			}
 		}
 		String daCercare = request.getParameter("daCercare");

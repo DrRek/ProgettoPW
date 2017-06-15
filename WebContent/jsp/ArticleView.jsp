@@ -193,7 +193,25 @@
 				}
 			%>
 		</table>
-
+	</div>
+	<div>
+		<br><br>Questo che segue è il primo tentativo di luca di usare ajax<br>Verrà rimosso a breve<br>
+		
+		<input type="button" onClick="loadDoc()" value="primo tentativo">
+		<h6 id="demo"></h6>
+		<script>
+			function loadDoc() {
+				  var xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+				      document.getElementById("demo").innerHTML = this.responseText;
+				    }
+				  };
+				  xhttp.open("GET", "article?action=ajax", true);
+				  xhttp.send();
+			}
+		</script>
+		
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/search-add-validation.js"></script>
