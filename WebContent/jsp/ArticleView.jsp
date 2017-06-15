@@ -50,8 +50,8 @@
 					</select>
 					<label for="prezzoMin">Prezzo:</label> 
 					<div>
-						<input type="text" name="prezzoMin" value="0" />
-						<input type="text" name="prezzoMax" value="Max" />
+						<input type="number" step="0.01" min="0" name="prezzoMin" placeholder="min" />
+						<input type="number" step="0.01" min="0" name="prezzoMax" placeholder="max" />
 					</div>
 					<label for="sesso">Sesso:</label> 
 					<select name="sesso">
@@ -78,8 +78,8 @@
 					</select>
 					<label for="prezzoMin">Prezzo:</label> 
 					<div>
-						<input type="text" name="prezzoMin" value="0" />
-						<input type="text" name="prezzoMax" value="Max" />
+						<input type="number" step="0.01" min="0" name="prezzoMin" placeholder="min" />
+						<input type="number" step="0.01" min="0" name="prezzoMax" placeholder="max" />
 					</div>
 					<label for="gradazione">Gradazione:</label>
 					<select name="gradazione">
@@ -125,9 +125,9 @@
 						<option value="M">Mensili</option>
 					</select>
 					<label for="raggio">Raggio:</label>
-					<input type="text" name="raggio" value="" />
+					<input type="number" min="5"  name="raggio" placeholder="mm" value="" />
 					<label for="diametro">Diametro:</label>
-					<input type="text" name="diametro" value="" />
+					<input type="number" min="10" name="diametro" placeholder="mm" value="" />
 					<label for="colore">Colore:</label>
 					<select name="colore">
 						<option selected value="">Tutte</option>
