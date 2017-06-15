@@ -96,10 +96,10 @@ create table Lentine(
 	NumeroPezziDisponibili decimal(3) not null,
 	Gradazione decimal(4,2) not null,
 	Tipologia char(1),
-	NumeroPezzi decimal(2),
+	NumeroPezziNelPacco decimal(2),
 	Raggio decimal(3,1),
 	Diametro decimal(3,1),
-	colore char(2),
+	Colore char(2),
 	primary key(Nome, Marca, Modello),
 	foreign key (Nome,Marca) references Articolo(Nome,Marca)
 );

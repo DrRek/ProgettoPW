@@ -61,25 +61,29 @@ public class ArticleControl extends HttpServlet {
 				
 				String tipo = request.getParameter("tipo");
 				String sort = request.getParameter("sort");
-				if(tipo==null){
-					request.setAttribute("articoli", model.doRetrieve(daCercare));
-				} else if(tipo.equalsIgnoreCase("O")){
-					String marca = request.getParameter("marca");
-					String prezzoMin = request.getParameter("prezzoMin");
-					String prezzoMax = request.getParameter("prezzoMax");
-					String sesso = request.getParameter("sesso");
-					String colore = request.getParameter("colore");
-					//request.setAttribute("articoli", model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort));
-				} else if(tipo.equalsIgnoreCase("O")){
-					String marca = request.getParameter("marca");
-					String prezzoMin = request.getParameter("prezzoMin");
-					String prezzoMax = request.getParameter("prezzoMax");
-					String gradazione = request.getParameter("gradazione");
-					String tipologia = request.getParameter("tipologia");
-					String raggio = request.getParameter("raggio");
-					String diametro = request.getParameter("diametro");
-					String colore = request.getParameter("colore");
-				//	request.setAttribute("articoli", model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, sort));
+				try{
+					if(tipo==null){
+						request.setAttribute("articoli", model.doRetrieve(daCercare));
+					} else if(tipo.equalsIgnoreCase("O")){
+						String marca = request.getParameter("marca");
+						String prezzoMin = request.getParameter("prezzoMin");
+						String prezzoMax = request.getParameter("prezzoMax");
+						String sesso = request.getParameter("sesso");
+						String colore = request.getParameter("colore");
+						request.setAttribute("articoli", model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort));
+					} else if(tipo.equalsIgnoreCase("O")){
+						String marca = request.getParameter("marca");
+						String prezzoMin = request.getParameter("prezzoMin");
+						String prezzoMax = request.getParameter("prezzoMax");
+						String gradazione = request.getParameter("gradazione");
+						String tipologia = request.getParameter("tipologia");
+						String raggio = request.getParameter("raggio");
+						String diametro = request.getParameter("diametro");
+						String colore = request.getParameter("colore");
+						request.setAttribute("articoli", model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, sort));
+					}
+				} catch (SQLException e){
+					e.printStackTrace();
 				}
 			}else{
 				try {
@@ -104,16 +108,6 @@ public class ArticleControl extends HttpServlet {
 
 
 	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
-		
-		try {
-		
-			model.doDelete(nome, marca);
-		
-		} catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
 	}
 
 	private Cart addCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
@@ -148,19 +142,4 @@ public class ArticleControl extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleDescriptionView.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	/*private void searchByType(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String type = request.getParameter("type");
-		
-		try {
-			
-			request.setAttribute("articoli",model.doRetrieveByType(type));
-			
-		} catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleView.jsp");
-		dispatcher.forward(request, response);
-	}*/
 }

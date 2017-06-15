@@ -1,14 +1,11 @@
 package it.quattrocchi.model;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import it.quattrocchi.support.CreditCardBean;
-import it.quattrocchi.support.OrderBean;
 import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 

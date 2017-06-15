@@ -2,10 +2,7 @@ package it.quattrocchi.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
@@ -88,7 +85,6 @@ public class CheckoutControl extends HttpServlet {
 			try {
 				model.doSave(ordine);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -119,6 +115,18 @@ public class CheckoutControl extends HttpServlet {
 		ArrayList<CartArticle> cArticle = cart.getProducts();
 		ArticleBean bean = new ArticleBean();
 		
+		for(CartArticle c : cArticle){
+			try{
+			ArticleBean art = aModel.doRetrieveByKey(c.getArticle().getNome(), c.getArticle().getMarca());
+			if(art.getTipo().equalsIgnoreCase("o")){
+				art.setNumeroPezziDisponibili(art.getNumeroPezziDisponibili()-c.getQuantity());
+			}
+			aModel.doSave(art);
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		
 		for(int i = 0; i<cArticle.size(); i++) {
 			try {
 			bean = aModel.doRetrieveByKey(cArticle.get(i).getArticle().getNome(), cArticle.get(i).getArticle().getMarca());
@@ -129,7 +137,7 @@ public class CheckoutControl extends HttpServlet {
 			int num = bean.getNumeroPezziDisponibili() - cArticle.get(i).getQuantity();
 			bean.setNumeroPezziDisponibili(num);		
 			try {
-				aModel.doUpdate(bean);
+				aModel.doSave(bean);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

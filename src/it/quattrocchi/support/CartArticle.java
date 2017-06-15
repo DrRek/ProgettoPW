@@ -1,6 +1,6 @@
 package it.quattrocchi.support;
 
-public class CartArticle extends ArticleBean{
+public class CartArticle{
 	
 	public CartArticle(ArticleBean a, int n){
 		numero = n;
@@ -38,7 +38,7 @@ public class CartArticle extends ArticleBean{
 		return numero;
 	}
 	
-	public float getPrezzo(){
+	public double getPrezzo(){
 		return (float)Math.floor((articolo.getPrezzo()*numero) * 100) / 100;
 	}
 	

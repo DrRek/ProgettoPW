@@ -57,7 +57,7 @@
 					</div>
 					<label for="sesso">Sesso:</label> 
 					<select name="sesso">
-						<option selected value="U">Unisex</option>
+						<option selected value="any">Any</option>
 						<option value="M">Man</option>
 						<option value="F">Woman</option>
 					</select>
@@ -166,7 +166,7 @@
 			%>
 			<tr>
 				<td>
-					<a href="article?action=description&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">
+					<a href="articlePage?nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">
 					<%=bean.getNome()%>
 					</a> 
 				</td>
@@ -195,7 +195,7 @@
 
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="js/search.js"></script>
+	<script src="js/search-add-validation.js"></script>
 </body>
 
 </html>

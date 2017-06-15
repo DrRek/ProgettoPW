@@ -44,7 +44,7 @@
 				<li><a href="article?action=category&type=lente">Lentine</a>
 				<li>
 					<form name="ricerca" target="article" method="get">
-						<input name="daCercare" placeholder="Cerca" type="text" />
+						<input name="daCercare" placeholder="Cerca" type="text"/>
 					</form>
 			</ul>
 				<ul class="nav navbar-nav navbar-right">

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.ArticleModel;
-import it.quattrocchi.model.CheckoutModel;
 import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.model.PrescriptionModel;
 import it.quattrocchi.support.ArticleBean;
@@ -96,7 +95,7 @@ public class UserControl extends HttpServlet{
 			bean.setTipo(tipo);
 			bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
 			bean.setPrezzo(prezzo);
-			bean.setGradazione(gradazione);
+			//bean.setGradazione(gradazione);
 
 			model.doSave(bean);
 		}
@@ -105,9 +104,9 @@ public class UserControl extends HttpServlet{
 			bean.setTipo(tipo);
 			bean.setNumeroPezziDisponibili(numeroPezziDisponibili);
 			bean.setPrezzo(prezzo);
-			bean.setGradazione(gradazione);
+			//bean.setGradazione(gradazione);
 
-			model.doUpdate(bean); 
+			//model.doUpdate(bean); 
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");

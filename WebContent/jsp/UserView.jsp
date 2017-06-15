@@ -270,30 +270,121 @@
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 
 		<h3>Insert</h3>
-		<form action="user" method="post">
-
-			<input type="hidden" name="action" value="insert"> <label
-				for="nome">Nome:</label><br> <input name="nome" type="text"
-				maxlength="40" required placeholder="inserisci il nome"><br>
-
-			<label for="marca">Marca:</label><br> <input type="text"
-				name="marca" maxlength="20" required
-				placeholder="inserisci la marca"></input><br> <label for="tipo">Tipo:</label><br>
-			<select name="tipo">
-				<option value="Lente a contatto">Lente a contatto</option>
-				<option value="Occhiale">Occhiale</option>
-			</select><br> <label for="numeroPezziDisponibili">Disponibilità:</label><br>
-			<input name="numeroPezziDisponibili" type="number" min="1" value="1"
-				required><br> <label for="prezzo">Prezzo:</label><br>
-			<input name="prezzo" type="number" min="0,01" value="0,00" required><br>
-
-			<input type="submit" value="Send"><input type="reset"
-				value="Reset">
-
-		</form>
+		<div id='daMettereASinistra'>
+			<input type="radio" name="tipo" value="Occhiale" autocomplete="off"> Occhiali<br>
+			<input type="radio" name="tipo" value="Lente a contatto" autocomplete="off"> Lenti a contatto<br>
+			<div id='daMostrareSeOcchiali'>
+				<form action="article" method='get'>
+					<input type="hidden" name="action" value="insert" />
+					<input type="hidden" name="tipo" value="O" />
+					<label for="nome">Nome:</label> 
+					<input type="text" name="nome" />
+					<label for="marca">Marca:</label> 
+					<select name="marca">
+						<option selected value="">Tutte</option>
+						<option value="GreenVision">GreenVision</option>
+						<option value="Lindberg">Lindberg</option>
+						<option value="Oakley">Oakley</option>
+						<option value="Persol">Persol</option>
+						<option value="RayBan">RayBan</option>
+					</select>
+					<label for="prezzo">Prezzo:</label> 
+					<input type="number" step="0.01" min="0" name="prezzo" placeholder="Prezzo" />
+					<label for="sesso">Sesso:</label> 
+					<select name="sesso">
+						<option selected value="any">Any</option>
+						<option value="M">Man</option>
+						<option value="F">Woman</option>
+					</select>
+					<label for="descrizione">Descrizione:</label> 
+					<input type="text" name="descrizione" />
+					<label for="numeroPezziDisponibili">Numero pezzi disponibili:</label> 
+					<input type="number" step="1" min="1" name="numeroPezziDisponibili" placeholder="Numero Pezzi Disponibili" />
+					<input type='submit' value='Insert!' />
+				</form>
+			</div>
+			<div id='daMostrareSeLentine'>
+				<form action="article" method='get'>
+					<input type="hidden" name="action" value="insert" />
+					<input type="hidden" name="tipo" value="L" />
+					<label for="nome">Nome:</label> 
+					<input type="text" name="nome" />
+					<label for="marca">Marca:</label>
+					<select name="marca">
+						<option selected value="">Tutte</option>
+						<option value="Acuvue">Acuvue</option>
+						<option value="Alcon">Alcon</option>
+						<option value="Biotrue">Biotrue</option>
+						<option value="Frequency">Frequency</option>
+						<option value="GreenVision">GreenVision</option>
+					</select>
+					<label for="prezzo">Prezzo:</label> 
+					<input type="number" step="0.01" min="0" name="prezzo" placeholder="Prezzo" />
+					<label for="gradazione">Gradazione:</label>
+					<select name="gradazione">
+						<option value="+8.00">+8.00</option>
+						<option value="+7.50">+7.50</option>
+						<option value="+7.00">+7.00</option>
+						<option value="+6.50">+6.50</option>
+						<option value="+6.00">+6.00</option>
+						<option value="+5.50">+5.50</option>
+						<option value="+5.00">+5.00</option>
+						<option value="+4.50">+4.50</option>
+						<option value="+4.00">+4.00</option>
+						<option value="+3.50">+3.50</option>
+						<option value="+3.00">+3.00</option>
+						<option value="+2.50">+2.50</option>
+						<option value="+2.00">+2.00</option>
+						<option value="+1.50">+1.50</option>
+						<option value="+1.00">+1.00</option>
+						<option value="+0.50">+0.50</option>
+						<option selected value="0">±0.00</option>
+						<option value="-0.50">-0.50</option>
+						<option value="-1.00">-1.00</option>
+						<option value="-1.50">-1.50</option>
+						<option value="-2.00">-2.00</option>
+						<option value="-2.50">-2.50</option>
+						<option value="-3.00">-3.00</option>
+						<option value="-3.50">-3.50</option>
+						<option value="-4.00">-4.00</option>
+						<option value="-4.50">-4.50</option>
+						<option value="-5.00">-5.00</option>
+						<option value="-5.50">-5.50</option>
+						<option value="-6.00">-6.00</option>
+						<option value="-6.50">-6.50</option>
+						<option value="-7.00">-7.00</option>
+						<option value="-8.50">-7.50</option>
+						<option value="-8.00">-8.00</option>
+					</select>
+					<label for="tipologia">Tipo:</label>
+					<select name="tipologia">
+						<option value="G">Giornaliere</option>
+						<option value="Q">Quindicinali</option>
+						<option value="M">Mensili</option>
+					</select>
+					<label for="raggio">Raggio:</label>
+					<input type="number" min="5"  name="raggio" placeholder="mm" value="" />
+					<label for="diametro">Diametro:</label>
+					<input type="number" min="10" name="diametro" placeholder="mm" value="" />
+					<label for="colore">Colore:</label>
+					<select name="colore">
+						<option value="Ve">Verdi</option>
+						<option value="Bl">Blu</option>
+						<option value="Ma">Marroni</option>
+						<option value="Ve">Verdi</option>
+						<option value="Vi">Viola</option>
+						<option value="Ro">Rosso</option>
+						<option value="Pa">Particolari</option>
+					</select>
+					<input type='submit' value='Insert!' />
+				</form>
+			</div>
+		</div>
 	</div>
 	<%
 		}
 	%>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/search-add-validation.js"></script>
 </body>
 </html>

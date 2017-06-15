@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.CreditCardBean;
 import it.quattrocchi.support.UserBean;
 
