@@ -27,6 +27,9 @@
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -146,7 +149,6 @@
 				</form>
 			</div>
 	</div>
-	
 	<div class="container">
 		<h2>Products</h2>
 		<table class="table-bordered">
@@ -182,7 +184,7 @@
 				</td>
 			</tr>
 			<%		
-					}
+			}
 				} else {
 			%>
 			<tr>
@@ -192,9 +194,7 @@
 				}
 			%>
 		</table>
-
 	</div>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/search-add-validation.js"></script>
 </body>
 
