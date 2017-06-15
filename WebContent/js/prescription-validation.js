@@ -18,12 +18,15 @@ function presValidation() {
 	var pdSX = $("input[name='pdSX']");
 	var pdDX =  $("input[name='pdSX']");
 	
-	if(isNumber(sferaSX,-10,10, "#sferaSX") && isNumber(sferaDX,-10,10,"#sferaDX") && isNumber(asseSX,0,180, "#asseSX")
-			&& isNumber(asseDX,0,180,"#asseDX") && isNumber(cilindroSX,-10,10, "#cilindroSX") && isNumber(cilindroDX,-10,10, "#cilindroDX")
-			&& isNumber(addVicinanza,-10,10, "#addVicinanza") && isNumber(prismaOrizSX,-10,10, "#prismaOrizSX") && isNumber(prismaOrizDX,-10,10, "#prismaOrizDX")
-			&& isNumber(prismaVertSX,-10,10, "#prismaVertSX") && isNumber(prismaVertDX,-10,10, "#prismVertDX") && isNumber(pdSX,-10,10, "#pdSX")
-			&& isNumber(pdDX,-10,10, "#pdDX") && allLetter(tipoP, "#tipoP") && allLetter(prismaOrizSXBD, "#prismaOrizSXBD")
-			&& allLetter(prismaOrizDXBD, "#prismaOrizDXBD")  && allLetter(prismaVertSXBD, "#prismaVertSXBD")  && allLetter(prismaVertDXBD, "#prismaVertDXBD"))
+	if(allLetter(tipoP, "#tipoP") && isNumber(sferaSX,-10,10, "#sferaSX") 
+			&& isNumber(cilindroSX,-10,10, "#cilindroSX")  && isNumber(asseSX,0,180, "#asseSX") 
+			&& isNumber(sferaDX,-10,10,"#sferaDX")  && isNumber(cilindroDX,-10,10, "#cilindroDX") 
+			&& isNumber(asseDX,0,180,"#asseDX")&& isNumber(addVicinanza,-10,10, "#addVicinanza") 
+			&& isNumber(prismaOrizSX,-10,10, "#prismaOrizSX") && allLetter(prismaOrizSXBD, "#prismaOrizSXBD") 
+			&& isNumber(prismaOrizDX,-10,10, "#prismaOrizDX") && allLetter(prismaOrizDXBD, "#prismaOrizDXBD")
+			&& isNumber(prismaVertSX,-10,10, "#prismaVertSX")  && allLetter(prismaVertSXBD, "#prismaVertSXBD") 
+			&& isNumber(prismaVertDX,-10,10, "#prismVertDX") && allLetter(prismaVertDXBD, "#prismaVertDXBD") 
+			&& isNumber(pdSX,-10,10, "#pdSX") && isNumber(pdDX,-10,10, "#pdDX"))
 		return true;
 	else
 		return false;
@@ -32,7 +35,7 @@ function presValidation() {
 function isNumber(input, min, max, id)
 {
 	var numbers = /^[0-9]+$/;
-	if(uzip.val().match(numbers))
+	if(input.val().match(numbers))
 	{
 		if(input >= min && input <= max)
 			return true
