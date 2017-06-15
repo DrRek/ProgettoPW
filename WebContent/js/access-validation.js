@@ -25,7 +25,10 @@ function user_validation(uid,mx,my)
 		uid.focus();
 		return false;
 	}
-	return true;
+	{
+		$("#user").empty();
+		return true;
+	}
 }
 function pass_validation(pass,mx,my)
 {
@@ -36,13 +39,19 @@ function pass_validation(pass,mx,my)
 		pass.focus();
 		return false;
 	}
-	return true;
+	else{
+		$("#pass").empty();
+		return true;
+	}
 }
 function allLetter(uname)
 { 
 	var letters = /^[A-Za-z]+$/;
 	if(uname.val().match(letters))
+	{
+		$("#nome").empty();
 		return true;
+	}
 	else
 	{
 		$("#nome").html("È consentito usare solo caratteri alfabetici");
@@ -54,7 +63,10 @@ function alphanumeric(uadd)
 { 
 	var letters = /^[0-9a-zA-Z ]+$/;
 	if(uadd.val().match(letters))
+	{
+		$("#indirizzo").empty();
 		return true;
+	}
 	else
 	{
 		$("#indirizzo").html("L'indirizzo può solo contenere caratteri alfanumerici");
@@ -70,14 +82,19 @@ function countryselect(ucountry)
 		ucountry.focus();
 		return false;
 	}
-	else
+	else{
+		$("#stato").empty();
 		return true;
+	}
 }
 function allnumeric(ucap)
 { 
 	var numbers = /^[0-9]+$/;
 	if(uzip.val().match(numbers))
+	{
+		$("#cap").empty();
 		return true;
+	}
 	else
 	{
 		$("#cap").html("Il codice postale può contenere solo numeri");
@@ -89,7 +106,10 @@ function ValidateEmail(uemail)
 {
 	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	if(uemail.val().match(mailformat))
+	{
+		$("#email").empty();
 		return true;
+	}
 	else
 	{
 		$("#email").html("Email non valida");

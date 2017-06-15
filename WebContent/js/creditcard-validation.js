@@ -29,8 +29,10 @@ function numcc_validation(numcc)
 		numcc.focus();
 		return false;
 	}
-	$("#numcc").html("");
-	return true;
+	else{
+		$("#numcc").empty();
+		return true;
+	}
 }
 
 function intestatario_validation(intestatario)
@@ -41,14 +43,16 @@ function intestatario_validation(intestatario)
 		intestatario.focus();
 		return false;
 	}
-	$("#intestatario").html("");
-	return true;
+	else{
+		$("#intestatario").empty();
+		return true;
+	}
 }
 function circuito_validation(circuito)
 { 
 	if(circuito.val().toLowerCase() == "visa" || circuito.val().toLowerCase() == "mastercard" || circuito.val().toLowerCase() == "american express")
 	{
-		$("#circuito").html( "");
+		$("#circuito").empty();
 		return true;
 	}
 	else
@@ -62,7 +66,7 @@ function circuito_validation(circuito)
 function scadenza_validation(scadenza){
 	  var regEx = /^\d{4}-\d{2}-\d{2}$/;
 	  if(scadenza.val().match(regEx)){
-		  $("#scadenza").html("");
+		  $("#scadenza").empty();
 		  return true;
 	  }
 	  $("#scadenza").html("Il formato della data non è valido. (yyyy-MM-dd)");	//TO DO: deve controllare date impossibili e date passate
@@ -74,7 +78,7 @@ function cvv_validation(cvv)
 	var numbers = /^[0-9]+$/;
 	if((cvv.val().match(numbers)) && (cvv.val().length == 3))
 	{
-		$("#cvv").html("");
+		$("#cvv").empty();
 		return true;
 	}
 	else

@@ -34,11 +34,13 @@ function presValidation() {
 
 function isNumber(input, min, max, id)
 {
-	var numbers = /^[0-9]+$/;
+	var numbers = /^-?\d+(\.\d+)?$/;
 	if(input.val().match(numbers))
 	{
-		if(input >= min && input <= max)
+		if(input.val() >= min && input.val() <= max){
+			$(id).empty();
 			return true
+		}
 		else
 		{
 			$(id).html("I valori consentiti sono tra"+ min + " e " + max);
@@ -58,7 +60,10 @@ function allLetter(input, id)
 { 
 	var letters = /^[A-Za-z]+$/;
 	if(input.val().match(letters))
+	{
+		$(id).empty();
 		return true;
+	}
 	else
 	{
 		$(id).html("È consentito usare solo caratteri alfabetici");

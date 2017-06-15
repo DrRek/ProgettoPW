@@ -81,8 +81,12 @@
 				if ($("select[name='carta']").val() == "default") {
 					$("#warning").html("selezionare una carta");
 					return false
-				} else
+				} 
+				else
+				{
+					$("#warning").empty();
 					return true;
+				}
 			}
 		</script>
 
