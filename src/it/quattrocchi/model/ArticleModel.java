@@ -111,48 +111,6 @@ public class ArticleModel {
 		}
 		return (result != 0);
 	}
-
-	public ArticleBean doRetrieveByKey(String nome, String marca) throws SQLException{
-		
-		Connection conn = null;
-		PreparedStatement stm  = null;
-		
-		ArticleBean bean = null;
-		
-		String query = "SELECT * FROM " + TABLE_NAME + " WHERE nome = ? and marca = ?;";
-		
-		try {
-			conn = DriverManagerConnectionPool.getConnection();
-			stm = conn.prepareStatement(query);
-			stm.setString(1, nome);
-			stm.setString(2, marca);
-			
-			ResultSet rs = stm.executeQuery();
-			
-			while(rs.next()) {
-				bean = new ArticleBean();
-				bean.setNome(rs.getString("nome"));
-				bean.setMarca(rs.getString("marca"));
-				bean.setTipo(rs.getString("tipo"));
-				bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
-				bean.setPrezzo(rs.getFloat("prezzo"));
-				bean.setImg1(rs.getString("img1"));
-				bean.setImg2(rs.getString("img2"));
-				bean.setImg3(rs.getString("img3"));	
-			}
-		}
-		
-		finally {
-			try {
-				if (stm != null)
-					stm.close();
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(conn);
-			}
-		}
-		
-		return bean;
-	}
 	
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{
 		Connection connection = null;
@@ -314,14 +272,16 @@ public class ArticleModel {
 		return products;
 	}
 
-	public Object doRetrieveGlasses(String daCercare, String marca, String prezzoMin, String prezzoMax, String sesso,
-			String colore, String sort) {
-		// TODO Auto-generated method stub
+	public Collection<ArticleBean> doRetrieveGlasses(String daCercare, String marca, String prezzoMin, String prezzoMax, String sesso, String colore, String sort) {
+		Connection conn = null;
+		PreparedStatement stm = null;
+		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
+		String sql = "select * from articoli right join occhiale on articolo.nome=occhiale.nome and articolo.marca=occhiale.marca where";
+		sql+=
 		return null;
 	}
 
-	public Object doRetrieveContactLenses(String daCercare, String marca, String prezzoMin, String prezzoMax,
-			String gradazione, String tipologia, String raggio, String diametro, String colore, String sort) {
+	public Object doRetrieveContactLenses(String daCercare, String marca, String prezzoMin, String prezzoMax, String gradazione, String tipologia, String raggio, String diametro, String colore, String sort) {
 		// TODO Auto-generated method stub
 		return null;
 	}
