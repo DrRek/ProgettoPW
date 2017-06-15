@@ -7,6 +7,14 @@ LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Articolo
 	INTO TABLE Articolo
 		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
 	();
+LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Occhiale.csv'
+	INTO TABLE Occhiale
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+	();
+LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Lentine.csv'
+	INTO TABLE Lentine
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+	();
 LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Amministratore.csv'
 	INTO TABLE Amministratore
 		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'

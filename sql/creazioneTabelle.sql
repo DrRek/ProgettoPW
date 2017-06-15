@@ -89,14 +89,14 @@ create table Occhiale(
 
 create table Lentine(
 	Nome varchar(40) not null,
-    Modello varchar(10) not null,
+    Modello varchar(20) unique,
     NumeroPezziDisponibili decimal(3) not null,
     Gradazione decimal(4,2) not null,
     Tipologia char(1),
     NumeroPezzi decimal(2),
     Raggio decimal(3,1),
     Diametro decimal(3,1),
-    primary key(Nome, Tipo),
+    primary key(Nome, Modello),
     foreign key (Nome) references Articolo(Nome)
 );
 
@@ -107,7 +107,7 @@ create table Appartenenza(
     Modello varchar(10),
     PrezzoVendita decimal (6,2) not null,
     primary key(Ordine, Articolo),
-    foreign key (Ordine) references Ordine(Codice),
+    foreign key(Ordine) references Ordine(Codice),
     foreign key(Articolo) references Articolo(Nome),
     foreign key(Prescrizione) references Prescrizione(Codice),
     foreign key(Modello) references Lentine(Modello)
