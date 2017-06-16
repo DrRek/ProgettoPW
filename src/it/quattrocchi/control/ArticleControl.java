@@ -2,7 +2,6 @@ package it.quattrocchi.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -82,6 +81,9 @@ public class ArticleControl extends HttpServlet {
 					String sesso = request.getParameter("sesso");
 					String colore = request.getParameter("colore");
 					request.setAttribute("articoli", model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort));
+					response.setContentType("application/json");
+					response.setHeader("Cache-Control", "no-cache");
+					response.getWriter().write(new Gson().toJson(model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort)));
 				} else if(tipo.equalsIgnoreCase("L")){
 					String marca = request.getParameter("marca");
 					String prezzoMin = request.getParameter("prezzoMin");
@@ -92,6 +94,9 @@ public class ArticleControl extends HttpServlet {
 					String diametro = request.getParameter("diametro");
 					String colore = request.getParameter("colore");
 					request.setAttribute("articoli", model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, sort));
+					response.setContentType("application/json");
+					response.setHeader("Cache-Control", "no-cache");
+					response.getWriter().write(new Gson().toJson(model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, sort)));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
