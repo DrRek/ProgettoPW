@@ -2,6 +2,8 @@ package it.quattrocchi.control;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.Cart;
@@ -38,10 +39,8 @@ public class ArticleControl extends HttpServlet {
 			cart = new Cart();
 			request.getSession().setAttribute("cart", cart);
 		}
-		
 		//In base a questo parametro viene deciso il da farsi
 		String action = request.getParameter("action");
-		
 		//TO DO: mi sa che questo non ha più senso di esistere, poi si vede
 		if (action != null){
 			if (action.equalsIgnoreCase("description")){

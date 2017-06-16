@@ -207,8 +207,10 @@
 						    url: "article",
 						    data: { action: "ajax"},
 						    dataType: "json",
-						    success: function (data) {
-						  		alert(data);
+						    success: function (responseText) {
+						    	$.each(responseText, function(i, articleObject) {
+				    	 			$("#demo").append(articleObject.nome + "<br>");
+				    			});
 						    }
 
 						});
