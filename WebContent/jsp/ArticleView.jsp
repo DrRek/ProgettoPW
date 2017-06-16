@@ -196,16 +196,23 @@
 			value="primo tentativo">
 		<h6 id="demo"></h6>
 		<script>
-			(document).ready(function() {
-				  $("#test").click(function(event){
-					  $.get('article', {"action":"ajax"}, function(resp) {
-				     $.each(resp, function(i, articleObject) {
-				    	 $("#demo"),append(i+1, "." + articleObject.nome + "<br>");
-				    		 });
-				     }).fail(function(){
-				    	 $("#demo").html("richiesta fallita")});
-				  };
-			);
+			(document).ready(function() 
+			{
+				  $("#test").click(function(event)
+					{
+					  	$.get('article', {"action":"ajax"}, function(resp) 
+					  	{
+				    		$.each(resp, function(i, articleObject) 
+				    		{
+				    	 		$("#demo").append(i+1, "." + articleObject.nome + "<br>");
+				    		});
+						  
+				    	}).fail(function()
+				    	{
+				    	 	$("#demo").html("richiesta fallita")
+				    	});
+				  	});
+			});
 		</script>
 
 	</div>
