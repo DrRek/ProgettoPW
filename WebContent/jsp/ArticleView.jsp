@@ -195,7 +195,30 @@
 		rimosso a breve<br> <input type="button" id="test"
 			value="primo tentativo">
 		<h6 id="demo"></h6>
+<<<<<<< HEAD
 		<script src="js/test-ajax.js"></script>
+=======
+		<script>
+		
+		
+			$(document).ready(function() 
+			{
+				  $("#test").click(function(event)
+					{
+					  $.ajax({
+						    type: "GET",
+						    url: "article",
+						    data: { action: "ajax"},
+						    dataType: "json",
+						    success: function (data) {
+						  		 alert(data);
+						    }
+
+						});
+				  	});
+			});
+		</script>
+>>>>>>> origin/master
 
 	</div>
 	<script src="js/search-add-validation.js"></script>
