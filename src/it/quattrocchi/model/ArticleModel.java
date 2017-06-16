@@ -27,10 +27,10 @@ public class ArticleModel {
 			stm.setString(2, art.getMarca());
 
 			ResultSet rs = stm.executeQuery();
-			rs.close();
-			stm.close();
 			
 			if(rs.next()){ //In questo caso bisogna fare l'update
+				rs.close();
+				stm.close();
 				query = "update articolo set Tipo=?, Prezzo=?, img1=? where Nome=? and Marca=?;";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, art.getTipo());
@@ -72,6 +72,8 @@ public class ArticleModel {
 					}
 				}
 			} else{ //Se bisogna crearlo
+				rs.close();
+				stm.close();
 				query = "insert into articolo values(?,?,?,?,?);";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, art.getNome());
@@ -83,7 +85,7 @@ public class ArticleModel {
 				stm.close();
 				
 				if(art.getTipo().equalsIgnoreCase("O")){
-					query = "insert into occhaile values(?,?,?,?,?,?,?);";
+					query = "insert into occhiale values(?,?,?,?,?,?,?);";
 					stm = conn.prepareStatement(query);
 					stm.setString(1, art.getNome());
 					stm.setString(2, art.getMarca());
@@ -188,14 +190,13 @@ public class ArticleModel {
 				boolean isFirst=true;
 				while (rs.next()) {
 					if(isFirst){
-						bean.setTipologia(rs.getString("Tipologia"));
 						bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
 						bean.setRaggio(rs.getDouble("Raggio"));
 						bean.setDiametro(rs.getDouble("Diametro"));
-						bean.setLentine(rs.getString("Modello"), rs.getDouble("Gradazione"), rs.getDouble("Raggio"), rs.getDouble("Diametro"), rs.getInt("NumeroPezziDisponibili"), rs.getString("Colore"));
+						bean.setLentine(rs.getString("Modello"), rs.getDouble("Gradazione"), rs.getDouble("Raggio"), rs.getDouble("Diametro"), rs.getInt("NumeroPezziDisponibili"), rs.getString("Colore"), rs.getString("tipologia"));
 						isFirst=false;
 					} else {
-						bean.setLentine(rs.getString("Modello"), rs.getDouble("Gradazione"), rs.getDouble("Raggio"), rs.getDouble("Diametro"), rs.getInt("NumeroPezziDisponibili"), rs.getString("Colore"));
+						bean.setLentine(rs.getString("Modello"), rs.getDouble("Gradazione"), rs.getDouble("Raggio"), rs.getDouble("Diametro"), rs.getInt("NumeroPezziDisponibili"), rs.getString("Colore"), rs.getString("tipologia"));
 					}
 				}
 				stm.close();
@@ -348,7 +349,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		String sql = "select * from articolo right join lentine on articolo.nome=lentine.nome and articolo.marca=lentine.marca";
+		String sql = "select distinct articolo.nome, articolo.marca, tipo, prezzo, img1  from articolo right join lentine on articolo.nome=lentine.nome and articolo.marca=lentine.marca";
 		if(daCercare.equalsIgnoreCase("null"))daCercare=null;
 		sql+= " where ((articolo.Nome LIKE '%"+daCercare+"%') or (articolo.Marca LIKE '%"+daCercare+"%'))";
 		if(marca!=null&&!marca.equalsIgnoreCase("")){
