@@ -208,7 +208,7 @@
 						    data: { action: "ajax"},
 						    dataType: "json",
 						    success: function (data) {
-						  		 alert(data);
+						  		alert(data);
 						    }
 
 						});
