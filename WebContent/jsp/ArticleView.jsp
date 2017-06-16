@@ -195,25 +195,7 @@
 		rimosso a breve<br> <input type="button" id="test"
 			value="primo tentativo">
 		<h6 id="demo"></h6>
-		<script>
-			(document).ready(function() 
-			{
-				  $("#test").click(function(event)
-					{
-					  	$.get('article', {"action":"ajax"}, function(resp) 
-					  	{
-				    		$.each(resp, function(i, articleObject) 
-				    		{
-				    	 		$("#demo").append(i+1, "." + articleObject.nome + "<br>");
-				    		});
-						  
-				    	}).fail(function()
-				    	{
-				    	 	$("#demo").html("richiesta fallita")
-				    	});
-				  	});
-			});
-		</script>
+		<script src="js/test-ajax.js"></script>
 
 	</div>
 	<script src="js/search-add-validation.js"></script>
