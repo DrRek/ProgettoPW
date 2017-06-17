@@ -21,12 +21,12 @@ $(document).ready(function() {
 			$(".specificiPerOcchiali").hide();
 			$(".specificiPerLentine").show();
 		}
-	})
+	});
 	
 	$("#submito").click(function(event){
 		//qui dovrei validare gli input
 		alert("cli");
-		var tipo = $('select[name=tipo]').val();
+		/*var tipo = $('select[name=tipo]').val();
 		var daCercare = $('input[name=daCercare]').val();
 		var marca = $('select[name=marca]').val();
 		var prezzoMin = $('input[name=prezzoMin]').val();
@@ -79,6 +79,6 @@ $(document).ready(function() {
 	    			});
 				}
 			})
-		}
+		}*/
 	});
 });
