@@ -26,44 +26,35 @@
 </head>
 
 <body>
-		<%@ include file="../jsp/header.jsp"%><br>
-		Pagina di esempio, per ora mostra i dati temporanei degli articoli<br>
-		in testa andrebbe mostrata l'immagine figa<br><br>
-		Nome: <%=bean.getNome() %><br>
-		Marca: <%=bean.getMarca() %><br>
-		Prezzo: <%=bean.getPrezzo() %><br>
-		<% if (bean.getTipo().equalsIgnoreCase("O")){%>
-			Descrizione: <%=bean.getDescrizione() %><br>
-			Sesso: <%=bean.getSesso() %><br>
-			Numero pezzi disponibili: <%=bean.getNumeroPezziDisponibili() %><br>
-		<%}else{ %>
-			Tipologia: <%=bean.getTipologia() %><br>
-			Pezzi per scatola: <%=bean.getNumeroPezziNelPacco() %><br>
-			<table class="table-bordered">
-				<thead>
-					<tr>
-						<th>Modello</th>
-						<th># pezzi disp</th>
-						<th>Gradazione</th>
-						<th>Raggio</th>
-						<th>Diametro</th>
-						<th>Colore</th>
-					</tr>
-				</thead>
-			<%for(SingleContactLenseBean e : bean.getLentine()){%>
-				<tr>
-					<td><%=e.getModello()%></td>
-					<td><%=e.getDisponibilita()%></td>
-					<td><%=e.getGradazione()%></td>
-					<td><%=e.getRaggio()%></td>
-					<td><%=e.getDiametro()%></td>
-					<td><%=e.getColore()%></td>
-				</tr>
-			<%}%>
-			</table>
-		<%}%>
-			
-			
+	<%@ include file="../jsp/header.jsp"%><br>
+	Pagina di esempio, per ora mostra i dati temporanei degli articoli
+	<br> in testa andrebbe mostrata l'immagine figa
+	<br>
+	<br> Nome:
+	<%=bean.getNome() %><br> Marca:
+	<%=bean.getMarca() %><br> Prezzo:
+	<%=bean.getPrezzo() %><br>
+	<% if (bean.getTipo().equalsIgnoreCase("O")){%>
+	Descrizione:
+	<%=bean.getDescrizione() %><br> Sesso:
+	<%=bean.getSesso() %><br> Numero pezzi disponibili:
+	<%=bean.getNumeroPezziDisponibili() %><br>
+	<%}else{ %>
+	Tipologia:
+	<%=bean.getTipologia() %><br> Pezzi per scatola:
+	<%=bean.getNumeroPezziNelPacco() %><br>
+	<table class="table-bordered">
+		<select>
+			<%int i = 0;
+			for(SingleContactLenseBean e : bean.getLentine()){%>
+			<option value="<%=e.getModello()%>"><%=e.getGradazione()%></option>
 
+			<%
+			i++;
+			}%>
+		</select>
+		<a id="cart">add to cart</a>
+		<%}%>
+	
 </body>
 </html>
