@@ -27,33 +27,54 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%><br>
-	Pagina di esempio, per ora mostra i dati temporanei degli articoli
-	<br> in testa andrebbe mostrata l'immagine figa
-	<br>
-	<br> Nome:
-	<%=bean.getNome() %><br> Marca:
-	<%=bean.getMarca() %><br> Prezzo:
-	<%=bean.getPrezzo() %><br>
+	<h1 id="nome"><%=bean.getNome() %></h1>
+	<h2 id="marca"><%=bean.getMarca() %></h2>
+	<h4>Prezzo:</h4>
+	<p><%=bean.getPrezzo() %></p>
 	<% if (bean.getTipo().equalsIgnoreCase("O")){%>
-	Descrizione:
-	<%=bean.getDescrizione() %><br> Sesso:
-	<%=bean.getSesso() %><br> Numero pezzi disponibili:
-	<%=bean.getNumeroPezziDisponibili() %><br>
+	<h4>Descrizione:</h4>
+	<p><%=bean.getDescrizione() %></p>
+	<h4>Sesso:</h4>
+	<p><%=bean.getSesso() %></p>
+	<h4>Numero pezzi disponibili:</h4>
+	<p><%=bean.getNumeroPezziDisponibili() %></p>
 	<%}else{ %>
-	Tipologia:
-	<%=bean.getTipologia() %><br> Pezzi per scatola:
-	<%=bean.getNumeroPezziNelPacco() %><br>
-	<table class="table-bordered">
-		<select>
+	<h4>Tipologia:</h4>
+	<p><%=bean.getTipologia() %></p> 
+	<h4>Pezzi per scatola:</h4>
+	<p><%=bean.getNumeroPezziNelPacco() %></p>
+	<script>
+	$(document).ready(function() 
+			{
+				  $("#addCart").click(function(event)
+					{
+					  $.ajax({
+						    type: "POST",
+						    url: "article",
+						    data: { action: "ajax"},
+						    dataType: "json",
+						    success: function (responseText) {
+						    	$.each(responseText, function(i, articleObject) {
+				    	 			$("#demo").append(articleObject.nome + "<br>");
+				    			});
+						    }
+
+						});
+				  	});
+					
+			})
+	</script>
+	<h4>Modello</h4>
+		<select id="modello">
 			<%int i = 0;
 			for(SingleContactLenseBean e : bean.getLentine()){%>
-			<option value="<%=e.getModello()%>"><%=e.getGradazione()%></option>
+			<option value="<%=e.getModello()%>">modello <%=e.getModello()%>: <%=e.getRaggio() %>mm <%=e.getGradazione()%>°</option>
 
 			<%
 			i++;
 			}%>
 		</select>
-		<a id="cart">add to cart</a>
+		<a id="addCart">add to cart</a>
 		<%}%>
 	
 </body>
