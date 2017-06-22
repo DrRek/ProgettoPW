@@ -1,7 +1,5 @@
 package it.quattrocchi.support;
 
-import java.util.ArrayList;
-
 public class ArticleBean {
 	
 	public ArticleBean(){
@@ -9,16 +7,8 @@ public class ArticleBean {
 		marca=null;
 		tipo=null;
 		img1=null;
-		img2=null;
-		img3=null;
-		descrizione=null;
-		sesso=null;
-		prezzo=0;
-		raggio=0;
-		diametro=0;
-		numeroPezziNelPacco=0;
-		numeroPezziDisponibili=0;
-		lentine=new ArrayList<SingleContactLenseBean>();
+		prezzo = 0;
+		disponibilita = 0;
 	}
 	
 	public String getNome(){
@@ -61,85 +51,13 @@ public class ArticleBean {
 		this.img1=img1;
 	}
 	
-	public String getImg2(){
-		return img2;
+	public int getDisponibilita() {
+		return disponibilita;
 	}
-	
-	public void setImg2(String img2){
-		this.img2=img2;
+	public void setDisponibilita(int disponibilita) {
+		this.disponibilita = disponibilita;
 	}
-	
-	public String getImg3(){
-		return img3;
-	}
-	
-	public void setImg3(String img3){
-		this.img3=img3;
-	}
-	
-	public String getTipologia() {
-		return lentine.get(0).getTipologia();
-	}
-
-	public double getRaggio() {
-		return raggio;
-	}
-
-	public void setRaggio(double raggio) {
-		this.raggio = raggio;
-	}
-
-	public double getDiametro() {
-		return diametro;
-	}
-
-	public void setDiametro(double diametro) {
-		this.diametro = diametro;
-	}
-
-	public int getNumeroPezziNelPacco() {
-		return numeroPezziNelPacco;
-	}
-
-	public void setNumeroPezziNelPacco(int numeroPezziNelPacco) {
-		this.numeroPezziNelPacco = numeroPezziNelPacco;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-
-	public String getSesso() {
-		return sesso;
-	}
-
-	public void setSesso(String sesso) {
-		this.sesso = sesso;
-	}
-
-	public boolean equals(Object o){
-		ArticleBean a = (ArticleBean) o;
-		if((a.getNome().equals(nome)) && (a.getMarca().equals(marca)))
-			return true;
-		return false;
-	}
-
-	public int getNumeroPezziDisponibili() {
-		return numeroPezziDisponibili;
-	}
-
-	public void setNumeroPezziDisponibili(int numeroPezziDisponibili) {
-		this.numeroPezziDisponibili = numeroPezziDisponibili;
-	}
-
-	public ArrayList<SingleContactLenseBean> getLentine() {
-		return lentine;
-	}
-
+/*
 	public void setLentine(String modello, double gradazione, double raggio, double diametro, int disponibilita, String colore, String tipologia) {
 		SingleContactLenseBean trovata = new SingleContactLenseBean();
 		trovata.setNome(nome);
@@ -153,9 +71,8 @@ public class ArticleBean {
 		trovata.setTipologia(tipologia);
 		lentine.add(trovata);
 	}
-
-	private String nome, marca, tipo, img1, img2, img3, descrizione, sesso;
-	private double prezzo, raggio, diametro;
-	private int numeroPezziNelPacco, numeroPezziDisponibili;
-	private ArrayList<SingleContactLenseBean> lentine;
+*/
+	private String nome, marca, tipo, img1;
+	private double prezzo;
+	private int disponibilita;
 }

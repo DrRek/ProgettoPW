@@ -130,11 +130,11 @@ create table Validita(
 );
 
 create table Disponibilita(
-	Nome varchar(20) not null,
+	Nome varchar(40) not null,
 	Marca varchar(20) not null,
 	NumeroPezziDisponibili decimal(3) not null,
 	Gradazione decimal(4,2),
 	foreign key(Nome,Marca) references Lentine(Nome,Marca),
-	primary key(Nome,Marca)
+	primary key(Nome,Marca,Gradazione)
 );
 	

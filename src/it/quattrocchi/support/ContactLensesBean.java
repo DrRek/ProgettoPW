@@ -1,16 +1,13 @@
 package it.quattrocchi.support;
 
-public class SingleContactLenseBean {
-	public SingleContactLenseBean (){
-		nome=null;
-		marca=null;
-		modello=null;
+public class ContactLensesBean extends ArticleBean {
+	public ContactLensesBean (){
+		super();
 		colore=null;
 		tipologia=null;
 		gradazione=0;
 		raggio=0;
 		diametro=0;
-		disponibilita=0;
 	}
 	
 	public String getNome() {
@@ -24,12 +21,6 @@ public class SingleContactLenseBean {
 	}
 	public void setMarca(String marca) {
 		this.marca = marca;
-	}
-	public String getModello() {
-		return modello;
-	}
-	public void setModello(String modello) {
-		this.modello = modello;
 	}
 	public double getGradazione() {
 		return gradazione;
@@ -49,13 +40,7 @@ public class SingleContactLenseBean {
 	public void setDiametro(double diametro) {
 		this.diametro = diametro;
 	}
-	public int getDisponibilita() {
-		return disponibilita;
-	}
-	public void setDisponibilita(int disponibilita) {
-		this.disponibilita = disponibilita;
-	}
-	
+
 	public String getColore() {
 		return colore;
 	}
@@ -71,8 +56,16 @@ public class SingleContactLenseBean {
 	public void setTipologia(String tipologia) {
 		this.tipologia = tipologia;
 	}
+	
+	public int getNumeroPezziNelPacco() {
+		return numeroPezziNelPacco;
+	}
 
-	private String nome, marca, modello, colore, tipologia;
+	public void setNumeroPezziNelPacco(int numeroPezziNelPacco) {
+		this.numeroPezziNelPacco = numeroPezziNelPacco;
+	}
+
+	private String nome, marca, colore, tipologia;
 	private double gradazione, raggio, diametro;
-	private int disponibilita;
+	private int numeroPezziNelPacco;
 }

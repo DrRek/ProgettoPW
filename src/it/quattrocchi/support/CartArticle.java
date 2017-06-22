@@ -8,7 +8,7 @@ public class CartArticle{
 	}
 	
 	public void aggiungi(){
-		if(numero + 1 > articolo.getNumeroPezziDisponibili())
+		if(numero + 1 > articolo.getDisponibilita())
 			//eccezione
 			return;
 		numero++;
@@ -22,7 +22,7 @@ public class CartArticle{
 	}
 	
 	public void aggiorna(int n){
-		if((n < 0) || (n > articolo.getNumeroPezziDisponibili()))
+		if((n < 0) || (n > articolo.getDisponibilita()))
 			//dovrebbe lanciare eccezione
 			return;
 		else

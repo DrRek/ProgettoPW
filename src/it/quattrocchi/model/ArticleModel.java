@@ -9,17 +9,18 @@ import java.util.LinkedList;
 import java.util.UUID;
 
 import it.quattrocchi.support.ArticleBean;
-import it.quattrocchi.support.SingleContactLenseBean;
+import it.quattrocchi.support.ContactLensesBean;
+import it.quattrocchi.support.GlassesBean;
 
 public class ArticleModel {
-	
+
 	private static final String TABLE_NAME = "quattrocchidb.articolo";
-	
+
 	public void doSave(ArticleBean art) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
 		String query = "Select * from articolo where Nome=? and Marca=?;";
-		
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
@@ -27,7 +28,7 @@ public class ArticleModel {
 			stm.setString(2, art.getMarca());
 
 			ResultSet rs = stm.executeQuery();
-			
+
 			if(rs.next()){ //In questo caso bisogna fare l'update
 				rs.close();
 				stm.close();
@@ -40,36 +41,41 @@ public class ArticleModel {
 				stm.setString(5, art.getMarca());
 				stm.executeUpdate();
 				stm.close();
-				
+
 				if(art.getTipo().equalsIgnoreCase("O")){
+					GlassesBean bean = (GlassesBean) art;
 					query = "update occhiale set Descrizione=?, Sesso=?, NumeroPezziDisponibili=?, img1=?, img2=? where Nome=? and Marca=?;";
 					stm = conn.prepareStatement(query);
-					stm.setString(1, art.getDescrizione());
-					stm.setString(2, art.getSesso());
-					stm.setInt(3, art.getNumeroPezziDisponibili());
-					stm.setString(4, art.getImg2());
-					stm.setString(5, art.getImg3());
-					stm.setString(6, art.getNome());
-					stm.setString(7, art.getMarca());
+					stm.setString(1, bean.getDescrizione());
+					stm.setString(2, bean.getSesso());
+					stm.setInt(3, bean.getDisponibilita());
+					stm.setString(4, bean.getImg2());
+					stm.setString(5, bean.getImg3());
+					stm.setString(6, bean.getNome());
+					stm.setString(7, bean.getMarca());
 					stm.executeUpdate();
 					stm.close();
 				} else {
-					for(SingleContactLenseBean l : art.getLentine()){
-						query = "update lentine set NumeroPezziDisponibili=?, Gradazione=?, Tipologia=?, NumeroPezziNelPacco=?, Raggio=?, Diametro=?, Colore=? where Nome=? and Marca=? and Modello=?;";
-						stm = conn.prepareStatement(query);
-						stm.setInt(1, l.getDisponibilita());
-						stm.setDouble(2, l.getGradazione());
-						stm.setString(3, art.getTipologia());
-						stm.setInt(4, art.getNumeroPezziNelPacco());
-						stm.setDouble(5, l.getRaggio());
-						stm.setDouble(6, l.getDiametro());
-						stm.setString(7, l.getColore());
-						stm.setString(8, art.getNome());
-						stm.setString(9, art.getMarca());
-						stm.setString(10, l.getModello());
-						stm.executeUpdate();
-						stm.close();
-					}
+					ContactLensesBean bean = (ContactLensesBean) art;
+					query = "update lentine set Tipologia=?, NumeroPezziNelPacco=?, Raggio=?, Diametro=?, Colore=? where Nome=? and Marca=?;";
+					stm = conn.prepareStatement(query);
+					stm.setString(1, bean.getTipologia());
+					stm.setInt(2, bean.getNumeroPezziNelPacco());
+					stm.setDouble(3, bean.getRaggio());
+					stm.setDouble(4, bean.getDiametro());
+					stm.setString(5, bean.getColore());
+					stm.setString(6, bean.getNome());
+					stm.setString(7, bean.getMarca());
+					stm.executeUpdate();
+					stm.close();
+					query = "update disponibilita set NumeroPezziDisponibili=? where Nome=? and Marca=? and Gradazione=?;";
+					stm = conn.prepareStatement(query);
+					stm.setInt(1, bean.getDisponibilita());
+					stm.setString(2, bean.getNome());
+					stm.setString(3, bean.getMarca());
+					stm.setDouble(4, bean.getGradazione());
+					stm.executeUpdate();
+					stm.close();
 				}
 			} else{ //Se bisogna crearlo
 				rs.close();
@@ -83,53 +89,45 @@ public class ArticleModel {
 				stm.setString(5, art.getImg1());
 				stm.executeUpdate();
 				stm.close();
-				
+
 				if(art.getTipo().equalsIgnoreCase("O")){
+					GlassesBean bean = (GlassesBean) art;
 					query = "insert into occhiale values(?,?,?,?,?,?,?);";
 					stm = conn.prepareStatement(query);
-					stm.setString(1, art.getNome());
-					stm.setString(2, art.getMarca());
-					stm.setString(3, art.getDescrizione());
-					stm.setString(4, art.getSesso());
-					stm.setInt(5, art.getNumeroPezziDisponibili());
-					stm.setString(6, art.getImg2());
-					stm.setString(7, art.getImg3());
+					stm.setString(1, bean.getNome());
+					stm.setString(2, bean.getMarca());
+					stm.setString(3, bean.getDescrizione());
+					stm.setString(4, bean.getSesso());
+					stm.setInt(5, bean.getDisponibilita());
+					stm.setString(6, bean.getImg2());
+					stm.setString(7, bean.getImg3());
 					stm.executeUpdate();
 					stm.close();
 				} else {
-					for(SingleContactLenseBean l : art.getLentine()){
-						boolean isUnique=false;
-						while(!isUnique){
-							String toTest = UUID.randomUUID().toString().substring(0, 20);
-							query="select * from lentine where modello=?;";
-							stm = conn.prepareStatement(query);
-							stm.setString(1, toTest);
-							rs = stm.executeQuery();
-							if(!rs.next()){
-								isUnique=true;
-								l.setModello(toTest);
-							}
-							rs.close();
-							stm.close();
-						}
-						query = "insert into lentine values(?,?,?,?,?,?,?,?,?,?);";
-						stm = conn.prepareStatement(query);
-						stm.setString(1, art.getNome());
-						stm.setString(2, art.getMarca());
-						stm.setString(3, l.getModello());
-						stm.setInt(4, l.getDisponibilita());
-						stm.setDouble(5, l.getGradazione());
-						stm.setString(6, art.getTipologia());
-						stm.setInt(7, art.getNumeroPezziNelPacco());
-						stm.setDouble(8, l.getRaggio());
-						stm.setDouble(9, l.getDiametro());
-						stm.setString(10, l.getColore());
-						stm.executeUpdate();
-						stm.close();
-					}
+					ContactLensesBean bean = (ContactLensesBean) art;
+					query = "insert into lentine values(?,?,?,?,?,?,?);";
+					stm = conn.prepareStatement(query);
+					stm.setString(1, bean.getNome());
+					stm.setString(2, bean.getMarca());
+					stm.setString(3, bean.getTipologia());
+					stm.setInt(4, bean.getNumeroPezziNelPacco());
+					stm.setDouble(5, bean.getRaggio());
+					stm.setDouble(6, bean.getDiametro());
+					stm.setString(7, bean.getColore());
+					stm.executeUpdate();
+					stm.close();
+
+					query = "insert into disponibilita values(?,?,?,?);";
+					stm = conn.prepareStatement(query);
+					stm.setString(1, bean.getNome());
+					stm.setString(2, bean.getMarca());
+					stm.setInt(3, bean.getDisponibilita());
+					stm.setDouble(4, bean.getGradazione());
+					stm.executeUpdate();
+					stm.close();
 				}
 			}
-			
+
 		} finally {
 			try {
 				if (stm != null)
@@ -139,14 +137,14 @@ public class ArticleModel {
 			}
 		}
 	}
-	
-	public ArticleBean doRetrieveByKey(String nome, String marca) throws SQLException{
+
+	public ArticleBean doRetrieveGlasses(String nome, String marca) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
-		ArticleBean bean = new ArticleBean();
-		
+		GlassesBean bean = null;
+
 		String query = "SELECT * FROM " + TABLE_NAME + " WHERE Nome = ? AND Marca = ?;";
-		
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
@@ -154,54 +152,93 @@ public class ArticleModel {
 			stm.setString(2, marca);
 
 			ResultSet rs = stm.executeQuery();
-			
-			while (rs.next()) {
+
+			if(rs.next()) {
+				bean = new GlassesBean();
 				bean.setNome(rs.getString("Nome"));
 				bean.setMarca(rs.getString("Marca"));
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
-			}
-			stm.close();
-			rs.close();
-			
-			if(bean.getTipo().equalsIgnoreCase("O")){
+
+				stm.close();
+				rs.close();
+
 				query = "SELECT * FROM occhiale WHERE Nome = ? AND Marca = ?;";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, nome);
 				stm.setString(2, marca);
 				rs = stm.executeQuery();
-				while (rs.next()) {
+				if (rs.next()) {
 					bean.setDescrizione(rs.getString("Descrizione"));
 					bean.setSesso(rs.getString("Sesso"));
-					bean.setNumeroPezziDisponibili(rs.getInt("NumeroPezziDisponibili"));
+					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 					bean.setImg2(rs.getString("Img1"));
 					bean.setImg3(rs.getString("Img2"));
 				}
+			}
+			stm.close();
+			rs.close();
+
+			conn.commit();
+		} finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return bean;
+	}
+
+	public ArticleBean doRetrieveContactLenses(String nome, String marca, double gradazione) throws SQLException{
+		Connection conn = null;
+		PreparedStatement stm = null;
+		ContactLensesBean bean = null;
+
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE Nome = ? AND Marca = ?;";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			stm.setString(2, marca);
+
+			ResultSet rs = stm.executeQuery();
+
+			if(rs.next()) {
+				bean = new ContactLensesBean();
+				bean.setNome(rs.getString("Nome"));
+				bean.setMarca(rs.getString("Marca"));
+				bean.setTipo(rs.getString("Tipo"));
+				bean.setPrezzo(rs.getDouble("Prezzo"));
+				bean.setImg1(rs.getString("Img1"));
+
 				stm.close();
 				rs.close();
-			} else {
-				query = "SELECT * FROM lentine WHERE Nome = ? AND Marca = ?;";
+
+				query = "SELECT * "
+						+ "FROM lentine l join disponibilita d on l.nome = d.nome and l.marca = d.marca"
+						+ " WHERE d.nome = ? AND d.marca = ? AND d.gradazione = ?;";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, nome);
 				stm.setString(2, marca);
-				rs.close();
+				stm.setDouble(3, gradazione);
 				rs = stm.executeQuery();
-				boolean isFirst=true;
-				while (rs.next()) {
-					if(isFirst){
-						bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
-						bean.setRaggio(rs.getDouble("Raggio"));
-						bean.setDiametro(rs.getDouble("Diametro"));
-						bean.setLentine(rs.getString("Modello"), rs.getDouble("Gradazione"), rs.getDouble("Raggio"), rs.getDouble("Diametro"), rs.getInt("NumeroPezziDisponibili"), rs.getString("Colore"), rs.getString("tipologia"));
-						isFirst=false;
-					} else {
-						bean.setLentine(rs.getString("Modello"), rs.getDouble("Gradazione"), rs.getDouble("Raggio"), rs.getDouble("Diametro"), rs.getInt("NumeroPezziDisponibili"), rs.getString("Colore"), rs.getString("tipologia"));
-					}
+				if (rs.next()) {
+					bean.setGradazione(rs.getDouble("Gradazione"));
+					bean.setColore(rs.getString("Colore"));
+					bean.setRaggio(rs.getDouble("Raggio"));
+					bean.setDiametro(rs.getDouble("Diametro"));
+					bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
+					bean.setTipologia(rs.getString("Tipologia"));
+					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+
 				}
-				stm.close();
-				rs.close();
 			}
+			stm.close();
+			rs.close();
 
 			conn.commit();
 		} finally {
@@ -215,35 +252,35 @@ public class ArticleModel {
 		return bean;
 	}
 	
+	
+	//da rivedere, deve comprendere disponibilità
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
-
+		ArticleBean bean = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
 
-		String selectSQL = "SELECT * FROM " + ArticleModel.TABLE_NAME;
-
+		String selectSQL = "SELECT * FROM  quattrocchidb.articolo ";
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
 		}
-		
-		
+
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			preparedStatement = conn.prepareStatement(selectSQL);
-
+			
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				ArticleBean bean = new ArticleBean();
-				
-				bean.setNome(rs.getString("Nome"));
-				bean.setMarca(rs.getString("Marca"));
-				bean.setTipo(rs.getString("Tipo"));
-				bean.setPrezzo(rs.getFloat("Prezzo"));
-				bean.setImg1(rs.getString("Img1"));
-				products.add(bean);
+					bean = new ArticleBean();
+					bean.setNome(rs.getString("Nome"));
+					bean.setMarca(rs.getString("Marca"));
+					bean.setTipo(rs.getString("Tipo"));
+					bean.setImg1(rs.getString("Img1"));
+					products.add(bean);
 			}
+			rs.close();
 			conn.commit();
 		} finally {
 			try {
@@ -256,6 +293,7 @@ public class ArticleModel {
 		return products;
 	}
 
+	//perché cerca solo tra gli occhiali?
 	public Collection<ArticleBean> doRetrieve(String daCercare) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -272,12 +310,13 @@ public class ArticleModel {
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
 				ArticleBean bean = new ArticleBean();
-				
+
 				bean.setNome(rs.getString("Nome"));
 				bean.setMarca(rs.getString("Marca"));
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
+				bean.setDisponibilita(rs.getInt("Disponibilita"));
 				products.add(bean);
 			}
 			conn.commit();
@@ -289,7 +328,7 @@ public class ArticleModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-			
+
 		return products;
 	}
 
@@ -324,12 +363,13 @@ public class ArticleModel {
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
 				ArticleBean bean = new ArticleBean();
-				
+
 				bean.setNome(rs.getString("Nome"));
 				bean.setMarca(rs.getString("Marca"));
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
+				bean.setDisponibilita(rs.getInt("Disponibilita"));
 				products.add(bean);
 			}
 			conn.commit();
@@ -341,7 +381,7 @@ public class ArticleModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-			
+
 		return products;
 	}
 
@@ -349,7 +389,13 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		String sql = "select distinct articolo.nome, articolo.marca, tipo, prezzo, img1  from articolo right join lentine on articolo.nome=lentine.nome and articolo.marca=lentine.marca";
+		String sql = "select distinct articolo.nome, articolo.marca, tipo, prezzo, img1  "
+				+ "from articolo "
+				+ "right join lentine on articolo.nome=lentine.nome "
+					+ "and articolo.marca=lentine.marca"
+				+ " join disponibilita on lentine.nome = disponibilita.nome "
+					+ "and lentine.marca = disponibilita.marca;";
+		
 		if(daCercare.equalsIgnoreCase("null"))daCercare=null;
 		sql+= " where ((articolo.Nome LIKE '%"+daCercare+"%') or (articolo.Marca LIKE '%"+daCercare+"%'))";
 		if(marca!=null&&!marca.equalsIgnoreCase("")){
@@ -362,10 +408,10 @@ public class ArticleModel {
 			sql+=" and articolo.prezzo<="+prezzoMax;
 		}
 		if(gradazione!=null&&!gradazione.equalsIgnoreCase("")){
-			sql+=" and lentine.gradazione="+gradazione;
+			sql+=" and disponibilita.gradazione="+gradazione;
 		}
 		if(tipologia!=null&&!tipologia.equalsIgnoreCase("")){
-			sql+=" and lentine.gradazione='"+tipologia+"'";
+			sql+=" and disponibilita.gradazione='"+tipologia+"'";
 		}
 		if(raggio!=null&&!raggio.equalsIgnoreCase("")){
 			sql+=" and lentine.raggio="+raggio;
@@ -380,19 +426,20 @@ public class ArticleModel {
 			sql+=" order by '%"+sort+"'";
 		}
 		sql+=";";
-		
+
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
 				ArticleBean bean = new ArticleBean();
-				
+
 				bean.setNome(rs.getString("Nome"));
 				bean.setMarca(rs.getString("Marca"));
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
+				bean.setDisponibilita(rs.getInt("Disponibilita"));
 				products.add(bean);
 			}
 			conn.commit();
@@ -404,7 +451,7 @@ public class ArticleModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-			
+
 		return products;
 	}
 }

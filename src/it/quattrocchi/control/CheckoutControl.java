@@ -134,8 +134,8 @@ public class CheckoutControl extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			int num = bean.getNumeroPezziDisponibili() - cArticle.get(i).getQuantity();
-			bean.setNumeroPezziDisponibili(num);		
+			int num = bean.getDisponibilita() - cArticle.get(i).getQuantity();
+			bean.setDisponibilita(num);		
 			try {
 				aModel.doSave(bean);
 			} catch (SQLException e) {
