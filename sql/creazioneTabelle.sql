@@ -73,6 +73,7 @@ create table Articolo(
 	Marca varchar(20) not null,
 	Tipo varchar(1) not null,
 	Prezzo decimal(6,2) not null,
+	NumeroPezziDisponibili decimal(3) not null,
 	img1 varchar(30),
 	primary key(Nome, Marca)
 );
@@ -82,7 +83,6 @@ create table Occhiale(
 	Marca varchar(20) not null,
 	Descrizione varchar(200),
 	Sesso char(1),
-	NumeroPezziDisponibili decimal(3) not null,
 	img1 varchar(30),
 	img2 varchar(30),
 	foreign key (Nome,Marca) references Articolo(Nome,Marca),
@@ -92,15 +92,11 @@ create table Occhiale(
 create table Lentine(
 	Nome varchar(40) not null,
 	Marca varchar(20) not null,
-	Modello varchar(20) unique,
-	NumeroPezziDisponibili decimal(3) not null,
-	Gradazione decimal(4,2) not null,
 	Tipologia char(1),
 	NumeroPezziNelPacco decimal(2),
 	Raggio decimal(3,1),
 	Diametro decimal(3,1),
-	Colore char(2),
-	primary key(Nome, Marca, Modello),
+	primary key(Nome, Marca),
 	foreign key (Nome,Marca) references Articolo(Nome,Marca)
 );
 
@@ -108,13 +104,13 @@ create table Appartenenza(
 	Ordine varchar(36),
 	Articolo varchar(40),
 	Prescrizione varchar(36),
-	Modello varchar(10),
 	PrezzoVendita decimal (6,2) not null,
+	Gradazione decimal(4,2),
+	Colore char(2),
 	primary key(Ordine, Articolo),
 	foreign key(Ordine) references Ordine(Codice),
 	foreign key(Articolo) references Articolo(Nome),
-	foreign key(Prescrizione) references Prescrizione(Codice),
-	foreign key(Modello) references Lentine(Modello)
+	foreign key(Prescrizione) references Prescrizione(Codice)
 );
 
 create table Promozione(

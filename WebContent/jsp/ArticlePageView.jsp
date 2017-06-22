@@ -51,7 +51,7 @@
 					  $.ajax({
 						    type: "POST",
 						    url: "article",
-						    data: { action: "ajax"},
+						    data: { action: "addCart"},
 						    dataType: "json",
 						    success: function (responseText) {
 						    	$.each(responseText, function(i, articleObject) {
