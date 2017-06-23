@@ -128,11 +128,14 @@ public class ArticleControl extends HttpServlet {
 	private Cart addCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
 		String nome = request.getParameter("nome");
 		String marca = request.getParameter("marca");
-		
+		String gradazione = request.getParameter("gradazione");
 		try {
-			
-			cart.addProduct(model.doRetrieveByKey(nome, marca));		
-		
+			if(gradazione == null)
+				cart.addProduct(model.doRetrieveGlasses(nome, marca));	
+			else{
+				double g = Double.parseDouble(gradazione);
+				cart.addProduct(model.doRetrieveContactLenses(nome, marca, g));	
+			}
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
@@ -142,11 +145,15 @@ public class ArticleControl extends HttpServlet {
 	private Cart delCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
 		String nome = request.getParameter("nome");
 		String marca = request.getParameter("marca");
+		String gradazione = request.getParameter("gradazione");
 		
 		try {
-			
-			cart.deleteProduct(model.doRetrieveByKey(nome, marca));
-		
+			if(gradazione == null)
+				cart.deleteProduct(model.doRetrieveGlasses(nome, marca));
+			else{
+				double g = Double.parseDouble(gradazione);
+				cart.deleteProduct(model.doRetrieveContactLenses(nome, marca, g));	
+			}
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}

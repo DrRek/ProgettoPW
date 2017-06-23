@@ -29,6 +29,7 @@ public class ArticlePageControl extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String marca = request.getParameter("marca");
 
+		
 		try {
 			request.setAttribute("articolo", model.doRetrieveByKey(nome, marca));
 		} catch (SQLException e) {
