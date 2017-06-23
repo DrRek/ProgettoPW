@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	ArticleBean bean = (ArticleBean) request.getAttribute("articolo");
+	ArticleBean occhiali = (ArticleBean) request.getAttribute("occhiali");
+	ArrayList<ContactLensesBean> lentine = (ArrayList<ContactLensesBean>) request.getAttribute("lentine");
 %>
 
 <!DOCTYPE html>
@@ -27,22 +28,59 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%><br>
-	<h1 id="nome"><%=bean.getNome() %></h1>
-	<h2 id="marca"><%=bean.getMarca() %></h2>
-	<h4>Prezzo:</h4>
-	<p><%=bean.getPrezzo() %></p>
-	<% if (bean.getTipo().equalsIgnoreCase("O")){%>
-	<h4>Descrizione:</h4>
-	<p><%=bean.getDescrizione() %></p>
-	<h4>Sesso:</h4>
-	<p><%=bean.getSesso() %></p>
-	<h4>Numero pezzi disponibili:</h4>
-	<p><%=bean.getNumeroPezziDisponibili() %></p>
-	<%}else{ %>
-	<h4>Tipologia:</h4>
-	<p><%=bean.getTipologia() %></p> 
-	<h4>Pezzi per scatola:</h4>
-	<p><%=bean.getNumeroPezziNelPacco() %></p>
+	<%
+	if (lentine == null && occhiali != null)
+	{
+		%>
+
+		<h1 id="nome"><%=occhiali.getNome() %></h1>
+		<h2 id="marca"><%=occhiali.getMarca() %></h2>
+		<h4>Prezzo:</h4>
+		<p><%=occhiali.getPrezzo() %></p>
+		<h4>Descrizione:</h4>
+		<p><%=((GlassesBean) occhiali).getDescrizione() %></p>
+		<h4>Sesso:</h4>
+		<p><%=((GlassesBean) occhiali).getSesso() %></p>
+		<h4>Numero pezzi disponibili:</h4>
+		<p><%=occhiali.getDisponibilita() %></p>
+	<%
+	}
+	else if(occhiali == null && lentine != null)
+	{
+		ArticleBean l = lentine.get(0);
+	%>
+		<h4><%=l.getNome() %></h4> 
+		<h4><%=l.getMarca() %></h4> 
+		<h4>Prezzo</h4>
+		<p><%=l.getPrezzo()%></p>
+		<h4>Tipologia:</h4>
+		<p><%=((ContactLensesBean)l).getTipologia() %></p> 
+		<h4>Pezzi per scatola:</h4>
+		<p><%=((ContactLensesBean)l).getNumeroPezziNelPacco() %> </p>
+		<h4>Raggio:</h4>
+		<p><%=((ContactLensesBean)l).getRaggio() %></p>
+		<h4>Diametro:</h4>
+		<p><%=((ContactLensesBean)l).getDiametro() %></p>
+		<h4>Colore:</h4>
+		<p><%=((ContactLensesBean)l).getColore() %></p>
+		<h4>Gradazione</h4>
+			<select id="gradazione">
+				<%
+				for(ArticleBean e : lentine)
+				{
+				%>
+				
+					<option value="<%=((ContactLensesBean)e).getGradazione()%>"><%=((ContactLensesBean)e).getGradazione()%></option>
+	
+				<%
+				}%>
+			</select>
+			<a id="addCart">add to cart</a>
+	<%
+	}
+	%>
+	
+	<!-- 
 	<script>
 	$(document).ready(function() 
 			{
@@ -64,18 +102,6 @@
 					
 			})
 	</script>
-	<h4>Modello</h4>
-		<select id="modello">
-			<%int i = 0;
-			for(SingleContactLenseBean e : bean.getLentine()){%>
-			<option value="<%=e.getModello()%>">modello <%=e.getModello()%>: <%=e.getRaggio() %>mm <%=e.getGradazione()%>°</option>
-
-			<%
-			i++;
-			}%>
-		</select>
-		<a id="addCart">add to cart</a>
-		<%}%>
-	
+	-->
 </body>
 </html>

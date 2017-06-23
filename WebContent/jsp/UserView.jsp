@@ -374,6 +374,8 @@
 						<option value="Ro">Rosso</option>
 						<option value="Pa">Particolari</option>
 					</select>
+					<label for="numeroPezziNelPacco">Numero pezzi nel pacco:</label> 
+					<input type="number" step="1" min="1" name="numeroPezziNelPacco" placeholder="Numero Pezzi Nel Pacco" />
 					<label for="numeroPezziDisponibili">Numero pezzi disponibili:</label> 
 					<input type="number" step="1" min="1" name="numeroPezziDisponibili" placeholder="Numero Pezzi Disponibili" />
 					<input type='submit' value='Insert!' />

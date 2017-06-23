@@ -18,6 +18,7 @@ import it.quattrocchi.model.CheckoutModel;
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
 import it.quattrocchi.support.CartArticle;
+import it.quattrocchi.support.ContactLensesBean;
 import it.quattrocchi.support.OrderBean;
 import it.quattrocchi.support.UserBean;
 
@@ -113,34 +114,23 @@ public class CheckoutControl extends HttpServlet {
 	{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		ArrayList<CartArticle> cArticle = cart.getProducts();
-		ArticleBean bean = new ArticleBean();
 		
 		for(CartArticle c : cArticle){
 			try{
-			ArticleBean art = aModel.doRetrieveByKey(c.getArticle().getNome(), c.getArticle().getMarca());
-			if(art.getTipo().equalsIgnoreCase("o")){
-				art.setNumeroPezziDisponibili(art.getNumeroPezziDisponibili()-c.getQuantity());
-			}
+			ArticleBean art = null;
+			
+			if(aModel.isGlasses(c.getArticle().getNome(), c.getArticle().getMarca()))
+				art = aModel.doRetrieveGlasses(c.getArticle().getNome(), c.getArticle().getMarca());
+			else	
+				art = aModel.doRetrieveContactLenses(c.getArticle().getNome(), c.getArticle().getMarca(), ((ContactLensesBean) c.getArticle()).getGradazione());
+				
+			art.setDisponibilita(art.getDisponibilita()-c.getQuantity());
 			aModel.doSave(art);
+	
 			} catch (Exception e){
 				e.printStackTrace();
 			}
 		}
 		
-		for(int i = 0; i<cArticle.size(); i++) {
-			try {
-			bean = aModel.doRetrieveByKey(cArticle.get(i).getArticle().getNome(), cArticle.get(i).getArticle().getMarca());
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			int num = bean.getDisponibilita() - cArticle.get(i).getQuantity();
-			bean.setDisponibilita(num);		
-			try {
-				aModel.doSave(bean);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }

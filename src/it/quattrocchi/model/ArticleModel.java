@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -15,6 +16,39 @@ public class ArticleModel {
 
 	private static final String TABLE_NAME = "quattrocchidb.articolo";
 
+	public boolean isGlasses(String nome, String marca) throws SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stm = null;
+		boolean found = false;
+		
+		String query = "SELECT * FROM " + " quattrocchidb.occhiale " + " WHERE Nome = ? AND Marca = ?;";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			stm.setString(2, marca);
+
+			ResultSet rs = stm.executeQuery();
+
+			if(rs.next()) 
+				found = true;
+			stm.close();
+			rs.close();
+
+			conn.commit();
+		} finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return found;
+	}
+	
 	public void doSave(ArticleBean art) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -251,6 +285,74 @@ public class ArticleModel {
 		return bean;
 	}
 	
+	public ArrayList<ContactLensesBean> doRetrieveAllContactLenses(String nome, String marca) throws SQLException{
+		Connection conn = null;
+		PreparedStatement stm = null;
+		ContactLensesBean bean = null;
+		ArrayList<ContactLensesBean> lentine = null;
+
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE Nome = ? AND Marca = ?;";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			stm.setString(2, marca);
+
+			ResultSet rs = stm.executeQuery();
+
+			if(rs.next()) {
+				lentine = new ArrayList<ContactLensesBean>();
+				String lNome = rs.getString("Nome");
+				String lMarca = rs.getString("Marca");
+				String lTipo = rs.getString("Tipo");
+				Double lPrezzo = rs.getDouble("Prezzo");
+				String lImg1 = rs.getString("Img1");
+
+				stm.close();
+				rs.close();
+				
+				query = "SELECT * "
+					+ "FROM lentine l join disponibilita d on l.nome = d.nome and l.marca = d.marca"
+					+ " WHERE d.nome = ? AND d.marca = ? ";
+					
+				stm = conn.prepareStatement(query);
+				stm.setString(1, nome);
+				stm.setString(2, marca);
+				rs = stm.executeQuery();
+				while(rs.next()){
+					bean = new ContactLensesBean();
+					bean.setNome(lNome);
+					bean.setMarca(lMarca);
+					bean.setTipo(lTipo);
+					bean.setPrezzo(lPrezzo);
+					bean.setImg1(lImg1);
+	
+					bean.setGradazione(rs.getDouble("Gradazione"));
+					bean.setColore(rs.getString("Colore"));
+					bean.setRaggio(rs.getDouble("Raggio"));
+					bean.setDiametro(rs.getDouble("Diametro"));
+					bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
+					bean.setTipologia(rs.getString("Tipologia"));
+					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+				
+					lentine.add(bean);
+				}
+			}
+			stm.close();
+			rs.close();
+
+			conn.commit();
+		} finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return lentine;
+	}
 	
 	//prende qualsiasi prodotto con disponibilità cumulativa nel caso delle lenti a contatto
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{

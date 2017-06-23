@@ -28,10 +28,14 @@ public class ArticlePageControl extends HttpServlet {
 			throws ServletException, IOException {
 		String nome = request.getParameter("nome");
 		String marca = request.getParameter("marca");
-
+		boolean isGlasses;
 		
 		try {
-			request.setAttribute("articolo", model.doRetrieveByKey(nome, marca));
+			isGlasses = model.isGlasses(nome,marca);
+			if(isGlasses)
+				request.setAttribute("occhiali", model.doRetrieveGlasses(nome, marca));
+			else
+				request.setAttribute("lentine", model.doRetrieveAllContactLenses(nome, marca));
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

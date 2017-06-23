@@ -17,7 +17,9 @@ import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.model.PrescriptionModel;
 import it.quattrocchi.support.ArticleBean;
+import it.quattrocchi.support.ContactLensesBean;
 import it.quattrocchi.support.CreditCardBean;
+import it.quattrocchi.support.GlassesBean;
 import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
@@ -79,27 +81,33 @@ public class UserControl extends HttpServlet{
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
 		String tipo = request.getParameter("tipo");
-		ArticleBean toAdd = new ArticleBean();
-		toAdd.setTipo(tipo);
+		ArticleBean toAdd = null;
 		try{
 			if(tipo.equalsIgnoreCase("O")){
+				toAdd = new GlassesBean();
+				
+				toAdd.setTipo(tipo);
 				toAdd.setNome(request.getParameter("nome"));
 				toAdd.setMarca(request.getParameter("marca"));
 				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
-				toAdd.setSesso(request.getParameter("sesso"));
-				toAdd.setDescrizione(request.getParameter("descrizione"));
-				toAdd.setNumeroPezziDisponibili(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
-			} else if(tipo.equalsIgnoreCase("L")){
+				((GlassesBean)toAdd).setSesso(request.getParameter("sesso"));
+				((GlassesBean)toAdd).setDescrizione(request.getParameter("descrizione"));
+				toAdd.setDisponibilita(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
+			}
+			else if(tipo.equalsIgnoreCase("L")){
+				toAdd = new ContactLensesBean();
+			
+				toAdd.setTipo(tipo);
 				toAdd.setNome(request.getParameter("nome"));
 				toAdd.setMarca(request.getParameter("marca"));
 				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
-				toAdd.setLentine(null,
-						Double.parseDouble(request.getParameter("gradazione")),
-						Double.parseDouble(request.getParameter("raggio")),
-						Double.parseDouble(request.getParameter("diametro")),
-						Integer.parseInt(request.getParameter("numeroPezziDisponibili")),
-						request.getParameter("colore"),
-						request.getParameter("tipologia"));
+				toAdd.setDisponibilita(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
+				((ContactLensesBean)toAdd).setGradazione(Double.parseDouble(request.getParameter("gradazione")));
+				((ContactLensesBean)toAdd).setRaggio(Double.parseDouble(request.getParameter("raggio")));
+				((ContactLensesBean)toAdd).setDiametro(Double.parseDouble(request.getParameter("diametro")));
+				((ContactLensesBean)toAdd).setColore(request.getParameter("colore"));
+				((ContactLensesBean)toAdd).setTipologia(request.getParameter("tipologia"));
+				((ContactLensesBean)toAdd).setNumeroPezziNelPacco(Integer.parseInt(request.getParameter("numeroPezziNelPacco")));
 			}
 			model.doSave(toAdd);
 		} catch (SQLException e){
