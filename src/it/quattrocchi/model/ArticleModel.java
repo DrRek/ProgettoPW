@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.UUID;
 
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.ContactLensesBean;
@@ -253,14 +252,24 @@ public class ArticleModel {
 	}
 	
 	
-	//da rivedere, deve comprendere disponibilità
+	//prende qualsiasi prodotto con disponibilità cumulativa nel caso delle lenti a contatto
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;
 		ArticleBean bean = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
 
-		String selectSQL = "SELECT * FROM  quattrocchidb.articolo ";
+		String selectSQL = 
+				"select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, sum(d.NumeroPezziDisponibili) as NumeroPezziDisponibili "
+				+ "from articolo a right join lentine l "
+				+ "on a.nome=l.nome and a.marca=l.marca "
+				+ "join disponibilita d "
+				+ "on l.nome = d.nome and l.marca = d.marca "
+				+ "group by a.nome, a.marca "
+				+ "union "
+				+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
+				+ "from articolo a right join occhiale o "
+				+ "on a.nome=o.nome and a.marca=o.marca ";
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
 		}
@@ -278,6 +287,7 @@ public class ArticleModel {
 					bean.setMarca(rs.getString("Marca"));
 					bean.setTipo(rs.getString("Tipo"));
 					bean.setImg1(rs.getString("Img1"));
+					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 					products.add(bean);
 			}
 			rs.close();
@@ -293,20 +303,33 @@ public class ArticleModel {
 		return products;
 	}
 
-	//perché cerca solo tra gli occhiali?
+	//cerca in base a stringa
 	public Collection<ArticleBean> doRetrieve(String daCercare) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
 		daCercare = "%"+daCercare+"%";
-		String sql = "select * from articolo left join occhiale on articolo.nome = occhiale.nome and articolo.marca = occhiale.marca where (articolo.Nome LIKE ?) or (occhiale.Descrizione LIKE ?) or (articolo.Marca LIKE ?)";
-
+		String sql = 
+				"select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, sum(d.NumeroPezziDisponibili) as NumeroPezziDisponibili "
+				+ "from articolo a right join lentine l "
+				+ "on a.nome=l.nome and a.marca=l.marca "
+				+ "join disponibilita d "
+				+ "on l.nome = d.nome and l.marca = d.marca "
+				+ "where (a.nome LIKE ?) or (a.marca LIKE ?)"
+				+ "group by a.nome, a.marca "
+				+ "union "
+				+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
+				+ "from articolo a right join occhiale o "
+				+ "where (a.Nome LIKE ?) or (o.Descrizione LIKE ?) or (a.Marca LIKE ?) "
+				+ "on a.nome=o.nome and a.marca=o.marca ";
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
 			stm.setString(1, daCercare);
 			stm.setString(2, daCercare);
 			stm.setString(3, daCercare);
+			stm.setString(4, daCercare);
+			stm.setString(5, daCercare);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
 				ArticleBean bean = new ArticleBean();
