@@ -21,7 +21,7 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		boolean found = false;
-		
+
 		String query = "SELECT * FROM " + " quattrocchidb.occhiale " + " WHERE Nome = ? AND Marca = ?;";
 
 		try {
@@ -48,7 +48,7 @@ public class ArticleModel {
 		}
 		return found;
 	}
-	
+
 	public void doSave(ArticleBean art) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -171,6 +171,48 @@ public class ArticleModel {
 		}
 	}
 
+	//si mette la disponibilità a zero, per non perdere la tracciabilità degli ordini passati
+	public void doDelete(String nome, String marca) throws SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stm = null;
+		String query = null;
+
+		if(isGlasses(nome,marca))
+		{
+			query = "UPDATE " + "quattrocchidb.occhiale"
+					+ " set NumeroPezziDisponibili = 0" 
+					+ " WHERE Nome = ? AND Marca = ?;";
+		}
+		else
+		{
+			query = "UPDATE " + "quattrocchidb.disponibilita"
+					+ " set NumeroPezziDisponibili = 0" 
+					+ " WHERE Nome = ? AND Marca = ?;";
+		}
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			stm.setString(2, marca);
+
+			stm.executeUpdate();
+			stm.close();
+			conn.commit();
+
+		} 
+
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+	}
+
 	public ArticleBean doRetrieveGlasses(String nome, String marca) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -284,7 +326,7 @@ public class ArticleModel {
 		}
 		return bean;
 	}
-	
+
 	public ArrayList<ContactLensesBean> doRetrieveAllContactLenses(String nome, String marca) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -311,11 +353,11 @@ public class ArticleModel {
 
 				stm.close();
 				rs.close();
-				
+
 				query = "SELECT * "
-					+ "FROM lentine l join disponibilita d on l.nome = d.nome and l.marca = d.marca"
-					+ " WHERE d.nome = ? AND d.marca = ? ";
-					
+						+ "FROM lentine l join disponibilita d on l.nome = d.nome and l.marca = d.marca"
+						+ " WHERE d.nome = ? AND d.marca = ? ";
+
 				stm = conn.prepareStatement(query);
 				stm.setString(1, nome);
 				stm.setString(2, marca);
@@ -327,7 +369,7 @@ public class ArticleModel {
 					bean.setTipo(lTipo);
 					bean.setPrezzo(lPrezzo);
 					bean.setImg1(lImg1);
-	
+
 					bean.setGradazione(rs.getDouble("Gradazione"));
 					bean.setColore(rs.getString("Colore"));
 					bean.setRaggio(rs.getDouble("Raggio"));
@@ -335,7 +377,7 @@ public class ArticleModel {
 					bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
 					bean.setTipologia(rs.getString("Tipologia"));
 					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
-				
+
 					lentine.add(bean);
 				}
 			}
@@ -353,7 +395,7 @@ public class ArticleModel {
 		}
 		return lentine;
 	}
-	
+
 	//prende qualsiasi prodotto con disponibilità cumulativa nel caso delle lenti a contatto
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{
 		Connection conn = null;
@@ -363,15 +405,15 @@ public class ArticleModel {
 
 		String selectSQL = 
 				"select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, sum(d.NumeroPezziDisponibili) as NumeroPezziDisponibili "
-				+ "from articolo a right join lentine l "
-				+ "on a.nome=l.nome and a.marca=l.marca "
-				+ "join disponibilita d "
-				+ "on l.nome = d.nome and l.marca = d.marca "
-				+ "group by a.nome, a.marca "
-				+ "union "
-				+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
-				+ "from articolo a right join occhiale o "
-				+ "on a.nome=o.nome and a.marca=o.marca ";
+						+ "from articolo a right join lentine l "
+						+ "on a.nome=l.nome and a.marca=l.marca "
+						+ "join disponibilita d "
+						+ "on l.nome = d.nome and l.marca = d.marca "
+						+ "group by a.nome, a.marca "
+						+ "union "
+						+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
+						+ "from articolo a right join occhiale o "
+						+ "on a.nome=o.nome and a.marca=o.marca ";
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
 		}
@@ -380,18 +422,18 @@ public class ArticleModel {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			preparedStatement = conn.prepareStatement(selectSQL);
-			
+
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-					bean = new ArticleBean();
-					bean.setNome(rs.getString("Nome"));
-					bean.setMarca(rs.getString("Marca"));
-					bean.setTipo(rs.getString("Tipo"));
-					bean.setImg1(rs.getString("Img1"));
-					bean.setPrezzo(rs.getDouble("prezzo"));
-					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
-					products.add(bean);
+				bean = new ArticleBean();
+				bean.setNome(rs.getString("Nome"));
+				bean.setMarca(rs.getString("Marca"));
+				bean.setTipo(rs.getString("Tipo"));
+				bean.setImg1(rs.getString("Img1"));
+				bean.setPrezzo(rs.getDouble("prezzo"));
+				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+				products.add(bean);
 			}
 			rs.close();
 			conn.commit();
@@ -412,21 +454,20 @@ public class ArticleModel {
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
 		daCercare = "%"+daCercare+"%";
-		System.out.printf(daCercare);
 		String sql = 
 				"select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, sum(d.NumeroPezziDisponibili) as NumeroPezziDisponibili "
-				+ "from articolo a right join lentine l "
-				+ "on a.nome=l.nome and a.marca=l.marca "
-				+ "join disponibilita d "
-				+ "on l.nome = d.nome and l.marca = d.marca "
-				+ "where (a.nome LIKE ?) or (a.marca LIKE ?)"
-				+ "group by a.nome, a.marca "
-				+ "union "
-				+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
-				+ "from articolo a right join occhiale o "
-				+ "where (a.Nome LIKE ?) or (o.Descrizione LIKE ?) or (a.Marca LIKE ?) "
-				+ "on a.nome=o.nome and a.marca=o.marca "
-				+ "order by nome";
+						+ "from articolo a right join lentine l "
+						+ "on a.nome=l.nome and a.marca=l.marca "
+						+ "join disponibilita d "
+						+ "on l.nome = d.nome and l.marca = d.marca "
+						+ "where (a.nome LIKE ?) or (a.marca LIKE ?)"
+						+ "group by a.nome, a.marca "
+						+ "union "
+						+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
+						+ "from articolo a right join occhiale o "
+						+ "on a.nome=o.nome and a.marca=o.marca "
+						+ "where (a.Nome LIKE ?) or (o.Descrizione LIKE ?) or (a.Marca LIKE ?) "
+						+ "order by nome";
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
@@ -527,7 +568,7 @@ public class ArticleModel {
 				+ "on l.nome = d.nome and l.marca = d.marca "
 				+ "where (a.nome LIKE ?) or (a.marca LIKE ?)"
 				+ "group by a.nome, a.marca ";
-		
+
 		if(daCercare.equalsIgnoreCase("null"))daCercare=null;
 		sql+= " where ((articolo.Nome LIKE '%"+daCercare+"%') or (articolo.Marca LIKE '%"+daCercare+"%'))";
 		if(marca!=null&&!marca.equalsIgnoreCase("")){

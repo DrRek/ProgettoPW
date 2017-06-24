@@ -57,22 +57,7 @@ public class ArticleBean {
 	public void setDisponibilita(int disponibilita) {
 		this.disponibilita = disponibilita;
 	}
-	
-/*
-	public void setLentine(String modello, double gradazione, double raggio, double diametro, int disponibilita, String colore, String tipologia) {
-		SingleContactLenseBean trovata = new SingleContactLenseBean();
-		trovata.setNome(nome);
-		trovata.setMarca(marca);
-		trovata.setModello(modello);
-		trovata.setGradazione(gradazione);
-		trovata.setRaggio(raggio);
-		trovata.setDiametro(diametro);
-		trovata.setDisponibilita(disponibilita);
-		trovata.setColore(colore);
-		trovata.setTipologia(tipologia);
-		lentine.add(trovata);
-	}
-*/
+
 	private String nome, marca, tipo, img1;
 	private double prezzo;
 	private int disponibilita;

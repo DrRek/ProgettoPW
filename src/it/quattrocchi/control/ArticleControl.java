@@ -50,8 +50,15 @@ public class ArticleControl extends HttpServlet {
 					cart = addCart(request, response, cart);
 				else if (action.equalsIgnoreCase("delCart"))
 					cart = delCart(request, response, cart);
-				else if (action.equalsIgnoreCase("delete"))
-					delete(request, response);
+			}
+			else{
+				if (action.equalsIgnoreCase("delete"))
+					try {
+						delete(request, response);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 			}
 			if(action.equalsIgnoreCase("ajax")){
 				response.setContentType("application/json");
@@ -122,7 +129,11 @@ public class ArticleControl extends HttpServlet {
 	}
 
 
-	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		String nome = request.getParameter("nome");
+		String marca = request.getParameter("marca");
+		if(nome != null && marca != null)
+			model.doDelete(nome, marca);
 	}
 
 	private Cart addCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
