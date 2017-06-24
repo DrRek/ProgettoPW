@@ -28,6 +28,7 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%><br>
+	<div class="container">
 	<%
 	if (lentine == null && occhiali != null)
 	{
@@ -49,8 +50,8 @@
 	{
 		ArticleBean l = lentine.get(0);
 	%>
-		<h4><%=l.getNome() %></h4> 
-		<h4><%=l.getMarca() %></h4> 
+		<h1><%=l.getNome() %></h1> 
+		<h2><%=l.getMarca() %></h2> 
 		<h4>Prezzo</h4>
 		<p><%=l.getPrezzo()%></p>
 		<h4>Tipologia:</h4>
@@ -79,7 +80,7 @@
 	<%
 	}
 	%>
-	
+	</div>
 	<!-- 
 	<script>
 	$(document).ready(function() 
