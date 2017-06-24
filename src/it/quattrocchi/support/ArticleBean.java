@@ -57,6 +57,7 @@ public class ArticleBean {
 	public void setDisponibilita(int disponibilita) {
 		this.disponibilita = disponibilita;
 	}
+	
 /*
 	public void setLentine(String modello, double gradazione, double raggio, double diametro, int disponibilita, String colore, String tipologia) {
 		SingleContactLenseBean trovata = new SingleContactLenseBean();

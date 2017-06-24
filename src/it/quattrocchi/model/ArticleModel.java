@@ -389,6 +389,7 @@ public class ArticleModel {
 					bean.setMarca(rs.getString("Marca"));
 					bean.setTipo(rs.getString("Tipo"));
 					bean.setImg1(rs.getString("Img1"));
+					bean.setPrezzo(rs.getDouble("prezzo"));
 					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 					products.add(bean);
 			}
@@ -411,6 +412,7 @@ public class ArticleModel {
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
 		daCercare = "%"+daCercare+"%";
+		System.out.printf(daCercare);
 		String sql = 
 				"select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, sum(d.NumeroPezziDisponibili) as NumeroPezziDisponibili "
 				+ "from articolo a right join lentine l "
@@ -423,7 +425,8 @@ public class ArticleModel {
 				+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
 				+ "from articolo a right join occhiale o "
 				+ "where (a.Nome LIKE ?) or (o.Descrizione LIKE ?) or (a.Marca LIKE ?) "
-				+ "on a.nome=o.nome and a.marca=o.marca ";
+				+ "on a.nome=o.nome and a.marca=o.marca "
+				+ "order by nome";
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
@@ -439,9 +442,9 @@ public class ArticleModel {
 				bean.setNome(rs.getString("Nome"));
 				bean.setMarca(rs.getString("Marca"));
 				bean.setTipo(rs.getString("Tipo"));
-				bean.setPrezzo(rs.getFloat("Prezzo"));
+				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
-				bean.setDisponibilita(rs.getInt("Disponibilita"));
+				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 				products.add(bean);
 			}
 			conn.commit();
@@ -461,8 +464,11 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		String sql = "select * from articolo right join occhiale on articolo.nome=occhiale.nome and articolo.marca=occhiale.marca";
-		sql+= " where ((articolo.Nome LIKE '%"+daCercare+"%') or (occhiale.Descrizione LIKE '%"+daCercare+"%') or (articolo.Marca LIKE '%"+daCercare+"%'))";
+		String sql = "select a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili"
+				+ "from articolo a right join occhiale o "
+				+ "on a.nome=occhiale.nome and a.marca=occhiale.marca";
+		sql+= " where ((a.Nome LIKE '%"+daCercare+"%') or (o.Descrizione LIKE '%"+daCercare+"%') or (a.Marca LIKE '%"+daCercare+"%'))"
+				+ "order by a.nome";
 		if(marca!=null&&!marca.equalsIgnoreCase("")){
 			sql+=" and articolo.marca='"+marca+"'";
 		}
@@ -494,7 +500,7 @@ public class ArticleModel {
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
-				bean.setDisponibilita(rs.getInt("Disponibilita"));
+				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 				products.add(bean);
 			}
 			conn.commit();
@@ -510,16 +516,17 @@ public class ArticleModel {
 		return products;
 	}
 
-	public Object doRetrieveContactLenses(String daCercare, String marca, String prezzoMin, String prezzoMax, String gradazione, String tipologia, String raggio, String diametro, String colore, String sort) throws SQLException{
+	public Collection<ArticleBean> doRetrieveContactLenses(String daCercare, String marca, String prezzoMin, String prezzoMax, String gradazione, String tipologia, String raggio, String diametro, String colore, String sort) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		String sql = "select distinct articolo.nome, articolo.marca, tipo, prezzo, img1  "
-				+ "from articolo "
-				+ "right join lentine on articolo.nome=lentine.nome "
-					+ "and articolo.marca=lentine.marca"
-				+ " join disponibilita on lentine.nome = disponibilita.nome "
-					+ "and lentine.marca = disponibilita.marca;";
+		String sql = "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, sum(d.NumeroPezziDisponibili) as NumeroPezziDisponibili "
+				+ "from articolo a right join lentine l "
+				+ "on a.nome=l.nome and a.marca=l.marca "
+				+ "join disponibilita d "
+				+ "on l.nome = d.nome and l.marca = d.marca "
+				+ "where (a.nome LIKE ?) or (a.marca LIKE ?)"
+				+ "group by a.nome, a.marca ";
 		
 		if(daCercare.equalsIgnoreCase("null"))daCercare=null;
 		sql+= " where ((articolo.Nome LIKE '%"+daCercare+"%') or (articolo.Marca LIKE '%"+daCercare+"%'))";
@@ -564,7 +571,7 @@ public class ArticleModel {
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
-				bean.setDisponibilita(rs.getInt("Disponibilita"));
+				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 				products.add(bean);
 			}
 			conn.commit();
