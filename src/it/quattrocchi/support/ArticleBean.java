@@ -58,6 +58,25 @@ public class ArticleBean {
 		this.disponibilita = disponibilita;
 	}
 
+	public boolean equals(Object o)
+	{
+		if(((ArticleBean)o).tipo.equals("O"))
+		{
+			if(((GlassesBean)o).equals((GlassesBean)this))
+				return true;
+			else
+				return false;
+		}
+		else
+		{
+			if(((ContactLensesBean)o).equals((ContactLensesBean)this))
+					return true;
+				else
+					return false;
+		}
+		
+	}
+	
 	private String nome, marca, tipo, img1;
 	private double prezzo;
 	private int disponibilita;

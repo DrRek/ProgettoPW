@@ -46,9 +46,7 @@ public class ArticleControl extends HttpServlet {
 				return;
 			}
 			if(admin==null){
-				if (action.equalsIgnoreCase("addCart"))
-					cart = addCart(request, response, cart);
-				else if (action.equalsIgnoreCase("delCart"))
+				if (action.equalsIgnoreCase("delCart"))
 					cart = delCart(request, response, cart);
 			}
 			else{
@@ -136,22 +134,7 @@ public class ArticleControl extends HttpServlet {
 			model.doDelete(nome, marca);
 	}
 
-	private Cart addCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
-		String gradazione = request.getParameter("gradazione");
-		try {
-			if(gradazione == null)
-				cart.addProduct(model.doRetrieveGlasses(nome, marca));	
-			else{
-				double g = Double.parseDouble(gradazione);
-				cart.addProduct(model.doRetrieveContactLenses(nome, marca, g));	
-			}
-		} catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-		return cart;
-	}
+
 
 	private Cart delCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
 		String nome = request.getParameter("nome");

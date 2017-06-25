@@ -101,7 +101,11 @@ public class ArticleModel {
 					stm.setString(7, bean.getMarca());
 					stm.executeUpdate();
 					stm.close();
-					query = "update disponibilita set NumeroPezziDisponibili=? where Nome=? and Marca=? and Gradazione=?;";
+
+					if(esisteGradazione(bean.getNome(), bean.getMarca(),bean.getGradazione()))
+						query = "update disponibilita set NumeroPezziDisponibili=? where Nome=? and Marca=? and Gradazione=?;";
+					else
+						query = "insert into disponibilita(NumeroPezziDisponibili, Nome, Marca, Gradazione) values (?,?,?,?);";
 					stm = conn.prepareStatement(query);
 					stm.setInt(1, bean.getDisponibilita());
 					stm.setString(2, bean.getNome());
@@ -109,6 +113,7 @@ public class ArticleModel {
 					stm.setDouble(4, bean.getGradazione());
 					stm.executeUpdate();
 					stm.close();
+					
 				}
 			} else{ //Se bisogna crearlo
 				rs.close();
@@ -169,6 +174,34 @@ public class ArticleModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
+	}
+
+	private boolean esisteGradazione(String nome, String marca, double gradazione) throws SQLException {
+		Connection conn = null;
+		PreparedStatement stm = null;
+		String query = "Select * from disponibilita where Nome=? and Marca=? and Gradazione=?;";
+		boolean found = false;
+		try
+		{
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			stm.setString(2, marca);
+			stm.setDouble(3, gradazione);
+			ResultSet rs = stm.executeQuery();
+			if(rs.next())
+				found = true;
+			rs.close();
+			stm.close();
+		} finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return found;
 	}
 
 	//si mette la disponibilità a zero, per non perdere la tracciabilità degli ordini passati

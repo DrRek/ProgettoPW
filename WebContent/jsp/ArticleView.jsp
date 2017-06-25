@@ -162,6 +162,8 @@
 					Iterator<?> it = products.iterator();
 					while (it.hasNext()) {
 						ArticleBean bean = (ArticleBean) it.next();
+						if(bean.getDisponibilita() != 0 || admin != null )
+						{
 			%>
 			<tr>
 				<td><a
@@ -177,11 +179,8 @@
 					%> <a
 					href="article?action=delete&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Delete</a>
 					<%
-						} else {
-					%> <a
-					href="article?action=addCart&nome=<%=bean.getNome()%>&marca=<%=bean.getMarca()%>">Add
-						to cart</a> <%
- 	}
+						}
+					}
  %>
 				</td>
 			</tr>

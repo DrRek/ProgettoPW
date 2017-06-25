@@ -24,12 +24,15 @@
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
 	<%@ include file="../jsp/header.jsp"%><br>
 	<div class="container">
-	<%
+		<%
 	if (lentine == null && occhiali != null)
 	{
 		%>
@@ -44,20 +47,45 @@
 		<p><%=((GlassesBean) occhiali).getSesso() %></p>
 		<h4>Numero pezzi disponibili:</h4>
 		<p><%=occhiali.getDisponibilita() %></p>
-	<%
+		<%
 	}
 	else if(occhiali == null && lentine != null)
 	{
 		ArticleBean l = lentine.get(0);
 	%>
-		<h1><%=l.getNome() %></h1> 
-		<h2><%=l.getMarca() %></h2> 
+		<script>
+		$(document).ready(function() 
+				{
+					  $("#addCart").click(function(event)
+						{
+						  $.ajax({
+							    type: "POST",
+							    url: "articlePage",
+							    data: 
+								    { 	action: "addCart",
+								    	nome:("#nome").val(),
+								    	marca:("#marca").val(),
+								    	gradazione:$('#gradazione').find(":selected").attr('value')
+								    },
+							    dataType: "json",
+							    success: function (responseText) {
+							    	//bisogna aggiornare il count dell'header
+							    }
+	
+							});
+					  	});
+						
+				})
+	</script>
+		<h1 id="nome"><%=l.getNome() %></h1>
+		<h2 id="marca"><%=l.getMarca() %></h2>
 		<h4>Prezzo</h4>
 		<p><%=l.getPrezzo()%></p>
 		<h4>Tipologia:</h4>
-		<p><%=((ContactLensesBean)l).getTipologia() %></p> 
+		<p><%=((ContactLensesBean)l).getTipologia() %></p>
 		<h4>Pezzi per scatola:</h4>
-		<p><%=((ContactLensesBean)l).getNumeroPezziNelPacco() %> </p>
+		<p><%=((ContactLensesBean)l).getNumeroPezziNelPacco() %>
+		</p>
 		<h4>Raggio:</h4>
 		<p><%=((ContactLensesBean)l).getRaggio() %></p>
 		<h4>Diametro:</h4>
@@ -65,19 +93,22 @@
 		<h4>Colore:</h4>
 		<p><%=((ContactLensesBean)l).getColore() %></p>
 		<h4>Gradazione</h4>
-			<select id="gradazione">
-				<%
+		<select id="gradazione">
+			<%
 				for(ArticleBean e : lentine)
 				{
 				%>
-				
-					<option value="<%=((ContactLensesBean)e).getGradazione()%>"><%=((ContactLensesBean)e).getGradazione()%></option>
-	
-				<%
+
+			<option value="<%=((ContactLensesBean)e).getGradazione()%>"><%=((ContactLensesBean)e).getGradazione()%>:
+				<%=e.getDisponibilita() %></option>
+
+			<%
 				}%>
-			</select>
-			<a id="addCart">add to cart</a>
-	<%
+		</select> <input type="submit" id="addCart" value="add to cart"/>
+
+
+
+		<%
 	}
 	%>
 	</div>

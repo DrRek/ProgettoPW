@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.ArticleModel;
+import it.quattrocchi.support.AdminBean;
+import it.quattrocchi.support.Cart;
 
 @WebServlet("/articlePage")
 
@@ -26,23 +28,56 @@ public class ArticlePageControl extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
-		boolean isGlasses;
-		
-		try {
-			isGlasses = model.isGlasses(nome,marca);
-			if(isGlasses)
-				request.setAttribute("occhiali", model.doRetrieveGlasses(nome, marca));
-			else
-				request.setAttribute("lentine", model.doRetrieveAllContactLenses(nome, marca));
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
+
+		String action = request.getParameter("action");
+		if(action != null){
+			if(action.equals("addCart"))
+				addCart(request, response);
 		}
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticlePageView.jsp");
-		dispatcher.forward(request, response);
+		else{
+			String nome = request.getParameter("nome");
+			String marca = request.getParameter("marca");
+			boolean isGlasses;
+
+			try {
+				isGlasses = model.isGlasses(nome,marca);
+				if(isGlasses)
+					request.setAttribute("occhiali", model.doRetrieveGlasses(nome, marca));
+				else
+					request.setAttribute("lentine", model.doRetrieveAllContactLenses(nome, marca));
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticlePageView.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+
+	private void addCart(HttpServletRequest request, HttpServletResponse response) {
+		Cart cart= (Cart) request.getSession().getAttribute("cart");
+		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
+		if (cart == null && admin == null) {
+			cart = new Cart();
+			request.getSession().setAttribute("cart", cart);
+		}
+		if(admin == null)
+		{
+			String nome = request.getParameter("nome");
+			String marca = request.getParameter("marca");
+			String gradazione = request.getParameter("gradazione");
+			try {
+				if(gradazione == null)
+					cart.addProduct(model.doRetrieveGlasses(nome, marca));	
+				else{
+					double g = Double.parseDouble(gradazione);
+					cart.addProduct(model.doRetrieveContactLenses(nome, marca, g));	
+				}
+			} catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

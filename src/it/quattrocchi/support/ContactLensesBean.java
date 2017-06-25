@@ -65,6 +65,15 @@ public class ContactLensesBean extends ArticleBean {
 		this.numeroPezziNelPacco = numeroPezziNelPacco;
 	}
 
+	public boolean equals(Object o)
+	{
+		ContactLensesBean c = (ContactLensesBean) o;
+		if(c.getNome().equals(nome) && c.getMarca().equals(marca) && c.getGradazione() == (gradazione))
+			return true;
+		else
+			return false;
+	}
+	
 	private String nome, marca, colore, tipologia;
 	private double gradazione, raggio, diametro;
 	private int numeroPezziNelPacco;
