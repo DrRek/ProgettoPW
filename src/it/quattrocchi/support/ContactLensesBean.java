@@ -8,19 +8,7 @@ public class ContactLensesBean extends ArticleBean {
 		gradazione=0;
 		raggio=0;
 		diametro=0;
-	}
-	
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getMarca() {
-		return marca;
-	}
-	public void setMarca(String marca) {
-		this.marca = marca;
+		numeroPezziNelPacco=0;
 	}
 	public double getGradazione() {
 		return gradazione;
@@ -68,13 +56,13 @@ public class ContactLensesBean extends ArticleBean {
 	public boolean equals(Object o)
 	{
 		ContactLensesBean c = (ContactLensesBean) o;
-		if(c.getNome().equals(nome) && c.getMarca().equals(marca) && c.getGradazione() == (gradazione))
+		if(c.getNome().equals(super.getNome()) && c.getMarca().equals(super.getMarca()) && c.getGradazione() == (gradazione))
 			return true;
 		else
 			return false;
 	}
 	
-	private String nome, marca, colore, tipologia;
+	private String colore, tipologia;
 	private double gradazione, raggio, diametro;
 	private int numeroPezziNelPacco;
 }

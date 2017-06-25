@@ -1,32 +1,8 @@
 $(document).ready(function() {
-	$("#submitOcchialiSearch").click(function(event){
-		$("#daCercare").val()
-		$.ajax({
-			type: "GET",
-			url: "article",
-			data: {action: ""},
-			dataType: "json",
-			success: function(responseText) {
-				//sistema todo
-			}
-		})
-	});
-
-	$(".specificiPerLentine").hide();
-	$('select[name=tipo]').change(function(){	
-		if($(this).val()=="O"){
-			$(".specificiPerLentine").hide();
-			$(".specificiPerOcchiali").show();
-		} else {
-			$(".specificiPerOcchiali").hide();
-			$(".specificiPerLentine").show();
-		}
-	});
-	
-	$("#submito").click(function(event){
+	$("#advancedSearch").click(function(event){
 		//qui dovrei validare gli input
 		alert("cli");
-		/*var tipo = $('select[name=tipo]').val();
+		var tipo = $('select[name=tipo]').val();
 		var daCercare = $('input[name=daCercare]').val();
 		var marca = $('select[name=marca]').val();
 		var prezzoMin = $('input[name=prezzoMin]').val();
@@ -79,6 +55,6 @@ $(document).ready(function() {
 	    			});
 				}
 			})
-		}*/
+		}
 	});
 });

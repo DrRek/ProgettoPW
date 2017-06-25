@@ -63,8 +63,8 @@
 							    url: "articlePage",
 							    data: 
 								    { 	action: "addCart",
-								    	nome:("#nome").val(),
-								    	marca:("#marca").val(),
+								    	nome:$("#nome").html(),
+								    	marca:$("#marca").html(),
 								    	gradazione:$('#gradazione').find(":selected").attr('value')
 								    },
 							    dataType: "json",

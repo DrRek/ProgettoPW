@@ -68,8 +68,9 @@ public class ArticlePageControl extends HttpServlet {
 			String marca = request.getParameter("marca");
 			String gradazione = request.getParameter("gradazione");
 			try {
-				if(gradazione == null)
-					cart.addProduct(model.doRetrieveGlasses(nome, marca));	
+				if(gradazione == null){
+					cart.addProduct(model.doRetrieveGlasses(nome, marca));
+				}
 				else{
 					double g = Double.parseDouble(gradazione);
 					cart.addProduct(model.doRetrieveContactLenses(nome, marca, g));	

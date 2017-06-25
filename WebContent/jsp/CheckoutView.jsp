@@ -54,7 +54,7 @@
 			</tr>
 			<%
 				List<CartArticle> prodcart = cart.getProducts();
-					for (CartArticle beancart : prodcart) {
+				for (CartArticle beancart : prodcart) {
 			%>
 			<tr>
 				<td><%=beancart.getArticle().getNome()%></td>
