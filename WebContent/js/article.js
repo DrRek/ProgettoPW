@@ -2,7 +2,10 @@ $(document).ready(function() {
 	$("#advancedSearch").click(function(event){
 		//qui dovrei validare gli input
 		var tipo = $('select[name=tipo]').val();
-		var daCercare = $('input[name=daCercare]').val();
+		var daCercare = $('input[name=daCercare1]').val();
+		if(daCercare==null || daCercare.length <= 0 ){
+			daCercare = $('input[name=daCercare]').val();
+		}
 		var marca = $('select[name=marca]').val();
 		var prezzoMin = $('input[name=prezzoMin]').val();
 		var prezzoMax = $('input[name=prezzoMax]').val();
@@ -20,11 +23,16 @@ $(document).ready(function() {
 					sesso: sesso,
 					colore: colore
 				},
-				dataType: "json",
+				dataType: "text",
+		        error: function (xhr, status) {
+		            alert(status);
+		        },
 				success: function(responseText) {
+			        console.log("uaua");
+			        responseText = eval(responseText);
 			    	$.each(responseText, function(i, articleObject) {
-	    	 			$("#demos").append(articleObject.nome + "<br>");
-	    			});
+			    		$("#demos").html(articleObject.nome + "<br>");
+			    	});
 				}
 			})
 		} else {
@@ -57,3 +65,7 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function magic(responseText){
+	
+};

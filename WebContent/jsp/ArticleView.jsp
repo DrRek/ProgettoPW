@@ -198,40 +198,13 @@
 
 	</div>
 	<div>
-		<br> <br>Questo che segue è il primo tentativo di luca di
-		usare ajax<br>Verrà rimosso a breve<br> <input type="button"
-			id="test" value="primo tentativo">
-		<h6 id="demo"></h6>
-		<script>
-			$(document).ready(function() 
-			{
-				  $("#test").click(function(event)
-						  
-					{
-					  $.ajax({
-						    type: "GET",
-						    url: "article",
-						    data: { action: "ajax"},
-						    dataType: "json",
-						    success: function (responseText) {
-						    	$.each(responseText, function(i, articleObject) {
-				    	 			$("#demo").append(articleObject.nome + "<br>");
-				    			});
-						    }
-
-						});
-				  	});
-					
-			})
-		</script>
-
 		<div id='daMettereASinistra'>
 			<select name="tipo">
 					<option selected value="O">Occhiale</option>
 					<option value="L">Lenti a contatto</option>
 			</select>
-			<label for="daCercare">Da cercare:</label>
-			<input type="text" name="daCercare" <%if (daCercare != null) {%> value="<%=daCercare%>" <%}%> />
+			<label for="daCercare1">Da cercare:</label>
+			<input type="text" name="daCercare1" <%if (daCercare != null) {%> value="<%=daCercare%>" <%}%> />
 			<label for="marca">Marca:</label>
 			<select name="marca">
 				<option selected value="">Tutte</option>
