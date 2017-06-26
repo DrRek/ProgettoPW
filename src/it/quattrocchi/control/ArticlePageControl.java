@@ -33,6 +33,7 @@ public class ArticlePageControl extends HttpServlet {
 		if(action != null){
 			if(action.equals("addCart"))
 				addCart(request, response);
+			return;
 		}
 		else{
 			String nome = request.getParameter("nome");

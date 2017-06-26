@@ -49,13 +49,10 @@
 								    	nome:$("#oNome").html(),
 								    	marca:$("#oMarca").html(),
 								    },
-							    dataType: "json",
-							    success: function (responseText) {
-							    	/** questa cosa quaggiù non funziona ma è un'idea
+							    success: function () {
 							    	var s = $("#count").html();
 							    	var num = parseInt(s);
-							    	$("#count").html(num++);
-							    	**/
+							    	$("#count").html(num+1);
 							    }
 	
 							});
@@ -82,27 +79,25 @@
 		ArticleBean l = lentine.get(0);
 	%>
 		<script>
-		$(document).ready(function() 
-				{
-					  $("#lAddCart").click(function(event)
-						{
-						  $.ajax({
-							    type: "POST",
-							    url: "articlePage",
-							    data: 
-								    { 	action: "addCart",
-								    	nome:$("#lNome").html(),
-								    	marca:$("#lMarca").html(),
+		$(document).ready(function(){
+					$("#lAddCart").click(function(event){
+						$.ajax({
+							  type: "POST",
+							  url: "articlePage",
+							  data: 
+								  { 	action: "addCart",
+							 	 	 	nome:$("#lNome").html(),
+						    			marca:$("#lMarca").html(),
 								    	gradazione:$('#gradazione').find(":selected").attr('value')
 								    },
-							    dataType: "json",
-							    success: function (responseText) {
-							    	//bisogna aggiornare il count dell'header
-							    }
+							  success: function () {
+								  var s = $("#count").html();
+								  var num = parseInt(s);
+								  $("#count").html(num+1);
+							  }
 	
-							});
-					  	});
-						
+						  });
+					  })
 				})
 	</script>
 		<h1 id="lNome"><%=l.getNome() %></h1>
