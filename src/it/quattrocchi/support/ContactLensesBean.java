@@ -55,11 +55,14 @@ public class ContactLensesBean extends ArticleBean {
 
 	public boolean equals(Object o)
 	{
-		ContactLensesBean c = (ContactLensesBean) o;
-		if(c.getNome().equals(super.getNome()) && c.getMarca().equals(super.getMarca()) && c.getGradazione() == (gradazione))
-			return true;
-		else
-			return false;
+		if(o.getClass().getName().equalsIgnoreCase("it.quattrocchi.support.ContactLensesBean")){
+			ContactLensesBean c = (ContactLensesBean) o;
+			if(c.getNome().equals(super.getNome()) && c.getMarca().equals(super.getMarca()) && c.getGradazione() == (gradazione))
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 	
 	private String colore, tipologia;

@@ -38,11 +38,14 @@ public class GlassesBean extends ArticleBean{
 
 	public boolean equals(Object o)
 	{
-		GlassesBean c = (GlassesBean) o;
-		if(c.getNome().equals(super.getNome()) && c.getMarca().equals(super.getMarca()))
-			return true;
-		else
-			return false;
+		if(o.getClass().getName().equalsIgnoreCase("it.quattrocchi.support.GlassesBean")){
+			GlassesBean c = (GlassesBean) o;
+			if(c.getNome().equals(super.getNome()) && c.getMarca().equals(super.getMarca()))
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 	private String descrizione, sesso, img2, img3;

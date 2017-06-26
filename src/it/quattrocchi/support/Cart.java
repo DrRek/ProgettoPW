@@ -9,11 +9,14 @@ public class Cart {
 	public void addProduct(ArticleBean product) {
 		boolean found = false;
 		for (CartArticle p: products){
-			if(product.equals(p.getArticle()))
-				p.aggiungi(); found = true;
+			if(product.equals(p.getArticle())){
+				p.aggiungi(); 
+				found = true;
+			}
 		}
-		if(!found)
+		if(!found){
 			products.add(new CartArticle(product,1));
+		}
 	}	
 
 	public void deleteProduct(ArticleBean product) {
