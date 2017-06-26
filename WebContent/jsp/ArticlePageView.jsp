@@ -36,9 +36,32 @@
 	if (lentine == null && occhiali != null)
 	{
 		%>
+		<script>
+		$(document).ready(function() 
+				{
+					  $("#oAddCart").click(function(event)
+						{
+						  $.ajax({
+							    type: "POST",
+							    url: "articlePage",
+							    data: 
+								    { 	action: "addCart",
+								    	nome:$("#oNome").html(),
+								    	marca:$("#oMarca").html(),
+								    },
+							    dataType: "json",
+							    success: function (responseText) {
+							    	//bisogna aggiornare il count dell'header
+							    }
+	
+							});
+					  	});
+						
+				})
+	</script>
 
-		<h1 id="nome"><%=occhiali.getNome() %></h1>
-		<h2 id="marca"><%=occhiali.getMarca() %></h2>
+		<h1 id="oNome"><%=occhiali.getNome() %></h1>
+		<h2 id="oMarca"><%=occhiali.getMarca() %></h2>
 		<h4>Prezzo:</h4>
 		<p><%=occhiali.getPrezzo() %></p>
 		<h4>Descrizione:</h4>
@@ -47,6 +70,7 @@
 		<p><%=((GlassesBean) occhiali).getSesso() %></p>
 		<h4>Numero pezzi disponibili:</h4>
 		<p><%=occhiali.getDisponibilita() %></p>
+		<input type="submit" id="oAddCart" value="add to cart"/>
 		<%
 	}
 	else if(occhiali == null && lentine != null)
@@ -56,15 +80,15 @@
 		<script>
 		$(document).ready(function() 
 				{
-					  $("#addCart").click(function(event)
+					  $("#lAddCart").click(function(event)
 						{
 						  $.ajax({
 							    type: "POST",
 							    url: "articlePage",
 							    data: 
 								    { 	action: "addCart",
-								    	nome:$("#nome").html(),
-								    	marca:$("#marca").html(),
+								    	nome:$("#lNome").html(),
+								    	marca:$("#lMarca").html(),
 								    	gradazione:$('#gradazione').find(":selected").attr('value')
 								    },
 							    dataType: "json",
@@ -77,8 +101,8 @@
 						
 				})
 	</script>
-		<h1 id="nome"><%=l.getNome() %></h1>
-		<h2 id="marca"><%=l.getMarca() %></h2>
+		<h1 id="lNome"><%=l.getNome() %></h1>
+		<h2 id="lMarca"><%=l.getMarca() %></h2>
 		<h4>Prezzo</h4>
 		<p><%=l.getPrezzo()%></p>
 		<h4>Tipologia:</h4>
@@ -104,7 +128,7 @@
 
 			<%
 				}%>
-		</select> <input type="submit" id="addCart" value="add to cart"/>
+		</select> <input type="submit" id="lAddCart" value="add to cart"/>
 
 
 
