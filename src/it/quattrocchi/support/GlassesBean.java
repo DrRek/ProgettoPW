@@ -36,5 +36,14 @@ public class GlassesBean extends ArticleBean{
 		this.img3 = img3;
 	}
 
+	public boolean equals(Object o)
+	{
+		GlassesBean c = (GlassesBean) o;
+		if(c.getNome().equals(super.getNome()) && c.getMarca().equals(super.getMarca()))
+			return true;
+		else
+			return false;
+	}
+
 	private String descrizione, sesso, img2, img3;
 }

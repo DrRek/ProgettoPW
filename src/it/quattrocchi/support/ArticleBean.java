@@ -60,9 +60,7 @@ public class ArticleBean {
 
 	public boolean equals(Object o)
 	{
-		if(o.getClass().getName().equals("GlassesBean") ||
-				o.getClass().getName().equals("ContactLensesBean") ||
-				o.getClass().getName().equals("ArticleBean") )
+		if(o.getClass().getName().equals("GlassesBean") || o.getClass().getName().equals("ContactLensesBean") || o.getClass().getName().equals("ArticleBean") )
 		{
 			if(((ArticleBean)o).getTipo().equalsIgnoreCase("O") && tipo.equalsIgnoreCase("O"))
 			{
