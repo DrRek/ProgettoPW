@@ -58,52 +58,45 @@ public class ArticleControl extends HttpServlet {
 					}
 			}
 		}
-		String async = request.getParameter("async");
-		if(async!=null&&async.equalsIgnoreCase("true")){
-			String daCercare = request.getParameter("daCercare");
-			if(daCercare!=null&&!daCercare.equalsIgnoreCase("")){
-				String tipo = request.getParameter("tipo");
-				String sort = request.getParameter("sort");
-				try{
-					if(tipo==null){
-						response.setContentType("application/json");
-						response.setHeader("Cache-Control", "no-cache");
-						response.getWriter().write(new Gson().toJson(model.doRetrieve(daCercare)));
-						return;
-					} else if(tipo.equalsIgnoreCase("O")){
-						String marca = request.getParameter("marca");
-						String prezzoMin = request.getParameter("prezzoMin");
-						String prezzoMax = request.getParameter("prezzoMax");
-						String sesso = request.getParameter("sesso");
-						String colore = request.getParameter("colore");
-						response.setContentType("application/json");
-						response.setHeader("Cache-Control", "no-cache");
-						response.getWriter().write(new Gson().toJson(model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, sort)));
-						return;
-					} else if(tipo.equalsIgnoreCase("L")){
-						String marca = request.getParameter("marca");
-						String prezzoMin = request.getParameter("prezzoMin");
-						String prezzoMax = request.getParameter("prezzoMax");
-						String gradazione = request.getParameter("gradazione");
-						String tipologia = request.getParameter("tipologia");
-						String raggio = request.getParameter("raggio");
-						String diametro = request.getParameter("diametro");
-						String colore = request.getParameter("colore");
-						response.setContentType("application/json");
-						response.setHeader("Cache-Control", "no-cache");
-						response.getWriter().write(new Gson().toJson(model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, sort)));
-						return;
-					}
-				} catch (SQLException e){
-					e.printStackTrace();
-				}
+		
+		String toDo = request.getParameter("toDo");
+		if(toDo!=null){
+			if(toDo.equalsIgnoreCase("searchFromOtherPage")){
+				request.setAttribute("daCercare", request.getParameter("daCercare"));
 			}else{
-				try {
+				try{
 					response.setContentType("application/json");
 					response.setHeader("Cache-Control", "no-cache");
-					response.getWriter().write(new Gson().toJson(model.doRetrieveAll(null)));
+					String daCercare = request.getParameter("daCercare");
+					if(toDo.equalsIgnoreCase("asyncGenericSearch")){
+						if(daCercare==null||daCercare.equalsIgnoreCase("")){
+							response.getWriter().write(new Gson().toJson(model.doRetrieveAll(null)));
+						}else{
+							response.getWriter().write(new Gson().toJson(model.doRetrieve(daCercare)));
+						}
+					} else if(toDo.equalsIgnoreCase("asyncSpecificSearch")){
+						String tipo = request.getParameter("tipo");
+						if(tipo.equalsIgnoreCase("O")){
+							String marca = request.getParameter("marca");
+							String prezzoMin = request.getParameter("prezzoMin");
+							String prezzoMax = request.getParameter("prezzoMax");
+							String sesso = request.getParameter("sesso");
+							String colore = request.getParameter("colore");
+							response.getWriter().write(new Gson().toJson(model.doRetrieveGlasses(daCercare, marca, prezzoMin, prezzoMax, sesso, colore, null)));
+						} else if(tipo.equalsIgnoreCase("L")){
+							String marca = request.getParameter("marca");
+							String prezzoMin = request.getParameter("prezzoMin");
+							String prezzoMax = request.getParameter("prezzoMax");
+							String gradazione = request.getParameter("gradazione");
+							String tipologia = request.getParameter("tipologia");
+							String raggio = request.getParameter("raggio");
+							String diametro = request.getParameter("diametro");
+							String colore = request.getParameter("colore");
+							response.getWriter().write(new Gson().toJson(model.doRetrieveContactLenses(daCercare, marca, prezzoMin, prezzoMax, gradazione, tipologia, raggio, diametro, colore, null)));
+						}
+					}
 					return;
-				} catch (SQLException e) {
+				} catch(Exception e){
 					e.printStackTrace();
 				}
 			}

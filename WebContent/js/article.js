@@ -1,14 +1,15 @@
 $(document).ready(function() {
 	
 	initialize();
+	setSearchField();
 	
 	function initialize(){
 		$.ajax({
 			type: "GET",
 			url: "article",
 			data: {
-				async: 'true',
-				daCercare: $('input[name=daCercare]').val()
+				toDo: 'asyncGenericSearch',
+				daCercare: $('input[name=daCercare1]').val()
 			},
 			dataType: "json",
 	        error: function (xhr, status, errorThrown) {
@@ -38,7 +39,7 @@ $(document).ready(function() {
 				type: "GET",
 				url: "article",
 				data: {
-					async: 'true',
+					toDo: 'asyncSpecificSearch',
 					daCercare: daCercare,
 					tipo: tipo,
 					marca: marca,
@@ -66,7 +67,7 @@ $(document).ready(function() {
 				type: "GET",
 				url: "article",
 				data: {
-					async: 'true',
+					toDo: 'asyncSpecificSearch',
 					daCercare: daCercare,
 					tipo: tipo,
 					marca: marca,
@@ -98,3 +99,13 @@ function formatData(responseText){
     	toAppend+='</table>';
     	$("#demos").html(toAppend);
 };
+
+function setSearchField(){
+	if($('select[name=tipo]').val() == "O"){
+		$(".specificiPerOcchiali").show();
+		$(".specificiPerLentine").hide();
+	} else {
+		$(".specificiPerOcchiali").hide();
+		$(".specificiPerLentine").show();
+	}
+}

@@ -28,8 +28,7 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -40,7 +39,7 @@
 	<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
 	<div>
 		<div id='daMettereASinistra'>
-			<select name="tipo">
+			<select name="tipo" onchange="setSearchField()">
 					<option selected value="O">Occhiale</option>
 					<option value="L">Lenti a contatto</option>
 			</select>

@@ -26,6 +26,8 @@
 	
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default ">
@@ -43,7 +45,8 @@
 				<li><a href="article?action=category&type=occhiale">Occhiali</a>
 				<li><a href="article?action=category&type=lente">Lentine</a>
 				<li>
-					<form name="ricerca" target="article" method="get">
+					<form action="article" method="get">
+						<input type="hidden" name="toDo" value="searchFromOtherPage">
 						<input name="daCercare" placeholder="Cerca" type="text"/>
 					</form>
 			</ul>

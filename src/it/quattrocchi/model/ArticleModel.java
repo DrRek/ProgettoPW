@@ -543,19 +543,19 @@ public class ArticleModel {
 				+ "on a.nome=o.nome and a.marca=o.marca";
 		sql+= " where ((a.Nome LIKE '%"+daCercare+"%') or (o.Descrizione LIKE '%"+daCercare+"%') or (a.Marca LIKE '%"+daCercare+"%'))";
 		if(marca!=null&&!marca.equalsIgnoreCase("")){
-			sql+=" and articolo.marca='"+marca+"'";
+			sql+=" and a.marca='"+marca+"'";
 		}
 		if(prezzoMin!=null&&!prezzoMin.equalsIgnoreCase("0")&&!prezzoMin.equalsIgnoreCase("")){
-			sql+=" and articolo.prezzo>="+prezzoMin;
+			sql+=" and a.prezzo>="+prezzoMin;
 		}
 		if(prezzoMax!=null&&!prezzoMax.equalsIgnoreCase("Max")&&!prezzoMax.equalsIgnoreCase("")){
-			sql+=" and articolo.prezzo<="+prezzoMax;
+			sql+=" and a.prezzo<="+prezzoMax;
 		}
 		if(sesso!=null&&!sesso.equalsIgnoreCase("")&&!sesso.equalsIgnoreCase("any")){
-			sql+=" and (occhiale.sesso=U or occhiale.sesso='"+sesso+"')";
+			sql+=" and (o.sesso='U' or o.sesso='"+sesso+"')";
 		}
 		if(colore!=null&&!colore.equalsIgnoreCase("")){ //cerca nella descrizione riferimenti al colore
-			sql+=" and occhiale.descrizione='%"+colore+"'%";
+			sql+=" and o.descrizione LIKE '%"+colore+"%'";
 		}
 		if(sort!=null&&!sort.equalsIgnoreCase("")){
 			sql+=" order by '%"+sort+"'";
@@ -564,7 +564,7 @@ public class ArticleModel {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
-
+			
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
 				ArticleBean bean = new ArticleBean();
@@ -594,37 +594,38 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		String sql = "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1 "
-				+ "from articolo a right join lentine l "
-				+ "on a.nome=l.nome and a.marca=l.marca ";
-		sql+= "where ((a.Nome LIKE '%"+daCercare+"%') or (a.Marca LIKE '%"+daCercare+"%'))";
+		
+		String sql = "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1 from articolo a join (select l.nome, l.marca, l.tipologia, l.numeroPezziNelPacco, l.raggio, l.diametro, l.colore from lentine l right join disponibilita d on l.nome=d.nome and l.marca=d.marca where d.NumeroPezziDisponibili>0";
+		if(gradazione!=null&&!gradazione.equalsIgnoreCase("")){
+			sql+=" and d.gradazione="+gradazione;
+		}
+		sql+=") as ld on a.nome=ld.nome and a.marca=ld.marca";
+		
+		sql+= " where ((a.Nome LIKE '%"+daCercare+"%') or (a.Marca LIKE '%"+daCercare+"%'))";
 		
 		if(marca!=null&&!marca.equalsIgnoreCase("")){
-			sql+=" and articolo.marca='"+marca+"'";
+			sql+=" and a.marca='"+marca+"'";
 		}
 		if(prezzoMin!=null&&!prezzoMin.equalsIgnoreCase("0")&&!prezzoMin.equalsIgnoreCase("")){
-			sql+=" and articolo.prezzo>="+prezzoMin;
+			sql+=" and a.prezzo>="+prezzoMin;
 		}
 		if(prezzoMax!=null&&!prezzoMax.equalsIgnoreCase("Max")&&!prezzoMax.equalsIgnoreCase("")){
-			sql+=" and articolo.prezzo<="+prezzoMax;
-		}
-		if(gradazione!=null&&!gradazione.equalsIgnoreCase("")){
-			sql+=" and disponibilita.gradazione="+gradazione;
+			sql+=" and a.prezzo<="+prezzoMax;
 		}
 		if(tipologia!=null&&!tipologia.equalsIgnoreCase("")){
-			sql+=" and disponibilita.gradazione='"+tipologia+"'";
+			sql+=" and ld.tipologia='"+tipologia+"'";
 		}
 		if(raggio!=null&&!raggio.equalsIgnoreCase("")){
-			sql+=" and lentine.raggio="+raggio;
+			sql+=" and ld.raggio="+raggio;
 		}
 		if(diametro!=null&&!diametro.equalsIgnoreCase("")){
-			sql+=" and lentine.diametro="+diametro;
+			sql+=" and ld.diametro="+diametro;
 		}
 		if(colore!=null&&!colore.equalsIgnoreCase("")){
-			sql+=" and lentine.colore='"+colore+"'";
+			sql+=" and ld.colore='"+colore+"'";
 		}
 		if(sort!=null&&!sort.equalsIgnoreCase("")){
-			sql+=" order by '%"+sort+"'";
+			sql+=" order by '"+sort+"'";
 		}
 		sql+=";";
 
