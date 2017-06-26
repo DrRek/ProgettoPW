@@ -1,9 +1,31 @@
 $(document).ready(function() {
+	
+	initialize();
+	
+	function initialize(){
+		$.ajax({
+			type: "GET",
+			url: "article",
+			data: {
+				async: 'true',
+				daCercare: $('input[name=daCercare]').val()
+			},
+			dataType: "json",
+	        error: function (xhr, status, errorThrown) {
+	        	 console.log(JSON.stringify(xhr)); 
+	        	 console.log("AJAX error: " + status + ' : ' + errorThrown); 
+	        },
+			success: function(responseText) {
+				formatData(responseText);
+			}
+		})
+	}
+	
 	$("#advancedSearch").click(function(event){
 		//qui dovrei validare gli input
-		var tipo = $('select[name=tipo]').val();
-		var daCercare = $('input[name=daCercare1]').val();
-		if(daCercare==null || daCercare.length <= 0 ){
+	    var tipo = $('select[name=tipo]').val();
+        var daCercare = $('input[name=daCercare1]').val();
+	    if(daCercare==null || daCercare.length == 0 ){
 			daCercare = $('input[name=daCercare]').val();
 		}
 		var marca = $('select[name=marca]').val();
@@ -15,7 +37,9 @@ $(document).ready(function() {
 			$.ajax({
 				type: "GET",
 				url: "article",
-				data: {daCercare: daCercare,
+				data: {
+					async: 'true',
+					daCercare: daCercare,
 					tipo: tipo,
 					marca: marca,
 					prezzoMin: prezzoMin,
@@ -23,16 +47,13 @@ $(document).ready(function() {
 					sesso: sesso,
 					colore: colore
 				},
-				dataType: "text",
-		        error: function (xhr, status) {
-		            alert(status);
+				dataType: "json",
+		        error: function (xhr, status, errorThrown) {
+		        	 console.log(JSON.stringify(xhr)); 
+		        	 console.log("AJAX error: " + status + ' : ' + errorThrown); 
 		        },
 				success: function(responseText) {
-			        console.log("uaua");
-			        responseText = eval(responseText);
-			    	$.each(responseText, function(i, articleObject) {
-			    		$("#demos").html(articleObject.nome + "<br>");
-			    	});
+					formatData(responseText);
 				}
 			})
 		} else {
@@ -44,7 +65,9 @@ $(document).ready(function() {
 			$.ajax({
 				type: "GET",
 				url: "article",
-				data: {daCercare: daCercare,
+				data: {
+					async: 'true',
+					daCercare: daCercare,
 					tipo: tipo,
 					marca: marca,
 					prezzoMin: prezzoMin,
@@ -57,15 +80,21 @@ $(document).ready(function() {
 				},
 				dataType: "json",
 				success: function(responseText) {
-			    	$.each(responseText, function(i, articleObject) {
-	    	 			$("#demos").append(articleObject.nome + "<br>");
-	    			});
+					formatData(responseText);
 				}
 			})
 		}
 	});
 });
 
-function magic(responseText){
-	
+function formatData(responseText){
+		var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th><a href="article?sort=nome">Nome</a></th><th><a href="article?sort=marca">Marca</a></th><th><a href="article?sort=tipo">Tipo</a></th><th><a href="article?sort=prezzo">Prezzo</a></th></tr></thead>';
+    	$.each(responseText, function(i, articleObject) {
+    		toAppend+='<tr><td><a href="articlePage?nome='+articleObject.nome+'&marca='+articleObject.marca+'">'+articleObject.nome+'</a></td>';
+    		toAppend+='<td>'+articleObject.marca+'</td>';
+    		toAppend+='<td>'+articleObject.tipo+'</td>';
+    		toAppend+='<td>'+articleObject.prezzo+'</td></tr>';
+        });
+    	toAppend+='</table>';
+    	$("#demos").html(toAppend);
 };
