@@ -60,7 +60,7 @@
 					<%
 						} else {
 					%>
-					<li><a href="checkout?action=checkout"><%=crt.getNumberOfProducts()%></a></li>
+					<li><a id="count" href="checkout?action=checkout"><%=crt.getNumberOfProducts()%></a></li>
 					<%
 						}
 						}

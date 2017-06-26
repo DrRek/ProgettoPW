@@ -51,7 +51,11 @@
 								    },
 							    dataType: "json",
 							    success: function (responseText) {
-							    	//bisogna aggiornare il count dell'header
+							    	/** questa cosa quaggiù non funziona ma è un'idea
+							    	var s = $("#count").html();
+							    	var num = parseInt(s);
+							    	$("#count").html(num++);
+							    	**/
 							    }
 	
 							});
@@ -136,28 +140,5 @@
 	}
 	%>
 	</div>
-	<!-- 
-	<script>
-	$(document).ready(function() 
-			{
-				  $("#addCart").click(function(event)
-					{
-					  $.ajax({
-						    type: "POST",
-						    url: "article",
-						    data: { action: "addCart"},
-						    dataType: "json",
-						    success: function (responseText) {
-						    	$.each(responseText, function(i, articleObject) {
-				    	 			$("#demo").append(articleObject.nome + "<br>");
-				    			});
-						    }
-
-						});
-				  	});
-					
-			})
-	</script>
-	-->
 </body>
 </html>
