@@ -258,7 +258,7 @@ public class ArticleModel {
 			stm = conn.prepareStatement(query);
 			stm.setString(1, nome);
 			stm.setString(2, marca);
-
+			
 			ResultSet rs = stm.executeQuery();
 
 			if(rs.next()) {
@@ -538,9 +538,9 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		String sql = "select a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili"
+		String sql = "select a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
 				+ "from articolo a right join occhiale o "
-				+ "on a.nome=occhiale.nome and a.marca=occhiale.marca";
+				+ "on a.nome=o.nome and a.marca=o.marca";
 		sql+= " where ((a.Nome LIKE '%"+daCercare+"%') or (o.Descrizione LIKE '%"+daCercare+"%') or (a.Marca LIKE '%"+daCercare+"%'))"
 				+ "order by a.nome";
 		if(marca!=null&&!marca.equalsIgnoreCase("")){
@@ -565,6 +565,7 @@ public class ArticleModel {
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
+
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
 				ArticleBean bean = new ArticleBean();
