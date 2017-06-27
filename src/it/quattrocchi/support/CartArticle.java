@@ -14,13 +14,6 @@ public class CartArticle{
 		numero++;
 	}
 	
-	public void rimuovi(){
-		if(numero - 1 < 0)
-			//dovrebbe lanciare eccezione
-			return;
-		numero--;
-	}
-	
 	public void aggiorna(int n){
 		if((n < 0) || (n > articolo.getDisponibilita()))
 			//dovrebbe lanciare eccezione
@@ -29,8 +22,7 @@ public class CartArticle{
 			numero = n;
 	}
 	
-	public ArticleBean getArticle()
-	{
+	public ArticleBean getArticle(){
 		return articolo;
 	}
 	

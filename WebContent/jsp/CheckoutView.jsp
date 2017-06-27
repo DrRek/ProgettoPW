@@ -46,7 +46,7 @@
 	<%
 		} else {
 	%>
-		<script>
+	<script>
 		$(document).ready(
 				function() {
 
@@ -54,62 +54,105 @@
 							function() {
 								var valore = $(this).val();
 								var val = parseInt(valore);
-								if(val > 0)
-								{
-									var nomeArt = $(this).parent().siblings(".nomeArt").html();
-									var marcaArt = $(this).parent().siblings(".marcaArt").html();
-									var tipoArt =  $(this).parent().siblings(".tipoArt").html();
-									var prezzo = $(this).parent().siblings(".prezzoArt").html();
+								if (val > 0) {
+									var nomeArt = $(this).parent().siblings(
+											".nomeArt").html();
+									var marcaArt = $(this).parent().siblings(
+											".marcaArt").html();
+									var tipoArt = $(this).parent().siblings(
+											".tipoArt").html();
+									var prezzo = $(this).parent().siblings(
+											".prezzoArt").html();
 									var prezzoArt = parseFloat(prezzo);
-									
-									if(tipoArt == "O" || tipoArt =="o")
-									{
+
+									if (tipoArt == "O" || tipoArt == "o") {
 										$.ajax({
-											  type: "POST",
-											  url: "checkout",
-											  data: 
-												  { 	action: "updateCart",
-											 	 	 	nome: nomeArt,
-										    			marca: marcaArt,
-										    			numero: val
-												    },
-											  success: function () {
-												  //aggiornare prezzo e numero sopra
-												  //non va
-												  $(this).parent().siblings(".prezzoArt").html(val * prezzoArt);
-												  
-											  }
-					
-										  });
-									}
-									else
-									{
-										var gradazioneArt = $(this).parent().siblings(".gradazioneArt").html();
+											type : "POST",
+											url : "checkout",
+											data : {
+												action : "updateCart",
+												nome : nomeArt,
+												marca : marcaArt,
+												numero : val
+											},
+											success : function() {
+												//aggiornare prezzo e numero sopra
+
+											}
+
+										});
+									} else {
+										var gradazioneArt = $(this).parent()
+												.siblings(".gradazioneArt")
+												.html();
 										$.ajax({
-											  type: "POST",
-											  url: "checkout",
-											  data: 
-												  { 	action: "updateCart",
-											 	 	 	nome: nomeArt,
-										    			marca: marcaArt,
-												    	gradazione: gradazioneArt,
-												    	numero: val
-												    },
-											  success: function () {
-												 //aggiornare prezzo
-												 //non va
-												  $(this).parent().siblings(".prezzoArt").html(val * prezzoArt);
-											  }
-										  });
+											type : "POST",
+											url : "checkout",
+											data : {
+												action : "updateCart",
+												nome : nomeArt,
+												marca : marcaArt,
+												gradazione : gradazioneArt,
+												numero : val
+											},
+											success : function() {
+												//aggiornare prezzo
+											}
+										});
 									}
-									
+
 								}
+							});
+
+					$("input[name='removeCart']").click(
+							function() {
+
+								var nomeArt = $(this).parent().siblings(
+										".nomeArt").html();
+								var marcaArt = $(this).parent().siblings(
+										".marcaArt").html();
+								var tipoArt = $(this).parent().siblings(
+										".tipoArt").html();
+
+								if (tipoArt == "O" || tipoArt == "o") {
+									$.ajax({
+										type : "POST",
+										url : "checkout",
+										data : {
+											action : "removeCart",
+											nome : nomeArt,
+											marca : marcaArt
+										},
+										success : function() {
+											//aggiornare prezzo e tabella
+
+										}
+
+									});
+								} else {
+									var gradazioneArt = $(this).parent()
+											.siblings(".gradazioneArt").html();
+									$.ajax({
+										type : "POST",
+										url : "checkout",
+										data : {
+											action : "removeCart",
+											nome : nomeArt,
+											marca : marcaArt,
+											gradazione : gradazioneArt
+										},
+										success : function() {
+											//aggiornare prezzo e tabella
+										}
+									});
+								}
+
 							});
 
 				});
 	</script>
 	<div class="container">
-		<table class="table-bordered">
+		<table id="cartElements" class="table-bordered">
 			<tr>
 				<th>Tipo</th>
 				<th>Nome</th>
@@ -124,32 +167,31 @@
 					for (CartArticle beancart : prodcart) {
 			%>
 			<tr>
-				<td class ="tipoArt"><%=beancart.getArticle().getTipo()%></td>
+				<td class="tipoArt"><%=beancart.getArticle().getTipo()%></td>
 				<td class="nomeArt"><%=beancart.getArticle().getNome()%></td>
 				<td class="marcaArt"><%=beancart.getArticle().getMarca()%></td>
-				
+
 				<%
-				if(beancart.getArticle().getClass().getName().equals("it.quattrocchi.support.GlassesBean")){
-				%>				
-					<td>N/A</td>
+					if (beancart.getArticle().getClass().getName().equals("it.quattrocchi.support.GlassesBean")) {
+				%>
+				<td>N/A</td>
 				<%
-				}else{
-				%>	
-					<td class="gradazioneArt"><%=((ContactLensesBean) beancart.getArticle()).getGradazione()%></td>
+					} else {
+				%>
+				<td class="gradazioneArt"><%=((ContactLensesBean) beancart.getArticle()).getGradazione()%></td>
 				<%
-				}
-				%>	
-				
-			
+					}
+				%>
+
+
 				<td><input name="numeroPezziDisponibili" type="number" min="1"
 					value="<%=beancart.getQuantity()%>"></td>
-				
+
 				<td class="prezzoArt"><%=beancart.getPrezzo()%>€</td>
-				
+
 				<!-- il delete cart si dovrà fare con ajax -->
-				<td><a
-					href="article?action=delCart&nome=<%=beancart.getArticle().getNome()%>&marca=<%=beancart.getArticle().getMarca()%>">Delete
-						from cart</a></td>
+				<td><input type="submit" name="removeCart" value="remove" /></td>
+
 			</tr>
 			<%
 				}

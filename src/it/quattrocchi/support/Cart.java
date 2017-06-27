@@ -26,14 +26,11 @@ public class Cart {
 		}
 	}	
 	
-	public void deleteProduct(ArticleBean product) {
+	public void removeProduct(ArticleBean product) {
 		for(int i = 0; i < products.size(); i++) {
 			CartArticle p = products.get(i);
-			if(product.equals(p.getArticle())){
-				p.rimuovi();
-				if(p.getQuantity() == 0)
-					products.remove(i);
-			}		
+			if(product.equals(p.getArticle()))
+				products.remove(i);	
 		}
 	}
 

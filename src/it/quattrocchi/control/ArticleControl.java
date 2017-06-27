@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
-import it.quattrocchi.support.Cart;
 
 @WebServlet("/article")
 
@@ -31,13 +30,7 @@ public class ArticleControl extends HttpServlet {
 			throws ServletException, IOException {
 		
 		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
-		Cart cart = (Cart) request.getSession().getAttribute("cart");
-	
-		//Crea un carrello vuoto se non esiste e se non si e' admin
-		if (cart == null && admin == null) {
-			cart = new Cart();
-			request.getSession().setAttribute("cart", cart);
-		}
+
 		//In base a questo parametro viene deciso il da farsi
 		String action = request.getParameter("action");
 
@@ -95,9 +88,6 @@ public class ArticleControl extends HttpServlet {
 			}
 		}
 
-		if(admin == null)
-			request.getSession().setAttribute("cart", cart);
-
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleView.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -117,21 +107,4 @@ public class ArticleControl extends HttpServlet {
 
 
 
-	private Cart delCart(HttpServletRequest request, HttpServletResponse response, Cart cart) throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String marca = request.getParameter("marca");
-		String gradazione = request.getParameter("gradazione");
-		
-		try {
-			if(gradazione == null)
-				cart.deleteProduct(model.doRetrieveGlasses(nome, marca));
-			else{
-				double g = Double.parseDouble(gradazione);
-				cart.deleteProduct(model.doRetrieveContactLenses(nome, marca, g));	
-			}
-		} catch (SQLException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-		return cart;
-	}
 }

@@ -50,8 +50,10 @@ public class CheckoutControl extends HttpServlet {
 			if (action != null) {
 				if (action.equalsIgnoreCase("checkout"))
 					summaryCheckout(request,response);
-				if (action.equalsIgnoreCase("updateCart"))
+				else if (action.equalsIgnoreCase("updateCart"))
 					updateCart(request,response);
+				else if (action.equalsIgnoreCase("removeCart"))
+					removeCart(request,response);
 				else if (action.equalsIgnoreCase("submit")){
 					addOrder(request, response);
 					updateCatalogo(request,response);
@@ -59,6 +61,40 @@ public class CheckoutControl extends HttpServlet {
 				}
 			}
 		}
+	}
+
+	private void removeCart(HttpServletRequest request, HttpServletResponse response) {
+		Cart cart = (Cart) request.getSession().getAttribute("cart");
+		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
+		
+		//anche se non capiterà mai 
+		if (cart == null && admin == null) {
+			cart = new Cart();
+			request.getSession().setAttribute("cart", cart);
+		}
+		if(admin == null)
+		{
+			String nome =  request.getParameter("nome");
+			String marca =  request.getParameter("marca");
+			String grString = request.getParameter("gradazione");
+			
+			try{
+				if(grString != null)
+				{
+					double gradazione = Double.parseDouble(grString);
+					cart.removeProduct(aModel.doRetrieveContactLenses(nome, marca, gradazione));	
+
+				}
+				else
+					cart.removeProduct(aModel.doRetrieveGlasses(nome, marca));	
+
+			}
+			catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
+			request.getSession().setAttribute("cart", cart);
+
+		}		
 	}
 
 	private void updateCart(HttpServletRequest request, HttpServletResponse response)
