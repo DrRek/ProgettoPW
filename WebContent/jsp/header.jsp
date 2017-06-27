@@ -59,11 +59,11 @@
 					<%
 						if (crt == null) {
 					%>
-					<li><a href="checkout?action=checkout">0</a></li>
+					<li><a href="checkout">0</a></li>
 					<%
 						} else {
 					%>
-					<li><a id="count" href="checkout?action=checkout"><%=crt.getNumberOfProducts()%></a></li>
+					<li><a id="count" href="checkout"><%=crt.getNumberOfProducts()%></a></li>
 					<%
 						}
 						}

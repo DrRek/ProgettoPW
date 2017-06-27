@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CheckoutModel;
 import it.quattrocchi.support.AdminBean;
@@ -47,8 +49,8 @@ public class CheckoutControl extends HttpServlet {
 			response.sendRedirect("access");
 		else{
 			String action = request.getParameter("action");
-			if (action != null) {
-				if (action.equalsIgnoreCase("checkout"))
+			if(action!=null&&!action.equalsIgnoreCase("")){
+				if (action.equalsIgnoreCase("asyncGenericSearch"))
 					summaryCheckout(request,response);
 				else if (action.equalsIgnoreCase("updateCart"))
 					updateCart(request,response);
@@ -57,9 +59,13 @@ public class CheckoutControl extends HttpServlet {
 				else if (action.equalsIgnoreCase("submit")){
 					addOrder(request, response);
 					updateCatalogo(request,response);
-					done(request, response);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
+					dispatcher.forward(request, response);
 				}
+				return;
 			}
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
+			dispatcher.forward(request, response);
 		}
 	}
 
@@ -178,10 +184,12 @@ public class CheckoutControl extends HttpServlet {
 		}
 	}
 
-	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
-		dispatcher.forward(request, response);
+	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		Cart cart = (Cart) request.getSession().getAttribute("cart");
+		if(cart==null){
+			cart=new Cart();
+		}
+		response.getWriter().write(new Gson().toJson(cart));
 	}
 
 	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
