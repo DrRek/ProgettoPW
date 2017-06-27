@@ -100,11 +100,10 @@
 												 //non va
 												  $(this).parent().siblings(".prezzoArt").html(val * prezzoArt);
 											  }
-					
 										  });
 									}
 									
-5								}
+								}
 							});
 
 				});
