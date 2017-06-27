@@ -40,16 +40,9 @@ public class ArticleControl extends HttpServlet {
 		}
 		//In base a questo parametro viene deciso il da farsi
 		String action = request.getParameter("action");
-		//TO DO: mi sa che questo non ha più senso di esistere, poi si vede
+
 		if (action != null){
-			if (action.equalsIgnoreCase("description")){
-				return;
-			}
-			if(admin==null){
-				if (action.equalsIgnoreCase("delCart"))
-					cart = delCart(request, response, cart);
-			}
-			else{
+			if(admin!=null){
 				if (action.equalsIgnoreCase("delete"))
 					try {
 						delete(request, response);

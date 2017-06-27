@@ -19,6 +19,13 @@ public class Cart {
 		}
 	}	
 
+	public void updateProduct(ArticleBean product, int n) {
+		for (CartArticle p: products){
+			if(product.equals(p.getArticle()))
+				p.aggiorna(n); 
+		}
+	}	
+	
 	public void deleteProduct(ArticleBean product) {
 		for(int i = 0; i < products.size(); i++) {
 			CartArticle p = products.get(i);

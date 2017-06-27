@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CheckoutModel;
+import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
 import it.quattrocchi.support.CartArticle;
@@ -49,12 +50,49 @@ public class CheckoutControl extends HttpServlet {
 			if (action != null) {
 				if (action.equalsIgnoreCase("checkout"))
 					summaryCheckout(request,response);
+				if (action.equalsIgnoreCase("updateCart"))
+					updateCart(request,response);
 				else if (action.equalsIgnoreCase("submit")){
 					addOrder(request, response);
 					updateCatalogo(request,response);
 					done(request, response);
 				}
 			}
+		}
+	}
+
+	private void updateCart(HttpServletRequest request, HttpServletResponse response)
+	{
+		Cart cart = (Cart) request.getSession().getAttribute("cart");
+		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
+
+		//anche se non capiterà mai 
+		if (cart == null && admin == null) {
+			cart = new Cart();
+			request.getSession().setAttribute("cart", cart);
+		}
+		if(admin == null)
+		{
+			String nome =  request.getParameter("nome");
+			String marca =  request.getParameter("marca");
+			int numero = Integer.parseInt(request.getParameter("numero"));
+			String grString = request.getParameter("gradazione");
+			try{
+				if(grString != null)
+				{
+					double gradazione = Double.parseDouble(grString);
+					cart.updateProduct(aModel.doRetrieveContactLenses(nome, marca, gradazione), numero);	
+
+				}
+				else
+					cart.updateProduct(aModel.doRetrieveGlasses(nome, marca), numero);	
+
+			}
+			catch (SQLException e) {
+				System.out.println("Error:" + e.getMessage());
+			}
+			request.getSession().setAttribute("cart", cart);
+
 		}
 	}
 
@@ -109,28 +147,28 @@ public class CheckoutControl extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/CheckoutView.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		ArrayList<CartArticle> cArticle = cart.getProducts();
-		
+
 		for(CartArticle c : cArticle){
 			try{
-			ArticleBean art = null;
-			
-			if(aModel.isGlasses(c.getArticle().getNome(), c.getArticle().getMarca()))
-				art = aModel.doRetrieveGlasses(c.getArticle().getNome(), c.getArticle().getMarca());
-			else	
-				art = aModel.doRetrieveContactLenses(c.getArticle().getNome(), c.getArticle().getMarca(), ((ContactLensesBean) c.getArticle()).getGradazione());
-				
-			art.setDisponibilita(art.getDisponibilita()-c.getQuantity());
-			aModel.doSave(art);
-	
+				ArticleBean art = null;
+
+				if(aModel.isGlasses(c.getArticle().getNome(), c.getArticle().getMarca()))
+					art = aModel.doRetrieveGlasses(c.getArticle().getNome(), c.getArticle().getMarca());
+				else	
+					art = aModel.doRetrieveContactLenses(c.getArticle().getNome(), c.getArticle().getMarca(), ((ContactLensesBean) c.getArticle()).getGradazione());
+
+				art.setDisponibilita(art.getDisponibilita()-c.getQuantity());
+				aModel.doSave(art);
+
 			} catch (Exception e){
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 }

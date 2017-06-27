@@ -79,6 +79,7 @@ public class ArticlePageControl extends HttpServlet {
 			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
 			}
+			request.getSession().setAttribute("cart", cart);
 		}
 	}
 
