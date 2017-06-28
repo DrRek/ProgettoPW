@@ -69,7 +69,8 @@ public class CheckoutControl extends HttpServlet {
 		}
 	}
 
-	private void removeCart(HttpServletRequest request, HttpServletResponse response) {
+	private void removeCart(HttpServletRequest request, HttpServletResponse response) 
+	{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
 		
@@ -168,19 +169,6 @@ public class CheckoutControl extends HttpServlet {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	private void done(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-	{
-		if(request.getSession().getAttribute("user") == null) {
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
-			dispatcher.forward(request, response);
-		}
-		else {
-			request.getSession().removeAttribute("cart");
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
-			dispatcher.forward(request, response);
 		}
 	}
 

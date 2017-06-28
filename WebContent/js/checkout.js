@@ -2,7 +2,7 @@ $(document).ready(function() {
 		
 			initializeCart();
 		
-			$("input[name='numeroPezziDisponibili']").change(
+			$("body").on("change","input[name='numeroPezziDisponibili']",
 					function() {
 						var valore = $(this).val();
 						var val = parseInt(valore);
@@ -57,7 +57,6 @@ $(document).ready(function() {
 
 			$("body").on("click","input[name='removeCart']",
 					function() {
-
 						var nomeArt = $(this).parent().siblings(
 								".nomeArt").html();
 						var marcaArt = $(this).parent().siblings(
@@ -119,20 +118,33 @@ $(document).ready(function() {
 
 			function formatData(responseText){
 					var toAppend = '<table id="cartElements" class="table-bordered"><tr><th>Tipo</th><th>Nome</th><th>Marca</th><th>Gradazione</th><th>Numero Prodotti</th><th>Prezzo</th><th>Opzioni</th></tr>';
-			    	$.each(responseText, function(i, cartObject) {
-			    		toAppend+='<tr><td class="tipoArt">'+cartObject[0].articolo.tipo+'</td>';
-			    		toAppend+='<td class="nomeArt">'+cartObject[0].articolo.nome+'</td>';
-			    		toAppend+='<td class="marcaArt">'+cartObject[0].articolo.marca+'</td>';
-			    		if(cartObject[0].articolo.tipo == "O"){
+					var products = new Array();
+					var tot = 0;
+					products = responseText[Object.keys(responseText)[0]];
+					jQuery.each(products, function(index, prod) {
+						
+			    		toAppend+='<tr><td class="tipoArt">'+prod.articolo.tipo+'</td>';
+			    		toAppend+='<td class="nomeArt">'+prod.articolo.nome+'</td>';
+			    		toAppend+='<td class="marcaArt">'+prod.articolo.marca+'</td>';
+			    		
+			    		if(prod.articolo.tipo == "O"){
 				    		toAppend+='<td>N/A</td>';
-			    		} else{
-			    			toAppend+='<td>'+cartObject[0].articolo.gradazione+'</td>';
+			    		} 
+			    		else{
+			    			toAppend+='<td class="gradazioneArt">'+prod.articolo.gradazione+'</td>';
 			    		}
-			    		toAppend+='<td><input name="numeroPezziDisponibili" type="number" min="1"value="'+cartObject[0].numero+'"></td>';
-			    		toAppend+='<td class="prezzoArt">'+cartObject[0].articolo.prezzo*cartObject[0].numero+'€</td>';
+			    		toAppend+='<td><input name="numeroPezziDisponibili" type="number" min="1"value="'+prod.numero+'"></td>';
+			    		
+			    		var prezzo = prod.articolo.prezzo*prod.numero;
+			    		tot += prezzo;
+			    		toAppend+='<td class="prezzoArt">'+prod.articolo.prezzo*prod.numero+'€</td>';
+			    		
 			    		toAppend+='<td><input type="submit" name="removeCart" value="remove" /></td></tr>';
+			    		
+			    		
 			        });
 			    	toAppend+='</table>';
 			    	$("#cartElements").html(toAppend);
+			    	$("#tot").html("Prezzo totale: " + tot + "€" );
 			};
 });

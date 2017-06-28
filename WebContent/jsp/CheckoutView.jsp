@@ -30,9 +30,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<body>
-
-	​​​​​​​​​​​​
+<body>​​​​​​​​​​​​
 	<%@ include file="header.jsp"%>
 	<div class="container">
 		<h2>Cart</h2>
@@ -52,9 +50,7 @@
 		}
 	%>
 	<div class="container">
-		<h3>
-			Prezzo totale:
-			<%=cart.getPrezzo()%>€
+		<h3 id = "tot">
 		</h3>
 	</div>
 	<script src="js/checkout.js"></script>

@@ -91,7 +91,7 @@ $(document).ready(function() {
 function formatData(responseText){
 		var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th><a href="article?sort=nome">Nome</a></th><th><a href="article?sort=marca">Marca</a></th><th><a href="article?sort=tipo">Tipo</a></th><th><a href="article?sort=prezzo">Prezzo</a></th></tr></thead>';
     	$.each(responseText, function(i, articleObject) {
-    		console.log(articleObject)
+    		console.log(articleObject);
     		toAppend+='<tr><td><a href="articlePage?nome='+articleObject.nome+'&marca='+articleObject.marca+'">'+articleObject.nome+'</a></td>';
     		toAppend+='<td>'+articleObject.marca+'</td>';
     		toAppend+='<td>'+articleObject.tipo+'</td>';
