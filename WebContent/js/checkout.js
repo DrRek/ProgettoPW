@@ -55,7 +55,7 @@ $(document).ready(function() {
 						}
 					});
 
-			$("body").on("click","input[name='removeCart']"),
+			$("body").on("click","input[name='removeCart']",
 					function() {
 
 						var nomeArt = $(this).parent().siblings(
@@ -64,7 +64,6 @@ $(document).ready(function() {
 						".marcaArt").html();
 						var tipoArt = $(this).parent().siblings(
 						".tipoArt").html();
-
 						if (tipoArt == "O" || tipoArt == "o") {
 							$.ajax({
 								type : "POST",
@@ -92,7 +91,6 @@ $(document).ready(function() {
 									gradazione : gradazioneArt
 								},
 								success : function() {
-									alert("test")
 									initializeCart();
 								}
 							});
@@ -132,7 +130,7 @@ $(document).ready(function() {
 			    		}
 			    		toAppend+='<td><input name="numeroPezziDisponibili" type="number" min="1"value="'+cartObject[0].numero+'"></td>';
 			    		toAppend+='<td class="prezzoArt">'+cartObject[0].articolo.prezzo*cartObject[0].numero+'€</td>';
-			    		toAppend+='<td><input type="submit" name="removeCart" value="remove" /></td></tr>'
+			    		toAppend+='<td><input type="submit" name="removeCart" value="remove" /></td></tr>';
 			        });
 			    	toAppend+='</table>';
 			    	$("#cartElements").html(toAppend);
