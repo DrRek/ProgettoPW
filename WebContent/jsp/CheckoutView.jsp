@@ -30,7 +30,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
-<body>​​​​​​​​​​​​
+<body>
+	​​​​​​​​​​​​
 	<%@ include file="header.jsp"%>
 	<div class="container">
 		<h2>Cart</h2>
@@ -44,14 +45,32 @@
 	<%
 		} else {
 	%>
-	<div class="container" id="cartElements">
-	</div>
+	<div class="container" id="cartElements"></div>
 	<%
 		}
 	%>
 	<div class="container">
-		<h3 id = "tot">
-		</h3>
+		<h3 id="tot"></h3>
+	</div>
+	<div class="container">
+		<%
+			ArrayList<CreditCardBean> creditCards = user.getCards();
+			if (creditCards != null) {
+		%>
+		<label>seleziona una carta:</label>
+		<select>
+			<%
+				for (CreditCardBean c : creditCards) {
+			%>
+			<option value="<%=c.getNumeroCC()%>"><%=c.getNumeroCC()%></option>
+			<%
+				}
+			%>
+		</select>
+		<%
+			}
+		%>
+		<br><a href="user">aggiungi una carta</a>
 	</div>
 	<script src="js/checkout.js"></script>
 </body>

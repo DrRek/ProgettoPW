@@ -23,6 +23,7 @@ import it.quattrocchi.support.Cart;
 import it.quattrocchi.support.CartArticle;
 import it.quattrocchi.support.ContactLensesBean;
 import it.quattrocchi.support.OrderBean;
+import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
 @WebServlet("/checkout")
@@ -56,6 +57,8 @@ public class CheckoutControl extends HttpServlet {
 					updateCart(request,response);
 				else if (action.equalsIgnoreCase("removeCart"))
 					removeCart(request,response);
+				else if(action.equalsIgnoreCase("prescriptions"))
+					prescriptions(request,response);
 				else if (action.equalsIgnoreCase("submit")){
 					addOrder(request, response);
 					updateCatalogo(request,response);
@@ -172,7 +175,8 @@ public class CheckoutControl extends HttpServlet {
 		}
 	}
 
-	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		if(cart==null){
 			cart=new Cart();
@@ -180,6 +184,15 @@ public class CheckoutControl extends HttpServlet {
 		response.getWriter().write(new Gson().toJson(cart));
 	}
 
+	private void prescriptions(HttpServletRequest request, HttpServletResponse response) throws IOException
+	{
+		ArrayList<PrescriptionBean> prescriptions = null;
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
+		if(user != null)
+			prescriptions = user.getPrescriptions();
+		response.getWriter().write(new Gson().toJson(prescriptions));
+	}
+	
 	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
