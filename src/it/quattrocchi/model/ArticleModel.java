@@ -625,7 +625,7 @@ public class ArticleModel {
 			sql+=" and ld.colore='"+colore+"'";
 		}
 		if(sort!=null&&!sort.equalsIgnoreCase("")){
-			sql+=" order by '"+sort+"'";
+			sql+=" order by "+sort;
 		}
 		sql+=";";
 
