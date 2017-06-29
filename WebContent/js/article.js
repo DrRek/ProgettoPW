@@ -9,7 +9,8 @@ $(document).ready(function() {
 			url: "article",
 			data: {
 				toDo: 'asyncGenericSearch',
-				daCercare: $('input[name=daCercare1]').val()
+				daCercare: $('input[name=daCercare1]').val(),
+				sort: 'marca'
 			},
 			dataType: "json",
 	        error: function (xhr, status, errorThrown) {
@@ -46,7 +47,8 @@ $(document).ready(function() {
 					prezzoMin: prezzoMin,
 					prezzoMax: prezzoMax,
 					sesso: sesso,
-					colore: colore
+					colore: colore,
+					sort: 'prezzo'
 				},
 				dataType: "json",
 		        error: function (xhr, status, errorThrown) {
@@ -77,7 +79,8 @@ $(document).ready(function() {
 					tipologia: tipologia,
 					raggio: raggio,
 					diametro: diametro,
-					colore: colore
+					colore: colore,
+					sort: 'prezzo'
 				},
 				dataType: "json",
 				success: function(responseText) {

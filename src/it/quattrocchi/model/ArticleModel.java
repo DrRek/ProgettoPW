@@ -558,7 +558,7 @@ public class ArticleModel {
 			sql+=" and o.descrizione LIKE '%"+colore+"%'";
 		}
 		if(sort!=null&&!sort.equalsIgnoreCase("")){
-			sql+=" order by '%"+sort+"'";
+			sql+=" order by "+sort;
 		}
 		sql+=";";
 		try {
