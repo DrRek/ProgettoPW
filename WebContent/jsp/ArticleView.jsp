@@ -34,7 +34,7 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%>
-
+	<br><br><br><br>
 	<!--  search.js gestisce questa parte-->
 	<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
 	<div>

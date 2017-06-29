@@ -30,7 +30,8 @@
 </head>
 
 <body>
-	<%@ include file="../jsp/header.jsp"%><br>
+	<%@ include file="../jsp/header.jsp"%>
+	<br><br>
 	<div class="container">
 		<%
 	if (lentine == null && occhiali != null)
