@@ -45,10 +45,13 @@
 				<li><a href="article?action=category&type=occhiale">Occhiali</a>
 				<li><a href="article?action=category&type=lente">Lentine</a>
 				<li>
-					<form action="article" method="get">
-						<input type="hidden" name="toDo" value="searchFromOtherPage">
-						<input name="daCercare" placeholder="Cerca" type="text"/>
-					</form>
+					  <form class="navbar-form" action="article" method="get">
+       					 <div class="form-group">
+       					 	<input type="hidden" name="toDo" value="searchFromOtherPage">
+        					<input name="daCercare" type="text" class="form-control" placeholder="Cerca"/>
+       					 </div>
+       					 <button type="submit" class="btn btn-default">Submit</button>
+    				  </form>
 			</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<%
