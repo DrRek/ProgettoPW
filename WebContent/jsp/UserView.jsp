@@ -152,7 +152,7 @@
 				<th>Tipo</th>
 			</thead>
 			<%
-				Collection<?> pres = (Collection<?>) user.getPrescriptions();
+				Collection<PrescriptionBean> pres = user.getPrescriptions();
 				if (pres != null && pres.size() != 0) {
 					Iterator<?> it = pres.iterator();
 					while (it.hasNext()) {
