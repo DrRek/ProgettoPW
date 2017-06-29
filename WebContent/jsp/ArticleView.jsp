@@ -152,6 +152,16 @@
 			<hr>
 			<input id="advancedSearch" type='button' value='Search!' />
 		</div>
+		<div class="container, main" style="display:none;"><!-- ci sto lavorando -->
+			<div class="single-object">
+				<div class="inside-img" style='background-image: url("image/error.png");'></div>
+			</div>
+			<h1>Nome della cosa</h1>
+			<h1>Marca della cosa</h1>
+			<h4>Descrizione o info generali</h4>
+			<h6>Tipo</h6>
+			<h5>Prezzo€</h5>
+		</div>
 		<div id="demos" class="container, main"></div>
 	</div>
 	<script src="js/article.js"></script>
