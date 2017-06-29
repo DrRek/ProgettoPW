@@ -3,6 +3,7 @@ package it.quattrocchi.control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
@@ -186,11 +187,16 @@ public class CheckoutControl extends HttpServlet {
 
 	private void prescriptions(HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
-		ArrayList<PrescriptionBean> prescriptions = null;
+		Collection<PrescriptionBean> prescriptions = null;
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
-		if(user != null)
+		if(user != null){
 			prescriptions = user.getPrescriptions();
-		response.getWriter().write(new Gson().toJson(prescriptions));
+			if(prescriptions!=null){
+				response.getWriter().write(new Gson().toJson(prescriptions));
+				return;
+			}
+		}
+		
 	}
 	
 	private void updateCatalogo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

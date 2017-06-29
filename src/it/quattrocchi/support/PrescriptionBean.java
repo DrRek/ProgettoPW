@@ -3,7 +3,6 @@ package it.quattrocchi.support;
 public class PrescriptionBean {
 	public PrescriptionBean(){
 		codice = "";
-		cliente = null;
 		tipo = "";
 		sferaSx = 0;
 		cilindroSx = 0;
@@ -30,14 +29,6 @@ public class PrescriptionBean {
 	
 	public void setCodice(String codice) {
 		this.codice = codice;
-	}
-	
-	public UserBean getCliente() {
-		return this.cliente;
-	}
-	
-	public void setCliente(UserBean cliente) {
-		this.cliente = cliente;
 	}
 	
 	public String getTipo() {
@@ -184,6 +175,5 @@ public class PrescriptionBean {
 	}
 	
 	String codice, tipo, prismaOrizSxBd, prismaOrizDxBd, prismaVertSxBd, prismaVertDxBd;
-	UserBean cliente;
 	float sferaSx, cilindroSx, asseSx, sferaDx, cilindroDx, asseDx, addVicinanza, prismaOrizSx, prismaOrizDx, prismaVertSx, prismaVertDx, pupillarDistanceSx, pupillarDistanceDx;
 }

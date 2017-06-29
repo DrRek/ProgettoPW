@@ -83,6 +83,10 @@ public class UserModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
+		
+		if(bean!=null){
+			new PrescriptionModel().doRetrieveByCliente(bean);
+		}
 
 		return bean;
 	}

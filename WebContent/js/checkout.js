@@ -113,7 +113,22 @@ $(document).ready(function() {
 				formatData(responseText);
 			}
 		})
-	}
+		$.ajax({
+			type: "GET",
+			url: "checkout",
+			data: {
+				action: 'prescriptions'
+			},
+			dataType: "json",
+			error: function (xhr, status, errorThrown) {
+				console.log(JSON.stringify(xhr)); 
+				console.log("AJAX error: " + status + ' : ' + errorThrown); 
+			},
+			success: function(respText) {
+				formatDataPrescriptions(respText);
+			}
+		});
+	};
 
 
 	function formatData(responseText){
@@ -121,8 +136,6 @@ $(document).ready(function() {
 		var products = new Array();
 		var tot = 0;
 		products = responseText[Object.keys(responseText)[0]];
-
-		var prescriptions = getPrescriptions();
 
 		jQuery.each(products, function(index, prod) {
 
@@ -132,16 +145,9 @@ $(document).ready(function() {
 
 			toAppend += '<td class="gradazioneArt">'
 				if(prod.articolo.tipo == "O"){
-					if(prescriptions != null){
-						jQuery.each(prescriptions, function(i, prescription)
-								{
-							toAppend += '<option value="'+ prescription.codice +'"> sx: '+ prescription.cilindrosx + ' dx: ' + prescription.cilindrodx + '</option>';
-								});
-						toAppend += '</select>';
-					}
-					else
-						toAppend += 'N/A';
-
+					toAppend += "<select class='gradazioneArt'>";
+					toAppend += '<option value="Neutro">Neutro</option>';
+					toAppend += '</select>';
 				}
 				else
 					toAppend+= prod.articolo.gradazione;
@@ -162,29 +168,14 @@ $(document).ready(function() {
 		$("#cartElements").html(toAppend);
 		$("#tot").html("Prezzo totale: " + tot + "€" );
 	};
-
-	function getPrescriptions()
-	{
-		$.ajax({
-			type: "GET",
-			url: "checkout",
-			data: {
-				action: 'prescriptions'
-			},
-			dataType: "json",
-			error: function (xhr, status, errorThrown) {
-				console.log(JSON.stringify(xhr)); 
-				console.log("AJAX error: " + status + ' : ' + errorThrown); 
-			},
-			success: function(respText) {
-				if(respText!=null && respText != undefined)
-				{
-					return respText
-				}
-				else
-					return null;
-
-			}
-		})
-	};
+	
+	function formatDataPrescriptions(responseText){
+		if(responseText!=null && responseText!=undefined){
+			var toAppend='<option value="Neutro">Neutro</option>';
+			$.each(responseText, function(i, prescription){
+				toAppend += '<option value="'+ prescription.codice +'"> sx: '+ prescription.cilindroSx + ' dx: ' + prescription.cilindroDx + '</option>';
+			});
+			$("select.gradazioneArt").html(toAppend);
+		}
+	}
 });

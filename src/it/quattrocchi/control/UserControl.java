@@ -191,7 +191,6 @@ public class UserControl extends HttpServlet{
 			codice = UUID.randomUUID().toString();
 		}
 		pres.setCodice(codice);
-		pres.setCliente(user);
 		pres.setTipo(request.getParameter("tipoP"));
 		pres.setSferaSX(Float.parseFloat(request.getParameter("sferaSX")));
 		pres.setCilindroSX(Float.parseFloat(request.getParameter("cilindroSX")));
@@ -211,9 +210,7 @@ public class UserControl extends HttpServlet{
 		pres.setPupillarDistanceSX(Float.parseFloat(request.getParameter("pdSX")));
 		pres.setPupillarDistanceDX(Float.parseFloat(request.getParameter("pdDX")));
 	
-		pModel.doSave(pres);
-		
-		user.setPrescriptions(pModel.doRetrieveByCliente(user));
+		pModel.doSave(pres, user);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
@@ -223,9 +220,7 @@ public class UserControl extends HttpServlet{
 		String codice = request.getParameter("codice");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		
-		pModel.doDelete(codice);
-		
-		user.setPrescriptions(pModel.doRetrieveByCliente(user));
+		pModel.doDelete(codice, user);
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);

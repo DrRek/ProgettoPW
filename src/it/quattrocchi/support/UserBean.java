@@ -2,6 +2,7 @@ package it.quattrocchi.support;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class UserBean {
 	public UserBean(){
@@ -14,6 +15,7 @@ public class UserBean {
 		setEmail(null);
 		setDataDiNascita(null);
 		setPassword(null);
+		prescriptions=null;
 	}
 	
 	public void setCards(ArrayList<CreditCardBean> cc) {
@@ -95,15 +97,15 @@ public class UserBean {
 		this.password = password;
 	}
 	
-	public ArrayList<PrescriptionBean> getPrescriptions() {
+	public Collection<PrescriptionBean> getPrescriptions() {
 		return this.prescriptions;
 	}
 	
-	public void setPrescriptions(ArrayList<PrescriptionBean> prescriptions) {
+	public void setPrescriptions(Collection<PrescriptionBean> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
 
-	private ArrayList<PrescriptionBean> prescriptions;
+	private Collection<PrescriptionBean> prescriptions;
 	private ArrayList<CreditCardBean> cc;
 	private String user, nome, cognome, stato, cap, indirizzo, email, password;
 	private Date dataDiNascita;

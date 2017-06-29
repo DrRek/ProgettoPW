@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
@@ -12,7 +13,7 @@ import it.quattrocchi.support.UserBean;
 public class PrescriptionModel {
 	private static final String TABLE_NAME = "quattrocchidb.prescrizione";
 	
-	public void doSave(PrescriptionBean prescription) throws SQLException{
+	public void doSave(PrescriptionBean prescription, UserBean user) throws SQLException{
 		
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -23,7 +24,7 @@ public class PrescriptionModel {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, prescription.getCodice());
-			stm.setString(2, prescription.getCliente().getUser());
+			stm.setString(2, user.getUser());
 			stm.setString(3, prescription.getTipo());
 			stm.setFloat(4, prescription.getSferaSX());
 			stm.setFloat(5, prescription.getCilindroSX());
@@ -56,7 +57,8 @@ public class PrescriptionModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-		}
+		doRetrieveByCliente(user);
+	}
 	
 	public static boolean isUniqueCod(String codice) {
 		
@@ -81,7 +83,7 @@ public class PrescriptionModel {
 		return true;
 	}
 	
-	public void doDelete(String codice) throws SQLException
+	public void doDelete(String codice, UserBean user) throws SQLException
 	{
 		Connection conn = null;
 		PreparedStatement stm = null;
@@ -106,11 +108,12 @@ public class PrescriptionModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
+		doRetrieveByCliente(user);
 	}
 	
-	public ArrayList<PrescriptionBean> doRetrieveByCliente(UserBean user) throws SQLException{
+	public void doRetrieveByCliente(UserBean user) throws SQLException{
 		
-		ArrayList<PrescriptionBean> pres = new ArrayList<PrescriptionBean>();
+		Collection<PrescriptionBean> pres = new LinkedList<PrescriptionBean>();
 		
 		Connection conn = null;
 		PreparedStatement stm  = null;
@@ -127,7 +130,6 @@ public class PrescriptionModel {
 			while(rs.next()) {
 				PrescriptionBean bean = new PrescriptionBean();
 				bean.setCodice(rs.getString("Codice"));
-				bean.setCliente(user);
 				bean.setTipo(rs.getString("TipoPrescrizione"));
 				bean.setSferaSX(rs.getFloat("SferaSinistra"));
 				bean.setCilindroSX(rs.getFloat("CilindroSinistra"));
@@ -159,7 +161,6 @@ public class PrescriptionModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
-		
-		return pres;
+		user.setPrescriptions(pres);
 	}
 }
