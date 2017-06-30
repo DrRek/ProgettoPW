@@ -5,6 +5,8 @@ public class CartArticle{
 	public CartArticle(ArticleBean a, int n){
 		numero = n;
 		articolo = a;
+		gradazione=0.0;
+		prescrizione=null;
 	}
 	
 	public void aggiungi(){
@@ -34,6 +36,24 @@ public class CartArticle{
 		return (float)Math.floor((articolo.getPrezzo()*numero) * 100) / 100;
 	}
 	
+	public Double getGradazione() {
+		return gradazione;
+	}
+
+	public void setGradazione(Double gradazione) {
+		this.gradazione = gradazione;
+	}
+
+	public PrescriptionBean getPrescrizione() {
+		return prescrizione;
+	}
+
+	public void setPrescrizione(PrescriptionBean prescrizione) {
+		this.prescrizione = prescrizione;
+	}
+
 	private int numero;
 	private ArticleBean articolo;
+	private Double gradazione;
+	private PrescriptionBean prescrizione;
 }

@@ -174,6 +174,10 @@ public class PrescriptionBean {
 		this.pupillarDistanceDx = pupillarDistanceDx;
 	}
 	
+	public String toString(){
+		return codice;
+	}
+	
 	String codice, tipo, prismaOrizSxBd, prismaOrizDxBd, prismaVertSxBd, prismaVertDxBd;
 	float sferaSx, cilindroSx, asseSx, sferaDx, cilindroDx, asseDx, addVicinanza, prismaOrizSx, prismaOrizDx, prismaVertSx, prismaVertDx, pupillarDistanceSx, pupillarDistanceDx;
 }

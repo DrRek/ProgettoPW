@@ -6,7 +6,7 @@ public class Cart {
 	public Cart() {
 		products = new ArrayList<CartArticle>();	}
 
-	public void addProduct(ArticleBean product) {
+	public void addProduct(ArticleBean product, Double g) {
 		boolean found = false;
 		for (CartArticle p: products){
 			if(product.equals(p.getArticle())){
@@ -15,7 +15,10 @@ public class Cart {
 			}
 		}
 		if(!found){
-			products.add(new CartArticle(product,1));
+			CartArticle current=new CartArticle(product,1);
+			current.setGradazione(g);
+			products.add(current);
+			
 		}
 	}	
 

@@ -10,7 +10,7 @@ import it.quattrocchi.support.CartArticle;
 import it.quattrocchi.support.OrderBean;
 
 
-public class CheckoutModel {
+public class OrderModel {
 	private static final String TABLE_NAME = "quattrocchidb.ordine";
 	private static final String TABLE_NAME_APPARTENENZA = "quattrocchidb.appartenenza";
 	
@@ -48,15 +48,25 @@ public class CheckoutModel {
 		//inserire in appartenenza
 		for(CartArticle ca : ordine.getOrdinati()){
 			conn=null; stm=null; query=null;
-			query = "INSERT INTO " + TABLE_NAME_APPARTENENZA + " values (?,?,?,?)";
+			query = "INSERT INTO " + TABLE_NAME_APPARTENENZA + " values (?,?,?,?,?,?,?)";
 			try {
 				conn = DriverManagerConnectionPool.getConnection();
 				stm = conn.prepareStatement(query);
 				stm.setString(1, ordine.getCodice());
 				stm.setString(2, ca.getArticle().getNome());
-				//da modificare quando ci sara' prescrizione
-				stm.setString(3, null);
-				stm.setDouble(4, ca.getPrezzo());
+				stm.setString(3, ca.getArticle().getMarca());
+				if(ca.getPrescrizione()!=null){
+					stm.setString(4, ca.getPrescrizione().toString());
+				}else{
+					stm.setString(4, null);
+				}
+				stm.setDouble(5, ca.getPrezzo());
+				if(ca.getGradazione()!=null){
+					stm.setDouble(6, ca.getGradazione());
+				}else{
+					stm.setString(6, null);
+				}
+				stm.setInt(7, ca.getQuantity());
 	
 				stm.executeUpdate();
 	

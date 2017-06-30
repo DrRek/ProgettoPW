@@ -72,11 +72,11 @@ public class ArticlePageControl extends HttpServlet {
 			String gradazione = request.getParameter("gradazione");
 			try {
 				if(gradazione == null){
-					cart.addProduct(model.doRetrieveGlasses(nome, marca));
+					cart.addProduct(model.doRetrieveGlasses(nome, marca), null);
 				}
 				else{
 					double g = Double.parseDouble(gradazione);
-					cart.addProduct(model.doRetrieveContactLenses(nome, marca, g));	
+					cart.addProduct(model.doRetrieveContactLenses(nome, marca, g), g);	
 				}
 			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());

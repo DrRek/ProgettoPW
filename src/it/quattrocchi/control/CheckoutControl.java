@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import it.quattrocchi.model.ArticleModel;
-import it.quattrocchi.model.CheckoutModel;
+import it.quattrocchi.model.OrderModel;
+import it.quattrocchi.model.PrescriptionModel;
 import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
@@ -33,7 +34,7 @@ public class CheckoutControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	static CheckoutModel model = new CheckoutModel();
+	static OrderModel model = new OrderModel();
 	static ArticleModel aModel = new ArticleModel();
 
 	public CheckoutControl() {
@@ -56,6 +57,8 @@ public class CheckoutControl extends HttpServlet {
 					summaryCheckout(request,response);
 				else if (action.equalsIgnoreCase("updateCart"))
 					updateCart(request,response);
+				else if (action.equalsIgnoreCase("updatePrescription"))
+					updatePrescription(request,response);
 				else if (action.equalsIgnoreCase("removeCart"))
 					removeCart(request,response);
 				else if(action.equalsIgnoreCase("prescriptions"))
@@ -147,12 +150,11 @@ public class CheckoutControl extends HttpServlet {
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		String carta = (String) request.getParameter("carta");
-		System.out.println(carta);
 
 		if(cart!=null&&user!=null){
 			//Crea il bean OrderBean
 			String codice = UUID.randomUUID().toString();
-			while(!CheckoutModel.isUniqueCod(codice)){
+			while(!OrderModel.isUniqueCod(codice)){
 				codice = UUID.randomUUID().toString();
 			}
 			Date dataEsecuzione = new Date();
@@ -166,8 +168,6 @@ public class CheckoutControl extends HttpServlet {
 			java.sql.Date rightDate = new java.sql.Date(dataEsecuzione.getTime());
 			ordine.setDataEsecuzione(rightDate);
 			ordine.setOrdinati(cart.getProducts());
-
-
 			//Chiama il model per salvare
 			try {
 				model.doSave(ordine);
@@ -175,6 +175,7 @@ public class CheckoutControl extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		request.getSession().setAttribute("cart", new Cart());
 	}
 
 	private void summaryCheckout(HttpServletRequest request, HttpServletResponse response) throws IOException
@@ -222,5 +223,27 @@ public class CheckoutControl extends HttpServlet {
 			}
 		}
 
+	}
+	
+	private void updatePrescription(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		Cart cart = (Cart) request.getSession().getAttribute("cart");
+		ArrayList<CartArticle> cArticle = cart.getProducts();
+		String nome =  request.getParameter("nome");
+		String marca =  request.getParameter("marca");
+		String prescrizione = request.getParameter("prescrizione");
+
+		for(CartArticle c : cArticle){
+			if(c.getArticle().getNome().equalsIgnoreCase(nome)&&c.getArticle().getMarca().equalsIgnoreCase(marca)){
+				if(prescrizione==null||prescrizione.equalsIgnoreCase("Neutro")){
+					c.setPrescrizione(null);
+				}
+				try {
+					c.setPrescrizione(new PrescriptionModel().doRetrieve(prescrizione));
+				} catch (SQLException e) {
+					c.setPrescrizione(null);
+				}
+			}
+		}
 	}
 }

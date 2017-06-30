@@ -145,9 +145,10 @@ $(document).ready(function() {
 
 			toAppend += '<td class="gradazioneArt">'
 				if(prod.articolo.tipo == "O"){
-					toAppend += "<select class='gradazioneArt'>";
+					toAppend += "<select class='gradazioneArt''>";
 					toAppend += '<option value="Neutro">Neutro</option>';
 					toAppend += '</select>';
+					updatePrescription();
 				}
 				else
 					toAppend+= prod.articolo.gradazione;
@@ -165,7 +166,7 @@ $(document).ready(function() {
 
 		});
 		toAppend+='</table>';
-		$("#cartElements").html(toAppend);
+		$("#divCartElements").html(toAppend);
 		$("#tot").html("Prezzo totale: " + tot + "€" );
 	};
 	
@@ -178,4 +179,24 @@ $(document).ready(function() {
 			$("select.gradazioneArt").html(toAppend);
 		}
 	}
+	
+	$("body").on("change","select.gradazioneArt", updatePrescription());
+	
+	function updatePrescription() {
+		var prescrizione = this.value;
+		var nomeArt = $(this).parent().siblings(".nomeArt").html();
+		var marcaArt = $(this).parent().siblings(".marcaArt").html();
+		$.ajax({
+			type : "POST",
+			url : "checkout",
+			data : {
+				action : "updatePrescription",
+				nome : nomeArt,
+				marca : marcaArt,
+				prescrizione : prescrizione
+			},
+			success : function() {
+			}
+		});
+	};
 });

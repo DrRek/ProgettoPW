@@ -108,6 +108,7 @@ create table Appartenenza(
 	Prescrizione varchar(36),
 	PrezzoVendita decimal (6,2) not null,
 	Gradazione decimal(4,2),
+    Quantita decimal(3),
 	primary key(Ordine, NomeArticolo, MarcaArticolo),
 	foreign key(Ordine) references Ordine(Codice),
 	foreign key(NomeArticolo, MarcaArticolo) references Articolo(Nome, Marca),

@@ -163,4 +163,54 @@ public class PrescriptionModel {
 		}
 		user.setPrescriptions(pres);
 	}
+	
+	public PrescriptionBean doRetrieve(String codice) throws SQLException{
+		
+		PrescriptionBean bean = new PrescriptionBean();
+		
+		Connection conn = null;
+		PreparedStatement stm  = null;
+		
+		String query = "SELECT * FROM " + TABLE_NAME + " WHERE codice = ?;";
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, codice);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				bean.setCodice(codice);
+				bean.setTipo(rs.getString("TipoPrescrizione"));
+				bean.setSferaSX(rs.getFloat("SferaSinistra"));
+				bean.setCilindroSX(rs.getFloat("CilindroSinistra"));
+				bean.setAsseSX(rs.getFloat("AsseSinistra"));
+				bean.setSferaDX(rs.getFloat("SferaDestra"));
+				bean.setCilindroDX(rs.getFloat("CilindroDestra"));
+				bean.setAsseDX(rs.getFloat("AsseDestra"));
+				bean.setAddVicinanza(rs.getFloat("AddizioneVicinanza"));
+				bean.setPrismaOrizSX(rs.getFloat("PrismaOrizSinistra"));
+				bean.setPrismaOrizSXBD(rs.getString("PrismaOrizSinistraBaseDirection"));
+				bean.setPrismaOrizDX(rs.getFloat("PrismaOrizDestra"));
+				bean.setPrismaOrizDXBD(rs.getString("PrismaOrizDestraBaseDirection"));
+				bean.setPrismaVertSX(rs.getFloat("PrismaVertSinistra"));
+				bean.setPrismaVertSXBD(rs.getString("PrismaVertSinistraBaseDirection"));
+				bean.setPrismaVertDX(rs.getFloat("PrismaVertDestra"));
+				bean.setPrismaVertDXBD(rs.getString("PrismaVertDestraBaseDirection"));
+				bean.setPupillarDistanceSX(rs.getFloat("PDSinistra"));
+				bean.setPupillarDistanceDX(rs.getFloat("PDDestra"));
+			}
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return bean;
+	}
 }

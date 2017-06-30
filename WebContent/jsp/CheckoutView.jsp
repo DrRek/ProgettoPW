@@ -45,7 +45,7 @@
 	<%
 		} else if(cart!=null && user !=null) {
 	%>
-	<div class="container" id="cartElements"></div>
+	<div class="container" id="divCartElements"></div>
 	<%
 		}
 	%>
@@ -58,19 +58,19 @@
 			if (creditCards != null) {
 		%>
 		<form action="checkout" method="post">
-		<label>seleziona una carta:</label> <select name="carta">
-			<%
-				for (CreditCardBean c : creditCards) {
-			%>
-			<option value="<%=c.getNumeroCC()%>"><%=c.getNumeroCC()%></option>
-			<%
-				}
-			%>
-
-		</select> <br>
-		<a href="user">aggiungi una carta</a><br>
-			<input type="hidden" name="action" value="submit">
-			<button type="submit">Paga</button>
+			<input type="hidden" name="action" value="submit"/>
+			<label>seleziona una carta:</label> <select name="carta">
+				<%
+					for (CreditCardBean c : creditCards) {
+				%>
+				<option value="<%=c.getNumeroCC()%>"><%=c.getNumeroCC()%></option>
+				<%
+					}
+				%>
+	
+			</select> <br>
+			<a href="user">aggiungi una carta</a><br>
+			<input id="completeOrder" type="submit" value="Paga" />
 		</form>
 		<%
 			}
