@@ -36,25 +36,25 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%>
-	
 	<!--  search.js gestisce questa parte-->
+	<br><br><br><br>
+	<div class"row container-fluid">
 	<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
-	<div>
-		<div id='daMettereASinistra' class='left'>
-			<h1>Ricerca avanzata</h1>
-			<hr>
-			<label for="tipo">Products:</label><br>
+		<div id='daMettereASinistra' class='col-md-2 '>
+			<h3 >Ricerca avanzata</h3>
+			<br>
+			<h4>Products:</h4>
 			<select name="tipo" onchange="setSearchField()">
 					<option <%if(cercaPerTipo == null || cercaPerTipo.equals("O")){ %>selected <%} %> value="O">Glasses</option>
 					<option <%if(cercaPerTipo!= null && cercaPerTipo.equals("L")){ %>selected <%} %>value="L">Contact lenses</option>
 			</select>
 			<hr>
-			<label for="daCercare1">Name to search for:</label><br>
+			<h4>Name to search for:</h4>
 			<input type="text" name="daCercare1" 
 			<%if(cercaPerTipo!=null){ %>value="cercaPerTipo"
 			<%} else if (daCercare != null) {%> value="<%=daCercare%>" <%}%>/>
 			<hr>
-			<label for="marca">Brand:</label><br>
+			<h4>Brand:</h4>
 			<select name="marca">
 				<option selected value="">All</option>
 				<option class="specificiPerOcchiali" value="GreenVision">GreenVision</option>
@@ -70,26 +70,26 @@
 				<option class="specificiPerLentine" value="GreenVision">GreenVision</option>
 			</select>
 			<hr>
-			<label for="prezzoMin">Price:</label><br>
+			<h4>Price:</h4>
 			<div>
 				<input type="number" step="1.00" min="0.00" name="prezzoMin" placeholder="min" />
 				<input type="number" step="1.00" min="0.00" name="prezzoMax" placeholder="max" />
 			</div>
 			<div class="specificiPerOcchiali">
 				<hr>
-				<label class="specificiPerOcchiali" for="sesso">Sex:</label><br>
+				<h4 class="specificiPerOcchiali">Sex:</h4>
 				<select class="specificiPerOcchiali" name="sesso">
 					<option selected value="any">Any</option>
 					<option value="M">Man</option>
 					<option value="F">Woman</option>
 				</select>
 				<hr>
-				<label class="specificiPerOcchiali" for="colore">Color:</label><br>
+				<h4 class="specificiPerOcchiali" >Color:</h4>
 				<input class="specificiPerOcchiali" type="text" name="colore" value="" />
 			</div>
 			<div class="specificiPerLentine">
 				<hr>
-				<label class="specificiPerLentine" for="gradazione">Gradazione:</label><br>
+				<h4 class="specificiPerLentine">Gradazione:</h4>
 				<select class="specificiPerLentine" name="gradazione">
 					<option value="+8.00">+8.00</option>
 					<option value="+7.50">+7.50</option>
@@ -127,7 +127,7 @@
 					<option value="-8.00">-8.00</option>
 				</select>
 				<hr>
-				<label class="specificiPerLentine" for="tipologia">Duration:</label><br>
+				<h4 class="specificiPerLentine">Duration:</h4>
 				<select class="specificiPerLentine" name="tipologia">
 					<option selected value="">All</option>
 					<option value="G">Daily</option>
@@ -135,13 +135,13 @@
 					<option value="M">Monthly</option>
 				</select>
 				<hr>
-				<label class="specificiPerLentine" for="raggio">Radius:</label><br>
+				<h4 class="specificiPerLentine" for="raggio">Radius:</h4>
 				<input class="specificiPerLentine" type="number" min="5" name="raggio" placeholder="mm" value="" />
 				<hr>
-				<label class="specificiPerLentine" for="diametro">Diameter:</label><br>
+				<h4 class="specificiPerLentine">Diameter:</h4>
 				<input class="specificiPerLentine" type="number" min="10" name="diametro" placeholder="mm" value="" />
 				<hr>
-				<label class="specificiPerLentine" for="colore">Color:</label><br>
+				<h4 class="specificiPerLentine">Color:</h4>
 				<select class="specificiPerLentine" name="colore">
 					<option selected value="">All</option>
 					<option value="Ve">Green</option>
@@ -155,7 +155,7 @@
 			<hr>
 			<input id="advancedSearch" type='button' value='Search!' />
 		</div>
-		<div class="container, main" style="display:none;"><!-- ci sto lavorando -->
+		<div class="container, main" style="display:none;" class='col-md-10 '><!-- ci sto lavorando -->
 			<div class="single-object">
 				<div class="inside-img" style='background-image: url("image/error.png");'></div>
 			</div>
@@ -165,8 +165,8 @@
 			<h6>Tipo</h6>
 			<h5>Prezzo€</h5>
 		</div>
+		</div>
 		<div id="demos" class="container, main"></div>
-	</div>
 	<script src="js/article.js"></script>
 	<script src="js/search-add-validation.js"></script>
 </body>
