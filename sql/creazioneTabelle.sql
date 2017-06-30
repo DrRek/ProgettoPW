@@ -103,13 +103,14 @@ create table Lentine(
 
 create table Appartenenza(
 	Ordine varchar(36),
-	Articolo varchar(40),
+	NomeArticolo varchar(40) not null,
+    MarcaArticolo varchar(20) not null,
 	Prescrizione varchar(36),
 	PrezzoVendita decimal (6,2) not null,
 	Gradazione decimal(4,2),
-	primary key(Ordine, Articolo),
+	primary key(Ordine, NomeArticolo, MarcaArticolo),
 	foreign key(Ordine) references Ordine(Codice),
-	foreign key(Articolo) references Articolo(Nome),
+	foreign key(NomeArticolo, MarcaArticolo) references Articolo(Nome, Marca),
 	foreign key(Prescrizione) references Prescrizione(Codice)
 );
 
@@ -123,10 +124,11 @@ create table Promozione(
 
 create table Validita(
 	Promozione varchar(20),
-	Articolo varchar(20),
-	primary key(Promozione, Articolo),
+	NomeArticolo varchar(40),
+    MarcaArticolo varchar(20),
+	primary key(Promozione, NomeArticolo, MarcaArticolo),
 	foreign key (Promozione) references Promozione(Nome),
-	foreign key (Articolo) references Articolo(Nome)
+	foreign key (NomeArticolo, MarcaArticolo) references Articolo(Nome, Marca)
 );
 
 create table Disponibilita(
