@@ -16,9 +16,9 @@ public class CheckoutModel {
 	
 	public void doSave(OrderBean ordine) throws SQLException{
 	
-		Connection conn;
-		PreparedStatement stm;
-		String query;
+		Connection conn=null;
+		PreparedStatement stm=null;
+		String query=null;
 		
 		//inserire in ordine
 		conn=null; stm=null; query=null;

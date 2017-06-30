@@ -147,6 +147,7 @@ public class CheckoutControl extends HttpServlet {
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		String carta = (String) request.getParameter("carta");
+		System.out.println(carta);
 
 		if(cart!=null&&user!=null){
 			//Crea il bean OrderBean

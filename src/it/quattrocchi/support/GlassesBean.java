@@ -9,6 +9,7 @@ public class GlassesBean extends ArticleBean{
 		sesso = null;
 		img2 = null; 
 		img3 = null;
+		prescrizione = null;
 	}
 	
 	public String getDescrizione() {
@@ -47,6 +48,7 @@ public class GlassesBean extends ArticleBean{
 		}
 		return false;
 	}
-
+	
 	private String descrizione, sesso, img2, img3;
+	private PrescriptionBean prescrizione;
 }

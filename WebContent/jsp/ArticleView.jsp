@@ -30,7 +30,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="css/example.css" type="text/css" rel="stylesheet"media="screen,projection" >
 
 </head>
 
@@ -38,7 +37,7 @@
 	<%@ include file="../jsp/header.jsp"%>
 	<!--  search.js gestisce questa parte-->
 	<br><br><br><br>
-	<div class"row container-fluid">
+	<div class="row container-fluid">
 	<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
 		<div id='daMettereASinistra' class='col-sm-3 '>
 			<h3 >Ricerca avanzata</h3>
@@ -170,7 +169,7 @@
 		<div id="demos" class="container col-sm-9"></div>
 		</div>
 	<script src="js/article.js"></script>
-	<script src="js/search-add-validation.js"></script>
+
 </body>
 
 </html>

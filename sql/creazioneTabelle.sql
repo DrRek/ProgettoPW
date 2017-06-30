@@ -96,7 +96,7 @@ create table Lentine(
 	NumeroPezziNelPacco decimal(2),
 	Raggio decimal(3,1),
 	Diametro decimal(3,1),
-	Colore char(2),
+	Colore varchar(10),
 	primary key(Nome, Marca),
 	foreign key (Nome,Marca) references Articolo(Nome,Marca)
 );

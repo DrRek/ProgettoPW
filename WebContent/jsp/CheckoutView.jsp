@@ -24,12 +24,15 @@
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
-<body>​​​​​​​​​​​​
+<body>
+	​​​​​​​​​​​​
 	<%@ include file="header.jsp"%>
-	<br><br>
+	<br>
+	<br>
 	<div class="container">
 		<h2>Cart</h2>
 	</div>
@@ -40,7 +43,7 @@
 		<h3>empty cart</h3>
 	</div>
 	<%
-		} else {
+		} else if(cart!=null && user !=null) {
 	%>
 	<div class="container" id="cartElements"></div>
 	<%
@@ -54,8 +57,8 @@
 			ArrayList<CreditCardBean> creditCards = user.getCards();
 			if (creditCards != null) {
 		%>
-		<label>seleziona una carta:</label>
-		<select>
+		<form action="checkout" method="post">
+		<label>seleziona una carta:</label> <select name="carta">
 			<%
 				for (CreditCardBean c : creditCards) {
 			%>
@@ -63,11 +66,15 @@
 			<%
 				}
 			%>
-		</select>
+
+		</select> <br>
+		<a href="user">aggiungi una carta</a><br>
+			<input type="hidden" name="action" value="submit">
+			<button type="submit">Paga</button>
+		</form>
 		<%
 			}
 		%>
-		<br><a href="user">aggiungi una carta</a>
 	</div>
 	<script src="js/checkout.js"></script>
 </body>

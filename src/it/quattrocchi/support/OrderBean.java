@@ -41,7 +41,14 @@ public class OrderBean {
 	public void setOrdinati(ArrayList<CartArticle> ordinati) {
 		this.ordinati = ordinati;
 	}
+	public CreditCardBean getCarta() {
+		return carta;
+	}
+	public void setCarta(CreditCardBean carta) {
+		this.carta = carta;
+	}
 	private String codice, cc;
+	private CreditCardBean carta;
 	private Date dataEsecuzione;
 	private double costo;
 	private UserBean cliente;

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.Cart;
@@ -79,7 +81,7 @@ public class ArticlePageControl extends HttpServlet {
 			} catch (SQLException e) {
 				System.out.println("Error:" + e.getMessage());
 			}
-			request.getSession().setAttribute("cart", cart);
+			request.getSession().setAttribute("cart", cart);		
 		}
 	}
 

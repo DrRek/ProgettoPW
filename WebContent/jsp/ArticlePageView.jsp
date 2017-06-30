@@ -98,7 +98,7 @@
 							  }
 	
 						  });
-					  })
+					  });
 				})
 	</script>
 		<h1 id="lNome"><%=l.getNome() %></h1>
