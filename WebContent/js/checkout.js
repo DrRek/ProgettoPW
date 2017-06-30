@@ -28,7 +28,6 @@ $(document).ready(function() {
 						numero : val
 					},
 					success : function() {
-						initializeCart();
 					}
 
 				});
@@ -47,7 +46,6 @@ $(document).ready(function() {
 						numero : val
 					},
 					success : function() {
-						initializeCart();
 					}
 				});
 			}
@@ -97,6 +95,11 @@ $(document).ready(function() {
 
 	});
 
+	$("body").on("blur","select.gradazioneArt", function(){
+		updatePrescription();
+	}
+	);
+
 	function initializeCart(){
 		$.ajax({
 			type: "GET",
@@ -139,16 +142,15 @@ $(document).ready(function() {
 
 		jQuery.each(products, function(index, prod) {
 
-			toAppend+='<tr><td class="tipoArt">'+prod.articolo.tipo+'</td>';
+			toAppend+='<tr class="rowArticle"><td class="tipoArt">'+prod.articolo.tipo+'</td>';
 			toAppend+='<td class="nomeArt">'+prod.articolo.nome+'</td>';
 			toAppend+='<td class="marcaArt">'+prod.articolo.marca+'</td>';
 
 			toAppend += '<td class="gradazioneArt">'
 				if(prod.articolo.tipo == "O"){
-					toAppend += "<select class='gradazioneArt''>";
+					toAppend += "<select class='gradazioneArt'>";
 					toAppend += '<option value="Neutro">Neutro</option>';
 					toAppend += '</select>';
-					updatePrescription();
 				}
 				else
 					toAppend+= prod.articolo.gradazione;
@@ -169,20 +171,19 @@ $(document).ready(function() {
 		$("#divCartElements").html(toAppend);
 		$("#tot").html("Prezzo totale: " + tot + "€" );
 	};
-	
+
 	function formatDataPrescriptions(responseText){
+
 		if(responseText!=null && responseText!=undefined){
-			var toAppend='<option value="Neutro">Neutro</option>';
+			$("select.gradazioneArt").html('<option value="Neutro" selected>Neutro</option>');
 			$.each(responseText, function(i, prescription){
-				toAppend += '<option value="'+ prescription.codice +'"> sx: '+ prescription.cilindroSx + ' dx: ' + prescription.cilindroDx + '</option>';
+				$("select.gradazioneArt").append('<option value="'+ prescription.codice +'">sx: '+ prescription.cilindroSx + ' dx: ' + prescription.cilindroDx + '</option>');
 			});
-			$("select.gradazioneArt").html(toAppend);
 		}
-	}
-	
-	$("body").on("change","select.gradazioneArt", updatePrescription());
-	
+	};
+
 	function updatePrescription() {
+		alert("test");
 		var prescrizione = this.value;
 		var nomeArt = $(this).parent().siblings(".nomeArt").html();
 		var marcaArt = $(this).parent().siblings(".marcaArt").html();
