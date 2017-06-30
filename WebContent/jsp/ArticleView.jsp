@@ -40,7 +40,7 @@
 	<br><br><br><br>
 	<div class"row container-fluid">
 	<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
-		<div id='daMettereASinistra' class='col-md-2 '>
+		<div id='daMettereASinistra' class='col-sm-3 '>
 			<h3 >Ricerca avanzata</h3>
 			<br>
 			<h4>Products:</h4>
@@ -72,7 +72,7 @@
 			<hr>
 			<h4>Price:</h4>
 			<div>
-				<input type="number" step="1.00" min="0.00" name="prezzoMin" placeholder="min" />
+				<input type="number" step="1.00" min="0.00" name="prezzoMin" placeholder="min" /><br>
 				<input type="number" step="1.00" min="0.00" name="prezzoMax" placeholder="max" />
 			</div>
 			<div class="specificiPerOcchiali">
@@ -155,7 +155,8 @@
 			<hr>
 			<input id="advancedSearch" type='button' value='Search!' />
 		</div>
-		<div class="container, main" style="display:none;" class='col-md-10 '><!-- ci sto lavorando -->
+		<!--  
+		<div class="container, main" style="display:none;" class='col-md-10 '>
 			<div class="single-object">
 				<div class="inside-img" style='background-image: url("image/error.png");'></div>
 			</div>
@@ -165,8 +166,9 @@
 			<h6>Tipo</h6>
 			<h5>Prezzo€</h5>
 		</div>
+		-->
+		<div id="demos" class="container col-sm-9"></div>
 		</div>
-		<div id="demos" class="container, main"></div>
 	<script src="js/article.js"></script>
 	<script src="js/search-add-validation.js"></script>
 </body>
