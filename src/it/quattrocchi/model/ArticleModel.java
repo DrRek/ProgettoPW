@@ -328,7 +328,8 @@ public class ArticleModel {
 
 				query = "SELECT * "
 						+ "FROM lentine l join disponibilita d on l.nome = d.nome and l.marca = d.marca"
-						+ " WHERE d.nome = ? AND d.marca = ? AND d.gradazione = ?;";
+						+ " WHERE d.nome = ? AND d.marca = ? AND d.gradazione = ?"
+						+ "AND d.NumeroPezziDisponibili>0;";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, nome);
 				stm.setString(2, marca);
