@@ -119,7 +119,8 @@ public class AccessControl extends HttpServlet{
 		newUser.setIndirizzo(request.getParameter("indirizzo"));
 		newUser.setEmail(request.getParameter("email"));
 		try {
-			model.doSave(newUser);
+			if(model.doRetrieveByKey(newUser.getUser()) == null)
+				model.doSave(newUser);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
