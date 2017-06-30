@@ -8,7 +8,7 @@ $(document).ready(function() {
 	$("#advancedSearch").click(function(event) {
 		//qui dovrei validare gli input
 		toDoD = 'asyncSpecificSearch'
-		advancedSearch();
+			advancedSearch();
 	});
 });
 
@@ -16,12 +16,14 @@ function formatData(responseText) {
 	var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th><a href="#" onclick="return orderByName()">Nome</a></th><th><a href="#" onclick="return orderByMarca()">Marca</a></th><th><a href="#" onclick="return orderByTipo()">Tipo</a></th><th><a href="#" onclick="return orderByPrezzo()">Prezzo</a></th></tr></thead>';
 	$.each(responseText, function(i, articleObject) {
 		console.log(articleObject);
-		toAppend += '<tr><td><a href="articlePage?nome=' + articleObject.nome
-				+ '&marca=' + articleObject.marca + '">' + articleObject.nome
-				+ '</a></td>';
-		toAppend += '<td>' + articleObject.marca + '</td>';
-		toAppend += '<td>' + articleObject.tipo + '</td>';
-		toAppend += '<td>' + articleObject.prezzo + '</td></tr>';
+		if(articleObject.disponibilita > 0){
+			toAppend += '<tr><td><a href="articlePage?nome=' + articleObject.nome
+			+ '&marca=' + articleObject.marca + '">' + articleObject.nome
+			+ '</a></td>';
+			toAppend += '<td>' + articleObject.marca + '</td>';
+			toAppend += '<td>' + articleObject.tipo + '</td>';
+			toAppend += '<td>' + articleObject.prezzo + '</td></tr>';
+		}
 	});
 	toAppend += '</table>';
 	$("#demos").html(toAppend);
@@ -40,7 +42,7 @@ function setSearchField() {
 function orderByName() {
 	sortD = 'nome';
 	if (toDoD == "asyncGenericSearch") {
-		initialize();
+		asyncGenericSearch();
 	}
 	else {
 		advancedSearch();
@@ -50,9 +52,10 @@ function orderByName() {
 function orderByMarca() {
 	sortD = 'marca';
 	if (toDoD == "asyncGenericSearch") {
-		initialize();
+		asyncGenericSearch();
 	}
 	else {
+
 		advancedSearch();
 	}
 }
@@ -60,7 +63,7 @@ function orderByMarca() {
 function orderByTipo() {
 	sortD = 'tipo';
 	if (toDoD == "asyncGenericSearch") {
-		initialize();
+		asyncGenericSearch();
 	}
 	else {
 		advancedSearch();
@@ -70,7 +73,7 @@ function orderByTipo() {
 function orderByPrezzo() {
 	sortD = 'prezzo';
 	if (toDoD == "asyncGenericSearch") {
-		initialize();
+		asyncGenericSearch();
 	}
 	else {
 		advancedSearch();
@@ -143,23 +146,35 @@ function advancedSearch() {
 	}
 }
 
-function initialize() {
+function asyncGenericSearch() {
 	toDoD = 'asyncGenericSearch'
-	$.ajax({
-		type : "GET",
-		url : "article",
-		data : {
-			toDo : 'asyncGenericSearch',
-			daCercare : $('input[name=daCercare1]').val(),
-			sort : sortD
-		},
-		dataType : "json",
-		error : function(xhr, status, errorThrown) {
-			console.log(JSON.stringify(xhr));
-			console.log("AJAX error: " + status + ' : ' + errorThrown);
-		},
-		success : function(responseText) {
-			formatData(responseText);
-		}
-	})
+		$.ajax({
+			type : "GET",
+			url : "article",
+			data : {
+				toDo : 'asyncGenericSearch',
+				daCercare : $('input[name=daCercare1]').val(),
+				sort : sortD
+			},
+			dataType : "json",
+			error : function(xhr, status, errorThrown) {
+				console.log(JSON.stringify(xhr));
+				console.log("AJAX error: " + status + ' : ' + errorThrown);
+			},
+			success : function(responseText) {
+				console.log(responseText);
+				formatData(responseText);
+			}
+		})
+}
+
+function initialize(){
+	if($('input[name=daCercare1]').val() == "cercaPerTipo"){
+		$('input[name=daCercare1]').val("");
+		toDoD = 'asyncSpecificSearch';
+		advancedSearch();
+	}
+	else{
+		asyncGenericSearch();
+	}
 }

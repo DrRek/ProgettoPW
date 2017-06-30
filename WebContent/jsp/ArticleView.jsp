@@ -4,6 +4,7 @@
 <%
 	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
 	String daCercare = (String) request.getAttribute("daCercare");
+	String cercaPerTipo = (String) request.getAttribute("cercaPerTipo");
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
@@ -44,12 +45,14 @@
 			<hr>
 			<label for="tipo">Products:</label><br>
 			<select name="tipo" onchange="setSearchField()">
-					<option selected value="O">Glasses</option>
-					<option value="L">Contact lenses</option>
+					<option <%if(cercaPerTipo == null || cercaPerTipo.equals("O")){ %>selected <%} %> value="O">Glasses</option>
+					<option <%if(cercaPerTipo!= null && cercaPerTipo.equals("L")){ %>selected <%} %>value="L">Contact lenses</option>
 			</select>
 			<hr>
 			<label for="daCercare1">Name to search for:</label><br>
-			<input type="text" name="daCercare1" <%if (daCercare != null) {%> value="<%=daCercare%>" <%}%> />
+			<input type="text" name="daCercare1" 
+			<%if(cercaPerTipo!=null){ %>value="cercaPerTipo"
+			<%} else if (daCercare != null) {%> value="<%=daCercare%>" <%}%>/>
 			<hr>
 			<label for="marca">Brand:</label><br>
 			<select name="marca">

@@ -482,7 +482,7 @@ public class ArticleModel {
 	}
 
 	//cerca in base a stringa
-	public Collection<ArticleBean> doRetrieve(String daCercare) throws SQLException{
+	public Collection<ArticleBean> doRetrieve(String daCercare, String order) throws SQLException{
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
@@ -499,8 +499,9 @@ public class ArticleModel {
 						+ "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, o.NumeroPezziDisponibili "
 						+ "from articolo a right join occhiale o "
 						+ "on a.nome=o.nome and a.marca=o.marca "
-						+ "where (a.Nome LIKE ?) or (o.Descrizione LIKE ?) or (a.Marca LIKE ?) "
-						+ "order by nome";
+						+ "where (a.Nome LIKE ?) or (o.Descrizione LIKE ?) or (a.Marca LIKE ?) ";
+		if (order != null && !order.equals(""))
+			sql += "order by " + order;
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(sql);
@@ -594,11 +595,14 @@ public class ArticleModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		Collection<ArticleBean> products = new LinkedList<ArticleBean>();
-		
-		String sql = "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1 from articolo a join (select l.nome, l.marca, l.tipologia, l.numeroPezziNelPacco, l.raggio, l.diametro, l.colore from lentine l right join disponibilita d on l.nome=d.nome and l.marca=d.marca where d.NumeroPezziDisponibili>0";
+		String sql = "select distinct a.nome, a.marca, a.tipo, a.prezzo, a.img1, ld.NumeroPezziDisponibili "
+				+ "from articolo a join ("
+						+ "select l.nome, l.marca, l.tipologia, l.numeroPezziNelPacco, l.raggio, l.diametro, l.colore, sum(NumeroPezziDisponibili) as NumeroPezziDisponibili "
+						+ "from lentine l right join disponibilita d on l.nome=d.nome and l.marca=d.marca ";
 		if(gradazione!=null&&!gradazione.equalsIgnoreCase("")){
-			sql+=" and d.gradazione="+gradazione;
+			sql+=" where d.gradazione="+gradazione;
 		}
+		sql += "group by l.nome, l.marca";
 		sql+=") as ld on a.nome=ld.nome and a.marca=ld.marca";
 		
 		sql+= " where ((a.Nome LIKE '%"+daCercare+"%') or (a.Marca LIKE '%"+daCercare+"%'))";
@@ -640,6 +644,7 @@ public class ArticleModel {
 				bean.setTipo(rs.getString("Tipo"));
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
+				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 				products.add(bean);
 			}
 			conn.commit();

@@ -42,8 +42,8 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-centered">
-				<li><a href="article?action=category&type=occhiale">Occhiali</a>
-				<li><a href="article?action=category&type=lente">Lentine</a>
+				<li><a href="article?toDo=searchOcchiale">Occhiali</a>
+				<li><a href="article?toDo=searchLente">Lentine</a>
 				<li>
 					  <form class="navbar-form" action="article" method="get">
        					 <div class="form-group">
