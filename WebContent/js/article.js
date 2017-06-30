@@ -13,7 +13,7 @@ $(document).ready(function() {
 });
 
 function formatData(responseText) {
-	var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th><a href="#" onclick="return orderByName()">Nome</a></th><th><a href="#" onclick="return orderByMarca()">Marca</a></th><th><a href="#" onclick="return orderByTipo()">Tipo</a></th><th><a href="#" onclick="return orderByPrezzo()">Prezzo</a></th></tr></thead>';
+	var toAppend = '<h2>Products</h2><table class="table table-condensed"><thead><tr><th><a href="#" onclick="return orderByName()">Nome</a></th><th><a href="#" onclick="return orderByMarca()">Marca</a></th><th><a href="#" onclick="return orderByTipo()">Tipo</a></th><th><a href="#" onclick="return orderByPrezzo()">Prezzo</a></th></tr></thead>';
 	$.each(responseText, function(i, articleObject) {
 		console.log(articleObject);
 		if(articleObject.disponibilita > 0){
