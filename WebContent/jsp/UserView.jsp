@@ -25,8 +25,6 @@
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
 </head>
 
 <body>
@@ -87,7 +85,7 @@
 	</div>
 	<div class="container">
 		<h2>Carte di credito</h2>
-		<table class="table-bordered">
+		<table class="table-bordered" id="cards">
 			<thead>
 				<th>Numero carta</th>
 				<th>Intestatario</th>
@@ -117,10 +115,7 @@
 		<h2>Aggiungi carta</h2>
 		<script type="text/javascript" src="js/creditcard-validation.js"></script>
 
-		<form name='cc' onSubmit="return ccValidation();"  action='user'
-			method="post"> 
-					
-		<input type="hidden" name="action" value="addCard"> 
+			<input type="hidden" name="action" value="addCard"> 
 		
 			<label for="numcc">Numero carta di credito:</label> <input
 				name="numcc" type="text" maxlength="50"
@@ -142,8 +137,7 @@
 			<label for="cvv">Cvv:</label> <input name="cvv" type="text"
 				maxlength="50" placeholder="ES. 570"> <span id="cvv"></span><br> 
 				
-			 <input name="addCard" value="Aggiungi" type="submit">
-		</form>
+			 <input id="addCard" name="addCard" value="Aggiungi" type="button">
 	</div>
 	
 	<div class="container">
@@ -151,7 +145,7 @@
 		<table class="table-bordered">
 			<thead>
 				<th>Codice</th>
-				<th>Tipo</th>
+				<th>Nome</th>
 			</thead>
 			<%
 				Collection<PrescriptionBean> pres = user.getPrescriptions();
@@ -162,7 +156,7 @@
 			%>
 			<tr>
 				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getTipo() %></td>
+				<td><%=bean.getNome() %></td>
 				<td><a href="user?action=delPres&codice=<%=bean.getCodice()%>">rimuovi</a></td>
 			</tr>
 			<% 	}
@@ -179,9 +173,9 @@
 					
 		<input type="hidden" name="action" value="addPrescription"> 
 		
-			<label for="tipoP">Tipo Prescrizione:</label> <input
-				name="tipoP" type="text" maxlength="50"
-				placeholder="ES. Oculistica"> <span id="tipoP"></span><br>
+			<label for="nomeP">Nome:</label> <input
+				name="nomeP" type="text" maxlength="50"
+				placeholder="ES. di Mario per vicinanza"> <span id="tipoP"></span><br>
 
 			<label for="sferaSX">Sfera Sinistra:</label> <input
 				name="sferaSX" type="number" step="0.01" step="0.01" min="-10" max="10"
@@ -260,6 +254,32 @@
 			 <input name="addPrescription" value="Aggiungi" type="submit">
 		</form>
 	</div>
+	
+	<div class="container">
+		<h2>Ordini passati</h2>
+		<table class="table-bordered">
+			<thead>
+				<th>Codice</th>
+				<th>Prezzo</th>
+				<th>Data Esecuzione</th>
+			</thead>
+			<%
+				Collection<OrderBean> orders = user.getOrders();
+				if (orders != null && orders.size() != 0) {
+					Iterator<?> it = orders.iterator();
+					while (it.hasNext()) {
+						OrderBean bean = (OrderBean) it.next();
+			%>
+			<tr>
+				<td><%=bean.getCodice()%></td>
+				<td><%=bean.getCosto() %></td>
+				<td><%=bean.getDataEsecuzione() %></td>
+				<td><a href="#">Info</a>
+			</tr>
+			<% 	}
+					}%>
+		</table>
+</div>
 	
 
 	<%
@@ -402,10 +422,37 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="container">
+		<h2>Ordini passati</h2>
+		<table class="table-bordered">
+			<thead>
+				<th>Codice</th>
+				<th>Prezzo</th>
+				<th>Data Esecuzione</th>
+			</thead>
+			<%
+				Collection<OrderBean> orders = admin.getOrders();
+				if (orders != null && orders.size() != 0) {
+					Iterator<?> it = orders.iterator();
+					while (it.hasNext()) {
+						OrderBean bean = (OrderBean) it.next();
+			%>
+			<tr>
+				<td><%=bean.getCodice()%></td>
+				<td><%=bean.getCosto() %></td>
+				<td><%=bean.getDataEsecuzione() %></td>
+				<td><a href="#">Info</a>
+			</tr>
+			<% 	}
+					}%>
+		</table>
+</div>
 	<%
 		}
 	%>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/search-add-validation.js"></script>
+	<script src="js/user.js"></script>
 </body>
 </html>
