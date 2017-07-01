@@ -32,7 +32,7 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-	<br><br>
+	<br><br><br><br>
 	<% if(user != null || admin !=  null) {%>
 
 	<div class="container">
@@ -44,47 +44,76 @@
 	<div class="container">
 		<script type="text/javascript" src="js/access-validation.js"></script>
 		<h1>Login</h1>
+		<div class=form-group">
 		<form name='login' onSubmit="return loginValidation();"
 			action='access' method="post">
 
-			<input type="hidden" name="action" value="login"> <label
-				for="userid">Username:</label> <input type="text" name="userid"
-				size="12" /><span id="userid"></span><br> <label for="passid">Password:</label>
-			<input type="password" name="passid" size="12" /><span id="passid"></span><br>
+			<input type="hidden" name="action" value="login"> 
+
+			<label for="userid">Username:</label>
+			<div class="row">
+			<input class="col-sm-10" type="text" name="userid" size="35" />
+			<span class="col-sm-2" id="userid"></span>
+			</div>
+			
+			<br><label for="passid">Password:</label>
+			<div class="row">
+			<input class="col-sm-10" type="password" name="passid" size="35" />
+			<span class="col-sm-2" id="passid"></span>
+			</div>
 
 			<%
 				if(request.getAttribute("loginFailed") != null){
 			%>
-			<h6>Parametri errati.</h6>
+			<br><h5>Parametri errati.</h5>
 			<%
 				}
 			%>
 
-			<input name="submit" value="Login" type="submit">
-
+			<br><input name="submit" value="Login" type="submit">
 		</form>
+		</div>
+		<hr>
 		<h1>Registration</h1>
+		<div class="form-group">
 		<form name='registration' onSubmit="return registerValidation();"
 			action='access' method="post">
 
 			<input type="hidden" name="action" value="register"> 
 			
-			<label for="user">Username:</label> <input type="text" name="user"
-				size="12" /><span id="user"></span><br> 
+			<br><label for="user">Username:</label> 
+			<div class="row">
+			<input class="col-sm-10" type="text" name="user" size="35" />
+			<span class="col-sm-2"  id="user"></span><br> 
+			</div>	
+			
+			<br><label for="pass">Password:</label>
+			<div class="row">
+			<input class="col-sm-10"  type="password" name="pass" size="35" />
+			<span class="col-sm-2"  id="pass"></span><br>
+			</div>
+	
+			<br><label for="nome">Nome:</label> 
+			<div class="row">
+			<input class="col-sm-10"  type="text" name="nome" size="35" />
+			<span class="col-sm-2"  id="nome"></span><br> 
+			</div>
 				
-			<label for="pass">Password:</label>
-			<input type="password" name="pass" size="12" /><span id="pass"></span><br>
-
-			<label for="nome">Nome:</label> <input type="text" name="nome"
-				size="50" /><span id="nome"></span><br> 
+			<br><label for="nome">Cognome:</label>
+			<div class="row">
+			<input class="col-sm-10"  type="text" name="cognome" size="35" />
+			<span class="col-sm-2"  id="cognome"></span><br>
+			</div>
+			
+			<br><label for="nascita">Data di nascita:</label> 
+			<div class="row">
+			<input class="col-sm-10"  type="date" name="nascita" size="35" />
+			<span class="col-sm-2"  id="nascita"></span><br> 
+			</div>	
 				
-			<label for="nome">Cognome:</label>
-			<input type="text" name="cognome" size="50" /><span id="cognome"></span><br>
-
-			<label for="nascita">Data di nascita:</label> <input type="date"
-				name="nascita" size="50" /><span id="nascita"></span><br> 
-				
-			<label for="stato">Stato:</label> <select name="stato">
+			<br><label for="stato">Stato:</label> 
+			<div class="row">	
+			<select class="col-sm-10"  name="stato">
 				<option selected="" value="Default">(Please select a
 					country)</option>
 				<option value="AF">Australia</option>
@@ -92,19 +121,33 @@
 				<option value="IT">Italia</option>
 				<option value="AS">Russia</option>
 				<option value="AD">USA</option>
-			</select><span id="stato"></span><br> 
+			</select>
+			<span class="col-sm-2"  id="stato"></span><br> 
+			</div>
 			
-			<label for="cap">CAP:</label> <input
-				type="text" name="cap" /><span id="cap"></span><br> 
 			
-			<label for="indirizzo">Indirizzo:</label> <input type="text"
-				name="indirizzo" size="50" /><span id="indirizzo"></span><br>
-
-			<label for="email">Email:</label> <input type="text" name="email"
-				size="50" /><span id="email"></span><br> <input name="submit"
-				value="Register" type="submit">
+			<br><label  for="cap">CAP:</label> 
+			<div class="row">
+			<input class="col-sm-10"  type="text" name="cap" />
+			<span class="col-sm-2"  id="cap"></span><br> 
+			</div>
+			
+			<br><label for="indirizzo">Indirizzo:</label> 
+			<div class="row">
+			<input class="col-sm-10"  type="text" name="indirizzo" size="35" />
+			<span class="col-sm-2"  id="indirizzo"></span><br>
+			</div>
+			
+			<br><label for="email">Email:</label> 
+			<div class="row">
+			<input class="col-sm-10"  type="text" name="email" size="35" />
+			<span class="col-sm-2"  id="email"></span><br> 
+			</div>
+			
+			<br><input name="submit" value="Register" type="submit">
 
 		</form>
+		</div>
 	</div>
 	<% } %>
 </body>

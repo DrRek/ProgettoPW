@@ -45,10 +45,7 @@
 		<h2>
 			Ciao,
 			<%=user.getUser()%></h2>
-		<table class="table-bordered">
-			<thead>
-				<th colspan="2">I tuoi dati:<br></th>
-			</thead>
+		<table class="table table-condensed">
 			<tr>
 				<td>Nome:</td>
 				<td><%=user.getNome()%></td>
@@ -78,14 +75,11 @@
 				<td><%=user.getDataDiNascita()%></td>
 			</tr>
 		</table>
-		<p>
-			<a>Modifica</a>&lt-- magari un giorno ci viene voglia di
-			implementarlo
-		</p>
+		<hr>
 	</div>
 	<div class="container">
 		<h2>Carte di credito</h2>
-		<table class="table-bordered" id="cards">
+		<table class="table table-condensed" id="cards">
 			<thead>
 				<th>Numero carta</th>
 				<th>Intestatario</th>

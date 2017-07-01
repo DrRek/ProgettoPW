@@ -35,13 +35,26 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%>
+	<script> 
+		$(document).ready(function(){
+   		 $("#advS").click(function(){
+	 	    $("#show").slideToggle();
+	 	    if($("#azione").html() == "mostra")
+	 	    	 $("#azione").html("nascondi");
+	 	    else
+	 	    	 $("#azione").html("mostra");
+
+	  	  });
+		});
+</script>
 	<!--  search.js gestisce questa parte-->
 	<br><br><br><br>
 	<div class="row container-fluid">
 	<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
-		<div id='daMettereASinistra' class='col-sm-3 '>
-			<h3 >Ricerca avanzata</h3>
-			<br>
+		<div id='daMettereASinistra' class='col-sm-4 col-md-3 col-lg-2'>
+			<div id=advS><h3>Ricerca avanzata</h3><p id="azione">nascondi</p></div>
+			<hr>
+			<div id="show" style="padding:15px;">
 			<h4>Products:</h4>
 			<select name="tipo" onchange="setSearchField()">
 					<option <%if(cercaPerTipo == null || cercaPerTipo.equals("O")){ %>selected <%} %> value="O">Glasses</option>
@@ -153,20 +166,10 @@
 			</div>
 			<hr>
 			<input id="advancedSearch" type='button' value='Search!' />
-		</div>
-		<!--  
-		<div class="container, main" style="display:none;" class='col-md-10 '>
-			<div class="single-object">
-				<div class="inside-img" style='background-image: url("image/error.png");'></div>
 			</div>
-			<h1>Nome della cosa</h1>
-			<h1>Marca della cosa</h1>
-			<h4>Descrizione o info generali</h4>
-			<h6>Tipo</h6>
-			<h5>Prezzo€</h5>
 		</div>
-		-->
-		<div id="demos" class="container col-sm-9"></div>
+		
+		<div id="demos" class="container col-sm-8 col-md-9 col-lg-10"></div>
 		</div>
 	<script src="js/article.js"></script>
 
