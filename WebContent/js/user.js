@@ -1,17 +1,48 @@
 
 $(document).ready(function() {
-
-	$("#addCard").click(function(event) {
-			reSearchCards();
+	$("#addCard").on("click", function(event) {
+			//TODO il validate
+			addCard();
 	});
 	
 	$("#addPres").click(function(event){
+		//TODO il validate
+		addPrescription();
 		reSearchPrescriptions();
 	});
 });
 
+function addCard(){
+	var numcc = $("input[name=numcc]").val();
+	var intestatario = $("input[name=intestatario]").val();
+	var circuito = $("input[name=circuito]").val();
+	var scadenza = $("input[name=scadenza]").val();
+	alert(scadenza)
+	var cvv = $("input[name=cvv]").val();
+	$.ajax({
+		type : "POST",
+		url : "user",
+		data : {
+			action : 'addCard',
+			numcc : numcc,
+			intestatario : intestatario,
+			circuito : circuito,
+			scadenza : scadenza,
+			cvv : cvv
+		},
+		dataType : "json",
+		error : function(xhr, status, errorThrown) {
+			console.log(JSON.stringify(xhr));
+			console.log("AJAX error: " + status + ' : ' + errorThrown);
+		},
+		success : function(responseText) {
+			formatDataCards(responseText);
+		}
+	});
+}
+
 function formatDataCards(responseText) {
-	var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th>Numero CC</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th></tr></thead>';
+	var toAppend = '<thead><th>Numero carta</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th><th>Opzioni</th></thead>';
 	$.each(responseText, function(i, cardsObject) {
 		console.log(cardsObject);
 			toAppend += '<tr><td>' + cardsObject.numerocc + '</td>';
@@ -20,7 +51,6 @@ function formatDataCards(responseText) {
 			toAppend += '<td>' + cardsObject.datascadenza + '</td>';
 			toAppend+='<td><input type="submit" name="removeCard" value="remove" /></td></tr>';
 	});
-	toAppend += '</table>';
 	$("#cards").html(toAppend);
 };
 
@@ -35,25 +65,6 @@ function formatDataPrescriptions(responseText) {
 	toAppend += '</table>';
 	$("#prescriptions").html(toAppend);
 };
-
-function reSearchCards(){
-		$.ajax({
-			type : "POST",
-			url : "user",
-			data : {
-				action: "addCard"
-			},
-			dataType : "json",
-			error : function(xhr, status, errorThrown) {
-				console.log(JSON.stringify(xhr));
-				console.log("AJAX error: " + status + ' : ' + errorThrown);
-			},
-			success : function(responseText) {
-				console.log(responseText);
-				formatDataCards(responseText);
-			}
-		})
-}
 
 function reSearchPrescriptions(){
 	$.ajax({

@@ -70,7 +70,7 @@ public class CreditCardModel {
 				bean.setIntestatario(rs.getString("Intestatario"));
 				bean.setDataScadenza(rs.getDate("DataScadenza"));
 				bean.setCvcCvv(rs.getString("CvcCvv"));
-				bean.setCliente(user);
+				bean.setCliente(null);
 				
 				cc.add(bean);
 			}
