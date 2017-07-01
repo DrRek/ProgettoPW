@@ -5,12 +5,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 
 import it.quattrocchi.support.CartArticle;
 import it.quattrocchi.support.OrderBean;
+import it.quattrocchi.support.UserBean;
 
 
 public class OrderModel {
+	private static ArticleModel aModel = new ArticleModel();
+	private static UserModel uModel = new UserModel();
 	private static final String TABLE_NAME = "quattrocchidb.ordine";
 	private static final String TABLE_NAME_APPARTENENZA = "quattrocchidb.appartenenza";
 	
@@ -105,6 +110,151 @@ public class OrderModel {
 			e.printStackTrace();
 		} 
 		return true;
+	}
+
+	
+	public ArrayList<OrderBean> doRetrieveByCliente(UserBean user) throws SQLException {
+		ArrayList<OrderBean> o = new ArrayList<OrderBean>();
+		ArrayList<CartArticle> ordinati = new ArrayList<CartArticle>();
+		String codPrecedente = "";
+		OrderBean bean = null;
+		
+		Connection conn = null;
+		PreparedStatement stm  = null;
+		
+		String query = "SELECT * FROM " 
+				+ "ORDINE O JOIN APPARTENENZA A ON O.CODICE = A.ORDINE"
+				+ " WHERE CLIENTE = ?"
+				+ " ORDER BY O.CODICE;" ;
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, user.getUser());
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				
+				if(!(codPrecedente.equals(rs.getString("o.Codice")))){
+					codPrecedente = rs.getString("o.Codice");
+					if(bean!=null){
+						bean.setOrdinati(ordinati);
+						ordinati = new ArrayList<CartArticle>();
+						o.add(bean);
+					}
+					bean = new OrderBean();
+					bean.setCodice(rs.getString("o.Codice"));
+					bean.setCc(rs.getString("o.CartaCredito"));
+					bean.setCosto(rs.getDouble("o.Costo"));
+					bean.setDataEsecuzione(rs.getDate("o.DataEsecuzione"));
+					bean.setCliente(uModel.doRetrieveByKey(rs.getString("o.Cliente")));
+					CartArticle aBean = null;
+					if(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")) == null)
+						aBean = new CartArticle(aModel.doRetrieveContactLenses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo"), rs.getDouble("a.Gradazione")), rs.getInt("a.Quantita"));
+					else
+						aBean = new CartArticle(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")), rs.getInt("a.Quantita"));
+					ordinati.add(aBean);
+				}
+				
+				else{	
+					CartArticle aBean = null;
+					if(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")) == null)
+						aBean = new CartArticle(aModel.doRetrieveContactLenses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo"), rs.getDouble("a.Gradazione")), rs.getInt("a.Quantita"));
+					else
+						aBean = new CartArticle(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")), rs.getInt("a.Quantita"));
+					ordinati.add(aBean);
+				}
+				
+			} 
+			if(ordinati.size() != 0){
+				bean.setOrdinati(ordinati);
+				o.add(bean);
+			}
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+
+		
+		return o;
+	}
+
+
+
+	public ArrayList<OrderBean> doRetrieveAll() throws SQLException {
+		ArrayList<OrderBean> o = new ArrayList<OrderBean>();
+		ArrayList<CartArticle> ordinati = new ArrayList<CartArticle>();
+		String codPrecedente = "";
+		OrderBean bean = null;
+		
+		Connection conn = null;
+		PreparedStatement stm  = null;
+		
+		String query = "SELECT * FROM " 
+				+ "ORDINE O JOIN APPARTENENZA A ON O.CODICE = A.ORDINE"
+				+ " ORDER BY O.CODICE;" ;
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				
+				if(!(codPrecedente.equals(rs.getString("o.Codice")))){
+					codPrecedente = rs.getString("o.Codice");
+					if(bean!=null){
+						bean.setOrdinati(ordinati);
+						ordinati = new ArrayList<CartArticle>();
+						o.add(bean);
+					}
+					bean = new OrderBean();
+					bean.setCodice(rs.getString("o.Codice"));
+					bean.setCc(rs.getString("o.CartaCredito"));
+					bean.setCosto(rs.getDouble("o.Costo"));
+					bean.setDataEsecuzione(rs.getDate("o.DataEsecuzione"));
+					bean.setCliente(uModel.doRetrieveByKey(rs.getString("o.Cliente")));
+					CartArticle aBean = null;
+					if(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")) == null)
+						aBean = new CartArticle(aModel.doRetrieveContactLenses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo"), rs.getDouble("a.Gradazione")), rs.getInt("a.Quantita"));
+					else
+						aBean = new CartArticle(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")), rs.getInt("a.Quantita"));
+					ordinati.add(aBean);
+				}
+				
+				else{
+					CartArticle aBean = null;
+					if(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")) == null)
+						aBean = new CartArticle(aModel.doRetrieveContactLenses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo"), rs.getDouble("a.Gradazione")), rs.getInt("a.Quantita"));
+					else
+						aBean = new CartArticle(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")), rs.getInt("a.Quantita"));
+					ordinati.add(aBean);
+				}
+				
+			} 
+			bean.setOrdinati(ordinati);
+			o.add(bean);
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+
+		
+		return o;
 	}
 
 }

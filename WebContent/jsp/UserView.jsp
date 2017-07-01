@@ -254,6 +254,32 @@
 		</form>
 	</div>
 	
+	<div class="container">
+		<h2>Ordini passati</h2>
+		<table class="table-bordered">
+			<thead>
+				<th>Codice</th>
+				<th>Prezzo</th>
+				<th>Data Esecuzione</th>
+			</thead>
+			<%
+				Collection<OrderBean> orders = user.getOrders();
+				if (orders != null && orders.size() != 0) {
+					Iterator<?> it = orders.iterator();
+					while (it.hasNext()) {
+						OrderBean bean = (OrderBean) it.next();
+			%>
+			<tr>
+				<td><%=bean.getCodice()%></td>
+				<td><%=bean.getCosto() %></td>
+				<td><%=bean.getDataEsecuzione() %></td>
+				<td><a href="#">Info</a>
+			</tr>
+			<% 	}
+					}%>
+		</table>
+</div>
+	
 
 	<%
 		} else if (admin != null) {
@@ -378,6 +404,32 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="container">
+		<h2>Ordini passati</h2>
+		<table class="table-bordered">
+			<thead>
+				<th>Codice</th>
+				<th>Prezzo</th>
+				<th>Data Esecuzione</th>
+			</thead>
+			<%
+				Collection<OrderBean> orders = admin.getOrders();
+				if (orders != null && orders.size() != 0) {
+					Iterator<?> it = orders.iterator();
+					while (it.hasNext()) {
+						OrderBean bean = (OrderBean) it.next();
+			%>
+			<tr>
+				<td><%=bean.getCodice()%></td>
+				<td><%=bean.getCosto() %></td>
+				<td><%=bean.getDataEsecuzione() %></td>
+				<td><a href="#">Info</a>
+			</tr>
+			<% 	}
+					}%>
+		</table>
+</div>
 	<%
 		}
 	%>

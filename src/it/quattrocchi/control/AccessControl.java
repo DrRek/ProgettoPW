@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.UserModel;
 import it.quattrocchi.model.CreditCardModel;
+import it.quattrocchi.model.OrderModel;
 import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.UserBean;
 
@@ -24,6 +25,7 @@ public class AccessControl extends HttpServlet{
 
 	static UserModel model = new UserModel();
 	static CreditCardModel ccModel = new CreditCardModel();
+	static OrderModel oModel = new OrderModel();
 
 	public AccessControl(){
 		super();
@@ -41,8 +43,12 @@ public class AccessControl extends HttpServlet{
 
 		if(action!=null){
 			if(action.equalsIgnoreCase("login"))
-				login(request, response);
-
+				try {
+					login(request, response);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			else if(action.equalsIgnoreCase("register"))
 				register(request,response);
 
@@ -53,7 +59,7 @@ public class AccessControl extends HttpServlet{
 		}
 	}
 
-	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException
 	{
 		String userid = request.getParameter("userid");
 		String passid = request.getParameter("passid");
@@ -71,6 +77,7 @@ public class AccessControl extends HttpServlet{
 			AdminBean admin = new AdminBean();
 			admin.setUser(userid);
 			admin.setPassword(passid);
+			admin.setOrders(oModel.doRetrieveAll());
 			request.getSession().setAttribute("admin", admin);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 			dispatcher.forward(request, response);
@@ -81,6 +88,7 @@ public class AccessControl extends HttpServlet{
 				user = model.doRetrieveIdentifiedByKey(userid, passid);
 				if(user!=null){ //restituisce true se l'utente esiste
 					user.setCards(ccModel.doRetrieveByCliente(user));
+					user.setOrders(oModel.doRetrieveByCliente(user));
 					request.getSession().setAttribute("user", user);
 	
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");

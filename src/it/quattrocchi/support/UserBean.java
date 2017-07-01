@@ -104,9 +104,18 @@ public class UserBean {
 	public void setPrescriptions(Collection<PrescriptionBean> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
+	
+	public ArrayList<OrderBean> getOrders() {
+		return this.orders;
+	}
+	
+	public void setOrders(ArrayList<OrderBean> orders) {
+		this.orders = orders;
+	}
 
 	private Collection<PrescriptionBean> prescriptions;
 	private ArrayList<CreditCardBean> cc;
 	private String user, nome, cognome, stato, cap, indirizzo, email, password;
 	private Date dataDiNascita;
+	private ArrayList<OrderBean> orders;
 }
