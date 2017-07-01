@@ -1,6 +1,8 @@
 package it.quattrocchi.control;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,10 +10,12 @@ import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CreditCardModel;
@@ -24,10 +28,13 @@ import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
 @WebServlet("/user")
-
+@MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
+maxFileSize=1024*1024*10,      // 10MB
+maxRequestSize=1024*1024*50)   // 50MB
 public class UserControl extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+	private static final String SAVE_DIR = "WebContent/catalogo";
 
 	static ArticleModel model = new ArticleModel();
 	static CreditCardModel ccModel = new CreditCardModel();
@@ -55,19 +62,19 @@ public class UserControl extends HttpServlet{
 
 				else if(action.equals("logout"))
 					logout(request,response);
-				
+
 				else if(action.equalsIgnoreCase("addCard"))
 					addCard(request,response);
-				
+
 				else if(action.equalsIgnoreCase("delCard"))
 					delCard(request,response);
-				
+
 				else if(action.equalsIgnoreCase("addPrescription"))
 					addPres(request,response);
-				
+
 				else if(action.equalsIgnoreCase("delPres"))
 					delPres(request,response);
-				
+
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -85,7 +92,7 @@ public class UserControl extends HttpServlet{
 		try{
 			if(tipo.equalsIgnoreCase("O")){
 				toAdd = new GlassesBean();
-				
+
 				toAdd.setTipo(tipo);
 				toAdd.setNome(request.getParameter("nome"));
 				toAdd.setMarca(request.getParameter("marca"));
@@ -93,10 +100,29 @@ public class UserControl extends HttpServlet{
 				((GlassesBean)toAdd).setSesso(request.getParameter("sesso"));
 				((GlassesBean)toAdd).setDescrizione(request.getParameter("descrizione"));
 				toAdd.setDisponibilita(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
+
+				String appPath = request.getServletContext().getContextPath();
+				// constructs path of the directory to save uploaded file
+				String savePath = appPath + File.separator + SAVE_DIR;
+				
+		     // creates the save directory if it does not exists
+		        File fileSaveDir = new File(savePath);
+		        if (!fileSaveDir.exists()) {
+		            fileSaveDir.mkdir();
+		        }
+		        
+		        Part part = request.getPart("img1");
+		        String fileName = extractFileName(part);
+		     // refines the fileName in case it is an absolute path
+				fileName = new File(fileName).getName();
+	            part.write(savePath+ File.separator + fileName);
+				
+		        System.out.println(toAdd.getImg1());
+				//can also write the photo to local storage
 			}
 			else if(tipo.equalsIgnoreCase("L")){
 				toAdd = new ContactLensesBean();
-			
+
 				toAdd.setTipo(tipo);
 				toAdd.setNome(request.getParameter("nome"));
 				toAdd.setMarca(request.getParameter("marca"));
@@ -113,26 +139,37 @@ public class UserControl extends HttpServlet{
 		} catch (SQLException e){
 			e.printStackTrace();
 		}
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}
 
+	private String extractFileName(Part part) {
+		String contentDisp = part.getHeader("content-disposition");
+		String[] items = contentDisp.split(";");
+		for (String s : items) {
+			if (s.trim().startsWith("filename")) {
+				return s.substring(s.indexOf("=") + 2, s.length()-1);
+			}
+		}
+		return "";
+	}
+	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.getSession().invalidate();
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void addCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException{
-		
+
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		String numeroCC = request.getParameter("numcc");
 		String intestatario = request.getParameter("intestatario");
 		String circuito = request.getParameter("circuito");
 		String stato = "attiva";
 		String cvcCvv = request.getParameter("cvv");
-		
+
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date parsed=null;
 		try {
@@ -141,7 +178,7 @@ public class UserControl extends HttpServlet{
 			e.printStackTrace();
 		}
 		java.sql.Date dataScadenza = new java.sql.Date(parsed.getTime());
-		
+
 		CreditCardBean bean = new CreditCardBean();
 		bean.setNumeroCC(numeroCC);
 		bean.setCircuito(circuito);
@@ -150,23 +187,23 @@ public class UserControl extends HttpServlet{
 		bean.setDataScadenza(dataScadenza);
 		bean.setIntestatario(intestatario);
 		bean.setStato(stato);
-		
+
 		if(ccModel.doRetrieveByKey(numeroCC) == null){
 			ccModel.doSave(bean);
 		}
-		
+
 		else {
 			ccModel.doUpdate(bean);
 		}
-		
+
 		user.setCards(ccModel.doRetrieveByCliente(user));
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void delCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		
+
 		String numeroCC = request.getParameter("numeroCC");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 
@@ -175,15 +212,15 @@ public class UserControl extends HttpServlet{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		user.setCards(ccModel.doRetrieveByCliente(user));
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void addPres(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		
+
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		PrescriptionBean pres = new PrescriptionBean();
 		String codice = UUID.randomUUID().toString();
@@ -209,19 +246,19 @@ public class UserControl extends HttpServlet{
 		pres.setPrismaVertDXBD(request.getParameter("prismaVertDXBD"));
 		pres.setPupillarDistanceSX(Float.parseFloat(request.getParameter("pdSX")));
 		pres.setPupillarDistanceDX(Float.parseFloat(request.getParameter("pdDX")));
-	
+
 		pModel.doSave(pres, user);
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	private void delPres(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
 		String codice = request.getParameter("codice");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
-		
+
 		pModel.doDelete(codice, user);
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}

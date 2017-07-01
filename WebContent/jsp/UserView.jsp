@@ -36,6 +36,7 @@
 		if (user == null && admin == null) {
 	%>
 	<div class="container">
+	<br><br>
 		<a href="access">Login is required!</a>
 	</div>
 	<%
@@ -275,11 +276,13 @@
 			<input type="radio" name="tipo" value="Occhiale" autocomplete="off"> Occhiali<br>
 			<input type="radio" name="tipo" value="Lente a contatto" autocomplete="off"> Lenti a contatto<br>
 			<div id='daMostrareSeOcchiali'>
-				<form action="user" method='get'>
+				<form action="user" method='post' enctype="multipart/form-data">
 					<input type="hidden" name="action" value="insert" />
 					<input type="hidden" name="tipo" value="O" />
+					
 					<label for="nome">Nome:</label> 
 					<input type="text" name="nome" />
+					
 					<label for="marca">Marca:</label> 
 					<select name="marca">
 						<option value="GreenVision">GreenVision</option>
@@ -288,23 +291,38 @@
 						<option value="Persol">Persol</option>
 						<option value="RayBan">RayBan</option>
 					</select>
+					
 					<label for="prezzo">Prezzo:</label> 
 					<input type="number" step="0.01" min="0" name="prezzo" placeholder="Prezzo" />
+					
 					<label for="sesso">Sesso:</label> 
 					<select name="sesso">
 						<option selected value="U">Any</option>
 						<option value="M">Man</option>
 						<option value="F">Woman</option>
 					</select>
+					
 					<label for="descrizione">Descrizione:</label> 
 					<input type="text" name="descrizione" />
 					<label for="numeroPezziDisponibili">Numero pezzi disponibili:</label> 
 					<input type="number" step="1" min="1" name="numeroPezziDisponibili" placeholder="Numero Pezzi Disponibili" />
+					
+					<label class="control-label" for="img1">Immagine:</label><input id="img1" name="img1" type="file" multiple class="file-loading">
+					<div id="errorBlock" class="help-block"></div>
+						<script>
+						$(document).on('ready', function() {
+						    $("#img1").fileinput({
+						        showPreview: false,
+						        allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+						        elErrorContainer: "#errorBlock"
+						    });
+						});
+						</script>					
 					<input type='submit' value='Insert!' />
 				</form>
 			</div>
 			<div id='daMostrareSeLentine'>
-				<form action="user" method='get'>
+				<form action="user" method='post'>
 					<input type="hidden" name="action" value="insert" />
 					<input type="hidden" name="tipo" value="L" />
 					<label for="nome">Nome:</label> 
