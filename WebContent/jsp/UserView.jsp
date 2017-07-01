@@ -150,7 +150,7 @@
 		<table class="table-bordered">
 			<thead>
 				<th>Codice</th>
-				<th>Tipo</th>
+				<th>Nome</th>
 			</thead>
 			<%
 				Collection<PrescriptionBean> pres = user.getPrescriptions();
@@ -161,7 +161,7 @@
 			%>
 			<tr>
 				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getTipo() %></td>
+				<td><%=bean.getNome() %></td>
 				<td><a href="user?action=delPres&codice=<%=bean.getCodice()%>">rimuovi</a></td>
 			</tr>
 			<% 	}
@@ -178,9 +178,9 @@
 					
 		<input type="hidden" name="action" value="addPrescription"> 
 		
-			<label for="tipoP">Tipo Prescrizione:</label> <input
-				name="tipoP" type="text" maxlength="50"
-				placeholder="ES. Oculistica"> <span id="tipoP"></span><br>
+			<label for="nomeP">Nome:</label> <input
+				name="nomeP" type="text" maxlength="50"
+				placeholder="ES. di Mario per vicinanza"> <span id="tipoP"></span><br>
 
 			<label for="sferaSX">Sfera Sinistra:</label> <input
 				name="sferaSX" type="number" step="0.01" step="0.01" min="-10" max="10"

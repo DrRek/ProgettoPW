@@ -191,7 +191,7 @@ public class UserControl extends HttpServlet{
 			codice = UUID.randomUUID().toString();
 		}
 		pres.setCodice(codice);
-		pres.setTipo(request.getParameter("tipoP"));
+		pres.setNome(request.getParameter("nomeP"));
 		pres.setSferaSX(Float.parseFloat(request.getParameter("sferaSX")));
 		pres.setCilindroSX(Float.parseFloat(request.getParameter("cilindroSX")));
 		pres.setAsseSX(Float.parseFloat(request.getParameter("asseSX")));

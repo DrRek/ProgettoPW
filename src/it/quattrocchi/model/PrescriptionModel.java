@@ -25,7 +25,7 @@ public class PrescriptionModel {
 			stm = conn.prepareStatement(query);
 			stm.setString(1, prescription.getCodice());
 			stm.setString(2, user.getUser());
-			stm.setString(3, prescription.getTipo());
+			stm.setString(3, prescription.getNome());
 			stm.setFloat(4, prescription.getSferaSX());
 			stm.setFloat(5, prescription.getCilindroSX());
 			stm.setFloat(6, prescription.getAsseSX());
@@ -130,7 +130,7 @@ public class PrescriptionModel {
 			while(rs.next()) {
 				PrescriptionBean bean = new PrescriptionBean();
 				bean.setCodice(rs.getString("Codice"));
-				bean.setTipo(rs.getString("TipoPrescrizione"));
+				bean.setNome(rs.getString("NomePrescrizione"));
 				bean.setSferaSX(rs.getFloat("SferaSinistra"));
 				bean.setCilindroSX(rs.getFloat("CilindroSinistra"));
 				bean.setAsseSX(rs.getFloat("AsseSinistra"));
@@ -182,7 +182,7 @@ public class PrescriptionModel {
 			
 			while(rs.next()) {
 				bean.setCodice(codice);
-				bean.setTipo(rs.getString("TipoPrescrizione"));
+				bean.setNome(rs.getString("NomePrescrizione"));
 				bean.setSferaSX(rs.getFloat("SferaSinistra"));
 				bean.setCilindroSX(rs.getFloat("CilindroSinistra"));
 				bean.setAsseSX(rs.getFloat("AsseSinistra"));
