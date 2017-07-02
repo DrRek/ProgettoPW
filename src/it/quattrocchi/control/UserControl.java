@@ -20,11 +20,10 @@ import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.model.OrderModel;
 import it.quattrocchi.model.PrescriptionModel;
 import it.quattrocchi.support.CreditCardBean;
-<<<<<<< HEAD
+
 import it.quattrocchi.support.GlassesBean;
 import it.quattrocchi.support.OrderBean;
-=======
->>>>>>> origin/master
+
 import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
@@ -87,7 +86,6 @@ public class UserControl extends HttpServlet{
 		}
 	}
 
-<<<<<<< HEAD
 	private void viewOldCheckout(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		String codice = request.getParameter("codice");
 		OrderBean order = oModel.doRetrieveByKey(codice);
@@ -97,67 +95,6 @@ public class UserControl extends HttpServlet{
 		dispatcher.forward(request, response);
 	}
 
-	private void insert(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{
-		String tipo = request.getParameter("tipo");
-		ArticleBean toAdd = null;
-		try{
-			if(tipo.equalsIgnoreCase("O")){
-				toAdd = new GlassesBean();
-				
-				String nome=request.getParameter("nome");
-				String marca=request.getParameter("marca");
-				toAdd.setTipo(tipo);
-				toAdd.setNome(nome);
-				toAdd.setMarca(marca);
-				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
-				((GlassesBean)toAdd).setSesso(request.getParameter("sesso"));
-				((GlassesBean)toAdd).setDescrizione(request.getParameter("descrizione"));
-				toAdd.setDisponibilita(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
-
-				String appPath = request.getServletContext().getContextPath();
-				// constructs path of the directory to save uploaded file
-				String savePath = appPath + File.separator + SAVE_DIR;
-				
-		     // creates the save directory if it does not exists
-		        File fileSaveDir = new File(savePath);
-		        if (!fileSaveDir.exists()) {
-		            fileSaveDir.mkdir();
-		        }
-		        
-		        Part part = request.getPart("img1");
-		        String ext = part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf('.')+1);
-		     // refines the fileName in case it is an absolute path
-				String fileName = new File(nome+"_"+marca+"_1."+ext).getName();
-	            part.write(SAVE_DIR + fileName);
-				toAdd.setImg1(fileName);
-				//can also write the photo to local storage
-			}
-			else if(tipo.equalsIgnoreCase("L")){
-				toAdd = new ContactLensesBean();
-
-				toAdd.setTipo(tipo);
-				toAdd.setNome(request.getParameter("nome"));
-				toAdd.setMarca(request.getParameter("marca"));
-				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
-				toAdd.setDisponibilita(Integer.parseInt(request.getParameter("numeroPezziDisponibili")));
-				((ContactLensesBean)toAdd).setGradazione(Double.parseDouble(request.getParameter("gradazione")));
-				((ContactLensesBean)toAdd).setRaggio(Double.parseDouble(request.getParameter("raggio")));
-				((ContactLensesBean)toAdd).setDiametro(Double.parseDouble(request.getParameter("diametro")));
-				((ContactLensesBean)toAdd).setColore(request.getParameter("colore"));
-				((ContactLensesBean)toAdd).setTipologia(request.getParameter("tipologia"));
-				((ContactLensesBean)toAdd).setNumeroPezziNelPacco(Integer.parseInt(request.getParameter("numeroPezziNelPacco")));
-			}
-			model.doSave(toAdd);
-		} catch (SQLException e){
-			e.printStackTrace();
-		}
-
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
-		dispatcher.forward(request, response);
-	}
-=======
-	
->>>>>>> origin/master
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.getSession().invalidate();
