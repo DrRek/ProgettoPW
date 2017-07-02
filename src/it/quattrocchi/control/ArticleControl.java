@@ -1,5 +1,6 @@
 package it.quattrocchi.control;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -9,16 +10,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
+import it.quattrocchi.support.ArticleBean;
+import it.quattrocchi.support.ContactLensesBean;
+import it.quattrocchi.support.GlassesBean;
 
 @WebServlet("/article")
 
 public class ArticleControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final String SAVE_DIR = "C://catalogoPW//";
 
 	static ArticleModel model = new ArticleModel();
 
@@ -56,7 +62,10 @@ public class ArticleControl extends HttpServlet {
 			else if(toDo.equalsIgnoreCase("searchLente")){
 				request.setAttribute("cercaPerTipo", "L");
 			}
-			
+			else if(toDo.equalsIgnoreCase("addProduct")){
+				System.out.println("test");
+				insert(request, response);
+			}
 			else{
 				try{
 					response.setContentType("application/json");
@@ -122,6 +131,75 @@ public class ArticleControl extends HttpServlet {
 			model.doDelete(nome, marca);
 	}
 
-
+	private void insert(HttpServletRequest request, HttpServletResponse response){
+		ArticleBean toAdd = null;
+		try{
+			toAdd = new GlassesBean();
+			String nome = request.getParameter("nome");
+			String marca = request.getParameter("marca");
+			String tipo = request.getParameter("tipo");
+			Double prezzo = Double.parseDouble(request.getParameter("prezzo"));
+	        Part img1 = request.getPart("img1");
+			toAdd.setNome(nome);
+			toAdd.setMarca(marca);
+			toAdd.setTipo(tipo);
+			toAdd.setPrezzo(prezzo);
+	        String fileName = new File(nome+"_"+marca+"_1."+img1.getSubmittedFileName().substring(img1.getSubmittedFileName().lastIndexOf('.')+1)).getName();
+	        img1.write(SAVE_DIR + fileName);
+			toAdd.setImg1(fileName);
+	        if(tipo.equalsIgnoreCase("O")){
+	    		String descrizione = request.getParameter("descrizione");
+	    		String sesso = request.getParameter("sesso");
+	    		int quantita = Integer.parseInt(request.getParameter("quantita"));
+	            Part img2 = request.getPart("img2");
+	            Part img3 = request.getPart("img3");
+	            ((GlassesBean)toAdd).setDescrizione(descrizione);
+	            ((GlassesBean)toAdd).setSesso(sesso);
+	            ((GlassesBean)toAdd).setDisponibilita(quantita);
+	            fileName = new File(nome+"_"+marca+"_2."+img2.getSubmittedFileName().substring(img2.getSubmittedFileName().lastIndexOf('.')+1)).getName();
+	            img2.write(SAVE_DIR + fileName);
+	            ((GlassesBean)toAdd).setImg2(fileName);
+	            fileName = new File(nome+"_"+marca+"_3."+img3.getSubmittedFileName().substring(img3.getSubmittedFileName().lastIndexOf('.')+1)).getName();
+	            img3.write(SAVE_DIR + fileName);
+	            ((GlassesBean)toAdd).setImg3(fileName);
+	        }else{
+	    		Double gradazione = Double.parseDouble(request.getParameter("gradazione"));
+	    		String tipologia = request.getParameter("tipologia");
+	    		Double raggio = Double.parseDouble(request.getParameter("raggio"));
+	    		Double diametro = Double.parseDouble(request.getParameter("diametro"));
+	    		String colore = request.getParameter("colore");
+	    		int quantita = Integer.parseInt(request.getParameter("quantita"));
+	    		int pezziPerPacco = Integer.parseInt(request.getParameter("pezziPerPacco"));
+	    		((ContactLensesBean)toAdd).setGradazione(gradazione);
+	    		((ContactLensesBean)toAdd).setTipologia(tipologia);
+	    		((ContactLensesBean)toAdd).setRaggio(raggio);
+	    		((ContactLensesBean)toAdd).setDiametro(diametro);
+	    		((ContactLensesBean)toAdd).setColore(colore);
+	            ((ContactLensesBean)toAdd).setDisponibilita(quantita);
+	            ((ContactLensesBean)toAdd).setNumeroPezziNelPacco(pezziPerPacco);
+	        }
+		} catch (Exception e){
+			try {
+				e.printStackTrace();
+				response.getWriter().write("Error saving the immage");
+				return;
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+        String status = "Article saved successfully";
+		try {
+			if(toAdd!=null)
+				model.doSave(toAdd);
+		} catch (SQLException e1) {
+			status = "Error saving the article";
+		}
+		
+		try {
+			response.getWriter().write(status);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

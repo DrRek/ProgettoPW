@@ -264,7 +264,7 @@
 			</select>
 			<hr>
 			<h4>Name:</h4>
-			<input type="text" name="nome" value="cercaPerTipo" value="NameS"/>
+			<input type="text" name="nome" value="name"/>
 			<hr>
 			<h4>Brand:</h4>
 			<select name="marca">
@@ -282,9 +282,10 @@
 			</select>
 			<hr>
 			<h4>Price:</h4>
-			<div>
-				<input type="number" step="1.00" min="0.00" name="prezzo" placeholder="Price" /><br>
-			</div>
+			<input type="number" step="1.00" min="0.00" name="prezzo" placeholder="Price" /><br>
+			<hr>
+			<h4>Available number:</h4>
+			<input type="number" step="1" min="1" name="quantita"/>
 			<div class="specificiPerOcchiali">
 				<hr>
 				<h4 class="specificiPerOcchiali">Description:</h4>
@@ -363,21 +364,22 @@
 					<option value="Ro">Red</option>
 					<option value="Pa">Special</option>
 				</select>
+				<hr>
+				<h4 class="specificiPerLentine">Lenses per pack:</h4>
+				<input class="specificiPerLentine" type="number" step="1" min="1" name="pezziPerPacco"/>
 			</div>
 			<hr>
 			<h4 class="control-label">First image:</h4>
-			<input name="img1" type="file" multiple class="img,file-loading">
-			<div id="errorBlock" class="help-block"></div>
+			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
+			<div class="help-block"></div>
 			<h4 class="control-label,specificiPerOcchiali">Second image:</h4>
 			<input name="img2" type="file" multiple class="img,file-loading,specificiPerOcchiali">
-			<div id="errorBlock" class="help-block,specificiPerOcchiali"></div>
+			<div class="help-block,specificiPerOcchiali"></div>
 			<h4 class="control-label,specificiPerOcchiali">Third image:</h4>
 			<input name="img3" type="file" multiple class="img,file-loading,specificiPerOcchiali">
-			<div id="errorBlock" class="help-block,specificiPerOcchiali"></div>
-			<script type="text/javascript">
-			</script>
+			<div class="help-block,specificiPerOcchiali"></div>
 			
-			<input id="advancedSearch" type='button' value='Search!' />
+			<input id="addProduct" type='button' value='Add!' />
 		</div>
 	</div>
 
@@ -411,8 +413,6 @@
 	%>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
-	<script src="js/search-add-validation.js"></script>
 	<script src="js/user.js"></script>
 </body>
 </html>
