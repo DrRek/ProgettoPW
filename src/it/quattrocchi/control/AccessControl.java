@@ -77,7 +77,7 @@ public class AccessControl extends HttpServlet{
 			AdminBean admin = new AdminBean();
 			admin.setUser(userid);
 			admin.setPassword(passid);
-			admin.setOrders(oModel.doRetrieveAll());
+			//admin.setOrders(oModel.doRetrieveAll());
 			request.getSession().setAttribute("admin", admin);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 			dispatcher.forward(request, response);
