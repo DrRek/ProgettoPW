@@ -111,6 +111,7 @@ function setSearchField() {
 function addProduct(){
 	alert("2");
 	var nome = $(input[name=nome]).val();
+	alert("qui non arriva");
 	var marca = $(select[name=marca]).val();
 	var tipo = $(select[name=tipo]).val();
 	var prezzo = $(input[name=prezzo]).val();
