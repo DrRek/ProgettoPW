@@ -372,12 +372,12 @@
 			<h4 class="control-label">First image:</h4>
 			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
 			<div class="help-block"></div>
-			<h4 class="control-label,specificiPerOcchiali">Second image:</h4>
+			<h4 class="control-label specificiPerOcchiali">Second image:</h4>
 			<input name="img2" type="file" multiple class="img,file-loading,specificiPerOcchiali">
-			<div class="help-block,specificiPerOcchiali"></div>
-			<h4 class="control-label,specificiPerOcchiali">Third image:</h4>
-			<input name="img3" type="file" multiple class="img,file-loading,specificiPerOcchiali">
-			<div class="help-block,specificiPerOcchiali"></div>
+			<div class="help-block specificiPerOcchiali"></div>
+			<h4 class="control-label specificiPerOcchiali">Third image:</h4>
+			<input name="img3" type="file" multiple class="img,file-loading specificiPerOcchiali">
+			<div class="help-block specificiPerOcchiali"></div>
 			
 			<input id="addProduct" type='button' value='Add!' />
 		</div>

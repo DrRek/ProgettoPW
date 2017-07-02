@@ -154,7 +154,7 @@ $(document).ready(function() {
 	}
 	
 	function formatData(cart, presc){
-		var toAppend = '<table id="cartElements" class="table-bordered"><tr><th>Tipo</th><th>Nome</th><th>Marca</th><th>Gradazione/Prescrizione</th><th>Numero Prodotti</th><th>Prezzo</th><th>Opzioni</th></tr>';
+		var toAppend = '<table id="cartElements" class="table table-condensed"><tr><th>Tipo</th><th>Nome</th><th>Marca</th><th>Gradazione/Prescrizione</th><th>Numero Prodotti</th><th>Prezzo</th><th>Opzioni</th></tr>';
 		var products = new Array();
 		var tot = 0;
 		products = cart[Object.keys(cart)[0]];
