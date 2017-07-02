@@ -35,6 +35,7 @@ maxRequestSize=1024*1024*50)   // 50MB
 public class UserControl extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
+	private static final String SAVE_DIR = "catalogo";
 
 	static ArticleModel model = new ArticleModel();
 	static CreditCardModel ccModel = new CreditCardModel();
