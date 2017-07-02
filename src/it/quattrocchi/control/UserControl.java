@@ -20,11 +20,13 @@ import com.google.gson.Gson;
 
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CreditCardModel;
+import it.quattrocchi.model.OrderModel;
 import it.quattrocchi.model.PrescriptionModel;
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.ContactLensesBean;
 import it.quattrocchi.support.CreditCardBean;
 import it.quattrocchi.support.GlassesBean;
+import it.quattrocchi.support.OrderBean;
 import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
@@ -40,6 +42,7 @@ public class UserControl extends HttpServlet{
 	static ArticleModel model = new ArticleModel();
 	static CreditCardModel ccModel = new CreditCardModel();
 	static PrescriptionModel pModel = new PrescriptionModel();
+	static OrderModel oModel = new OrderModel();
 
 	public UserControl(){
 		super();
@@ -76,6 +79,9 @@ public class UserControl extends HttpServlet{
 				else if(action.equalsIgnoreCase("delPres"))
 					delPres(request,response);
 				
+				else if(action.equalsIgnoreCase("viewOldCheckout"))
+					viewOldCheckout(request,response);
+				
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -85,6 +91,15 @@ public class UserControl extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 			dispatcher.forward(request, response);
 		}
+	}
+
+	private void viewOldCheckout(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		String codice = request.getParameter("codice");
+		OrderBean order = oModel.doRetrieveByKey(codice);
+		request.setAttribute("order", order);
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/OrderView.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void insert(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException{

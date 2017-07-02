@@ -131,7 +131,7 @@
 
 	<div class="container">
 		<h2>Prescrizioni</h2>
-		<table class="table-bordered">
+		<table class="table table-condensed">
 			<thead>
 				<th>Codice</th>
 				<th>Nome</th>
@@ -221,7 +221,7 @@
 
 	<div class="container">
 		<h2>Ordini passati</h2>
-		<table class="table-bordered">
+		<table class="table table-condensed">
 			<thead>
 				<th>Codice</th>
 				<th>Prezzo</th>
@@ -238,7 +238,7 @@
 				<td><%=bean.getCodice()%></td>
 				<td><%=bean.getCosto() %></td>
 				<td><%=bean.getDataEsecuzione() %></td>
-				<td><a href="#">Info</a>
+				<td><a href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
 			</tr>
 			<% 	}
 					}%>
@@ -383,7 +383,7 @@
 
 	<div class="container">
 		<h2>Ordini passati</h2>
-		<table class="table-bordered">
+		<table class="table table-condensed">
 			<thead>
 				<th>Codice</th>
 				<th>Prezzo</th>
@@ -400,7 +400,7 @@
 				<td><%=bean.getCodice()%></td>
 				<td><%=bean.getCosto() %></td>
 				<td><%=bean.getDataEsecuzione() %></td>
-				<td><a href="#">Info</a>
+				<td><a href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
 			</tr>
 			<%  }
 				}%>

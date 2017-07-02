@@ -257,5 +257,68 @@ public class OrderModel {
 
 		return o;
 	}
+	
+	public OrderBean doRetrieveByKey(String codice) throws SQLException {
+		OrderBean o = new OrderBean();
+		ArrayList<CartArticle> ordinati = new ArrayList<CartArticle>();
+		String codPrecedente = "";
+		
+		Connection conn = null;
+		PreparedStatement stm  = null;
+		
+		String query = "SELECT * FROM " 
+				+ "ORDINE O JOIN APPARTENENZA A ON O.CODICE = A.ORDINE"
+				+ " WHERE O.CODICE = ?" ;
+		
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, codice);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()) {
+				
+				if(!(codPrecedente.equals(rs.getString("o.Codice")))){
+					codPrecedente = rs.getString("o.Codice");
+					o.setCodice(rs.getString("o.Codice"));
+					o.setCc(rs.getString("o.CartaCredito"));
+					o.setCosto(rs.getDouble("o.Costo"));
+					o.setDataEsecuzione(rs.getDate("o.DataEsecuzione"));
+					o.setCliente(uModel.doRetrieveByKey(rs.getString("o.Cliente")));
+					CartArticle aBean = null;
+					if(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")) == null)
+						aBean = new CartArticle(aModel.doRetrieveContactLenses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo"), rs.getDouble("a.Gradazione")), rs.getInt("a.Quantita"));
+					else
+						aBean = new CartArticle(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")), rs.getInt("a.Quantita"));
+					ordinati.add(aBean);
+				}
+				
+				else{	
+					CartArticle aBean = null;
+					if(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")) == null)
+						aBean = new CartArticle(aModel.doRetrieveContactLenses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo"), rs.getDouble("a.Gradazione")), rs.getInt("a.Quantita"));
+					else
+						aBean = new CartArticle(aModel.doRetrieveGlasses(rs.getString("a.NomeArticolo"), rs.getString("a.MarcaArticolo")), rs.getInt("a.Quantita"));
+					ordinati.add(aBean);
+				}
+				
+			} 
+			o.setOrdinati(ordinati);
+			
+		}
+		
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+
+		
+		return o;
+	}
 
 }
