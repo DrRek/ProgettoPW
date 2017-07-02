@@ -35,7 +35,7 @@ maxRequestSize=1024*1024*50)   // 50MB
 public class UserControl extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private static final String SAVE_DIR = "catalogo";
+	private static final String SAVE_DIR = "C://catalogoPW//";
 
 	static ArticleModel model = new ArticleModel();
 	static CreditCardModel ccModel = new CreditCardModel();
@@ -93,10 +93,12 @@ public class UserControl extends HttpServlet{
 		try{
 			if(tipo.equalsIgnoreCase("O")){
 				toAdd = new GlassesBean();
-
+				
+				String nome=request.getParameter("nome");
+				String marca=request.getParameter("marca");
 				toAdd.setTipo(tipo);
-				toAdd.setNome(request.getParameter("nome"));
-				toAdd.setMarca(request.getParameter("marca"));
+				toAdd.setNome(nome);
+				toAdd.setMarca(marca);
 				toAdd.setPrezzo(Double.parseDouble(request.getParameter("prezzo")));
 				((GlassesBean)toAdd).setSesso(request.getParameter("sesso"));
 				((GlassesBean)toAdd).setDescrizione(request.getParameter("descrizione"));
@@ -113,12 +115,11 @@ public class UserControl extends HttpServlet{
 		        }
 		        
 		        Part part = request.getPart("img1");
-		        String fileName = extractFileName(part);
+		        String ext = part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf('.')+1);
 		     // refines the fileName in case it is an absolute path
-				fileName = new File(fileName).getName();
-	            part.write(savePath+ File.separator + fileName);
-				
-		        System.out.println(toAdd.getImg1());
+				String fileName = new File(nome+"_"+marca+"_1."+ext).getName();
+	            part.write(SAVE_DIR + fileName);
+				toAdd.setImg1(fileName);
 				//can also write the photo to local storage
 			}
 			else if(tipo.equalsIgnoreCase("L")){
@@ -143,17 +144,6 @@ public class UserControl extends HttpServlet{
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	private String extractFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-		String[] items = contentDisp.split(";");
-		for (String s : items) {
-			if (s.trim().startsWith("filename")) {
-				return s.substring(s.indexOf("=") + 2, s.length()-1);
-			}
-		}
-		return "";
 	}
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
