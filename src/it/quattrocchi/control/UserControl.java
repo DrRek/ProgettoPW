@@ -1,6 +1,5 @@
 package it.quattrocchi.control;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -14,19 +13,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
 import com.google.gson.Gson;
 
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.model.OrderModel;
 import it.quattrocchi.model.PrescriptionModel;
-import it.quattrocchi.support.ArticleBean;
-import it.quattrocchi.support.ContactLensesBean;
 import it.quattrocchi.support.CreditCardBean;
+<<<<<<< HEAD
 import it.quattrocchi.support.GlassesBean;
 import it.quattrocchi.support.OrderBean;
+=======
+>>>>>>> origin/master
 import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
@@ -37,7 +35,6 @@ maxRequestSize=1024*1024*50)   // 50MB
 public class UserControl extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private static final String SAVE_DIR = "C://catalogoPW//";
 
 	static ArticleModel model = new ArticleModel();
 	static CreditCardModel ccModel = new CreditCardModel();
@@ -61,10 +58,7 @@ public class UserControl extends HttpServlet{
 		if(action!=null){
 			try{
 
-				if (action.equalsIgnoreCase("insert"))
-					insert(request,response);
-
-				else if(action.equals("logout"))
+				if(action.equals("logout"))
 					logout(request,response);
 				
 				else if(action.equalsIgnoreCase("addCard"))
@@ -93,6 +87,7 @@ public class UserControl extends HttpServlet{
 		}
 	}
 
+<<<<<<< HEAD
 	private void viewOldCheckout(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		String codice = request.getParameter("codice");
 		OrderBean order = oModel.doRetrieveByKey(codice);
@@ -160,6 +155,9 @@ public class UserControl extends HttpServlet{
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 		dispatcher.forward(request, response);
 	}
+=======
+	
+>>>>>>> origin/master
 
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.getSession().invalidate();
