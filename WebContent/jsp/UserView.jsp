@@ -256,29 +256,25 @@
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
 		<hr>
-		<div id="show" style="padding: 15px;">
-			<h4>Products:</h4>
-			<select name="tipo" onchange="setSearchField()">
-				<option selected value="O">Glasses</option>
-				<option value="L">Contact lenses</option>
-			</select>
-			<hr>
+		<h4>Products:</h4>
+		<select name="tipo" onchange="setSearchField()">
+			<option selected value="O">Glasses</option>
+			<option value="L">Contact lenses</option>
+		</select>
+		<hr>
+		<form class="specificiPerOcchiali" action="article" method='post' enctype="multipart/form-data">
+			<input type="hidden" name="toDo" value="addProduct"/>
+			<input type="hidden" name="tipo" value="O"/>
 			<h4>Name:</h4>
 			<input type="text" name="nome" value="name"/>
 			<hr>
 			<h4>Brand:</h4>
 			<select name="marca">
-				<option class="specificiPerOcchiali" value="GreenVision">GreenVision</option>
-				<option class="specificiPerOcchiali" value="Lindberg">Lindberg</option>
-				<option class="specificiPerOcchiali" value="Oakley">Oakley</option>
-				<option class="specificiPerOcchiali" value="Persol">Persol</option>
-				<option class="specificiPerOcchiali" value="RayBan">RayBan</option>
-				
-				<option class="specificiPerLentine" value="Acuvue">Acuvue</option>
-				<option class="specificiPerLentine" value="Alcon">Alcon</option>
-				<option class="specificiPerLentine" value="Biotrue">Biotrue</option>
-				<option class="specificiPerLentine" value="Frequency">Frequency</option>
-				<option class="specificiPerLentine" value="GreenVision">GreenVision</option>
+				<option value="GreenVision">GreenVision</option>
+				<option value="Lindberg">Lindberg</option>
+				<option value="Oakley">Oakley</option>
+				<option value="Persol">Persol</option>
+				<option value="RayBan">RayBan</option>
 			</select>
 			<hr>
 			<h4>Price:</h4>
@@ -286,101 +282,119 @@
 			<hr>
 			<h4>Available number:</h4>
 			<input type="number" step="1" min="1" name="quantita"/>
-			<div class="specificiPerOcchiali">
-				<hr>
-				<h4 class="specificiPerOcchiali">Description:</h4>
-				<input class="specificiPerOcchiali" type="text" name="descrizione" value="Description"/>
-				<hr>
-				<h4 class="specificiPerOcchiali">Sex:</h4>
-				<select class="specificiPerOcchiali" name="sesso">
-					<option class="specificiPerOcchiali" value="U">Unisex</option>
-					<option class="specificiPerOcchiali" value="M">Male</option>
-					<option class="specificiPerOcchiali" value="F">Female</option>
-				</select>
-				<hr>
-			</div>
-			<div class="specificiPerLentine">
-				<hr>
-				<h4 class="specificiPerLentine">Gradazione:</h4>
-				<select class="specificiPerLentine" name="gradazione">
-					<option value="+8.00">+8.00</option>
-					<option value="+7.50">+7.50</option>
-					<option value="+7.00">+7.00</option>
-					<option value="+6.50">+6.50</option>
-					<option value="+6.00">+6.00</option>
-					<option value="+5.50">+5.50</option>
-					<option value="+5.00">+5.00</option>
-					<option value="+4.50">+4.50</option>
-					<option value="+4.00">+4.00</option>
-					<option value="+3.50">+3.50</option>
-					<option value="+3.00">+3.00</option>
-					<option value="+2.50">+2.50</option>
-					<option value="+2.00">+2.00</option>
-					<option value="+1.50">+1.50</option>
-					<option value="+1.00">+1.00</option>
-					<option value="+0.50">+0.50</option>
-					<option selected value="">All</option>
-					<option value="0">±0.00</option>
-					<option value="-0.50">-0.50</option>
-					<option value="-1.00">-1.00</option>
-					<option value="-1.50">-1.50</option>
-					<option value="-2.00">-2.00</option>
-					<option value="-2.50">-2.50</option>
-					<option value="-3.00">-3.00</option>
-					<option value="-3.50">-3.50</option>
-					<option value="-4.00">-4.00</option>
-					<option value="-4.50">-4.50</option>
-					<option value="-5.00">-5.00</option>
-					<option value="-5.50">-5.50</option>
-					<option value="-6.00">-6.00</option>
-					<option value="-6.50">-6.50</option>
-					<option value="-7.00">-7.00</option>
-					<option value="-8.50">-7.50</option>
-					<option value="-8.00">-8.00</option>
-				</select>
-				<hr>
-				<h4 class="specificiPerLentine">Duration:</h4>
-				<select class="specificiPerLentine" name="tipologia">
-					<option value="G">Daily</option>
-					<option value="Q">15-days</option>
-					<option value="M">Monthly</option>
-				</select>
-				<hr>
-				<h4 class="specificiPerLentine">Radius:</h4>
-				<input class="specificiPerLentine" type="number" min="5"
-					name="raggio" placeholder="mm" value="" />
-				<hr>
-				<h4 class="specificiPerLentine">Diameter:</h4>
-				<input class="specificiPerLentine" type="number" min="10"
-					name="diametro" placeholder="mm" value="" />
-				<hr>
-				<h4 class="specificiPerLentine">Color:</h4>
-				<select class="specificiPerLentine" name="colore">
-					<option selected value="">All</option>
-					<option value="Ve">Green</option>
-					<option value="Bl">Blue</option>
-					<option value="Ma">Brown</option>
-					<option value="Vi">Violet</option>
-					<option value="Ro">Red</option>
-					<option value="Pa">Special</option>
-				</select>
-				<hr>
-				<h4 class="specificiPerLentine">Lenses per pack:</h4>
-				<input class="specificiPerLentine" type="number" step="1" min="1" name="pezziPerPacco"/>
-			</div>
+			<hr>
+			<h4 >Description:</h4>
+			<input type="text" name="descrizione" value="Description"/>
+			<hr>
+			<h4>Sex:</h4>
+			<select name="sesso">
+				<option value="U">Unisex</option>
+				<option value="M">Male</option>
+				<option value="F">Female</option>
+			</select>
 			<hr>
 			<h4 class="control-label">First image:</h4>
 			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
 			<div class="help-block"></div>
-			<h4 class="control-label specificiPerOcchiali">Second image:</h4>
+			<h4 class="control-label">Second image:</h4>
 			<input name="img2" type="file" multiple class="img,file-loading,specificiPerOcchiali">
-			<div class="help-block specificiPerOcchiali"></div>
-			<h4 class="control-label specificiPerOcchiali">Third image:</h4>
+			<div class="help-block"></div>
+			<h4 class="control-label">Third image:</h4>
 			<input name="img3" type="file" multiple class="img,file-loading specificiPerOcchiali">
-			<div class="help-block specificiPerOcchiali"></div>
-			
-			<input id="addProduct" type='button' value='Add!' />
-		</div>
+			<div class="help-block"></div>
+			<input id="addProduct" type='submit' value='Add glass!' />
+		</form>
+		<form class="specificiPerLentine" action="article" method='post' enctype="multipart/form-data">
+			<input type="hidden" name="toDo" value="addProduct"/>
+			<input type="hidden" name="tipo" value="L"/>
+			<h4>Name:</h4>
+			<input type="text" name="nome" value="name"/>
+			<hr>
+			<h4>Brand:</h4>
+			<select name="marca">
+				<option value="Acuvue">Acuvue</option>
+				<option value="Alcon">Alcon</option>
+				<option value="Biotrue">Biotrue</option>
+				<option value="Frequency">Frequency</option>
+				<option value="GreenVision">GreenVision</option>
+			</select>
+			<hr>
+			<h4>Price:</h4>
+			<input type="number" step="1.00" min="0.00" name="prezzo" placeholder="Price" /><br>
+			<hr>
+			<h4>Available number:</h4>
+			<input type="number" step="1" min="1" name="quantita"/>
+			<hr>
+			<h4>Gradazione:</h4>
+			<select name="gradazione">
+				<option value="+8.00">+8.00</option>
+				<option value="+7.50">+7.50</option>
+				<option value="+7.00">+7.00</option>
+				<option value="+6.50">+6.50</option>
+				<option value="+6.00">+6.00</option>
+				<option value="+5.50">+5.50</option>
+				<option value="+5.00">+5.00</option>
+				<option value="+4.50">+4.50</option>
+				<option value="+4.00">+4.00</option>
+				<option value="+3.50">+3.50</option>
+				<option value="+3.00">+3.00</option>
+				<option value="+2.50">+2.50</option>
+				<option value="+2.00">+2.00</option>
+				<option value="+1.50">+1.50</option>
+				<option value="+1.00">+1.00</option>
+				<option value="+0.50">+0.50</option>
+				<option selected value="">All</option>
+				<option value="0">±0.00</option>
+				<option value="-0.50">-0.50</option>
+				<option value="-1.00">-1.00</option>
+				<option value="-1.50">-1.50</option>
+				<option value="-2.00">-2.00</option>
+				<option value="-2.50">-2.50</option>
+				<option value="-3.00">-3.00</option>
+				<option value="-3.50">-3.50</option>
+				<option value="-4.00">-4.00</option>
+				<option value="-4.50">-4.50</option>
+				<option value="-5.00">-5.00</option>
+				<option value="-5.50">-5.50</option>
+				<option value="-6.00">-6.00</option>
+				<option value="-6.50">-6.50</option>
+				<option value="-7.00">-7.00</option>
+				<option value="-8.50">-7.50</option>
+				<option value="-8.00">-8.00</option>
+			</select>
+			<hr>
+			<h4>Duration:</h4>
+			<select name="tipologia">
+				<option value="G">Daily</option>
+				<option value="Q">15-days</option>
+				<option value="M">Monthly</option>
+			</select>
+			<hr>
+			<h4>Radius:</h4>
+			<input type="number" min="5" name="raggio" placeholder="mm" value="" />
+			<hr>
+			<h4>Diameter:</h4>
+			<input type="number" min="10" name="diametro" placeholder="mm"
+				value="" />
+			<hr>
+			<h4>Color:</h4>
+			<select class="specificiPerLentine" name="colore">
+				<option selected value="">All</option>
+				<option value="Ve">Green</option>
+				<option value="Bl">Blue</option>
+				<option value="Ma">Brown</option>
+				<option value="Vi">Violet</option>
+				<option value="Ro">Red</option>
+				<option value="Pa">Special</option>
+			</select>
+			<hr>
+			<h4>Lenses per pack:</h4>
+			<input type="number" step="1" min="1" name="pezziPerPacco" />
+			<h4 class="control-label">First image:</h4>
+			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
+			<div class="help-block"></div>
+			<input id="addProduct" type='submit' value='Add contact lense!' />
+		</form>
 	</div>
 
 	<div class="container">

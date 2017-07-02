@@ -17,12 +17,6 @@ $(document).ready(function(){
 		addPrescription();
 		reSearchPrescriptions();
 	});
-	
-	$("#addProduct").click(function(event){
-		//TODO il validate
-		alert("1");
-		addProduct();
-	});
 });
 
 function addCard(){
@@ -105,82 +99,5 @@ function setSearchField() {
 	} else {
 		$(".specificiPerOcchiali").hide();
 		$(".specificiPerLentine").show();
-	}
-}
-
-function addProduct(){
-	alert("2");
-	var nome = $("input[name=nome]").val();
-	alert("qui non arriva");
-	var marca = $("select[name=marca]").val();
-	var tipo = $("select[name=tipo]").val();
-	var prezzo = $("input[name=prezzo]").val();
-	var img1 = $("input[name=img1]").val();
-	var quantita = $("input[name=quantita]").val();
-	if(tipo=="O"){
-		alert("3");
-		var descrizione = $("input[name=descrizione]").val();
-		var sesso = $("select[name=sesso]").val();
-		var img2 = $("input[name=img2]").val();
-		var img3 = $("select[name=img3]").val();
-		$.ajax({
-			type : "POST",
-			url : "article",
-			data : {
-				toDo: "addProduct",
-				nome : nome,
-				marca : marca,
-				tipo : tipo,
-				prezzo : prezzo,
-				quantita : quantita,
-				descrizione : descrizione,
-				sesso : sesso,
-				img1 : img1,
-				img2 : img2,
-				img3 : img3
-			},
-			contentType: 'multipart/form-data',
-			error : function(xhr, status, errorThrown) {
-				console.log(JSON.stringify(xhr));
-				console.log("AJAX error: " + status + ' : ' + errorThrown);
-			},
-			success : function(responseText) {
-				alert(responseText);
-			}
-		})
-	}else{
-		var gradazione = $("select[name=gradazione]").val();
-		var tipologia = $("select[name=tipologia]").val();
-		var raggio = $("input[name=raggio]").val();
-		var diametro = $("input[name=diametro]").val();
-		var colore = $("select[name=colore]").val();
-		var pezziPerPacco = $("input[name=pezziPerPacco]").val();
-		$.ajax({
-			type : "POST",
-			url : "article",
-			data : {
-				toDo: "addProduct",
-				nome : nome,
-				marca : marca,
-				tipo : tipo,
-				prezzo : prezzo,
-				quantita : quantita,
-				gradazione : gradazione,
-				tipologia : tipologia,
-				raggio : raggio,
-				diametro : diametro,
-				colore : colore,
-				pezziPerPacco : pezziPerPacco,
-				img1 : img1
-			},
-			contentType: 'multipart/form-data',
-			error : function(xhr, status, errorThrown) {
-				console.log(JSON.stringify(xhr));
-				console.log("AJAX error: " + status + ' : ' + errorThrown);
-			},
-			success : function(responseText) {
-				alert(responseText);
-			}
-		})
 	}
 }

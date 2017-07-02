@@ -127,6 +127,7 @@ public class ArticleModel {
 				stm.setString(5, art.getImg1());
 				stm.executeUpdate();
 				stm.close();
+				conn.commit();
 
 				if(art.getTipo().equalsIgnoreCase("O")){
 					GlassesBean bean = (GlassesBean) art;
@@ -141,6 +142,7 @@ public class ArticleModel {
 					stm.setString(7, bean.getImg3());
 					stm.executeUpdate();
 					stm.close();
+					conn.commit();
 				} else {
 					ContactLensesBean bean = (ContactLensesBean) art;
 					query = "insert into lentine values(?,?,?,?,?,?,?);";
@@ -154,6 +156,7 @@ public class ArticleModel {
 					stm.setString(7, bean.getColore());
 					stm.executeUpdate();
 					stm.close();
+					conn.commit();
 
 					query = "insert into disponibilita values(?,?,?,?);";
 					stm = conn.prepareStatement(query);
@@ -163,6 +166,7 @@ public class ArticleModel {
 					stm.setDouble(4, bean.getGradazione());
 					stm.executeUpdate();
 					stm.close();
+					conn.commit();
 				}
 			}
 
