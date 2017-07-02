@@ -343,8 +343,7 @@
 				<option value="+1.50">+1.50</option>
 				<option value="+1.00">+1.00</option>
 				<option value="+0.50">+0.50</option>
-				<option selected value="">All</option>
-				<option value="0">±0.00</option>
+				<option value="0" selected>±0.00</option>
 				<option value="-0.50">-0.50</option>
 				<option value="-1.00">-1.00</option>
 				<option value="-1.50">-1.50</option>
@@ -379,7 +378,7 @@
 			<hr>
 			<h4>Color:</h4>
 			<select class="specificiPerLentine" name="colore">
-				<option selected value="">All</option>
+				<option selected value="/N">Transparent</option>
 				<option value="Ve">Green</option>
 				<option value="Bl">Blue</option>
 				<option value="Ma">Brown</option>
