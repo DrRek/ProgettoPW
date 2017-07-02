@@ -10,6 +10,12 @@ $(document).ready(function() {
 		addPrescription();
 		reSearchPrescriptions();
 	});
+	
+	$(".img").fileinput({
+		showPreview: false,
+		allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
+	    elErrorContainer: "#errorBlock"
+	});
 });
 
 function addCard(){
@@ -83,4 +89,14 @@ function reSearchPrescriptions(){
 			formatDataPrescriptions(responseText);
 		}
 	})
+}
+
+function setSearchField() {
+	if ($('select[name=tipo]').val() == "O") {
+		$(".specificiPerOcchiali").show();
+		$(".specificiPerLentine").hide();
+	} else {
+		$(".specificiPerOcchiali").hide();
+		$(".specificiPerLentine").show();
+	}
 }
