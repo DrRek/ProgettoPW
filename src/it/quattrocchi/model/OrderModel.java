@@ -197,9 +197,9 @@ public class OrderModel {
 		Connection conn = null;
 		PreparedStatement stm  = null;
 		
-		String query = "SELECT * FROM " 
-				+ "ORDINE O JOIN APPARTENENZA A ON O.CODICE = A.ORDINE"
-				+ " ORDER BY O.CODICE;" ;
+		String query = "SELECT * FROM" 
+				+ " ORDINE O JOIN APPARTENENZA A ON O.CODICE = A.ORDINE"
+				+ " ORDER BY O.DATAESECUZIONE;" ;
 		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
@@ -239,9 +239,11 @@ public class OrderModel {
 					ordinati.add(aBean);
 				}
 				
-			} 
-			bean.setOrdinati(ordinati);
-			o.add(bean);
+			}
+			if(bean!=null){
+				bean.setOrdinati(ordinati);
+				o.add(bean);
+			}
 		}
 		
 		finally {
@@ -253,7 +255,6 @@ public class OrderModel {
 			}
 		}
 
-		
 		return o;
 	}
 

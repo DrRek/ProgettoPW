@@ -431,15 +431,15 @@
 					Iterator<?> it = orders.iterator();
 					while (it.hasNext()) {
 						OrderBean bean = (OrderBean) it.next();
-			%>
-			<tr>
-				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getCosto() %></td>
-				<td><%=bean.getDataEsecuzione() %></td>
-				<td><a href="#">Info</a>
-			</tr>
-			<% 	}
-					}%>
+					%>
+					<tr>
+						<td><%=bean.getCodice()%></td>
+						<td><%=bean.getCosto() %></td>
+						<td><%=bean.getDataEsecuzione() %></td>
+						<td><a href="#">Info</a>
+					</tr>
+				<%  }
+				}%>
 		</table>
 </div>
 	<%

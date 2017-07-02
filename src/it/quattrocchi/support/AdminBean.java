@@ -7,6 +7,7 @@ public class AdminBean {
 		public AdminBean(){
 			setUser(null);
 			setPassword(null);
+			allOrders=null;
 		}
 
 		public String getUser() {
