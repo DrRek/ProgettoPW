@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
+import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
+import it.quattrocchi.support.ContactLensesBean;
+import it.quattrocchi.support.GlassesBean;
 
 @WebServlet("/articlePage")
 
@@ -33,6 +36,10 @@ public class ArticlePageControl extends HttpServlet {
 		if(action != null){
 			if(action.equals("addCart"))
 				addCart(request, response);
+			if(action.equals("updateGlass"))
+				updateGlass(request, response);
+			if(action.equals("updateContact"))
+				updateContact(request, response);
 			return;
 		}
 		else{
@@ -53,6 +60,32 @@ public class ArticlePageControl extends HttpServlet {
 
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticlePageView.jsp");
 			dispatcher.forward(request, response);
+		}
+	}
+
+	private void updateContact(HttpServletRequest request, HttpServletResponse response) {
+		String nome = (String) request.getParameter("nome");
+		String marca = (String) request.getParameter("marca");
+		Double gradazione = Double.parseDouble((String)request.getParameter("gradazione"));
+		try {
+			ArticleBean toUpdate =  model.doRetrieveContactLenses(nome, marca, gradazione);
+			toUpdate.setDisponibilita(Integer.parseInt((String)request.getParameter("quantita")));
+			System.out.println(toUpdate.getNome()+toUpdate.getDisponibilita());
+			model.doSave(toUpdate);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void updateGlass(HttpServletRequest request, HttpServletResponse response) {
+		String nome = (String)request.getParameter("nome");
+		String marca = (String) request.getParameter("marca");
+		try {
+			ArticleBean toUpdate =  model.doRetrieveGlasses(nome, marca);
+			toUpdate.setDisponibilita(Integer.parseInt((String)request.getParameter("quantita")));
+			model.doSave(toUpdate);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
