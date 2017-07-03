@@ -8,14 +8,15 @@ $(document).on('ready', function() {
 $(document).ready(function(){
 	setSearchField();
 	$("#addCard").on("click", function(event) {
-			//TODO il validate
+		if(ccValidation())
 			addCard();
 	});
 	
 	$("#addPres").click(function(event){
-		//TODO il validate
-		addPrescription();
-		reSearchPrescriptions();
+		if(presValidation()){
+			addPrescription();
+			reSearchPrescriptions();
+		}
 	});
 });
 
@@ -101,3 +102,174 @@ function setSearchField() {
 		$(".specificiPerLentine").show();
 	}
 }
+
+//di seguito le funzioni per il validate
+
+//carta di credito
+function ccValidation()
+{
+	var numcc = $("input[name='numcc']");
+	var intestatario = $("input[name='intestatario']");
+	var circuito = $("input[name='circuito']");
+	var scadenza = $("input[name='scadenza']");
+	var cvv = $("input[name='cvv']");
+
+	if(numcc_validation(numcc) &&
+	intestatario_validation(intestatario) &&
+	circuito_validation(circuito) &&
+	scadenza_validation(scadenza) &&
+	cvv_validation(cvv))
+		return true;
+	
+	return false;
+}
+
+function numcc_validation(numcc)
+{
+	var numbers = /^[0-9]+$/;
+	if (numcc.val().length != 16){
+		$("#numcc").html( "Il numero CC deve contenere esattamente 16 caratteri");
+		numcc.focus();
+		return false;
+	}
+	else if(!numcc.val().match(numbers)){
+		$("#numcc").html("Il numero CC può contenere solo numeri");
+		numcc.focus();
+		return false;
+	}
+	else{
+		$("#numcc").empty();
+		return true;
+	}
+}
+
+function intestatario_validation(intestatario)
+{
+	var letters = /^[A-Za-z ]+$/; //da aggiungere che si deve inserire sia nome che cognome
+	if(!intestatario.val().match(letters)){
+		$("#intestatario").html( "È consentito usare solo caratteri alfabetici");
+		intestatario.focus();
+		return false;
+	}
+	else{
+		$("#intestatario").empty();
+		return true;
+	}
+}
+function circuito_validation(circuito)
+{ 
+	if(circuito.val().toLowerCase() == "visa" || circuito.val().toLowerCase() == "mastercard" || circuito.val().toLowerCase() == "american express")
+	{
+		$("#circuito").empty();
+		return true;
+	}
+	else
+	{
+		$("#circuito").html( "Si accettano solo Visa, Mastercard e American Express");
+		circuito.focus();
+		return false;
+	}
+}
+
+function scadenza_validation(scadenza){
+	  var regEx = /^\d{4}-\d{2}-\d{2}$/;
+	  if(scadenza.val().match(regEx)){
+		  $("#scadenza").empty();
+		  return true;
+	  }
+	  $("#scadenza").html("Il formato della data non è valido. (yyyy-MM-dd)");	//TO DO: deve controllare date impossibili e date passate
+	  return false;
+}
+
+function cvv_validation(cvv)
+{ 
+	var numbers = /^[0-9]+$/;
+	if((cvv.val().match(numbers)) && (cvv.val().length == 3))
+	{
+		$("#cvv").empty();
+		return true;
+	}
+	else
+	{
+		$("#cvv").html("Il CVV deve essere composto da 3 numeri");
+		cvv.focus();
+		return false;
+	}
+}
+
+//prescrizione
+
+function presValidation() {
+	var tipoP = $("input[name='tipoP']");
+	var sferaSX = $("input[name='sferaSX']");
+	var cilindroSX = $("input[name='cilindroSX']");
+	var asseSX =  $("input[name='asseSX']");
+	var sferaDX = $("input[name='sferaDX']");
+	var cilindroDX = $("input[name='cilindroDX']");
+	var asseDX =  $("input[name='asseDX']");
+	var addVicinanza = $("input[name='addVicinanza']");
+	var prismaOrizSX = $("input[name='prismaOrizSX']");
+	var prismaOrizSXBD =  $("input[name='prismaOrizSXBD']");
+	var prismaOrizDX = $("input[name='prismaOrizDX']");
+	var prismaOrizDXBD =  $("input[name='prismaOrizDXBD']");
+	var prismaVertSX = $("input[name='prismaVertSX']");
+	var prismaVertSXBD =  $("input[name='prismaVertSXBD']");
+	var prismaVertDX = $("input[name='prismaVertDX']");
+	var prismaVertDXBD =  $("input[name='prismaVertDXBD']");
+	var pdSX = $("input[name='pdSX']");
+	var pdDX =  $("input[name='pdSX']");
+	
+	if(allLetter(tipoP, "#tipoP") && isNumber(sferaSX,-10,10, "#sferaSX") 
+			&& isNumber(cilindroSX,-10,10, "#cilindroSX")  && isNumber(asseSX,0,180, "#asseSX") 
+			&& isNumber(sferaDX,-10,10,"#sferaDX")  && isNumber(cilindroDX,-10,10, "#cilindroDX") 
+			&& isNumber(asseDX,0,180,"#asseDX")&& isNumber(addVicinanza,-10,10, "#addVicinanza") 
+			&& isNumber(prismaOrizSX,-10,10, "#prismaOrizSX") && allLetter(prismaOrizSXBD, "#prismaOrizSXBD") 
+			&& isNumber(prismaOrizDX,-10,10, "#prismaOrizDX") && allLetter(prismaOrizDXBD, "#prismaOrizDXBD")
+			&& isNumber(prismaVertSX,-10,10, "#prismaVertSX")  && allLetter(prismaVertSXBD, "#prismaVertSXBD") 
+			&& isNumber(prismaVertDX,-10,10, "#prismVertDX") && allLetter(prismaVertDXBD, "#prismaVertDXBD") 
+			&& isNumber(pdSX,-10,10, "#pdSX") && isNumber(pdDX,-10,10, "#pdDX"))
+		return true;
+	else
+		return false;
+}
+
+function isNumber(input, min, max, id)
+{
+	var numbers = /^-?\d+(\.\d+)?$/;
+	if(input.val().match(numbers))
+	{
+		if(input.val() >= min && input.val() <= max){
+			$(id).empty();
+			return true
+		}
+		else
+		{
+			$(id).html("I valori consentiti sono tra"+ min + " e " + max);
+			input.focus();
+			return false;
+		}
+	}
+	else
+	{
+		$(id).html("Sono consentiti solo numeri");
+		input.focus();
+		return false;
+	}
+}
+
+function allLetter(input, id)
+{ 
+	var letters = /^[A-Za-z]+$/;
+	if(input.val().match(letters))
+	{
+		$(id).empty();
+		return true;
+	}
+	else
+	{
+		$(id).html("È consentito usare solo caratteri alfabetici");
+		input.focus();
+		return false;
+	}
+}
+ 
