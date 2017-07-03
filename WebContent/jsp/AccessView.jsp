@@ -49,71 +49,67 @@
 			action='access' method="post">
 
 			<input type="hidden" name="action" value="login"> 
-
-			<label for="userid">Username:</label>
-			<div class="row">
-			<input class="col-sm-10" type="text" name="userid" size="35" />
-			<span class="col-sm-2" id="userid"></span>
+			<div class="form-group">
+			<br><label for="userid">Username:</label>
+			<input class="form-control" type="text" name="userid" size="12" />
 			</div>
 			
-			<br><label for="passid">Password:</label>
-			<div class="row">
-			<input class="col-sm-10" type="password" name="passid" size="35" />
-			<span class="col-sm-2" id="passid"></span>
+			<div class="form-group">
+			<label for="passid">Password:</label>
+			<input class= "form-control" type="password" name="passid" size="12" />
 			</div>
 
 			<%
 				if(request.getAttribute("loginFailed") != null){
 			%>
-			<br><h5>Parametri errati.</h5>
+			<h5>Parametri errati.</h5>
 			<%
 				}
 			%>
 
-			<br><input name="submit" value="Login" type="submit">
+			<input class= "btn btn-outline-secondary" name="submit" value="Login" type="submit">
 		</form>
 		</div>
 		<hr>
 		<h1>Registration</h1>
-		<div class="form-group">
 		<form name='registration' onSubmit="return registerValidation();"
 			action='access' method="post">
 
 			<input type="hidden" name="action" value="register"> 
 			
+			<div class="form-group">
 			<br><label for="user">Username:</label> 
-			<div class="row">
-			<input class="col-sm-10" type="text" name="user" size="35" />
-			<span class="col-sm-2"  id="user"></span><br> 
+			<input class="form-control" type="text" name="user" size="35" />
+			<span class="help-block" id="user"></span><br> 
 			</div>	
 			
-			<br><label for="pass">Password:</label>
-			<div class="row">
-			<input class="col-sm-10"  type="password" name="pass" size="35" />
-			<span class="col-sm-2"  id="pass"></span><br>
+			<div class="form-group">
+			<label for="pass">Password:</label>
+			<input class="form-control"  type="password" name="pass" size="35" />
+			<span class="help-block" id="pass"></span><br>
 			</div>
 	
-			<br><label for="nome">Nome:</label> 
-			<div class="row">
-			<input class="col-sm-10"  type="text" name="nome" size="35" />
-			<span class="col-sm-2"  id="nome"></span><br> 
+			<div class="form-group">
+			<label for="nome">Nome:</label> 
+			<input class="form-control"  type="text" name="nome" size="35" />
+			<span class="help-block"  id="nome"></span><br> 
 			</div>
 				
+			<div class="form-group">
 			<br><label for="nome">Cognome:</label>
-			<div class="row">
-			<input class="col-sm-10"  type="text" name="cognome" size="35" />
-			<span class="col-sm-2"  id="cognome"></span><br>
+			<input class="form-control"  type="text" name="cognome" size="35" />
+			<span class="help-block" id="cognome"></span><br>
 			</div>
-			
-			<br><label for="nascita">Data di nascita:</label> 
-			<div class="row">
-			<input class="col-sm-10"  type="date" name="nascita" size="35" />
-			<span class="col-sm-2"  id="nascita"></span><br> 
+
+			<div class="form-group">			
+			<label for="nascita">Data di nascita:</label> 
+			<input class="form-control"  type="date" name="nascita" size="35" />
+			<span class="help-block" id="nascita"></span><br> 
 			</div>	
-				
-			<br><label for="stato">Stato:</label> 
-			<div class="row">	
-			<select class="col-sm-10"  name="stato">
+
+			<div class="form-group">				
+			<label for="stato">Stato:</label> 
+			<select class="form-control"  name="stato">
 				<option selected="" value="Default">(Please select a
 					country)</option>
 				<option value="AF">Australia</option>
@@ -122,32 +118,30 @@
 				<option value="AS">Russia</option>
 				<option value="AD">USA</option>
 			</select>
-			<span class="col-sm-2"  id="stato"></span><br> 
+			<span class="help-block" id="stato"></span><br> 
 			</div>
 			
-			
-			<br><label  for="cap">CAP:</label> 
-			<div class="row">
-			<input class="col-sm-10"  type="text" name="cap" />
-			<span class="col-sm-2"  id="cap"></span><br> 
+			<div class="form-group">	
+			<label  for="cap">CAP:</label> 
+			<input class="form-control"  type="text" name="cap" />
+			<span class="help-block" id="cap"></span><br> 
 			</div>
 			
-			<br><label for="indirizzo">Indirizzo:</label> 
-			<div class="row">
-			<input class="col-sm-10"  type="text" name="indirizzo" size="35" />
-			<span class="col-sm-2"  id="indirizzo"></span><br>
+			<div class="form-group">	
+			<label for="indirizzo">Indirizzo:</label> 
+			<input class="form-control"  type="text" name="indirizzo" size="35" />
+			<span class="help-block"  id="indirizzo"></span><br>
 			</div>
 			
-			<br><label for="email">Email:</label> 
-			<div class="row">
-			<input class="col-sm-10"  type="text" name="email" size="35" />
-			<span class="col-sm-2"  id="email"></span><br> 
+			<div class="form-group">			
+			<label for="email">Email:</label> 
+			<input class="form-control"  type="text" name="email" size="35" />
+			<span class="help-block" id="email"></span><br> 
 			</div>
 			
-			<br><input name="submit" value="Register" type="submit">
+			<input class= "btn btn-outline-secondary" name="submit" value="Register" type="submit">
 
 		</form>
-		</div>
 	</div>
 	<% } %>
 </body>
