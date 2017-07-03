@@ -180,6 +180,12 @@ public class CheckoutControl extends HttpServlet {
 			}
 		}
 		
+		for(CartArticle a: cart.getProducts()){
+			a.getArticle().setDisponibilita(a.getArticle().getDisponibilita() - a.getQuantity());
+			System.out.println(a.getArticle().getDisponibilita() - a.getQuantity());
+			aModel.doSave(a.getArticle());
+		}
+		
 		user.setOrders(model.doRetrieveByCliente(user));
 		request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("cart", new Cart());
