@@ -25,7 +25,6 @@ function addCard(){
 	var intestatario = $("input[name=intestatario]").val();
 	var circuito = $("input[name=circuito]").val();
 	var scadenza = $("input[name=scadenza]").val();
-	alert(numcc)
 	var cvv = $("input[name=cvv]").val();
 	$.ajax({
 		type : "POST",
@@ -87,7 +86,6 @@ function reSearchPrescriptions(){
 			console.log("AJAX error: " + status + ' : ' + errorThrown);
 		},
 		success : function(responseText) {
-			console.log(responseText);
 			formatDataPrescriptions(responseText);
 		}
 	})

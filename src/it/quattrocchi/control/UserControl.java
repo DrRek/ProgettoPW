@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -19,6 +20,7 @@ import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.model.OrderModel;
 import it.quattrocchi.model.PrescriptionModel;
+import it.quattrocchi.model.UserModel;
 import it.quattrocchi.support.CreditCardBean;
 
 import it.quattrocchi.support.OrderBean;
@@ -38,6 +40,7 @@ public class UserControl extends HttpServlet{
 	static CreditCardModel ccModel = new CreditCardModel();
 	static PrescriptionModel pModel = new PrescriptionModel();
 	static OrderModel oModel = new OrderModel();
+	static UserModel uModel = new UserModel();
 
 	public UserControl(){
 		super();
@@ -135,7 +138,9 @@ public class UserControl extends HttpServlet{
 		else {
 			ccModel.doUpdate(bean);
 		}
-		System.out.println("test");
+		ArrayList<CreditCardBean> cc = user.getCards();
+		cc.add(bean);
+		user.setCards(cc);
 		response.getWriter().write(new Gson().toJson(ccModel.doRetrieveByCliente(user)));
 	}
 	
