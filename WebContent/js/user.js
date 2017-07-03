@@ -25,7 +25,7 @@ function addCard(){
 	var intestatario = $("input[name=intestatario]").val();
 	var circuito = $("input[name=circuito]").val();
 	var scadenza = $("input[name=scadenza]").val();
-	alert(scadenza)
+	alert(numcc)
 	var cvv = $("input[name=cvv]").val();
 	$.ajax({
 		type : "POST",
@@ -53,10 +53,10 @@ function formatDataCards(responseText) {
 	var toAppend = '<thead><th>Numero carta</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th><th>Opzioni</th></thead>';
 	$.each(responseText, function(i, cardsObject) {
 		console.log(cardsObject);
-			toAppend += '<tr><td>' + cardsObject.numerocc + '</td>';
+			toAppend += '<tr><td>' + cardsObject.numeroCC + '</td>';
 			toAppend += '<td>' + cardsObject.intestatario + '</td>';
 			toAppend += '<td>' + cardsObject.circuito + '</td>';
-			toAppend += '<td>' + cardsObject.datascadenza + '</td>';
+			toAppend += '<td>' + cardsObject.dataScadenza + '</td>';
 			toAppend+='<td><input type="submit" name="removeCard" value="remove" /></td></tr>';
 	});
 	$("#cards").html(toAppend);
