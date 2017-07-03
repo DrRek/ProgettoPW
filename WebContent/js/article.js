@@ -12,6 +12,7 @@ $(document).ready(function() {
 	});
 });
 
+/* old formatData
 function formatData(responseText) {
 	var toAppend = '<h2>Products</h2><table class="table table-condensed"><thead><tr><th><a href="#" onclick="return orderByName()">Nome</a></th><th><a href="#" onclick="return orderByMarca()">Marca</a></th><th><a href="#" onclick="return orderByTipo()">Tipo</a></th><th><a href="#" onclick="return orderByPrezzo()">Prezzo</a></th></tr></thead>';
 	$.each(responseText, function(i, articleObject) {
@@ -28,6 +29,41 @@ function formatData(responseText) {
 	toAppend += '</table>';
 	$("#demos").html(toAppend);
 };
+*/
+
+function formatData(responseText)
+{
+	var toAppend = '';
+	$.each(responseText, function(i, articleObject) {
+		console.log(articleObject);
+		if(articleObject.disponibilita > 0){
+			toAppend += '<div class="block">'
+							+'<div class="top">'
+								+ '<ul>'
+								+ '<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>'
+								+ '<li><span class="prodotto">' + articleObject.marca + '</span></li>'
+								+ '<li><a href="#"><i class="fa fa-shopping-basket" aria-hidden="true"></i> </a></li>'
+								+ '</ul>'
+								+'</div>';
+				toAppend += '<div class="middle">';
+			
+				if(articleObject.tipo == 'O')
+					toAppend += '<img src="image/placeholder_occhiali.jpg" alt="pic" />';
+				else
+					toAppend += '<img src="image/placeholder_lentine.jpg" alt="pic" />';
+				toAppend += '</div>'
+						 +  '<div class="bottom">'
+	    	   			 + '<div class="heading">'+ articleObject.nome +'</div>'
+	    	   			 + '<div class="info">' + articleObject.disponibilita + ' pezzi disponibili</div>' 
+	    	   			 + '<div class="price">' + articleObject.prezzo + ' €</div>' 
+	    	   			 + '<div><a href="articlePage?nome=' + articleObject.nome
+	    	   				+ '&marca=' + articleObject.marca + '">Mostra</a></div>'
+	    	   			 + '</div>'
+						+'</div>';
+		}
+	});
+	$("#demos").html(toAppend);
+}
 
 function setSearchField() {
 	if ($('select[name=tipo]').val() == "O") {
