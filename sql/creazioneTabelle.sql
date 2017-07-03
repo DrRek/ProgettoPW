@@ -73,7 +73,7 @@ create table Articolo(
 	Marca varchar(20) not null,
 	Tipo varchar(1) not null,
 	Prezzo decimal(6,2) not null,
-	img1 varchar(30),
+	img1 varchar(60),
 	primary key(Nome, Marca)
 );
 
@@ -83,8 +83,8 @@ create table Occhiale(
 	Descrizione varchar(200),
 	Sesso char(1),
 	NumeroPezziDisponibili decimal(3) not null,
-	img1 varchar(30),
-	img2 varchar(30),
+	img1 varchar(60),
+	img2 varchar(60),
 	foreign key (Nome,Marca) references Articolo(Nome,Marca),
     primary key(Nome, Marca)
 );
