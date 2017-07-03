@@ -302,6 +302,7 @@
 			<h4 class="control-label">Third image:</h4>
 			<input name="img3" type="file" multiple class="img,file-loading specificiPerOcchiali">
 			<div class="help-block"></div>
+			<h6>To change some product attributes visit the article's webpage</h6>
 			<input id="addProduct" type='submit' value='Add glass!' />
 		</form>
 		<form class="specificiPerLentine" action="article" method='post' enctype="multipart/form-data">
@@ -325,7 +326,7 @@
 			<h4>Available number:</h4>
 			<input type="number" step="1" min="1" name="quantita"/>
 			<hr>
-			<h4>Gradazione:</h4>
+			<h4>Gradation:</h4>
 			<select name="gradazione">
 				<option value="+8.00">+8.00</option>
 				<option value="+7.50">+7.50</option>
@@ -392,6 +393,7 @@
 			<h4 class="control-label">First image:</h4>
 			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
 			<div class="help-block"></div>
+			<h6>To add product with different gradation or change attributes visit the article's webpage</h6>
 			<input id="addProduct" type='submit' value='Add contact lense!' />
 		</form>
 	</div>
