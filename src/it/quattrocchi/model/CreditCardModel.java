@@ -133,17 +133,17 @@ public class CreditCardModel {
 		Connection conn = null;
 		PreparedStatement stm = null;
 		
-		String query = "update " + TABLE_NAME + " set Intestatario=?, Circuito=?, DataScadenza=?, CvcCvv=?, Cliente=?, Stato=? where NumeroCC=?;";
+		String query = "update " + TABLE_NAME + " set Stato=?, DataScadenza=? where  Intestatario=? AND Circuito=? AND CvcCvv=? AND Cliente=? AND NumeroCC=?;";
 		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
-			stm.setString(1, card.getIntestatario());
-			stm.setString(2, card.getCircuito());
-			stm.setDate(3, card.getDataScadenza());
-			stm.setString(4, card.getCvcCvv());
-			stm.setString(5, card.getCliente().getUser());
-			stm.setString(6,card.getStato());
+			stm.setString(1,card.getStato());
+			stm.setDate(2, card.getDataScadenza());
+			stm.setString(3, card.getIntestatario());
+			stm.setString(4, card.getCircuito());
+			stm.setString(5, card.getCvcCvv());
+			stm.setString(6, card.getCliente().getUser());
 			stm.setString(7, card.getNumeroCC());
 
 			
