@@ -14,8 +14,6 @@ import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.support.AdminBean;
 import it.quattrocchi.support.ArticleBean;
 import it.quattrocchi.support.Cart;
-import it.quattrocchi.support.ContactLensesBean;
-import it.quattrocchi.support.GlassesBean;
 
 @WebServlet("/articlePage")
 
