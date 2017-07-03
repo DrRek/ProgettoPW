@@ -12,25 +12,6 @@ $(document).ready(function() {
 	});
 });
 
-/* old formatData
-function formatData(responseText) {
-	var toAppend = '<h2>Products</h2><table class="table table-condensed"><thead><tr><th><a href="#" onclick="return orderByName()">Nome</a></th><th><a href="#" onclick="return orderByMarca()">Marca</a></th><th><a href="#" onclick="return orderByTipo()">Tipo</a></th><th><a href="#" onclick="return orderByPrezzo()">Prezzo</a></th></tr></thead>';
-	$.each(responseText, function(i, articleObject) {
-		console.log(articleObject);
-		if(articleObject.disponibilita > 0){
-			toAppend += '<tr><td><a href="articlePage?nome=' + articleObject.nome
-			+ '&marca=' + articleObject.marca + '">' + articleObject.nome
-			+ '</a></td>';
-			toAppend += '<td>' + articleObject.marca + '</td>';
-			toAppend += '<td>' + articleObject.tipo + '</td>';
-			toAppend += '<td>' + articleObject.prezzo + '</td></tr>';
-		}
-	});
-	toAppend += '</table>';
-	$("#demos").html(toAppend);
-};
-*/
-
 function formatData(responseText)
 {
 	var toAppend = '';
