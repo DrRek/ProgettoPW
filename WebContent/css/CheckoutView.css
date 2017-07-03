@@ -20,7 +20,7 @@
 	
 	table#cartElements thead { display: none; }
 	table#cartElements tbody td { display: block; padding: .6rem; }
-	table#cartElements tbody tr td:first-child { background: #41464C; color:white; }
+	table#cartElements tbody tr td:first-child { background: #e4e4e4; color:white; }
 	table#cartElements tbody td:before {
 		content: attr(data-th); font-weight: bold;
 		display: inline-block; width: 8rem;
