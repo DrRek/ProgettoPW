@@ -45,7 +45,7 @@
 		<script type="text/javascript" src="js/access-validation.js"></script>
 		<h1>Login</h1>
 		<div class=form-group">
-		<form name='login' onSubmit="return loginValidation();"
+		<form name='login'
 			action='access' method="post">
 
 			<input type="hidden" name="action" value="login"> 
