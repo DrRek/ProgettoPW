@@ -41,7 +41,7 @@
 	<%@ include file="../jsp/header.jsp"%>
 	<script>
 		$(document).ready(function() {
-			$("#advS").click(function() {
+			$("#azione").click(function() {
 				$("#show").slideToggle();
 				if ($("#azione").html() == "mostra")
 					$("#azione").html("nascondi");
@@ -58,28 +58,37 @@
 	<br>
 	<div class="row container-fluid">
 		<!-- devo ancora ricercare nelle impostazioni iniziali anche in base alla parola cercata e implementare il sort -->
-		<div id='daMettereASinistra' class='col-sm-4 col-md-3 col-lg-2'>
-			<div id=advS>
-				<h3>Ricerca avanzata</h3>
-				<p id="azione">nascondi</p>
+		<div id='daMettereASinistra' class='col-sm-4 col-md-3 col-lg-2 ' >
+			<div align="center">
+				<h3 >Advanced Search</h3>
+				<button class="btn btn-outline-secondary" id="azione">nascondi</button>
 			</div>
 			<hr>
+			
+
+  			 
 			<div id="show" style="padding: 15px;">
+			 <form>
+			 <div class="form-group">
 				<h4>Products:</h4>
-				<select name="tipo" onchange="setSearchField()">
+				<select class="form-control" name="tipo" onchange="setSearchField()">
 					<option <%if (cercaPerTipo == null || cercaPerTipo.equals("O")) {%>
 						selected <%}%> value="O">Glasses</option>
 					<option <%if (cercaPerTipo != null && cercaPerTipo.equals("L")) {%>
 						selected <%}%> value="L">Contact lenses</option>
 				</select>
+				</div>
 				<hr>
+				<div class="form-group">
 				<h4>Name to search for:</h4>
-				<input type="text" name="daCercare1" <%if (cercaPerTipo != null) {%>
+				<input type="text" class="form-control" name="daCercare1" <%if (cercaPerTipo != null) {%>
 					value="cercaPerTipo" <%} else if (daCercare != null) {%>
 					value="<%=daCercare%>" <%}%> />
+				</div>
 				<hr>
+				<div class="form-group">
 				<h4>Brand:</h4>
-				<select name="marca">
+				<select class="form-control" name="marca">
 					<option selected value="">All</option>
 					<option class="specificiPerOcchiali" value="GreenVision">GreenVision</option>
 					<option class="specificiPerOcchiali" value="Lindberg">Lindberg</option>
@@ -93,29 +102,35 @@
 					<option class="specificiPerLentine" value="Frequency">Frequency</option>
 					<option class="specificiPerLentine" value="GreenVision">GreenVision</option>
 				</select>
+				</div>
 				<hr>
 				<h4>Price:</h4>
 				<div>
-					<input type="number" step="1.00" min="0.00" name="prezzoMin"
-						placeholder="min" /><br> <input type="number" step="1.00"
+					<input class="form-control" type="number" step="1.00" min="0.00" name="prezzoMin"
+						placeholder="min" /><br> <input class="form-control" type="number" step="1.00"
 						min="0.00" name="prezzoMax" placeholder="max" />
 				</div>
 				<div class="specificiPerOcchiali">
 					<hr>
+					<div class="form-group">
 					<h4 class="specificiPerOcchiali">Sex:</h4>
-					<select class="specificiPerOcchiali" name="sesso">
+					<select class="specificiPerOcchiali form-control" name="sesso">
 						<option selected value="any">Any</option>
 						<option value="M">Man</option>
 						<option value="F">Woman</option>
 					</select>
+					</div>
 					<hr>
+					<div class="form-group">
 					<h4 class="specificiPerOcchiali">Color:</h4>
-					<input class="specificiPerOcchiali" type="text" name="colore"
+					<input class="specificiPerOcchiali form-control" type="text" name="colore"
 						value="" />
+					</div>
 				</div>
 				<div class="specificiPerLentine">
 					<hr>
-					<h4 class="specificiPerLentine">Gradazione:</h4>
+					<div class="form-group">
+					<h4 class="specificiPerLentine form-control">Gradazione:</h4>
 					<select class="specificiPerLentine" name="gradazione">
 						<option value="+8.00">+8.00</option>
 						<option value="+7.50">+7.50</option>
@@ -152,25 +167,33 @@
 						<option value="-8.50">-7.50</option>
 						<option value="-8.00">-8.00</option>
 					</select>
+					</div>
 					<hr>
+					<div class="form-group">
 					<h4 class="specificiPerLentine">Duration:</h4>
-					<select class="specificiPerLentine" name="tipologia">
+					<select class="specificiPerLentine form-control" name="tipologia">
 						<option selected value="">All</option>
 						<option value="G">Daily</option>
 						<option value="Q">15-days</option>
 						<option value="M">Monthly</option>
 					</select>
+					</div>
 					<hr>
+					<div class="form-group">
 					<h4 class="specificiPerLentine" for="raggio">Radius:</h4>
-					<input class="specificiPerLentine" type="number" min="5"
+					<input class="specificiPerLentine form-control" type="number" min="5"
 						name="raggio" placeholder="mm" value="" />
+					</div>
 					<hr>
-					<h4 class="specificiPerLentine">Diameter:</h4>
-					<input class="specificiPerLentine" type="number" min="10"
+					<div class="form-group">
+					<h4 class="specificiPerLentine ">Diameter:</h4>
+					<input class="specificiPerLentine form-control" type="number" min="10"
 						name="diametro" placeholder="mm" value="" />
-					<hr>
+					</div>
+					<hr>					
+					<div class="form-group">
 					<h4 class="specificiPerLentine">Color:</h4>
-					<select class="specificiPerLentine" name="colore">
+					<select class="specificiPerLentine form-control" name="colore">
 						<option selected value="">All</option>
 						<option value="Ve">Green</option>
 						<option value="Bl">Blue</option>
@@ -179,9 +202,11 @@
 						<option value="Ro">Red</option>
 						<option value="Pa">Special</option>
 					</select>
+					</div>
 				</div>
 				<hr>
-				<input id="advancedSearch" type='button' value='Search!' />
+				<input class="form-control" id="advancedSearch" type='button' value='Search!' />
+				</form>
 			</div>
 		</div>
 
