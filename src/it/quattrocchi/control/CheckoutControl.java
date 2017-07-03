@@ -64,7 +64,11 @@ public class CheckoutControl extends HttpServlet {
 				else if(action.equalsIgnoreCase("prescriptions"))
 					prescriptions(request,response);
 				else if (action.equalsIgnoreCase("submit")){
-					addOrder(request, response);
+					try {
+						addOrder(request, response);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 					updateCatalogo(request,response);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article");
 					dispatcher.forward(request, response);
@@ -146,7 +150,7 @@ public class CheckoutControl extends HttpServlet {
 		}
 	}
 
-	private void addOrder(HttpServletRequest request, HttpServletResponse response){
+	private void addOrder(HttpServletRequest request, HttpServletResponse response) throws SQLException{
 		Cart cart = (Cart) request.getSession().getAttribute("cart");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		String carta = (String) request.getParameter("carta");
@@ -175,6 +179,9 @@ public class CheckoutControl extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		user.setOrders(model.doRetrieveByCliente(user));
+		request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("cart", new Cart());
 	}
 
