@@ -4,6 +4,7 @@
 <%
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
 	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
+	ArrayList<PromotionBean> promozioni = (ArrayList<PromotionBean>) request.getAttribute("promozioni");
 %>
 
 <!DOCTYPE html>
@@ -82,11 +83,13 @@
 		<h2>Carte di credito</h2>
 		<table class="table table-condensed" id="cards">
 			<thead>
-				<th>Numero carta</th>
-				<th>Intestatario</th>
-				<th>Circuito</th>
-				<th>Scadenza</th>
-				<th>Opzioni</th>
+				<tr>
+					<th>Numero carta</th>
+					<th>Intestatario</th>
+					<th>Circuito</th>
+					<th>Scadenza</th>
+					<th>Opzioni</th>
+				</tr>
 			</thead>
 			<%
 				Collection<?> cc = (Collection<?>) user.getCards();
@@ -133,8 +136,10 @@
 		<h2>Prescrizioni</h2>
 		<table class="table table-condensed">
 			<thead>
+			<tr>
 				<th>Codice</th>
 				<th>Nome</th>
+			<tr>
 			</thead>
 			<%
 				Collection<PrescriptionBean> pres = user.getPrescriptions();
@@ -223,9 +228,11 @@
 		<h2>Ordini passati</h2>
 		<table class="table table-condensed">
 			<thead>
-				<th>Codice</th>
-				<th>Prezzo</th>
-				<th>Data Esecuzione</th>
+				<tr>
+					<th>Codice</th>
+					<th>Prezzo</th>
+					<th>Data Esecuzione</th>
+				</tr>
 			</thead>
 			<%
 				Collection<OrderBean> orders = user.getOrders();
@@ -253,6 +260,58 @@
 		<h2>
 			Ciao,
 			<%=admin.getUser()%></h2>
+		
+		<h2>Active and future promotion list</h2>
+		<table id="tablePromotion" class="table table-condensed">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Value</th>
+					<th>Type</th>
+					<th>Start</th>
+					<th>End</th>
+					<th>Cumulative</th>
+					<th></th>
+				</tr>
+			</thead>
+			<%
+				if (promozioni != null && promozioni.size() != 0) {
+					for(PromotionBean bean : promozioni){
+					%>
+			<tr>
+				<td><%=bean.getNome()%></td>
+				<td><%=bean.getDescrizione() %></td>
+				<td><%=bean.getSconto()%></td>
+				<td><%=bean.getTipo() %></td>
+				<td><%=bean.getDataInizio() %></td>
+				<td><%=bean.getDataFine() %></td>
+				<td><%if(bean.isCumulabile()){%>true<%}else{%>false<%}%></td>
+				<td><a href="promotion?nome=<%=bean.getNome()%>">info/edit</a></td>
+			</tr>
+				<%	}
+				}%>
+		</table>
+		<h3>Add promotion</h3>
+		<h4>Name:</h4>
+		<input id="nomeP" type="text" />
+		<h4>Description:</h4>
+		<input id="descrizioneP" type="text" />
+		<h4>Subtract type</h4>
+			<input type="radio" name="tipoP" value="%"> Percent (%)
+ 		 	<input type="radio" name="tipoP" value="s"> Subtract (-)
+		<h4>Subtract ammount:</h4>
+		<input id="scontoP" type="number" />
+		<br>
+		<h4>Start date:</h4>
+		<input id="inizioP" type="date" size="35" />
+		<br>
+		<h4>End date:</h4>
+		<input id="fineP" type="date" size="35"/>
+		<br>
+		<input id="cumulabileP" type="checkbox"> Cumulabile<br>
+		<input id="submitP" type="button" value="Add promotion!"/>
+		<br>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
 		<hr>
@@ -406,7 +465,7 @@
 					<th>Codice</th>
 					<th>Prezzo</th>
 					<th>Data Esecuzione</th>
-				<tr>
+				</tr>
 			</thead>
 			<%
 				Collection<OrderBean> orders = admin.getOrders();
@@ -419,7 +478,7 @@
 				<td><%=bean.getCodice()%></td>
 				<td><%=bean.getCosto() %></td>
 				<td><%=bean.getDataEsecuzione() %></td>
-				<td><a href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
+				<td><a href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a></td>
 			</tr>
 			<%  }
 				}%>

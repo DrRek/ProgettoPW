@@ -48,6 +48,39 @@ public class ArticleModel {
 		}
 		return found;
 	}
+	
+	public boolean isArticle(String nome, String marca) throws SQLException
+	{
+		Connection conn = null;
+		PreparedStatement stm = null;
+		boolean found = false;
+
+		String query = "SELECT * FROM " + " quattrocchidb.articolo " + " WHERE Nome = ? AND Marca = ?;";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			stm.setString(1, nome);
+			stm.setString(2, marca);
+
+			ResultSet rs = stm.executeQuery();
+
+			if(rs.next()) 
+				found = true;
+			stm.close();
+			rs.close();
+
+			conn.commit();
+		} finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+		return found;
+	}
 
 	public void doSave(ArticleBean art) throws SQLException{
 		Connection conn = null;

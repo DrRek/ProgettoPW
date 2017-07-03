@@ -62,15 +62,9 @@ public class ArticleBean {
 	{
 		if(o.getClass().getName().equals("it.quattrocchi.support.GlassesBean") || o.getClass().getName().equals("it.quattrocchi.support.ContactLensesBean") || o.getClass().getName().equals("it.quattrocchi.support.ArticleBean") )
 		{
-			if(((ArticleBean)o).getTipo().equalsIgnoreCase("O") && tipo.equalsIgnoreCase("O"))
+			if(((ArticleBean)o).getNome().equalsIgnoreCase(nome) && ((ArticleBean)o).getMarca().equalsIgnoreCase(marca))
 			{
-				if(((GlassesBean)o).equals((GlassesBean)this))
-					return true;
-			}
-			else if(((ArticleBean)o).getTipo().equalsIgnoreCase("L") && tipo.equalsIgnoreCase("L"))
-			{
-				if(((ContactLensesBean)o).equals((ContactLensesBean)this))
-					return true;
+				return true;
 			}
 		}
 		return false;

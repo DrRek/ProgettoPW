@@ -20,6 +20,7 @@ import it.quattrocchi.model.ArticleModel;
 import it.quattrocchi.model.CreditCardModel;
 import it.quattrocchi.model.OrderModel;
 import it.quattrocchi.model.PrescriptionModel;
+import it.quattrocchi.model.PromotionModel;
 import it.quattrocchi.model.UserModel;
 import it.quattrocchi.support.CreditCardBean;
 
@@ -41,6 +42,7 @@ public class UserControl extends HttpServlet{
 	static PrescriptionModel pModel = new PrescriptionModel();
 	static OrderModel oModel = new OrderModel();
 	static UserModel uModel = new UserModel();
+	static PromotionModel promotionModel = new PromotionModel();
 
 	public UserControl(){
 		super();
@@ -83,6 +85,14 @@ public class UserControl extends HttpServlet{
 			}
 		}
 		else{
+			try{
+				if(request.getSession().getAttribute("admin")!=null){
+					request.setAttribute("promozioni", promotionModel.doRetriveAllValid());
+				}
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
 			dispatcher.forward(request, response);
 		}

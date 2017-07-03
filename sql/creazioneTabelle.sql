@@ -119,8 +119,10 @@ create table Promozione(
 	Nome varchar(20) primary key,
 	Descrizione varchar(50),
 	Sconto decimal(4,2) not null,
+    Tipo char(1) not null,
 	DataInizio date not null,
-	DataFine date not null
+	DataFine date not null,
+	Cumulabile boolean not null
 );
 
 create table Validita(

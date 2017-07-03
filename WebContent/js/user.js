@@ -1,10 +1,3 @@
-
-$(document).on('ready', function() {
-	alert("test1");
-	
-	
-});
-
 $(document).ready(function(){
 	setSearchField();
 	$("#addCard").on("click", function(event) {
@@ -17,6 +10,10 @@ $(document).ready(function(){
 			addPrescription();
 			reSearchPrescriptions();
 		}
+	});
+	
+	$("#submitP").click(function(event){
+		addPromotion();
 	});
 });
 
@@ -64,10 +61,9 @@ function formatDataCards(responseText) {
 function formatDataPrescriptions(responseText) {
 	var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th>Codice</th><th>Tipo</th></tr></thead>';
 	$.each(responseText, function(i, prescriptionsObject) {
-		console.log(prescriptionsObject);
-			toAppend += '<tr><td>' + prescriptionsObject.codice + '</td>';
-			toAppend += '<td>' + prescriptionsObject.tipo + '</td>';
-			toAppend+='<td><input type="submit" name="removePrescription" value="remove" /></td></tr>';
+		toAppend += '<tr><td>' + prescriptionsObject.codice + '</td>';
+		toAppend += '<td>' + prescriptionsObject.tipo + '</td>';
+		toAppend+='<td><input type="submit" name="removePrescription" value="remove" /></td></tr>';
 	});
 	toAppend += '</table>';
 	$("#prescriptions").html(toAppend);
@@ -270,4 +266,55 @@ function allLetter(input, id)
 		return false;
 	}
 }
- 
+
+function addPromotion(){
+	var nome = $("#nomeP").val();
+	var descrizione = $("#descrizioneP").val();
+	var sconto = $("#scontoP").val();
+	var tipo = $("input[name=tipoP]:checked").val();
+	var inizio = $("#inizioP").val();
+	var fine = $("#fineP").val();
+	if($('#cumulabileP').is(':checked')){
+		var cumulabile = true;
+	}else{
+		var cumulabile = false;
+	}
+	$.ajax({
+		type : "POST",
+		url : "promotion",
+		async : true,
+		data : {
+			action : 'addPromotion',
+			nome : nome,
+			descrizione : descrizione,
+			sconto : sconto,
+			tipo : tipo,
+			inizio : inizio,
+			fine : fine,
+			cumulabile : cumulabile
+		},
+		dataType : "json",
+		error : function(xhr, status, errorThrown) {
+			console.log(JSON.stringify(xhr));
+			console.log("AJAX error: " + status + ' : ' + errorThrown);
+		},
+		success : function(responseText) {
+			formatDataPromotion(responseText);
+		}
+	});
+}
+
+function formatDataPromotion(responseText){
+	var toAppend = '<thead><tr><th>Name</th><th>Description</th><th>Value</th><th>Type</th><th>Start</th><th>End</th><th>Cumulative</th><th></th></tr></thead>';
+	$.each(responseText, function(i, promotionObject) {
+			toAppend += '<tr><td>' + promotionObject.nome + '</td>';
+			toAppend += '<td>' + promotionObject.descrizione + '</td>';
+			toAppend += '<td>' + promotionObject.sconto + '</td>';
+			toAppend += '<td>' + promotionObject.tipo + '</td>';
+			toAppend += '<td>' + promotionObject.dataInizio + '</td>';
+			toAppend += '<td>' + promotionObject.dataFine + '</td>';
+			toAppend += '<td>' + promotionObject.cumulabile + '</td>';
+			toAppend += '<td><a href="promotion?nome='+promotionObject.nome+'">info/edit</a></td></tr>';
+	});
+	$("#tablePromotion").html(toAppend);
+}
