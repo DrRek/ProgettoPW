@@ -21,7 +21,8 @@
 
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
-
+<link href="  css/CheckoutView.css" type="text/css" rel="stylesheet"
+	media="screen,projection" />
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script
@@ -71,7 +72,7 @@
 	
 			</select> <br>
 			<a href="user">aggiungi una carta</a><br>
-			<input id="completeOrder" type="submit" value="Paga" />
+			<input class= "btn btn-outline-secondary " id="completeOrder" type="submit" value="Paga" />
 		</form>
 		<%
 			}
