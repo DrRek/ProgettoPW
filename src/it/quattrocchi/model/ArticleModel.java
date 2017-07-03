@@ -65,7 +65,6 @@ public class ArticleModel {
 			if(rs.next()){ //In questo caso bisogna fare l'update
 				rs.close();
 				stm.close();
-				conn.commit();
 				query = "update articolo set Tipo=?, Prezzo=?, img1=? where Nome=? and Marca=?;";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, art.getTipo());
@@ -75,7 +74,6 @@ public class ArticleModel {
 				stm.setString(5, art.getMarca());
 				stm.executeUpdate();
 				stm.close();
-				conn.commit();
 
 				if(art.getTipo().equalsIgnoreCase("O")){
 					GlassesBean bean = (GlassesBean) art;
@@ -90,7 +88,6 @@ public class ArticleModel {
 					stm.setString(7, bean.getMarca());
 					stm.executeUpdate();
 					stm.close();
-					conn.commit();
 				} else {
 					ContactLensesBean bean = (ContactLensesBean) art;
 					query = "update lentine set Tipologia=?, NumeroPezziNelPacco=?, Raggio=?, Diametro=?, Colore=? where Nome=? and Marca=?;";
@@ -104,7 +101,6 @@ public class ArticleModel {
 					stm.setString(7, bean.getMarca());
 					stm.executeUpdate();
 					stm.close();
-					conn.commit();
 
 					if(esisteGradazione(bean.getNome(), bean.getMarca(),bean.getGradazione()))
 						query = "update disponibilita set NumeroPezziDisponibili=? where Nome=? and Marca=? and Gradazione=?;";
@@ -117,13 +113,11 @@ public class ArticleModel {
 					stm.setDouble(4, bean.getGradazione());
 					stm.executeUpdate();
 					stm.close();
-					conn.commit();
 					
 				}
 			} else{ //Se bisogna crearlo
 				rs.close();
 				stm.close();
-				conn.commit();
 				query = "insert into articolo values(?,?,?,?,?);";
 				stm = conn.prepareStatement(query);
 				stm.setString(1, art.getNome());
@@ -180,7 +174,6 @@ public class ArticleModel {
 			try {
 				if (stm != null)
 					stm.close();
-					conn.commit();
 			} finally {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}

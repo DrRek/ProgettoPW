@@ -302,7 +302,7 @@
 			<h4 class="control-label">Third image:</h4>
 			<input name="img3" type="file" multiple class="img,file-loading specificiPerOcchiali">
 			<div class="help-block"></div>
-			<h6>To change available number of an existing product visit the product's webpage</h6>
+			<h6>To change some product attributes visit the article's webpage</h6>
 			<input id="addProduct" type='submit' value='Add glass!' />
 		</form>
 		<form class="specificiPerLentine" action="article" method='post' enctype="multipart/form-data">
@@ -393,7 +393,7 @@
 			<h4 class="control-label">First image:</h4>
 			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
 			<div class="help-block"></div>
-			<h6>To change available number or the gradation availability of an existing product visit the product's webpage</h6>
+			<h6>To add product with different gradation or change attributes visit the article's webpage</h6>
 			<input id="addProduct" type='submit' value='Add contact lense!' />
 		</form>
 	</div>
@@ -402,11 +402,9 @@
 		<h2>Ordini passati</h2>
 		<table class="table table-condensed">
 			<thead>
-				<tr>
-					<th>Codice</th>
-					<th>Prezzo</th>
-					<th>Data Esecuzione</th>
-				<tr>
+				<th>Codice</th>
+				<th>Prezzo</th>
+				<th>Data Esecuzione</th>
 			</thead>
 			<%
 				Collection<OrderBean> orders = admin.getOrders();

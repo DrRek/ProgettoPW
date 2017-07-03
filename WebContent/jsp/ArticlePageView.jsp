@@ -4,7 +4,6 @@
 <%
 	ArticleBean occhiali = (ArticleBean) request.getAttribute("occhiali");
 	ArrayList<ContactLensesBean> lentine = (ArrayList<ContactLensesBean>) request.getAttribute("lentine");
-	AdminBean admin = (AdminBean) request.getSession().getAttribute("admin");
 %>
 
 <!DOCTYPE html>
@@ -25,8 +24,9 @@
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -73,13 +73,7 @@
 		<h4>Numero pezzi disponibili:</h4>
 		<p><%=occhiali.getDisponibilita() %></p>
 		<input type="submit" id="oAddCart" value="add to cart"/>
-		
-		<%if(admin!=null){ %>
-			<h2>Add product: </h2>
-			<h4>Available number:</h4>
-			<input type="number" step="1" min="1" name="oQuantita"/>
-			<input id="AddGlassToStorage" type="button" value="Set!"/>
-	<%	}
+		<%
 	}
 	else if(occhiali == null && lentine != null)
 	{
@@ -134,55 +128,13 @@
 
 			<%
 				}%>
-		</select>
-		<input type="submit" id="lAddCart" value="add to cart"/>
+		</select> <input type="submit" id="lAddCart" value="add to cart"/>
 
 
 
-		<%if(admin!=null){%>
-			<h2>Add product: </h2>
-			<h4>Gradation:</h4>
-			<select name="lGradazione">
-				<option value="+8.00">+8.00</option>
-				<option value="+7.50">+7.50</option>
-				<option value="+7.00">+7.00</option>
-				<option value="+6.50">+6.50</option>
-				<option value="+6.00">+6.00</option>
-				<option value="+5.50">+5.50</option>
-				<option value="+5.00">+5.00</option>
-				<option value="+4.50">+4.50</option>
-				<option value="+4.00">+4.00</option>
-				<option value="+3.50">+3.50</option>
-				<option value="+3.00">+3.00</option>
-				<option value="+2.50">+2.50</option>
-				<option value="+2.00">+2.00</option>
-				<option value="+1.50">+1.50</option>
-				<option value="+1.00">+1.00</option>
-				<option value="+0.50">+0.50</option>
-				<option value="0" selected>±0.00</option>
-				<option value="-0.50">-0.50</option>
-				<option value="-1.00">-1.00</option>
-				<option value="-1.50">-1.50</option>
-				<option value="-2.00">-2.00</option>
-				<option value="-2.50">-2.50</option>
-				<option value="-3.00">-3.00</option>
-				<option value="-3.50">-3.50</option>
-				<option value="-4.00">-4.00</option>
-				<option value="-4.50">-4.50</option>
-				<option value="-5.00">-5.00</option>
-				<option value="-5.50">-5.50</option>
-				<option value="-6.00">-6.00</option>
-				<option value="-6.50">-6.50</option>
-				<option value="-7.00">-7.00</option>
-				<option value="-8.50">-7.50</option>
-				<option value="-8.00">-8.00</option>
-			</select>
-			<h4>Available number:</h4>
-			<input type="number" step="1" min="1" name="lQuantita"/>
-			<input id="AddLenseToStorage" type="button" value="Set!"/>
-	<%  }%>
-<%   }%>
+		<%
+	}
+	%>
 	</div>
-	<script src="js/article-page.js"></script>
 </body>
 </html>
