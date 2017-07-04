@@ -163,7 +163,7 @@
 		<div class="content-wrapper">
 			<div class="item-container">
 				<div class="container">
-					<div >
+					<div>
 						<div class="product col-md-3 service-image-left">
 
 							<center>
@@ -171,121 +171,133 @@
 							</center>
 						</div>
 					</div>
-					<div class="col-md-6">
 						<div class="product-title" id="lNome"><%=l.getNome()%></div>
 						<h4 id="lMarca"><%=l.getMarca()%></h4>
 						<hr>
-						<div>
-							<span class="etichetta">Tipologia:</span> <span class="value"><%=((ContactLensesBean) l).getTipologia()%></span>
+						<div class="row">
+						<div class="col-md-2">
+						<br>
+						<div class="etichetta">Tipologia</div>
+						<div class="value"><%=((ContactLensesBean) l).getTipologia()%></div>
 						</div>
-
-						<div class="etichetta"><%=((ContactLensesBean) l).getNumeroPezziNelPacco()%>
+						
+						<div class="col-md-2">
+						<br>
+						<div class="value"><%=((ContactLensesBean) l).getNumeroPezziNelPacco()%>
 							pieces in a box
 						</div>
-
-						<div>
-							<span class="etichetta">Raggio:</span> <span class="value"><%=((ContactLensesBean) l).getRaggio()%>
-								mm</span>
+						</div>
+						
+						<div class="col-md-2">
+						<br>
+						<div class="etichetta">Raggio</div>
+						<div class="value"><%=((ContactLensesBean) l).getRaggio()%>
+							mm</div>
+						</div>
+						
+						<div class="col-md-2">
+						<br>
+						<div class="etichetta">Diametro</div>
+						<div class="value"><%=((ContactLensesBean) l).getDiametro()%>
+							mm</div>
 						</div>
 
-						<div>
-							<span class="etichetta">Diametro:</span> <span class="value"><%=((ContactLensesBean) l).getDiametro()%>
-								mm</span>
-						</div>
 						<%
 							if (!((ContactLensesBean) l).getColore().equals("/N")) {
 						%>
-
-						<div>
-							<span class="etichetta">Colore:</span> <span class="value"><%=((ContactLensesBean) l).getColore()%></span>
+						<div class="col-md-2">
+						<br>
+						<div class="etichetta">Colore</div>
+						<div class="value"><%=((ContactLensesBean) l).getColore()%>
 						</div>
-					</div>
-					<%
-						}
-					%>
-					<div class="col-md-6">
+						</div>
+						<%
+							}
+						%>
+						</div>
 						<hr>
-						<div class="product-price"><%=l.getPrezzo()%>
-							€
-						</div>
-						<hr> <select class="product-stock"id="gradazione">
+							<div class="product-price"><%=l.getPrezzo()%>
+								€
+							</div>
+							<hr>
+							<select class="product-stock" id="gradazione">
+								<%
+									for (ArticleBean e : lentine) {
+								%>
+
+								<option class="product-stock"
+									value="<%=((ContactLensesBean) e).getGradazione()%>">
+									<%=((ContactLensesBean) e).getGradazione()%> degree |
+									<%=e.getDisponibilita()%> left
+								</option>
+
+								<%
+									}
+								%>
+							</select>
 							<%
-								for (ArticleBean e : lentine) {
+								if (admin == null) {
 							%>
 
-							<option class="product-stock" value="<%=((ContactLensesBean) e).getGradazione()%>" >
-								<%=((ContactLensesBean) e).getGradazione()%> degree |
-								<%=e.getDisponibilita()%> left
-							</option>
+							<input class="btn btn-outline-secondary" type="submit"
+								id="lAddCart" value="add to cart" />
+
+
+
+							<%
+								} else {
+							%>
+							<h4>In stock:</h4>
+							<h4>Gradation:</h4>
+							<select class="btn btn-outline-secondary" name="lGradazione">
+								<option value="+8.00">+8.00</option>
+								<option value="+7.50">+7.50</option>
+								<option value="+7.00">+7.00</option>
+								<option value="+6.50">+6.50</option>
+								<option value="+6.00">+6.00</option>
+								<option value="+5.50">+5.50</option>
+								<option value="+5.00">+5.00</option>
+								<option value="+4.50">+4.50</option>
+								<option value="+4.00">+4.00</option>
+								<option value="+3.50">+3.50</option>
+								<option value="+3.00">+3.00</option>
+								<option value="+2.50">+2.50</option>
+								<option value="+2.00">+2.00</option>
+								<option value="+1.50">+1.50</option>
+								<option value="+1.00">+1.00</option>
+								<option value="+0.50">+0.50</option>
+								<option value="0" selected>±0.00</option>
+								<option value="-0.50">-0.50</option>
+								<option value="-1.00">-1.00</option>
+								<option value="-1.50">-1.50</option>
+								<option value="-2.00">-2.00</option>
+								<option value="-2.50">-2.50</option>
+								<option value="-3.00">-3.00</option>
+								<option value="-3.50">-3.50</option>
+								<option value="-4.00">-4.00</option>
+								<option value="-4.50">-4.50</option>
+								<option value="-5.00">-5.00</option>
+								<option value="-5.50">-5.50</option>
+								<option value="-6.00">-6.00</option>
+								<option value="-6.50">-6.50</option>
+								<option value="-7.00">-7.00</option>
+								<option value="-8.50">-7.50</option>
+								<option value="-8.00">-8.00</option>
+							</select> <input class="btn btn-outline-secondary" type="number" step="1"
+								min="1" name="lQuantita" /> <input id="AddLenseToStorage"
+								type="button" value="update" />
 
 							<%
 								}
 							%>
-							</select>
-							<%
-									if (admin == null) {
-							%>
-
-						<input class="btn btn-outline-secondary" type="submit"
-							id="lAddCart" value="add to cart" />
-
-
-
-						<%
-							} else {
-						%>
-						<h4>In stock:</h4>
-						<h4>Gradation:</h4>
-						<select class="btn btn-outline-secondary" name="lGradazione">
-							<option value="+8.00">+8.00</option>
-							<option value="+7.50">+7.50</option>
-							<option value="+7.00">+7.00</option>
-							<option value="+6.50">+6.50</option>
-							<option value="+6.00">+6.00</option>
-							<option value="+5.50">+5.50</option>
-							<option value="+5.00">+5.00</option>
-							<option value="+4.50">+4.50</option>
-							<option value="+4.00">+4.00</option>
-							<option value="+3.50">+3.50</option>
-							<option value="+3.00">+3.00</option>
-							<option value="+2.50">+2.50</option>
-							<option value="+2.00">+2.00</option>
-							<option value="+1.50">+1.50</option>
-							<option value="+1.00">+1.00</option>
-							<option value="+0.50">+0.50</option>
-							<option value="0" selected>±0.00</option>
-							<option value="-0.50">-0.50</option>
-							<option value="-1.00">-1.00</option>
-							<option value="-1.50">-1.50</option>
-							<option value="-2.00">-2.00</option>
-							<option value="-2.50">-2.50</option>
-							<option value="-3.00">-3.00</option>
-							<option value="-3.50">-3.50</option>
-							<option value="-4.00">-4.00</option>
-							<option value="-4.50">-4.50</option>
-							<option value="-5.00">-5.00</option>
-							<option value="-5.50">-5.50</option>
-							<option value="-6.00">-6.00</option>
-							<option value="-6.50">-6.50</option>
-							<option value="-7.00">-7.00</option>
-							<option value="-8.50">-7.50</option>
-							<option value="-8.00">-8.00</option>
-						</select> <input class="btn btn-outline-secondary" type="number" step="1"
-							min="1" name="lQuantita" /> <input id="AddLenseToStorage"
-							type="button" value="update" />
-
-						<%
-							}
-						%>
+						</div>
 					</div>
-				</div>
 			</div>
 		</div>
-	</div>
 
-	<%
+		<%
 			}
 		%>
-	<script src="js/article-page.js"></script>
+		<script src="js/article-page.js"></script>
 </body>
 </html>
