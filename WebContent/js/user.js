@@ -58,27 +58,28 @@ function addCard(){
 }
 
 function addPrescription() {
-	var tipoP = $("input[name='nomeP']");
-	var sferaSX = $("input[name='sferaSX']");
-	var cilindroSX = $("input[name='cilindroSX']");
-	var asseSX =  $("input[name='asseSX']");
-	var sferaDX = $("input[name='sferaDX']");
-	var cilindroDX = $("input[name='cilindroDX']");
-	var asseDX =  $("input[name='asseDX']");
-	var addVicinanza = $("input[name='addVicinanza']");
-	var prismaOrizSX = $("input[name='prismaOrizSX']");
-	var prismaOrizSXBD =  $("input[name='prismaOrizSXBD']");
-	var prismaOrizDX = $("input[name='prismaOrizDX']");
-	var prismaOrizDXBD =  $("input[name='prismaOrizDXBD']");
-	var prismaVertSX = $("input[name='prismaVertSX']");
-	var prismaVertSXBD =  $("input[name='prismaVertSXBD']");
-	var prismaVertDX = $("input[name='prismaVertDX']");
-	var prismaVertDXBD =  $("input[name='prismaVertDXBD']");
-	var pdSX = $("input[name='pdSX']");
-	var pdDX =  $("input[name='pdDX']");
+	var tipoP = $("input[name='nomeP']").val();
+	var sferaSX = $("input[name='sferaSX']").val();
+	var cilindroSX = $("input[name='cilindroSX']").val();
+	var asseSX =  $("input[name='asseSX']").val();
+	var sferaDX = $("input[name='sferaDX']").val();
+	var cilindroDX = $("input[name='cilindroDX']").val();
+	var asseDX =  $("input[name='asseDX']").val();
+	var addVicinanza = $("input[name='addVicinanza']").val();
+	var prismaOrizSX = $("input[name='prismaOrizSX']").val();
+	var prismaOrizSXBD =  $("input[name='prismaOrizSXBD']").val();
+	var prismaOrizDX = $("input[name='prismaOrizDX']").val();
+	var prismaOrizDXBD =  $("input[name='prismaOrizDXBD']").val();
+	var prismaVertSX = $("input[name='prismaVertSX']").val();
+	var prismaVertSXBD =  $("input[name='prismaVertSXBD']").val();
+	var prismaVertDX = $("input[name='prismaVertDX']").val();
+	var prismaVertDXBD =  $("input[name='prismaVertDXBD']").val();
+	var pdSX = $("input[name='pdSX']").val();
+	var pdDX =  $("input[name='pdDX']").val();
+	alert(tipoP+sferaSX+cilindroSX+asseSX+sferaDX+cilindroDX+asseDX+addVicinanza+prismaOrizSX+prismaOrizSXBD+prismaOrizDX+prismaOrizDXBD+prismaVertSX+prismaVertSXBD+prismaVertDX+prismaVertDXBD+pdSX+pdDX)
 	$.ajax({
 		type : "POST",
-		url : "user",
+		url : "/user",
 		data : {
 			action : 'addPres',
 			nomeP : tipoP,

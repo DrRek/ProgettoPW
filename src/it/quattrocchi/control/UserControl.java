@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +30,7 @@ import it.quattrocchi.support.PrescriptionBean;
 import it.quattrocchi.support.UserBean;
 
 @WebServlet("/user")
+
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
 maxFileSize=1024*1024*10,      // 10MB
 maxRequestSize=1024*1024*50)   // 50MB

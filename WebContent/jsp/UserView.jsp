@@ -36,8 +36,7 @@
 		if (user == null && admin == null) {
 	%>
 	<div class="container">
-		<br>
-		<br> <a href="access">Login is required!</a>
+		<br> <br> <a href="access">Login is required!</a>
 	</div>
 	<%
 		} else if (user != null) {
@@ -93,21 +92,23 @@
 			</thead>
 			<%
 				Collection<?> cc = (Collection<?>) user.getCards();
-				if (cc != null && cc.size() != 0) {
-					Iterator<?> it = cc.iterator();
-					while (it.hasNext()) {
-						CreditCardBean bean = (CreditCardBean) it.next();
+					if (cc != null && cc.size() != 0) {
+						Iterator<?> it = cc.iterator();
+						while (it.hasNext()) {
+							CreditCardBean bean = (CreditCardBean) it.next();
 			%>
 			<tr>
 				<td><%=bean.getNumeroCC()%></td>
-				<td><%=bean.getIntestatario() %></td>
-				<td><%=bean.getCircuito() %></td>
-				<td><%=bean.getDataScadenza() %></td>
+				<td><%=bean.getIntestatario()%></td>
+				<td><%=bean.getCircuito()%></td>
+				<td><%=bean.getDataScadenza()%></td>
 				<td><a
 					href="user?action=delCard&numeroCC=<%=bean.getNumeroCC()%>">rimuovi</a></td>
 			</tr>
-			<% 	}
-					}%>
+			<%
+				}
+					}
+			%>
 		</table>
 	</div>
 	<div class="container">
@@ -136,25 +137,27 @@
 		<h2>Prescrizioni</h2>
 		<table class="table table-condensed" id="prescriptions">
 			<thead>
-			<tr>
-				<th>Codice</th>
-				<th>Nome</th>
-			<tr>
+				<tr>
+					<th>Codice</th>
+					<th>Nome</th>
+				<tr>
 			</thead>
 			<%
 				Collection<?> pres = (Collection<?>) user.getPrescriptions();
-				if (pres != null && pres.size() != 0) {
-					Iterator<?> it = pres.iterator();
-					while (it.hasNext()) {
-						PrescriptionBean bean = (PrescriptionBean) it.next();
+					if (pres != null && pres.size() != 0) {
+						Iterator<?> it = pres.iterator();
+						while (it.hasNext()) {
+							PrescriptionBean bean = (PrescriptionBean) it.next();
 			%>
 			<tr>
 				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getNome() %></td>
+				<td><%=bean.getNome()%></td>
 				<td><a href="user?action=delPres&codice=<%=bean.getCodice()%>">rimuovi</a></td>
 			</tr>
-			<% 	}
-					}%>
+			<%
+				}
+					}
+			%>
 		</table>
 	</div>
 
@@ -162,66 +165,56 @@
 		<h2>Aggiungi Prescrizione</h2>
 		<script type="text/javascript" src="js/prescription-validation.js"></script>
 
-		<form name='presc' onSubmit="return presValidation();" action='user'
-			method="post">
+		<label for="nomeP">Nome:</label> <input name="nomeP" type="text"
+			maxlength="50" placeholder="ES. di Mario per vicinanza"> <span
+			id="tipoP"></span><br> <label for="sferaSX">Sfera Sinistra:</label>
+		<input name="sferaSX" type="number" step="0.01" step="0.01" min="-10"
+			max="10" placeholder="Gradazione Occhio SX"><span id="sferaSX"></span> <br> <label for="cilindroSX">Cilindro Sinistra:</label> <input name="cilindroSX" type="number" step="0.01" min="-10" max="10"
+			placeholder="Valore Astigmatismo SX"><span id="cilindroSX"></span> <br> <label for="asseSX">Asse Sinistra:</label> <input name="asseSX" type="number" step="0.01" min="0" max="180"
+			placeholder="Gradi Orientamento Lente"><span id="asseSX"></span> <br> <label for="sferaDX">Sfera Destra:</label> <input name="sferaDX" type="number" step="0.01" min="-10" max="10"
+			placeholder="Gradazione Occhio DX"><span id="sferaDX"></span> <br> <label
+			for="cilindroDX">Cilindro Destra:</label> <input name="cilindroDX"
+			type="number" type="number" step="0.01" min="-10" max="10"
+			placeholder="Valore Astigmatismo DX"><span
+			id="cilindroDX"></span> <br> <label for="asseDX">Asse
+			Destra:</label> <input name="asseDX" type="number" step="0.01" min="0"
+			max="180" placeholder="Gradi Orientamento Lente"><span
+			id="asseDX"></span> <br> <label for="addVicinanza">Addizione
+			Vicinanza</label> <input name="addVicinanza" type="number" step="0.01"
+			min="-10" max="10" placeholder="Aggiunta Diottrie Positive">
+		<span id="addVicinanza"></span> <br> <label for="prismaOrizSX">Prisma
+			Orizzontale SX:</label> <input name="prismaOrizSX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Oriz SX"><span
+			id="prismaOrizSX"></span> <br> <label for="prismaOrizSXBD">Prisma
+			Oriz SX BaseDirection:</label> <input name="prismaOrizSXBD" type="text"
+			maxlength="3" placeholder="PrismaOrizSXBaseDirection"><span
+			id="prismaOrizSXBD"></span> <br> <label for="prismaOrizDX">Prisma
+			Orizzontale DX:</label> <input name="prismaOrizDX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Oriz DX"><span
+			id="prismaOrizDX"></span> <br> <label for="prismaOrizDXBD">Prisma
+			Oriz DX BaseDirection:</label> <input name="prismaOrizDXBD" type="text"
+			maxlength="3" placeholder="PrismaOrizDXBaseDirection"><span
+			id="prismaOrizDXBD"></span> <br> <label for="prismaVertSX">Prisma
+			Verticale SX:</label> <input name="prismaVertSX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Vert SX"><span
+			id="prismaVertSX"></span> <br> <label for="prismaVertSXBD">Prisma
+			Vert SX BaseDirection:</label> <input name="prismaVertSXBD" type="text"
+			maxlength="3" placeholder="PrismaVertSXBaseDirection"><span
+			id="prismaVertSXBD"></span> <br> <label for="prismaVertDX">Prisma
+			Verticale DX:</label> <input name="prismaVertDX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Vert DX"><span
+			id="prismaVertDX"></span> <br> <label for="prismaVertSXBD">Prisma
+			Vert DX BaseDirection:</label> <input name="prismaVertDXBD" type="text"
+			maxlength="3" placeholder="PrismaVertDXBaseDirection"><span
+			id="prismaVertDXBD"></span> <br> <label for="pdSX">Pupillar
+			Distance SX: </label> <input name="pdSX" type="number" step="0.01" min="-10"
+			max="10" placeholder="Pupillar Distance"><span id="pdSX"></span>
+		<br> <label for="pdDX">Pupillar Distance DX: </label> <input
+			name="pdDX" type="number" step="0.01" min="-10" max="10"
+			placeholder="Pupillar Distance"><span id="pdDX"></span> <br>
 
-			<input type="hidden" name="action" value="addPrescription"> <label
-				for="nomeP">Nome:</label> <input name="nomeP" type="text"
-				maxlength="50" placeholder="ES. di Mario per vicinanza"> <span
-				id="tipoP"></span><br> <label for="sferaSX">Sfera
-				Sinistra:</label> <input name="sferaSX" type="number" step="0.01"
-				step="0.01" min="-10" max="10" placeholder="Gradazione Occhio SX"><span
-				id="sferaSX"></span> <br> <label for="cilindroSX">Cilindro
-				Sinistra:</label> <input name="cilindroSX" type="number" step="0.01"
-				min="-10" max="10" placeholder="Valore Astigmatismo SX"><span
-				id="cilindroSX"></span> <br> <label for="asseSX">Asse
-				Sinistra:</label> <input name="asseSX" type="number" step="0.01" min="0"
-				max="180" placeholder="Gradi Orientamento Lente"><span
-				id="asseSX"></span> <br> <label for="sferaDX">Sfera
-				Destra:</label> <input name="sferaDX" type="number" step="0.01" min="-10"
-				max="10" placeholder="Gradazione Occhio DX"><span
-				id="sferaDX"></span> <br> <label for="cilindroDX">Cilindro
-				Destra:</label> <input name="cilindroDX" type="number" type="number"
-				step="0.01" min="-10" max="10" placeholder="Valore Astigmatismo DX"><span
-				id="cilindroDX"></span> <br> <label for="asseDX">Asse
-				Destra:</label> <input name="asseDX" type="number" step="0.01" min="0"
-				max="180" placeholder="Gradi Orientamento Lente"><span
-				id="asseDX"></span> <br> <label for="addVicinanza">Addizione
-				Vicinanza</label> <input name="addVicinanza" type="number" step="0.01"
-				min="-10" max="10" placeholder="Aggiunta Diottrie Positive">
-			<span id="addVicinanza"></span> <br> <label for="prismaOrizSX">Prisma
-				Orizzontale SX:</label> <input name="prismaOrizSX" type="number" step="0.01"
-				min="-10" max="10" placeholder="Prisma Oriz SX"><span
-				id="prismaOrizSX"></span> <br> <label for="prismaOrizSXBD">Prisma
-				Oriz SX BaseDirection:</label> <input name="prismaOrizSXBD" type="text"
-				maxlength="3" placeholder="PrismaOrizSXBaseDirection"><span
-				id="prismaOrizSXBD"></span> <br> <label for="prismaOrizDX">Prisma
-				Orizzontale DX:</label> <input name="prismaOrizDX" type="number" step="0.01"
-				min="-10" max="10" placeholder="Prisma Oriz DX"><span
-				id="prismaOrizDX"></span> <br> <label for="prismaOrizDXBD">Prisma
-				Oriz DX BaseDirection:</label> <input name="prismaOrizDXBD" type="text"
-				maxlength="3" placeholder="PrismaOrizDXBaseDirection"><span
-				id="prismaOrizDXBD"></span> <br> <label for="prismaVertSX">Prisma
-				Verticale SX:</label> <input name="prismaVertSX" type="number" step="0.01"
-				min="-10" max="10" placeholder="Prisma Vert SX"><span
-				id="prismaVertSX"></span> <br> <label for="prismaVertSXBD">Prisma
-				Vert SX BaseDirection:</label> <input name="prismaVertSXBD" type="text"
-				maxlength="3" placeholder="PrismaVertSXBaseDirection"><span
-				id="prismaVertSXBD"></span> <br> <label for="prismaVertDX">Prisma
-				Verticale DX:</label> <input name="prismaVertDX" type="number" step="0.01"
-				min="-10" max="10" placeholder="Prisma Vert DX"><span
-				id="prismaVertDX"></span> <br> <label for="prismaVertSXBD">Prisma
-				Vert DX BaseDirection:</label> <input name="prismaVertDXBD" type="text"
-				maxlength="3" placeholder="PrismaVertDXBaseDirection"><span
-				id="prismaVertDXBD"></span> <br> <label for="pdSX">Pupillar
-				Distance SX: </label> <input name="pdSX" type="number" step="0.01" min="-10"
-				max="10" placeholder="Pupillar Distance"><span id="pdSX"></span>
-			<br> <label for="pdDX">Pupillar Distance DX: </label> <input
-				name="pdDX" type="number" step="0.01" min="-10" max="10"
-				placeholder="Pupillar Distance"><span id="pdDX"></span> <br>
-
-			<input id="addPrescription" name="addPrescription" value="Aggiungi" type="button">
-		</form>
+		<input id="addPrescription" name="addPrescription" value="Aggiungi"
+			type="button">
 	</div>
 
 	<div class="container">
@@ -236,19 +229,22 @@
 			</thead>
 			<%
 				Collection<OrderBean> orders = user.getOrders();
-				if (orders != null && orders.size() != 0) {
-					Iterator<?> it = orders.iterator();
-					while (it.hasNext()) {
-						OrderBean bean = (OrderBean) it.next();
+					if (orders != null && orders.size() != 0) {
+						Iterator<?> it = orders.iterator();
+						while (it.hasNext()) {
+							OrderBean bean = (OrderBean) it.next();
 			%>
 			<tr>
 				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getCosto() %></td>
-				<td><%=bean.getDataEsecuzione() %></td>
-				<td><a href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
+				<td><%=bean.getCosto()%></td>
+				<td><%=bean.getDataEsecuzione()%></td>
+				<td><a
+					href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
 			</tr>
-			<% 	}
-					}%>
+			<%
+				}
+					}
+			%>
 		</table>
 	</div>
 
@@ -260,7 +256,7 @@
 		<h2>
 			Ciao,
 			<%=admin.getUser()%></h2>
-		
+
 		<h2>Active and future promotion list</h2>
 		<table id="tablePromotion" class="table table-condensed">
 			<thead>
@@ -277,20 +273,30 @@
 			</thead>
 			<%
 				if (promozioni != null && promozioni.size() != 0) {
-					for(PromotionBean bean : promozioni){
-					%>
+						for (PromotionBean bean : promozioni) {
+			%>
 			<tr>
 				<td><%=bean.getNome()%></td>
-				<td><%=bean.getDescrizione() %></td>
+				<td><%=bean.getDescrizione()%></td>
 				<td><%=bean.getSconto()%></td>
-				<td><%=bean.getTipo() %></td>
-				<td><%=bean.getDataInizio() %></td>
-				<td><%=bean.getDataFine() %></td>
-				<td><%if(bean.isCumulabile()){%>true<%}else{%>false<%}%></td>
+				<td><%=bean.getTipo()%></td>
+				<td><%=bean.getDataInizio()%></td>
+				<td><%=bean.getDataFine()%></td>
+				<td>
+					<%
+						if (bean.isCumulabile()) {
+					%>true<%
+						} else {
+					%>false<%
+						}
+					%>
+				</td>
 				<td><a href="promotion?nome=<%=bean.getNome()%>">info/edit</a></td>
 			</tr>
-				<%	}
-				}%>
+			<%
+				}
+					}
+			%>
 		</table>
 		<h3>Add promotion</h3>
 		<h4>Name:</h4>
@@ -298,20 +304,16 @@
 		<h4>Description:</h4>
 		<input id="descrizioneP" type="text" />
 		<h4>Subtract type</h4>
-			<input type="radio" name="tipoP" value="%"> Percent (%)
- 		 	<input type="radio" name="tipoP" value="s"> Subtract (-)
+		<input type="radio" name="tipoP" value="%"> Percent (%) <input
+			type="radio" name="tipoP" value="s"> Subtract (-)
 		<h4>Subtract ammount:</h4>
-		<input id="scontoP" type="number" />
-		<br>
+		<input id="scontoP" type="number" /> <br>
 		<h4>Start date:</h4>
-		<input id="inizioP" type="date" size="35" />
-		<br>
+		<input id="inizioP" type="date" size="35" /> <br>
 		<h4>End date:</h4>
-		<input id="fineP" type="date" size="35"/>
-		<br>
-		<input id="cumulabileP" type="checkbox"> Cumulabile<br>
-		<input id="submitP" type="button" value="Add promotion!"/>
-		<br>
+		<input id="fineP" type="date" size="35" /> <br> <input
+			id="cumulabileP" type="checkbox"> Cumulabile<br> <input
+			id="submitP" type="button" value="Add promotion!" /> <br>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
 		<hr>
@@ -321,11 +323,12 @@
 			<option value="L">Contact lenses</option>
 		</select>
 		<hr>
-		<form class="specificiPerOcchiali" action="article" method='post' enctype="multipart/form-data">
-			<input type="hidden" name="toDo" value="addProduct"/>
-			<input type="hidden" name="tipo" value="O"/>
+		<form class="specificiPerOcchiali" action="article" method='post'
+			enctype="multipart/form-data">
+			<input type="hidden" name="toDo" value="addProduct" /> <input
+				type="hidden" name="tipo" value="O" />
 			<h4>Name:</h4>
-			<input type="text" name="nome" value="name"/>
+			<input type="text" name="nome" value="name" />
 			<hr>
 			<h4>Brand:</h4>
 			<select name="marca">
@@ -337,13 +340,14 @@
 			</select>
 			<hr>
 			<h4>Price:</h4>
-			<input type="number" step="1.00" min="0.00" name="prezzo" placeholder="Price" /><br>
+			<input type="number" step="1.00" min="0.00" name="prezzo"
+				placeholder="Price" /><br>
 			<hr>
 			<h4>Available number:</h4>
-			<input type="number" step="1" min="1" name="quantita"/>
+			<input type="number" step="1" min="1" name="quantita" />
 			<hr>
-			<h4 >Description:</h4>
-			<input type="text" name="descrizione" value="Description"/>
+			<h4>Description:</h4>
+			<input type="text" name="descrizione" value="Description" />
 			<hr>
 			<h4>Sex:</h4>
 			<select name="sesso">
@@ -353,22 +357,27 @@
 			</select>
 			<hr>
 			<h4 class="control-label">First image:</h4>
-			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
+			<input id="img1" name="img1" type="file" multiple
+				class="img,file-loading">
 			<div class="help-block"></div>
 			<h4 class="control-label">Second image:</h4>
-			<input name="img2" type="file" multiple class="img,file-loading,specificiPerOcchiali">
+			<input name="img2" type="file" multiple
+				class="img,file-loading,specificiPerOcchiali">
 			<div class="help-block"></div>
 			<h4 class="control-label">Third image:</h4>
-			<input name="img3" type="file" multiple class="img,file-loading specificiPerOcchiali">
+			<input name="img3" type="file" multiple
+				class="img,file-loading specificiPerOcchiali">
 			<div class="help-block"></div>
-			<h6>To change available number of an existing product visit the product's webpage</h6>
+			<h6>To change available number of an existing product visit the
+				product's webpage</h6>
 			<input id="addProduct" type='submit' value='Add glass!' />
 		</form>
-		<form class="specificiPerLentine" action="article" method='post' enctype="multipart/form-data">
-			<input type="hidden" name="toDo" value="addProduct"/>
-			<input type="hidden" name="tipo" value="L"/>
+		<form class="specificiPerLentine" action="article" method='post'
+			enctype="multipart/form-data">
+			<input type="hidden" name="toDo" value="addProduct" /> <input
+				type="hidden" name="tipo" value="L" />
 			<h4>Name:</h4>
-			<input type="text" name="nome" value="name"/>
+			<input type="text" name="nome" value="name" />
 			<hr>
 			<h4>Brand:</h4>
 			<select name="marca">
@@ -380,10 +389,11 @@
 			</select>
 			<hr>
 			<h4>Price:</h4>
-			<input type="number" step="1.00" min="0.00" name="prezzo" placeholder="Price" /><br>
+			<input type="number" step="1.00" min="0.00" name="prezzo"
+				placeholder="Price" /><br>
 			<hr>
 			<h4>Available number:</h4>
-			<input type="number" step="1" min="1" name="quantita"/>
+			<input type="number" step="1" min="1" name="quantita" />
 			<hr>
 			<h4>Gradation:</h4>
 			<select name="gradazione">
@@ -450,9 +460,11 @@
 			<h4>Lenses per pack:</h4>
 			<input type="number" step="1" min="1" name="pezziPerPacco" />
 			<h4 class="control-label">First image:</h4>
-			<input id="img1" name="img1" type="file" multiple class="img,file-loading">
+			<input id="img1" name="img1" type="file" multiple
+				class="img,file-loading">
 			<div class="help-block"></div>
-			<h6>To change available number or the gradation availability of an existing product visit the product's webpage</h6>
+			<h6>To change available number or the gradation availability of
+				an existing product visit the product's webpage</h6>
 			<input id="addProduct" type='submit' value='Add contact lense!' />
 		</form>
 	</div>
@@ -469,26 +481,30 @@
 			</thead>
 			<%
 				Collection<OrderBean> orders = admin.getOrders();
-				if (orders != null && orders.size() != 0) {
-					Iterator<?> it = orders.iterator();
-					while (it.hasNext()) {
-						OrderBean bean = (OrderBean) it.next();
-					%>
+					if (orders != null && orders.size() != 0) {
+						Iterator<?> it = orders.iterator();
+						while (it.hasNext()) {
+							OrderBean bean = (OrderBean) it.next();
+			%>
 			<tr>
 				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getCosto() %></td>
-				<td><%=bean.getDataEsecuzione() %></td>
-				<td><a href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a></td>
+				<td><%=bean.getCosto()%></td>
+				<td><%=bean.getDataEsecuzione()%></td>
+				<td><a
+					href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a></td>
 			</tr>
-			<%  }
-				}%>
+			<%
+				}
+					}
+			%>
 		</table>
 	</div>
 	<%
 		}
 	%>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/user.js"></script>
 </body>
 </html>
