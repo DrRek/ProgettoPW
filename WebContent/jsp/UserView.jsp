@@ -220,7 +220,7 @@
 				name="pdDX" type="number" step="0.01" min="-10" max="10"
 				placeholder="Pupillar Distance"><span id="pdDX"></span> <br>
 
-			<input name="addPrescription" value="Aggiungi" type="submit">
+			<input id="addPrescription" name="addPrescription" value="Aggiungi" type="button">
 		</form>
 	</div>
 

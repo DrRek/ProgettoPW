@@ -5,7 +5,7 @@ $(document).ready(function(){
 			addCard();
 	});
 	
-	$("#addPres").click(function(event){
+	$("#addPrescription").on("click", function(event){
 		if(presValidation()){
 			addPrescription();
 		}
@@ -45,7 +45,7 @@ function addCard(){
 	});
 }
 
-function addPres() {
+function addPrescription() {
 	var tipoP = $("input[name='nomeP']");
 	var sferaSX = $("input[name='sferaSX']");
 	var cilindroSX = $("input[name='cilindroSX']");
