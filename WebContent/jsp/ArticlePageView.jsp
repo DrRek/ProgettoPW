@@ -70,14 +70,14 @@
 			<div class="item-container">
 				<div class="container">
 					<div>
-						<div class="product col-md-3 service-image-left">
+						<div class="product col-sm-3 service-image-left">
 
 							<center>
 								<img src="image/placeholder_occhiali.jpg" alt="pic1"></img>
 							</center>
 						</div>
 
-						<div class="container service1-items col-sm-2 col-md-2 pull-left">
+						<div class="container service1-items col-sm-2 col-sm-2 pull-left">
 							<center>
 								<a class="service1-item"> <img
 									src="image/placeholder_occhiali.jpg" alt="pic2"></img>
@@ -88,7 +88,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-6">
+					<div class="col-sm-6">
 						<div class="product-title" id="oNome"><%=occhiali.getNome()%></div>
 						<h4 id="oMarca"><%=occhiali.getMarca()%></h4>
 						<div class="product-desc"><%=((GlassesBean) occhiali).getDescrizione()%></div>
@@ -163,62 +163,56 @@
 		<div class="content-wrapper">
 			<div class="item-container">
 				<div class="container">
-					<div>
-						<div class="product col-md-3 service-image-left">
+
+						<div class="product col-sm-3 service-image-left">
 
 							<center>
 								<img src="image/placeholder_lentine.jpg" alt="pic1"></img>
 							</center>
 						</div>
-					</div>
 						<div class="product-title" id="lNome"><%=l.getNome()%></div>
 						<h4 id="lMarca"><%=l.getMarca()%></h4>
 						<hr>
 						<div class="row">
-						<div class="col-md-2">
+						<div class="col-sm-2">
 						<br>
 						<div class="etichetta">Tipologia</div>
 						<div class="value"><%=((ContactLensesBean) l).getTipologia()%></div>
 						</div>
 						
-						<div class="col-md-2">
+						<div class="col-sm-3">
 						<br>
 						<div class="value"><%=((ContactLensesBean) l).getNumeroPezziNelPacco()%>
 							pieces in a box
 						</div>
 						</div>
 						
-						<div class="col-md-2">
+						<div class="col-sm-2">
 						<br>
 						<div class="etichetta">Raggio</div>
 						<div class="value"><%=((ContactLensesBean) l).getRaggio()%>
 							mm</div>
-						</div>
 						
-						<div class="col-md-2">
+						</div>
+						<div class="col-sm-2">
 						<br>
 						<div class="etichetta">Diametro</div>
 						<div class="value"><%=((ContactLensesBean) l).getDiametro()%>
 							mm</div>
 						</div>
 
-						<%
-							if (!((ContactLensesBean) l).getColore().equals("/N")) {
-						%>
-						<div class="col-md-2">
+						<div class="col-sm-3">
 						<br>
 						<div class="etichetta">Colore</div>
 						<div class="value"><%=((ContactLensesBean) l).getColore()%>
 						</div>
 						</div>
-						<%
-							}
-						%>
-						</div>
-						<hr>
-							<div class="product-price"><%=l.getPrezzo()%>
-								€
+
+							
+							<div class="product-price col-sm-2">
+							<br><%=l.getPrezzo()%> €
 							</div>
+						</div>
 							<hr>
 							<select class="product-stock" id="gradazione">
 								<%
