@@ -169,9 +169,9 @@ public class UserControl extends HttpServlet{
 		}
 		
 		user.setCards(ccModel.doRetrieveByCliente(user));
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
-		dispatcher.forward(request, response);
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "no-cache");
+		response.getWriter().write(new Gson().toJson(ccModel.doRetrieveByCliente(user)));
 	}
 	
 	private void addPres(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
@@ -218,7 +218,9 @@ public class UserControl extends HttpServlet{
 		
 		pModel.doDelete(codice, user);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
-		dispatcher.forward(request, response);
+		user.setPrescriptions(pModel.doRetrieveByCliente(user));
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "no-cache");
+		response.getWriter().write(new Gson().toJson(pModel.doRetrieveByCliente(user)));
 	}
 }

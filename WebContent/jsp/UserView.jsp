@@ -102,9 +102,7 @@
 				<td><%=bean.getIntestatario()%></td>
 				<td><%=bean.getCircuito()%></td>
 				<td><%=bean.getDataScadenza()%></td>
-				<td><a
-					href="user?action=delCard&numeroCC=<%=bean.getNumeroCC()%>">rimuovi</a></td>
-			</tr>
+				<td><input type="submit" id="removeCard" name="removeCard" value="remove" /></td></tr>
 			<%
 				}
 					}
@@ -152,8 +150,7 @@
 			<tr>
 				<td><%=bean.getCodice()%></td>
 				<td><%=bean.getNome()%></td>
-				<td><a href="user?action=delPres&codice=<%=bean.getCodice()%>">rimuovi</a></td>
-			</tr>
+				<td><input type="submit" id="removePrescription" name="removePrescription" value="remove" /></td></tr>
 			<%
 				}
 					}
