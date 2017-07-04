@@ -15,6 +15,8 @@ import it.quattrocchi.support.GlassesBean;
 public class ArticleModel {
 
 	private static final String TABLE_NAME = "quattrocchidb.articolo";
+	
+	private static final PromotionModel proModel = new PromotionModel();
 
 	public boolean isGlasses(String nome, String marca) throws SQLException
 	{
@@ -327,6 +329,7 @@ public class ArticleModel {
 					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
 					bean.setImg2(rs.getString("Img1"));
 					bean.setImg3(rs.getString("Img2"));
+					bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 				}
 			}
 			stm.close();
@@ -387,7 +390,7 @@ public class ArticleModel {
 					bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
 					bean.setTipologia(rs.getString("Tipologia"));
 					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
-
+					bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 				}
 			}
 			stm.close();
@@ -455,7 +458,7 @@ public class ArticleModel {
 					bean.setNumeroPezziNelPacco(rs.getInt("NumeroPezziNelPacco"));
 					bean.setTipologia(rs.getString("Tipologia"));
 					bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
-
+					bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 					lentine.add(bean);
 				}
 			}
@@ -511,6 +514,7 @@ public class ArticleModel {
 				bean.setImg1(rs.getString("Img1"));
 				bean.setPrezzo(rs.getDouble("prezzo"));
 				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+				bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 				products.add(bean);
 			}
 			rs.close();
@@ -565,6 +569,7 @@ public class ArticleModel {
 				bean.setPrezzo(rs.getDouble("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
 				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+				bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 				products.add(bean);
 			}
 			conn.commit();
@@ -621,6 +626,7 @@ public class ArticleModel {
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
 				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+				bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 				products.add(bean);
 			}
 			conn.commit();
@@ -690,6 +696,7 @@ public class ArticleModel {
 				bean.setPrezzo(rs.getFloat("Prezzo"));
 				bean.setImg1(rs.getString("Img1"));
 				bean.setDisponibilita(rs.getInt("NumeroPezziDisponibili"));
+				bean.setSconto(proModel.doRetriveAllActiveOnProduct(bean));
 				products.add(bean);
 			}
 			conn.commit();

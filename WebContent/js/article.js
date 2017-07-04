@@ -16,7 +16,6 @@ function formatData(responseText)
 {
 	var toAppend = '';
 	$.each(responseText, function(i, articleObject) {
-		console.log(articleObject);
 		if(articleObject.disponibilita > 0){
 			toAppend += '<div class="block">'
 							+'<div class="top">'
@@ -179,7 +178,6 @@ function asyncGenericSearch() {
 				console.log("AJAX error: " + status + ' : ' + errorThrown);
 			},
 			success : function(responseText) {
-				console.log(responseText);
 				formatData(responseText);
 			}
 		})

@@ -1,5 +1,7 @@
 package it.quattrocchi.support;
 
+import java.util.ArrayList;
+
 public class ArticleBean {
 
 	public ArticleBean(){
@@ -9,6 +11,8 @@ public class ArticleBean {
 		img1=null;
 		prezzo = 0;
 		disponibilita = 0;
+		tipoSconto=null;
+		sconto=0;
 	}
 
 	public String getNome(){
@@ -57,7 +61,6 @@ public class ArticleBean {
 	public void setDisponibilita(int disponibilita) {
 		this.disponibilita = disponibilita;
 	}
-
 	public boolean equals(Object o)
 	{
 		if(o.getClass().getName().equals("it.quattrocchi.support.GlassesBean") || o.getClass().getName().equals("it.quattrocchi.support.ContactLensesBean") || o.getClass().getName().equals("it.quattrocchi.support.ArticleBean") )
@@ -69,8 +72,52 @@ public class ArticleBean {
 		}
 		return false;
 	}
-
-	private String nome, marca, tipo, img1;
-	private double prezzo;
+	public void setSconto(ArrayList<PromotionBean> promozioni){
+		Double scontoPercentualeTemp=0.0, scontoSubtractNONCumulabileTemp=0.0, scontoSubtractCumulabileTemp=0.0;
+		for(PromotionBean p : promozioni){
+			if(p.isCumulabile()){
+				scontoSubtractCumulabileTemp+=p.getSconto();
+			}else{
+				if(p.getTipo().equalsIgnoreCase("s")){
+					if(scontoSubtractNONCumulabileTemp<p.getSconto()){
+						scontoSubtractNONCumulabileTemp = p.getSconto();
+					}
+				}else {
+					if(scontoPercentualeTemp<p.getSconto()){
+						scontoPercentualeTemp = p.getSconto();
+					}
+				}
+			}
+		}
+		Double prezzoSubtractCumulabileTemp=prezzo-scontoSubtractCumulabileTemp;
+		Double prezzoSubtractNONCumulabileTemp=prezzo-scontoSubtractNONCumulabileTemp;
+		Double PrezzoPercentualeTemp=prezzo-(prezzo*scontoPercentualeTemp/100);
+		if(prezzoSubtractCumulabileTemp<prezzoSubtractNONCumulabileTemp&&prezzoSubtractCumulabileTemp<PrezzoPercentualeTemp){
+			this.sconto=scontoSubtractCumulabileTemp;
+			this.tipoSconto="s";
+		}else if(prezzoSubtractNONCumulabileTemp<prezzoSubtractCumulabileTemp&&prezzoSubtractNONCumulabileTemp<PrezzoPercentualeTemp){
+			this.sconto=scontoSubtractNONCumulabileTemp;
+			this.tipoSconto="s";
+		}else{
+			this.sconto=scontoPercentualeTemp;
+			this.tipoSconto="%";
+		}
+	}
+	public Double getSconto(){
+		return sconto;
+	}
+	public String getTipoSconto(){
+		return tipoSconto;
+	}
+	public Double getRealPrezzo() {
+		if(tipoSconto.equalsIgnoreCase("s")){
+			return prezzo-sconto;
+		}
+		else{
+			return prezzo-(prezzo*sconto/100);
+		}
+	}
+	private String nome, marca, tipo, img1, tipoSconto;
+	private double prezzo, sconto;
 	private int disponibilita;
 }

@@ -161,7 +161,8 @@ $(document).ready(function() {
 			+'<th style="width:10%" >Tipo</th>'
 			+'<th style="width:20%" >Gradazione</th>'
 			+'<th style="width:8%" >Numero Prodotti</th>'
-			+'<th style="width:22%" >Subtotal</th>'
+			+'<th style="width:11%" >Price</th>'
+			+'<th style="width:11%" >Discounted price</th>'
 			+'<th style="width:10%"></th></thead><tbody>';
 		var products = new Array();
 		var tot = 0;
@@ -201,8 +202,14 @@ $(document).ready(function() {
 			toAppend+='<td><input  data-th="Numero Prodotti" name="numeroPezziDisponibili" class="form-control "  type="number" min="1"value="'+prod.numero+'"></td>';
 
 			var prezzo = prod.articolo.prezzo*prod.numero;
-			tot += prezzo;
-			toAppend+='<td data-th="Subtotal" class="prezzoArt ">'+prod.articolo.prezzo*prod.numero+'€</td>';
+			toAppend+='<td data-th="Subtotal" class="prezzoArt ">'+prezzo+'€</td>';
+			
+			if(prod.articolo.tipoSconto=="s")
+				var realPrezzo = (prod.articolo.prezzo-prod.articolo.sconto)*prod.numero;
+			else
+				var realPrezzo = (prod.articolo.prezzo-(prod.articolo.prezzo*prod.articolo.sconto/100))*prod.numero;
+			tot += realPrezzo;
+			toAppend+='<td data-th="Subtotal" class="prezzoArt ">'+realPrezzo+'€</td>';
 
 			toAppend+='<td data-th=""><input class= "btn btn-outline-secondary " type="submit" name="removeCart" value="remove" /></td></tr>';
 

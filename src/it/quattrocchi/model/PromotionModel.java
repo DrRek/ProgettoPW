@@ -248,4 +248,61 @@ public class PromotionModel {
 
 		return bean;
 	}
+
+	public ArrayList<PromotionBean> doRetriveAllActiveOnProduct(ArticleBean a) throws SQLException {
+		Connection conn = null;
+		PreparedStatement stm  = null;
+
+		PromotionBean bean = null;
+		ArrayList<PromotionBean> toReturn = new ArrayList<PromotionBean>();
+		String query = "SELECT * FROM promozione p join validita v WHERE p.DataInizio <= ? and p.DataFine >= ? and v.NomeArticolo = ? and v.MarcaArticolo = ?;";
+
+		try {
+			conn = DriverManagerConnectionPool.getConnection();
+			stm = conn.prepareStatement(query);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date data = new Date();
+			stm.setString(1, sdf.format(data));
+			stm.setString(2, sdf.format(data));
+			stm.setString(3, a.getNome());
+			stm.setString(4, a.getMarca());
+			ResultSet rs = stm.executeQuery();
+					
+			while(rs.next()) {
+				bean = new PromotionBean();
+				bean.setNome(rs.getString("nome"));
+				bean.setDescrizione(rs.getString("descrizione"));
+				bean.setSconto(rs.getDouble("sconto"));
+				bean.setTipo(rs.getString("tipo"));
+				bean.setDataInizio(rs.getDate("dataInizio"));
+				bean.setDataFine(rs.getDate("dataFine"));
+				bean.setCumulabile(rs.getBoolean("cumulabile"));
+				
+				query = "SELECT * FROM validita WHERE promozione = ?;";
+				stm.setString(1, bean.getNome());
+				stm = conn.prepareStatement(query);
+				stm.setString(1, bean.getNome());
+				ResultSet rs1 = stm.executeQuery();
+				while(rs1.next()){
+					ArticleBean toadd = new ArticleBean();
+					toadd.setNome(rs1.getString("NomeArticolo"));
+					toadd.setMarca(rs1.getString("MarcaArticolo"));
+					bean.addToValidi(toadd);
+				}
+				toReturn.add(bean);
+			}
+			stm.close();
+			rs.close();
+		}
+		finally {
+			try {
+				if (stm != null)
+					stm.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(conn);
+			}
+		}
+
+		return toReturn;
+	}
 }

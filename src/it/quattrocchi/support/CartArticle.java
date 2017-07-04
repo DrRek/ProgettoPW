@@ -33,7 +33,7 @@ public class CartArticle{
 	}
 	
 	public double getPrezzo(){
-		return (float)Math.floor((articolo.getPrezzo()*numero) * 100) / 100;
+		return (float)Math.floor((articolo.getRealPrezzo()*numero) * 100) / 100;
 	}
 	
 	public Double getGradazione() {
