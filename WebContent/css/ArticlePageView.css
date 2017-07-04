@@ -12,6 +12,16 @@
 	font-size: 20px;
 }
 
+.etichetta{
+	color: #404040;
+	font-size:18px;
+}
+
+.value{
+	color: #404040;
+	font-size:14px;
+}
+
 .product-desc{
 	font-size: 14px;
 }
@@ -21,7 +31,7 @@
 }
 
 .product-stock{
-	color: #74DF00;
+	color: #404040;
 	font-size: 20px;
 	margin-top: 10px;
 }
@@ -39,12 +49,6 @@
 .container-fluid{
 	max-width: 1140px;
 	margin: 0 auto;
-}
-
-.view-wrapper {
-	float: right;
-	max-width: 70%;
-	margin-top: 25px;
 }
 
 .container {

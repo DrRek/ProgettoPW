@@ -1,21 +1,21 @@
 $(document).ready(function() {
 
 	$("#AddGlassToStorage").click(function(event) {
-		var oNome = $('#oNome').html();
-		var oMarca = $('#oMarca').html();
-		var oQuantita = $('input[name=oQuantita]').val();
+		var oNome = $("#oNome").html();
+		var oMarca = $("#oMarca").html();
+		var oQuantita = $("input[name=oQuantita]").val();
 		$.ajax({
 			type : "GET",
 			url : "articlePage",
 			data : {
-				action : 'updateGlass',
+				action : "updateGlass",
 				nome : oNome,
 				marca : oMarca,
 				quantita : oQuantita
 			},
 			dataType : "json",
 			success : function(responseText) {
-				alert("Success!");
+				$("#oDisp").html(oQuantita + " left");
 			}
 		});
 	});
