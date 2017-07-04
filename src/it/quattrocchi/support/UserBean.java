@@ -97,11 +97,11 @@ public class UserBean {
 		this.password = password;
 	}
 	
-	public Collection<PrescriptionBean> getPrescriptions() {
+	public ArrayList<PrescriptionBean> getPrescriptions() {
 		return this.prescriptions;
 	}
 	
-	public void setPrescriptions(Collection<PrescriptionBean> prescriptions) {
+	public void setPrescriptions(ArrayList<PrescriptionBean> prescriptions) {
 		this.prescriptions = prescriptions;
 	}
 	
@@ -113,7 +113,7 @@ public class UserBean {
 		this.orders = orders;
 	}
 
-	private Collection<PrescriptionBean> prescriptions;
+	private ArrayList<PrescriptionBean> prescriptions;
 	private ArrayList<CreditCardBean> cc;
 	private String user, nome, cognome, stato, cap, indirizzo, email, password;
 	private Date dataDiNascita;

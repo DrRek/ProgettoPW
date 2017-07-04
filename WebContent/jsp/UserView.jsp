@@ -134,7 +134,7 @@
 
 	<div class="container">
 		<h2>Prescrizioni</h2>
-		<table class="table table-condensed">
+		<table class="table table-condensed" id="prescriptions">
 			<thead>
 			<tr>
 				<th>Codice</th>
@@ -142,7 +142,7 @@
 			<tr>
 			</thead>
 			<%
-				Collection<PrescriptionBean> pres = user.getPrescriptions();
+				Collection<?> pres = (Collection<?>) user.getPrescriptions();
 				if (pres != null && pres.size() != 0) {
 					Iterator<?> it = pres.iterator();
 					while (it.hasNext()) {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -111,9 +112,9 @@ public class PrescriptionModel {
 		doRetrieveByCliente(user);
 	}
 	
-	public void doRetrieveByCliente(UserBean user) throws SQLException{
+	public ArrayList<PrescriptionBean> doRetrieveByCliente(UserBean user) throws SQLException{
 		
-		Collection<PrescriptionBean> pres = new LinkedList<PrescriptionBean>();
+		ArrayList<PrescriptionBean> pres = new ArrayList<PrescriptionBean>();
 		
 		Connection conn = null;
 		PreparedStatement stm  = null;
@@ -162,6 +163,8 @@ public class PrescriptionModel {
 			}
 		}
 		user.setPrescriptions(pres);
+		
+		return pres;
 	}
 	
 	public PrescriptionBean doRetrieve(String codice) throws SQLException{

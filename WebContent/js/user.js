@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	setSearchField();
+	
 	$("#addCard").on("click", function(event) {
 		if(ccValidation())
 			addCard();
@@ -8,13 +8,13 @@ $(document).ready(function(){
 	$("#addPres").click(function(event){
 		if(presValidation()){
 			addPrescription();
-			reSearchPrescriptions();
 		}
 	});
 	
 	$("#submitP").click(function(event){
 		addPromotion();
 	});
+	
 });
 
 function addCard(){
@@ -45,6 +45,61 @@ function addCard(){
 	});
 }
 
+function addPres() {
+	var tipoP = $("input[name='nomeP']");
+	var sferaSX = $("input[name='sferaSX']");
+	var cilindroSX = $("input[name='cilindroSX']");
+	var asseSX =  $("input[name='asseSX']");
+	var sferaDX = $("input[name='sferaDX']");
+	var cilindroDX = $("input[name='cilindroDX']");
+	var asseDX =  $("input[name='asseDX']");
+	var addVicinanza = $("input[name='addVicinanza']");
+	var prismaOrizSX = $("input[name='prismaOrizSX']");
+	var prismaOrizSXBD =  $("input[name='prismaOrizSXBD']");
+	var prismaOrizDX = $("input[name='prismaOrizDX']");
+	var prismaOrizDXBD =  $("input[name='prismaOrizDXBD']");
+	var prismaVertSX = $("input[name='prismaVertSX']");
+	var prismaVertSXBD =  $("input[name='prismaVertSXBD']");
+	var prismaVertDX = $("input[name='prismaVertDX']");
+	var prismaVertDXBD =  $("input[name='prismaVertDXBD']");
+	var pdSX = $("input[name='pdSX']");
+	var pdDX =  $("input[name='pdDX']");
+	$.ajax({
+		type : "POST",
+		url : "user",
+		data : {
+			action : 'addPres',
+			nomeP : tipoP,
+			sferaSX : sferaSX,
+			cilindroSX : cilindroSX,
+			asseSX : asseSX,
+			sferaDX : sferaDX,
+			cilindroDX : cilindroDX,
+			asseDX : asseDX,
+			addVicinanza : addVicinanza,
+			prismaOrizSX : prismaOrizSX,
+			prismaOrizSXBD : prismaOrizSXBD,
+			prismaOrizDX : prismaOrizDX,
+			prismaOrizDXBD : prismaOrizDXBD,
+			prismaVertSX : prismaVertSX,
+			prismaVertSXBD : prismaVertSXBD, 
+			prismaVertDX : prismaVertDX,
+			prismaVertDXBD : prismaVertDXBD,
+			pdSX : pdSX,
+			pdDX : pdDX
+		},
+		dataType : "json",
+		error : function(xhr, status, errorThrown) {
+			console.log(JSON.stringify(xhr));
+			console.log("AJAX error: " + status + ' : ' + errorThrown);
+		},
+		success : function(responseText) {
+			formatDataPrescriptions(responseText);
+		}
+	});
+}
+
+
 function formatDataCards(responseText) {
 	var toAppend = '<thead><th>Numero carta</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th><th>Opzioni</th></thead>';
 	$.each(responseText, function(i, cardsObject) {
@@ -59,43 +114,15 @@ function formatDataCards(responseText) {
 };
 
 function formatDataPrescriptions(responseText) {
-	var toAppend = '<h2>Products</h2><table class="table-bordered"><thead><tr><th>Codice</th><th>Tipo</th></tr></thead>';
+	var toAppend = '<thead><tr><th>Codice</th><th>Tipo</th></tr></thead>';
 	$.each(responseText, function(i, prescriptionsObject) {
 		toAppend += '<tr><td>' + prescriptionsObject.codice + '</td>';
 		toAppend += '<td>' + prescriptionsObject.tipo + '</td>';
 		toAppend+='<td><input type="submit" name="removePrescription" value="remove" /></td></tr>';
 	});
-	toAppend += '</table>';
 	$("#prescriptions").html(toAppend);
 };
 
-function reSearchPrescriptions(){
-	$.ajax({
-		type : "POST",
-		url : "user",
-		data : {
-			action: "addPres"
-		},
-		dataType : "json",
-		error : function(xhr, status, errorThrown) {
-			console.log(JSON.stringify(xhr));
-			console.log("AJAX error: " + status + ' : ' + errorThrown);
-		},
-		success : function(responseText) {
-			formatDataPrescriptions(responseText);
-		}
-	})
-}
-
-function setSearchField() {
-	if ($('select[name=tipo]').val() == "O") {
-		$(".specificiPerOcchiali").show();
-		$(".specificiPerLentine").hide();
-	} else {
-		$(".specificiPerOcchiali").hide();
-		$(".specificiPerLentine").show();
-	}
-}
 
 //di seguito le funzioni per il validate
 
@@ -194,7 +221,7 @@ function cvv_validation(cvv)
 //prescrizione
 
 function presValidation() {
-	var tipoP = $("input[name='tipoP']");
+	var tipoP = $("input[name='nomeP']");
 	var sferaSX = $("input[name='sferaSX']");
 	var cilindroSX = $("input[name='cilindroSX']");
 	var asseSX =  $("input[name='asseSX']");

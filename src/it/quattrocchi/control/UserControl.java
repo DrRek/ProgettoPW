@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -201,8 +202,10 @@ public class UserControl extends HttpServlet{
 	
 		pModel.doSave(pres, user);
 		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/UserView.jsp");
-		dispatcher.forward(request, response);
+		ArrayList<PrescriptionBean> prescriptions = user.getPrescriptions();
+		prescriptions.add(pres);
+		user.setPrescriptions(prescriptions);
+		response.getWriter().write(new Gson().toJson(pModel.doRetrieveByCliente(user)));
 	}
 	
 	private void delPres(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
