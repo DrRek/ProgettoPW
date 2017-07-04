@@ -163,24 +163,26 @@ function addPrescription() {
 }
 
 function formatDataCards(responseText) {
-	var toAppend = '<thead><th>Numero carta</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th><th>Opzioni</th></thead>';
+	var toAppend = '<thead><tr><th>Numero carta</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th><th></th></tr></thead><tbody>';
 	$.each(responseText, function(i, cardsObject) {
 		console.log(cardsObject);
-		toAppend += '<tr><td class="numcc">' + cardsObject.numeroCC + '</td>';
-		toAppend += '<td>' + cardsObject.intestatario + '</td>';
-		toAppend += '<td>' + cardsObject.circuito + '</td>';
-		toAppend += '<td>' + cardsObject.dataScadenza + '</td>';
-		toAppend += '<td><input type="submit" class="removeCard" name="removeCard" value="remove" /></td></tr>';
+		toAppend += '<tr><td class="numcc" data-th="Numero carta">' + cardsObject.numeroCC + '</td>';
+		toAppend += '<td data-th="Intestatario">' + cardsObject.intestatario + '</td>';
+		toAppend += '<td data-th="Circuito">' + cardsObject.circuito + '</td>';
+		toAppend += '<td data-th="Scadenza">' + cardsObject.dataScadenza + '</td>';
+		toAppend += '<td data-th=""><input type="submit" class="removeCard btn btn-outline-secondary" name="removeCard" value="remove" /></td></tr>';
 	});
 	$("#cards").html(toAppend);
 };
 
 function formatDataPrescriptions(responseText) {
-	var toAppend = '<thead><tr><th>Codice</th><th>Tipo</th></tr></thead>';
+	var toAppend = '<thead><tr><th>Codice</th><th>Nome</th><th>Sfera dx</th><th>Sfera sx</th><th></th></tr></thead>';
 	$.each(responseText, function(i, prescriptionsObject) {
-		toAppend += '<tr><td class="pCodice">' + prescriptionsObject.codice+ '</td>';
-		toAppend += '<td>' + prescriptionsObject.nome + '</td>';
-		toAppend += '<td><input type="submit" class="removePrescription" name="removePrescription" value="remove" /></td></tr>';
+		toAppend += '<tr><td class="pCodice" data-th="Codice">' + prescriptionsObject.codice+ '</td>';
+		toAppend += '<td data-th="Nome">' + prescriptionsObject.nome + '</td>';
+		toAppend += '<td data-th="Sfera dx">' + prescriptionsObject.sferaDx + '</td>';
+		toAppend += '<td data-th="Sfera sx">' + prescriptionsObject.sferaSx + '</td>';
+		toAppend += '<td data-th=""><input type="submit" class="removePrescription btn btn-outline-secondary" name="removePrescription" value="remove" /></td></tr>';
 	});
 	$("#prescriptions").html(toAppend);
 };
@@ -390,13 +392,13 @@ function addPromotion() {
 function formatDataPromotion(responseText) {
 	var toAppend = '<thead><tr><th>Name</th><th>Description</th><th>Value</th><th>Type</th><th>Start</th><th>End</th><th>Cumulative</th><th></th></tr></thead>';
 	$.each(responseText, function(i, promotionObject) {
-		toAppend += '<tr><td>' + promotionObject.nome + '</td>';
-		toAppend += '<td>' + promotionObject.descrizione + '</td>';
-		toAppend += '<td>' + promotionObject.sconto + '</td>';
-		toAppend += '<td>' + promotionObject.tipo + '</td>';
-		toAppend += '<td>' + promotionObject.dataInizio + '</td>';
-		toAppend += '<td>' + promotionObject.dataFine + '</td>';
-		toAppend += '<td>' + promotionObject.cumulabile + '</td>';
+		toAppend += '<tr><td data-th="Name">' + promotionObject.nome + '</td>';
+		toAppend += '<td data-th="Description">' + promotionObject.descrizione + '</td>';
+		toAppend += '<td data-th="Value">' + promotionObject.sconto + '</td>';
+		toAppend += '<td data-th="Type">' + promotionObject.tipo + '</td>';
+		toAppend += '<td data-th="Start">' + promotionObject.dataInizio + '</td>';
+		toAppend += '<td data-th="End">' + promotionObject.dataFine + '</td>';
+		toAppend += '<td data-th="Cumulative">' + promotionObject.cumulabile + '</td>';
 		toAppend += '<td><a href="promotion?nome=' + promotionObject.nome
 				+ '">info/edit</a></td></tr>';
 	});

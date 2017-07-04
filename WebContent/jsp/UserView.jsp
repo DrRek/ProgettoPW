@@ -23,6 +23,9 @@
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
 
+<link href="css/UserView.css" type="text/css" rel="stylesheet"
+	media="screen,projection" />
+
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -30,13 +33,12 @@
 
 <body>
 	<%@ include file="header.jsp"%>
-	<br>
-	<br>
+	<br><br><br><br>
 	<%
 		if (user == null && admin == null) {
 	%>
 	<div class="container">
-		<br> <br> <a href="access">Login is required!</a>
+		<a href="access">Login is required!</a>
 	</div>
 	<%
 		} else if (user != null) {
@@ -46,50 +48,60 @@
 		<h2>
 			Ciao,
 			<%=user.getUser()%></h2>
-		<table class="table table-condensed">
-			<tr>
-				<td>Nome:</td>
-				<td><%=user.getNome()%></td>
-			</tr>
-			<tr>
-				<td>Cognome:</td>
-				<td><%=user.getCognome()%></td>
-			</tr>
-			<tr>
-				<td>Stato:</td>
-				<td><%=user.getStato()%></td>
-			</tr>
-			<tr>
-				<td>Cap:</td>
-				<td><%=user.getCap()%></td>
-			</tr>
-			<tr>
-				<td>Indirizzo:</td>
-				<td><%=user.getIndirizzo()%></td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td><%=user.getEmail()%></td>
-			</tr>
-			<tr>
-				<td>Data di nascita:</td>
-				<td><%=user.getDataDiNascita()%></td>
-			</tr>
-		</table>
+		<div class="row">
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Email:</span>
+				<span class="value"><%=user.getEmail()%></span>
+			</div>
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Nome:</span>
+				<span class="value"><%=user.getNome()%></span>
+			</div>
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Cognome:</span>
+				<span class="value"><%=user.getCognome()%></span>
+			</div>
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Data di nascita:</span>
+				<span class="value"><%=user.getDataDiNascita()%></span>
+			</div>
+
+		</div>
+		<div class=row>
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Stato:</span>
+				<span class="value"><%=user.getStato()%></span>
+			</div>
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Cap:</span>
+				<span class="value"><%=user.getCap()%></span>
+			</div>
+			<div class="col-sm-3">
+				<br>
+				<span class="etichetta">Indirizzo:</span>
+				<span class="value"><%=user.getIndirizzo()%></span>
+			</div>
+
+		</div>
 		<hr>
 	</div>
 	<div class="container">
 		<h2>Carte di credito</h2>
 		<table class="table table-condensed" id="cards">
-			<thead>
-				<tr>
+			<thead><tr>
 					<th>Numero carta</th>
 					<th>Intestatario</th>
 					<th>Circuito</th>
 					<th>Scadenza</th>
-					<th>Opzioni</th>
-				</tr>
+					<th></th></tr>
 			</thead>
+			<tbody>
 			<%
 				Collection<?> cc = (Collection<?>) user.getCards();
 					if (cc != null && cc.size() != 0) {
@@ -98,48 +110,65 @@
 							CreditCardBean bean = (CreditCardBean) it.next();
 			%>
 			<tr>
-				<td class="numcc"><%=bean.getNumeroCC()%></td>
-				<td><%=bean.getIntestatario()%></td>
-				<td><%=bean.getCircuito()%></td>
-				<td><%=bean.getDataScadenza()%></td>
-				<td><input type="submit" class="removeCard" name="removeCard" value="remove" /></td></tr>
+				<td class="numcc" data-th="Numero carta"><%=bean.getNumeroCC()%></td>
+				<td data-th="Intestatario"><%=bean.getIntestatario()%></td>
+				<td data-th="Circuito"><%=bean.getCircuito()%></td>
+				<td data-th="Scadenza"><%=bean.getDataScadenza()%></td>
+				<td data-th=""><input type="submit" class="removeCard btn btn-outline-secondary" name="removeCard"
+					value="remove" /></td>
+			</tr>
 			<%
 				}
 					}
 			%>
+			</tbody>
 		</table>
 	</div>
 	<div class="container">
 		<h2>Aggiungi carta</h2>
 		<script type="text/javascript" src="js/creditcard-validation.js"></script>
-
-		<input type="hidden" name="action" value="addCard"> <label
-			for="numcc">Numero carta di credito:</label> <input name="numcc"
+		<div class="form-group">
+		
+		<input type="hidden" name="action" value="addCard"> 
+		
+		<label for="numcc">Numero carta di credito:</label> <input  class="form-control" name="numcc"
 			type="text" maxlength="50" placeholder="ES. 1234567890123456">
-		<span id="numcc"></span><br> <label for="intestatario">Intestatario:</label>
-		<input name="intestatario" type="text" maxlength="50"
-			placeholder="inserisci nome e cognome"><span
-			id="intestatario"></span> <br> <label for="circuito">Circuito:</label>
-		<input name="circuito" type="text" maxlength="50"
-			placeholder="ES. Mastercard"><span id="circuito"></span> <br>
-
-		<label for="scadenza">Scadenza:</label> <input name="scadenza"
+		<span class="help-block" id="numcc"></span>
+		
+		<br> <label for="intestatario">Intestatario:</label>
+		<input  class="form-control" name="intestatario" type="text" maxlength="50"
+			placeholder="inserisci nome e cognome"><span class="help-block"
+			id="intestatario"></span> 
+			
+			<br> <label for="circuito">Circuito:</label>
+		<input  class="form-control" name="circuito" type="text" maxlength="50"
+			placeholder="ES. Mastercard"><span class="help-block" id="circuito"></span> 
+			
+			<br><label for="scadenza">Scadenza:</label> <input  class="form-control" name="scadenza"
 			type="text" maxlength="50" placeholder="ES. 2017-07-06"><span
-			id="scadenza"></span> <br> <label for="cvv">Cvv:</label> <input
-			name="cvv" type="text" maxlength="50" placeholder="ES. 570">
-		<span id="cvv"></span><br> <input id="addCard" name="addCard"
+			class="help-block" id="scadenza"></span> 
+			
+			<br> <label for="cvv">Cvv:</label> <input
+			 class="form-control" name="cvv" type="text" maxlength="50" placeholder="ES. 570">
+		<span class="help-block" id="cvv"></span>
+		
+		<br> <input class= "btn btn-outline-secondary"  id="addCard" name="addCard"
 			value="Aggiungi" type="button">
+		
+		</div>
+		<hr>
 	</div>
-
 	<div class="container">
 		<h2>Prescrizioni</h2>
 		<table class="table table-condensed" id="prescriptions">
-			<thead>
-				<tr>
+			<thead><tr>
 					<th>Codice</th>
 					<th>Nome</th>
-				<tr>
+					<th>Sfera dx</th>
+					<th>Sfera sx</th>
+					<th></th></tr>
 			</thead>
+			<tbody>
 			<%
 				Collection<?> pres = (Collection<?>) user.getPrescriptions();
 					if (pres != null && pres.size() != 0) {
@@ -148,81 +177,94 @@
 							PrescriptionBean bean = (PrescriptionBean) it.next();
 			%>
 			<tr>
-				<td class="pCodice"><%=bean.getCodice()%></td>
-				<td><%=bean.getNome()%></td>
-				<td><input type="submit" class="removePrescription" name="removePrescription" value="remove" /></td>
+				<td class="pCodice" data-th="Codice" ><%=bean.getCodice()%></td>
+				<td data-th="Nome"><%=bean.getNome()%></td>
+				<td data-th="Sfera dx"><%=bean.getSferaDX()%></td>
+				<td data-th="Sfera sx"><%=bean.getSferaSX()%></td>
+				<td data-th=""><input type="submit" class="removePrescription btn btn-outline-secondary"
+					name="removePrescription" value="remove" /></td>
 			</tr>
 			<%
 				}
 					}
 			%>
+			</tbody>
 		</table>
 	</div>
 
 	<div class="container">
 		<h2>Aggiungi Prescrizione</h2>
 		<script type="text/javascript" src="js/prescription-validation.js"></script>
-
-		<label for="nomeP">Nome:</label> <input name="nomeP" type="text"
-			maxlength="50" placeholder="ES. di Mario per vicinanza"> <span
-			id="tipoP"></span><br> <label for="sferaSX">Sfera Sinistra:</label>
-		<input name="sferaSX" type="number" step="0.01" step="0.01" min="-10"
-			max="10" placeholder="Gradazione Occhio SX"><span id="sferaSX"></span> <br> <label for="cilindroSX">Cilindro Sinistra:</label> <input name="cilindroSX" type="number" step="0.01" min="-10" max="10"
-			placeholder="Valore Astigmatismo SX"><span id="cilindroSX"></span> <br> <label for="asseSX">Asse Sinistra:</label> <input name="asseSX" type="number" step="0.01" min="0" max="180"
-			placeholder="Gradi Orientamento Lente"><span id="asseSX"></span> <br> <label for="sferaDX">Sfera Destra:</label> <input name="sferaDX" type="number" step="0.01" min="-10" max="10"
-			placeholder="Gradazione Occhio DX"><span id="sferaDX"></span> <br> <label
-			for="cilindroDX">Cilindro Destra:</label> <input name="cilindroDX"
-			type="number" type="number" step="0.01" min="-10" max="10"
-			placeholder="Valore Astigmatismo DX"><span
+		<div class="form-group">
+		<label for="nomeP">Nome:</label> <input class="form-control"  name="nomeP" type="text"
+			maxlength="50" placeholder="ES. di Mario per vicinanza"> <span class="help-block" 
+			id="tipoP"></span><br> <label for="sferaSX">Sfera
+			Sinistra:</label> <input class="form-control"  name="sferaSX" type="number" step="0.01"
+			step="0.01" min="-10" max="10" placeholder="Gradazione Occhio SX"><span class="help-block" 
+			id="sferaSX"></span> <br> <label for="cilindroSX">Cilindro
+			Sinistra:</label> <input class="form-control"  name="cilindroSX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Valore Astigmatismo SX"><span class="help-block" 
+			id="cilindroSX"></span> <br> <label for="asseSX">Asse
+			Sinistra:</label> <input class="form-control"  name="asseSX" type="number" step="0.01" min="0"
+			max="180" placeholder="Gradi Orientamento Lente"><span class="help-block" 
+			id="asseSX"></span> <br> <label for="sferaDX">Sfera
+			Destra:</label> <input class="form-control"  name="sferaDX" type="number" step="0.01" min="-10"
+			max="10" placeholder="Gradazione Occhio DX"><span class="help-block" 
+			id="sferaDX"></span> <br> <label for="cilindroDX">Cilindro
+			Destra:</label> <input class="form-control"  name="cilindroDX" type="number" type="number"
+			step="0.01" min="-10" max="10" placeholder="Valore Astigmatismo DX"><span class="help-block" 
 			id="cilindroDX"></span> <br> <label for="asseDX">Asse
-			Destra:</label> <input name="asseDX" type="number" step="0.01" min="0"
-			max="180" placeholder="Gradi Orientamento Lente"><span
+			Destra:</label> <input class="form-control"  name="asseDX" type="number" step="0.01" min="0"
+			max="180" placeholder="Gradi Orientamento Lente"><span class="help-block" 
 			id="asseDX"></span> <br> <label for="addVicinanza">Addizione
-			Vicinanza</label> <input name="addVicinanza" type="number" step="0.01"
-			min="-10" max="10" placeholder="Aggiunta Diottrie Positive">
-		<span id="addVicinanza"></span> <br> <label for="prismaOrizSX">Prisma
-			Orizzontale SX:</label> <input name="prismaOrizSX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Oriz SX"><span
+			Vicinanza</label> <input class="form-control"  name="addVicinanza" type="number" step="0.01"
+			min="-10" max="10" placeholder="Aggiunta Diotdivie Positive">
+		<span class="help-block"  id="addVicinanza"></span> <br> <label for="prismaOrizSX">Prisma
+			Orizzontale SX:</label> <input class="form-control"  name="prismaOrizSX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Oriz SX"><span class="help-block" 
 			id="prismaOrizSX"></span> <br> <label for="prismaOrizSXBD">Prisma
-			Oriz SX BaseDirection:</label> <input name="prismaOrizSXBD" type="text"
-			maxlength="3" placeholder="PrismaOrizSXBaseDirection"><span
+			Oriz SX BaseDirection:</label> <input class="form-control"  name="prismaOrizSXBD" type="text"
+			maxlength="3" placeholder="PrismaOrizSXBaseDirection"><span class="help-block" 
 			id="prismaOrizSXBD"></span> <br> <label for="prismaOrizDX">Prisma
-			Orizzontale DX:</label> <input name="prismaOrizDX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Oriz DX"><span
+			Orizzontale DX:</label> <input class="form-control"  name="prismaOrizDX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Oriz DX"><span class="help-block" 
 			id="prismaOrizDX"></span> <br> <label for="prismaOrizDXBD">Prisma
-			Oriz DX BaseDirection:</label> <input name="prismaOrizDXBD" type="text"
-			maxlength="3" placeholder="PrismaOrizDXBaseDirection"><span
+			Oriz DX BaseDirection:</label> <input class="form-control"  name="prismaOrizDXBD" type="text"
+			maxlength="3" placeholder="PrismaOrizDXBaseDirection"><span class="help-block" 
 			id="prismaOrizDXBD"></span> <br> <label for="prismaVertSX">Prisma
-			Verticale SX:</label> <input name="prismaVertSX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Vert SX"><span
+			Verticale SX:</label> <input class="form-control"  name="prismaVertSX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Vert SX"><span class="help-block" 
 			id="prismaVertSX"></span> <br> <label for="prismaVertSXBD">Prisma
-			Vert SX BaseDirection:</label> <input name="prismaVertSXBD" type="text"
-			maxlength="3" placeholder="PrismaVertSXBaseDirection"><span
+			Vert SX BaseDirection:</label> <input class="form-control"  name="prismaVertSXBD" type="text"
+			maxlength="3" placeholder="PrismaVertSXBaseDirection"><span class="help-block" 
 			id="prismaVertSXBD"></span> <br> <label for="prismaVertDX">Prisma
-			Verticale DX:</label> <input name="prismaVertDX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Vert DX"><span
+			Verticale DX:</label> <input class="form-control"  name="prismaVertDX" type="number" step="0.01"
+			min="-10" max="10" placeholder="Prisma Vert DX"><span class="help-block" 
 			id="prismaVertDX"></span> <br> <label for="prismaVertSXBD">Prisma
-			Vert DX BaseDirection:</label> <input name="prismaVertDXBD" type="text"
-			maxlength="3" placeholder="PrismaVertDXBaseDirection"><span
+			Vert DX BaseDirection:</label> <input class="form-control"  name="prismaVertDXBD" type="text"
+			maxlength="3" placeholder="PrismaVertDXBaseDirection"><span class="help-block" 
 			id="prismaVertDXBD"></span> <br> <label for="pdSX">Pupillar
-			Distance SX: </label> <input name="pdSX" type="number" step="0.01" min="-10"
-			max="10" placeholder="Pupillar Distance"><span id="pdSX"></span>
-		<br> <label for="pdDX">Pupillar Distance DX: </label> <input
+			Distance SX: </label> <input class="form-control"  name="pdSX" type="number" step="0.01" min="-10"
+			max="10" placeholder="Pupillar Distance"><span class="help-block"  id="pdSX"></span>
+		<br> <label for="pdDX">Pupillar Distance DX: </label> <input class="form-control" 
 			name="pdDX" type="number" step="0.01" min="-10" max="10"
-			placeholder="Pupillar Distance"><span id="pdDX"></span> <br>
+			placeholder="Pupillar Distance"><span class="help-block"  id="pdDX"></span> <br>
 
-		<input id="addPrescription" name="addPrescription" value="Aggiungi"
+		<input class="btn btn-outline-secondary"  id="addPrescription" name="addPrescription" value="Aggiungi"
 			type="button">
+			<hr>
 	</div>
-
+	
+	</div>
 	<div class="container">
-		<h2>Ordini passati</h2>
+		<h2>Storico ordini</h2>
 		<table class="table table-condensed">
 			<thead>
 				<tr>
 					<th>Codice</th>
 					<th>Prezzo</th>
 					<th>Data Esecuzione</th>
+					<th></th>
 				</tr>
 			</thead>
 			<%
@@ -233,10 +275,10 @@
 							OrderBean bean = (OrderBean) it.next();
 			%>
 			<tr>
-				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getCosto()%></td>
-				<td><%=bean.getDataEsecuzione()%></td>
-				<td><a
+				<td data-th="Codice"><%=bean.getCodice()%></td>
+				<td data-th="Prezzo"><%=bean.getCosto()%></td>
+				<td data-th="Data Esecuzione"><%=bean.getDataEsecuzione()%></td>
+				<td data-th=""><a
 					href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
 			</tr>
 			<%
@@ -283,7 +325,7 @@
 				<td>
 					<%
 						if (bean.isCumulabile()) {
-					%>true<%
+					%>divue<%
 						} else {
 					%>false<%
 						}
@@ -301,10 +343,10 @@
 		<input id="nomeP" type="text" />
 		<h4>Description:</h4>
 		<input id="descrizioneP" type="text" />
-		<h4>Subtract type</h4>
+		<h4>Subdivact type</h4>
 		<input type="radio" name="tipoP" value="%"> Percent (%) <input
-			type="radio" name="tipoP" value="s"> Subtract (-)
-		<h4>Subtract ammount:</h4>
+			type="radio" name="tipoP" value="s"> Subdivact (-)
+		<h4>Subdivact ammount:</h4>
 		<input id="scontoP" type="number" /> <br>
 		<h4>Start date:</h4>
 		<input id="inizioP" type="date" size="35" /> <br>
@@ -354,15 +396,15 @@
 				<option value="F">Female</option>
 			</select>
 			<hr>
-			<h4 class="control-label">First image:</h4>
+			<h4 class="condivol-label">First image:</h4>
 			<input id="img1" name="img1" type="file" multiple
 				class="img,file-loading">
 			<div class="help-block"></div>
-			<h4 class="control-label">Second image:</h4>
+			<h4 class="condivol-label">Second image:</h4>
 			<input name="img2" type="file" multiple
 				class="img,file-loading,specificiPerOcchiali">
 			<div class="help-block"></div>
-			<h4 class="control-label">Third image:</h4>
+			<h4 class="condivol-label">Third image:</h4>
 			<input name="img3" type="file" multiple
 				class="img,file-loading specificiPerOcchiali">
 			<div class="help-block"></div>
@@ -381,7 +423,7 @@
 			<select name="marca">
 				<option value="Acuvue">Acuvue</option>
 				<option value="Alcon">Alcon</option>
-				<option value="Biotrue">Biotrue</option>
+				<option value="Biodivue">Biodivue</option>
 				<option value="Frequency">Frequency</option>
 				<option value="GreenVision">GreenVision</option>
 			</select>
@@ -441,12 +483,12 @@
 			<input type="number" min="5" name="raggio" placeholder="mm" value="" />
 			<hr>
 			<h4>Diameter:</h4>
-			<input type="number" min="10" name="diametro" placeholder="mm"
+			<input type="number" min="10" name="diamedivo" placeholder="mm"
 				value="" />
 			<hr>
 			<h4>Color:</h4>
 			<select class="specificiPerLentine" name="colore">
-				<option selected value="/N">Transparent</option>
+				<option selected value="/N">divansparent</option>
 				<option value="Ve">Green</option>
 				<option value="Bl">Blue</option>
 				<option value="Ma">Brown</option>
@@ -457,7 +499,7 @@
 			<hr>
 			<h4>Lenses per pack:</h4>
 			<input type="number" step="1" min="1" name="pezziPerPacco" />
-			<h4 class="control-label">First image:</h4>
+			<h4 class="condivol-label">First image:</h4>
 			<input id="img1" name="img1" type="file" multiple
 				class="img,file-loading">
 			<div class="help-block"></div>

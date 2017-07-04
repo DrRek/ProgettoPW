@@ -177,7 +177,7 @@ $(document).ready(function() {
 			
 			toAppend += '<td data-th="Gradazione" class="gradazioneArt ">'
 				if(prod.articolo.tipo == "O"){
-					toAppend += '<select class="gradazioneArt">';
+					toAppend += '<select class="form-control" class="gradazioneArt">';
 					var find=false;
 					jQuery.each(presc, function(index, pre) {
 						if(prod.prescrizione!=null&&pre.codice == prod.prescrizione.codice){

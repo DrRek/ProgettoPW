@@ -61,7 +61,7 @@
 		%>
 		<form action="checkout" method="post">
 			<input type="hidden" name="action" value="submit"/>
-			<label>seleziona una carta:</label><br><select name="carta">
+			<label>seleziona una carta:</label><br><select class="form-control" name="carta">
 				<%
 					for (CreditCardBean c : creditCards) {
 				%>
@@ -71,7 +71,7 @@
 				%>
 	
 			</select> <br>
-			<a href="user">aggiungi una carta</a><br>
+			<a href="user">aggiungi una carta</a><br><br>
 			<input class= "btn btn-outline-secondary " id="completeOrder" type="submit" value="Paga" />
 		</form>
 		<%

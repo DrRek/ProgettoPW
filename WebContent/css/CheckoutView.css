@@ -11,13 +11,6 @@
 		margin:1.5em 0;
 	}
 	
-	.actions .btn-info{
-		float:left;
-	}
-	.actions .btn-danger{
-		float:right;
-	}
-	
 	table#cartElements thead { display: none; }
 	table#cartElements tbody td { display: block; padding: .6rem; }
 	table#cartElements tbody tr td:first-child { background: #e4e4e4; color:white; }

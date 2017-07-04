@@ -1,0 +1,33 @@
+.etichetta{
+	color: #404040;
+	font-size:10px;
+}
+
+.value{
+	color: #404040;
+	font-size:20px;
+}
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+    table tbody td .form-control{
+		width:20%;
+		display: inline !important;
+	}
+	.actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	table thead { display: none; }
+	table tbody td { display: block; padding: .6rem; }
+	table tbody tr td:first-child { background: #e4e4e4; color:white; }
+	table tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		display: inline-block; width: 8rem;
+	}
+	
+
+	
+}
