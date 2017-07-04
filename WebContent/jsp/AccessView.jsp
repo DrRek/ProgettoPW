@@ -42,7 +42,6 @@
 	<%}
 		else{%>
 	<div class="container">
-		<script type="text/javascript" src="js/access-validation.js"></script>
 		<h1>Login</h1>
 		<div class="form-group">
 		<form name='login' onSubmit="return loginValidation();"
@@ -146,5 +145,7 @@
 		</form>
 	</div>
 	<% } %>
+	<script type="text/javascript" src="js/access-validation.js"></script>
+	<script src="js/util.js"></script>
 </body>
 </html>
