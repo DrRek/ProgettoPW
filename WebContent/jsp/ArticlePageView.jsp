@@ -214,15 +214,15 @@
 							</div>
 						</div>
 							<hr>
-							<select class="product-stock" id="gradazione">
+							<select class="product-stock btn btn-outline-secondary" id="gradazione">
 								<%
 									for (ArticleBean e : lentine) {
 								%>
 
-								<option class="product-stock"
+								<option 
 									value="<%=((ContactLensesBean) e).getGradazione()%>">
-									<%=((ContactLensesBean) e).getGradazione()%> degree |
-									<%=e.getDisponibilita()%> left
+									<%=((ContactLensesBean) e).getGradazione()%> 
+									(<%=e.getDisponibilita()%> left)
 								</option>
 
 								<%
@@ -234,16 +234,14 @@
 							%>
 
 							<input class="btn btn-outline-secondary" type="submit"
-								id="lAddCart" value="add to cart" />
+								id="lAddCart" value="Add to cart" />
 
 
 
 							<%
 								} else {
 							%>
-							<h4>In stock:</h4>
-							<h4>Gradation:</h4>
-							<select class="btn btn-outline-secondary" name="lGradazione">
+							<br><select class="btn btn-outline-secondary product-stock" name="lGradazione">
 								<option value="+8.00">+8.00</option>
 								<option value="+7.50">+7.50</option>
 								<option value="+7.00">+7.00</option>
@@ -277,8 +275,8 @@
 								<option value="-7.00">-7.00</option>
 								<option value="-8.50">-7.50</option>
 								<option value="-8.00">-8.00</option>
-							</select> <input class="btn btn-outline-secondary" type="number" step="1"
-								min="1" name="lQuantita" /> <input id="AddLenseToStorage"
+							</select> <input class="btn btn-outline-secondary product-stock" type="number" step="1"
+								min="1" name="lQuantita" /> <input class="btn btn-outline-secondary" id="AddLenseToStorage"
 								type="button" value="update" />
 
 							<%

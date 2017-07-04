@@ -48,7 +48,7 @@
 			<%=user.getUser()%></h2>
 		<table class="table table-condensed">
 			<tr>
-				<td><b>Nome:</b></td>
+				<td>Nome:</td>
 				<td><%=user.getNome()%></td>
 			</tr>
 			<tr>
