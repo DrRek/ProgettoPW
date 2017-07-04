@@ -76,10 +76,9 @@ function addPrescription() {
 	var prismaVertDXBD =  $("input[name='prismaVertDXBD']").val();
 	var pdSX = $("input[name='pdSX']").val();
 	var pdDX =  $("input[name='pdDX']").val();
-	alert(tipoP+sferaSX+cilindroSX+asseSX+sferaDX+cilindroDX+asseDX+addVicinanza+prismaOrizSX+prismaOrizSXBD+prismaOrizDX+prismaOrizDXBD+prismaVertSX+prismaVertSXBD+prismaVertDX+prismaVertDXBD+pdSX+pdDX)
 	$.ajax({
 		type : "POST",
-		url : "/user",
+		url : "user",
 		data : {
 			action : 'addPres',
 			nomeP : tipoP,

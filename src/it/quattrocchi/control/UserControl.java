@@ -71,7 +71,7 @@ public class UserControl extends HttpServlet{
 				else if(action.equalsIgnoreCase("delCard"))
 					delCard(request,response);
 				
-				else if(action.equalsIgnoreCase("addPrescription"))
+				else if(action.equalsIgnoreCase("addPres"))
 					addPres(request,response);
 				
 				else if(action.equalsIgnoreCase("delPres"))
@@ -152,6 +152,8 @@ public class UserControl extends HttpServlet{
 		ArrayList<CreditCardBean> cc = user.getCards();
 		cc.add(bean);
 		user.setCards(cc);
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(ccModel.doRetrieveByCliente(user)));
 	}
 	
@@ -205,6 +207,8 @@ public class UserControl extends HttpServlet{
 		ArrayList<PrescriptionBean> prescriptions = user.getPrescriptions();
 		prescriptions.add(pres);
 		user.setPrescriptions(prescriptions);
+		response.setContentType("application/json");
+		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(pModel.doRetrieveByCliente(user)));
 	}
 	
