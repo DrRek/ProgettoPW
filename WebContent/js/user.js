@@ -117,7 +117,7 @@ function formatDataPrescriptions(responseText) {
 	var toAppend = '<thead><tr><th>Codice</th><th>Tipo</th></tr></thead>';
 	$.each(responseText, function(i, prescriptionsObject) {
 		toAppend += '<tr><td>' + prescriptionsObject.codice + '</td>';
-		toAppend += '<td>' + prescriptionsObject.tipo + '</td>';
+		toAppend += '<td>' + prescriptionsObject.nome + '</td>';
 		toAppend+='<td><input type="submit" name="removePrescription" value="remove" /></td></tr>';
 	});
 	$("#prescriptions").html(toAppend);
