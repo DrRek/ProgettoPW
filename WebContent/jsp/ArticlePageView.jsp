@@ -96,30 +96,34 @@
 						<div class="product-price"><%=occhiali.getPrezzo()%>
 							€
 						</div>
-						<div class="product-stock" id="oDisp">
+						<hr>
+						<div style="float:right">
+						<span class="product-stock" id="oDisp" >
 							<%=occhiali.getDisponibilita()%>
 							left
-						</div>
+						</span>
 
 						<%
 							if (admin == null) {
 						%>
-						<hr>
-						<div class="btn-group cart">
+						
+						<div style="margin-left:10px"class="btn-group cart" >
 							<button type="button" id="oAddCart"
 								class="btn btn-outline-secondary">Add to cart</button>
 						</div>
 						<%
 							} else {
 						%>
-						<h4>In stock:</h4>
+						<div>
+						<hr>
 						<input class="btn btn-outline-secondary" type="number" step="1"
 							min="1" name="oQuantita" /> <input
 							class="btn btn-outline-secondary" id="AddGlassToStorage"
-							type="button" value="update" />
+							type="button" value="update" /></div>
 						<%
 							}
 						%>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -214,11 +218,12 @@
 							</div>
 						</div>
 							<hr>
+							<div style="float:right">
 							<select class="product-stock btn btn-outline-secondary" id="gradazione">
 								<%
 									for (ArticleBean e : lentine) {
 								%>
-
+							
 								<option 
 									value="<%=((ContactLensesBean) e).getGradazione()%>">
 									<%=((ContactLensesBean) e).getGradazione()%> 
@@ -233,7 +238,7 @@
 								if (admin == null) {
 							%>
 
-							<input class="btn btn-outline-secondary" type="submit"
+							<input style="margin-left:10px"class="btn btn-outline-secondary" type="submit"
 								id="lAddCart" value="Add to cart" />
 
 
@@ -241,7 +246,7 @@
 							<%
 								} else {
 							%>
-							<br><select class="btn btn-outline-secondary product-stock" name="lGradazione">
+							<hr><select class="btn btn-outline-secondary product-stock" name="lGradazione">
 								<option value="+8.00">+8.00</option>
 								<option value="+7.50">+7.50</option>
 								<option value="+7.00">+7.00</option>
@@ -282,6 +287,7 @@
 							<%
 								}
 							%>
+							</div>
 						</div>
 					</div>
 			</div>
