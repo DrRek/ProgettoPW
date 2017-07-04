@@ -5,10 +5,9 @@ $(document).ready(function() {
 	initialize();
 	setSearchField();
 
-	$("#advancedSearch").click(function(event) {
-		//qui dovrei validare gli input
+	$("#advancedSearch").on("click", function(event) {
 		toDoD = 'asyncSpecificSearch'
-			advancedSearch();
+		advancedSearch();
 	});
 });
 
