@@ -112,7 +112,7 @@ create table Appartenenza(
 	primary key(Ordine, NomeArticolo, MarcaArticolo),
 	foreign key(Ordine) references Ordine(Codice),
 	foreign key(NomeArticolo, MarcaArticolo) references Articolo(Nome, Marca),
-	foreign key(Prescrizione) references Prescrizione(Codice)
+	foreign key(Prescrizione) references Prescrizione(Codice) on delete set null
 );
 
 create table Promozione(
