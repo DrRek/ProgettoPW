@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	setSearchField();
+	
 	$("#addCard").on("click", function(event) {
 		if(ccValidation())
 			addCard();
@@ -16,6 +18,16 @@ $(document).ready(function(){
 	});
 	
 });
+
+function setSearchField() {
+	if ($('select[name=tipo]').val() == "O") {
+		$(".specificiPerOcchiali").show();
+		$(".specificiPerLentine").hide();
+	} else {
+		$(".specificiPerOcchiali").hide();
+		$(".specificiPerLentine").show();
+	}
+}
 
 function addCard(){
 	var numcc = $("input[name=numcc]").val();
