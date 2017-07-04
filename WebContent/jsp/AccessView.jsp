@@ -45,18 +45,20 @@
 		<script type="text/javascript" src="js/access-validation.js"></script>
 		<h1>Login</h1>
 		<div class="form-group">
-		<form name='login'
+		<form name='login' onSubmit="return loginValidation();"
 			action='access' method="post">
 
 			<input type="hidden" name="action" value="login"> 
 			<div class="form-group">
 			<br><label for="userid">Username:</label>
 			<input class="form-control" type="text" name="userid" size="12" />
+			<span class="help-block" id="userid"></span><br>
 			</div>
 			
 			<div class="form-group">
 			<label for="passid">Password:</label>
 			<input class= "form-control" type="password" name="passid" size="12" />
+			<span class="help-block" id="passid"></span><br>
 			</div>
 
 			<%

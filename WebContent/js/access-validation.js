@@ -14,7 +14,45 @@ function registerValidation()
 		return true;
 	else 
 		return false;
-} 
+}
+
+function loginValidation(){
+	var uid = $("input[name='userid']");
+	var pass = $("input[name='passid']");
+	if(userid_validation(uid,5,12) && passid_validation(pass,7,12))
+		return true;
+	else 
+		return false;
+}
+
+function userid_validation(uid,mx,my){
+	var uid_len = uid.val().length;
+	if (uid_len == 0 || uid_len >= my || uid_len < mx)
+	{
+		$("#userid").html("This username is not valid!");
+		uid.focus();
+		return false;
+	}
+	{
+		$("#userid").empty();
+		return true;
+	}
+}
+
+function passid_validation(pass,mx,my)
+{
+	var pass_len = pass.val().length;
+	if (pass_len == 0 ||pass_len >= my || pass_len < mx)
+	{
+		$("#passid").html("This password is not valid!");
+		pass.focus();
+		return false;
+	}
+	else{
+		$("#passid").empty();
+		return true;
+	}
+}
 
 function user_validation(uid,mx,my)
 {
