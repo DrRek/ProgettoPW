@@ -55,12 +55,11 @@ public class CreditCardModel {
 		PreparedStatement stm  = null;
 		
 		String query = "SELECT * FROM " + TABLE_NAME + " WHERE cliente = ? and stato = 'attiva';";
-		
 		try {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, user.getUser());
-			
+
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()) {

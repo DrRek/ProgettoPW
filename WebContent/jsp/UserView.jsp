@@ -98,11 +98,11 @@
 							CreditCardBean bean = (CreditCardBean) it.next();
 			%>
 			<tr>
-				<td><%=bean.getNumeroCC()%></td>
+				<td class="numcc"><%=bean.getNumeroCC()%></td>
 				<td><%=bean.getIntestatario()%></td>
 				<td><%=bean.getCircuito()%></td>
 				<td><%=bean.getDataScadenza()%></td>
-				<td><input type="submit" id="removeCard" name="removeCard" value="remove" /></td></tr>
+				<td><input type="submit" class="removeCard" name="removeCard" value="remove" /></td></tr>
 			<%
 				}
 					}
@@ -148,9 +148,10 @@
 							PrescriptionBean bean = (PrescriptionBean) it.next();
 			%>
 			<tr>
-				<td><%=bean.getCodice()%></td>
+				<td class="pCodice"><%=bean.getCodice()%></td>
 				<td><%=bean.getNome()%></td>
-				<td><input type="submit" id="removePrescription" name="removePrescription" value="remove" /></td></tr>
+				<td><input type="submit" class="removePrescription" name="removePrescription" value="remove" /></td>
+			</tr>
 			<%
 				}
 					}

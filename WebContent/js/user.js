@@ -17,24 +17,26 @@ $(document).ready(function() {
 		addPromotion();
 	});
 
-	$("#removeCard").click(function(event) {
-		delCard();
+	$("table").on("click", ".removeCard", function(event) {
+		var numcc = $(this).parent().siblings(".numcc").html();
+		delCard(numcc);
 	});
 
-	$("#removePrescription").click(function(event) {
-		delPrescription();
+	$("table").on("click", ".removePrescription", function(event) {
+		var codice = $(this).parent().siblings(".pCodice").html();
+		delPrescription(codice);
 	});
 
 });
 
-function delCard() {
+function delCard(numcc) {
 	$.ajax({
 		type : "POST",
 		url : "user",
+		async : true,
 		data : {
 			action : "delCard",
 			numcc : numcc
-		//non so come si prende il numcc dalla riga
 		},
 		dataType : "json",
 		error : function(xhr, status, errorThrown) {
@@ -47,14 +49,14 @@ function delCard() {
 	});
 }
 
-function delPrescription() {
+function delPrescription(codice) {
 	$.ajax({
 		type : "POST",
 		url : "user",
+		async : true,
 		data : {
 			action : "delPres",
 			codice : codice
-		//non so come si prende il codice dalla riga
 		},
 		dataType : "json",
 		error : function(xhr, status, errorThrown) {
@@ -86,6 +88,7 @@ function addCard() {
 	$.ajax({
 		type : "POST",
 		url : "user",
+		async : true,
 		data : {
 			action : 'addCard',
 			numcc : numcc,
@@ -161,31 +164,24 @@ function addPrescription() {
 
 function formatDataCards(responseText) {
 	var toAppend = '<thead><th>Numero carta</th><th>Intestatario</th><th>Circuito</th><th>Scadenza</th><th>Opzioni</th></thead>';
-	$
-			.each(
-					responseText,
-					function(i, cardsObject) {
-						console.log(cardsObject);
-						toAppend += '<tr><td>' + cardsObject.numeroCC + '</td>';
-						toAppend += '<td>' + cardsObject.intestatario + '</td>';
-						toAppend += '<td>' + cardsObject.circuito + '</td>';
-						toAppend += '<td>' + cardsObject.dataScadenza + '</td>';
-						toAppend += '<td><input type="submit" id="removeCard" name="removeCard" value="remove" /></td></tr>';
-					});
+	$.each(responseText, function(i, cardsObject) {
+		console.log(cardsObject);
+		toAppend += '<tr><td class="numcc">' + cardsObject.numeroCC + '</td>';
+		toAppend += '<td>' + cardsObject.intestatario + '</td>';
+		toAppend += '<td>' + cardsObject.circuito + '</td>';
+		toAppend += '<td>' + cardsObject.dataScadenza + '</td>';
+		toAppend += '<td><input type="submit" class="removeCard" name="removeCard" value="remove" /></td></tr>';
+	});
 	$("#cards").html(toAppend);
 };
 
 function formatDataPrescriptions(responseText) {
 	var toAppend = '<thead><tr><th>Codice</th><th>Tipo</th></tr></thead>';
-	$
-			.each(
-					responseText,
-					function(i, prescriptionsObject) {
-						toAppend += '<tr><td>' + prescriptionsObject.codice
-								+ '</td>';
-						toAppend += '<td>' + prescriptionsObject.nome + '</td>';
-						toAppend += '<td><input type="submit" id="removePrescription" name="removePrescription" value="remove" /></td></tr>';
-					});
+	$.each(responseText, function(i, prescriptionsObject) {
+		toAppend += '<tr><td class="pCodice">' + prescriptionsObject.codice+ '</td>';
+		toAppend += '<td>' + prescriptionsObject.nome + '</td>';
+		toAppend += '<td><input type="submit" class="removePrescription" name="removePrescription" value="remove" /></td></tr>';
+	});
 	$("#prescriptions").html(toAppend);
 };
 

@@ -144,22 +144,18 @@ public class UserControl extends HttpServlet{
 		
 		if(ccModel.doRetrieveByKey(numeroCC) == null){
 			ccModel.doSave(bean);
-		}
-		
-		else {
+		}else {
 			ccModel.doUpdate(bean);
 		}
-		ArrayList<CreditCardBean> cc = user.getCards();
-		cc.add(bean);
-		user.setCards(cc);
+
+		user.setCards(ccModel.doRetrieveByCliente(user));
 		response.setContentType("application/json");
 		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(ccModel.doRetrieveByCliente(user)));
 	}
 	
 	private void delCard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		
-		String numeroCC = request.getParameter("numeroCC");
+		String numeroCC = request.getParameter("numcc");
 		UserBean user = (UserBean) request.getSession().getAttribute("user");
 
 		try {
