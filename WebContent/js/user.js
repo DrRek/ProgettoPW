@@ -1,6 +1,14 @@
 $(document).ready(function() {
 	
 	setSearchField();
+	$(".cumulativeP").hide();
+	
+	$("input[name=tipoP]").on("click", function(){
+		if(this.value=="s")
+			$(".cumulativeP").show();
+		else
+			$(".cumulativeP").hide();
+	});
 	
 	$("#addCard").on("click", function(event) {
 		if (ccValidation())
@@ -14,7 +22,9 @@ $(document).ready(function() {
 	});
 
 	$("input[name=submitP]").click(function(event) {
-		addPromotion();
+		$("span.help-block").html("");
+		if(promotionValidation())
+			addPromotion();
 	});
 
 	$("table").on("click", ".removeCard", function(event) {
@@ -404,3 +414,42 @@ function formatDataPromotion(responseText) {
 	});
 	$("#tablePromotion").html(toAppend);
 }
+
+function promotionValidation(){
+	var toCheck = $("input[name=nomeP]").val();
+	if(toCheck.length<=0||toCheck.length>=21){
+		$("#nomeP").html("Enter minimum 0 characters and maximum 20 characters!")
+		return false;
+	}
+	toCheck = $("input[name=descrizioneP]").val();
+	if(toCheck.length<=0||toCheck.length>=51){
+		$("#descrizioneP").html("Enter minimum 0 characters and maximum 50 characters!")
+		return false;
+	}
+	toCheck = $("input[name=scontoP]").val();
+	alert(toCheck)
+	if(toCheck==""){
+		$("#scontoP").html("Enter a positive number!")
+		return false;
+	} else if(!isDouble(toCheck) || parseFloat(toCheck) <= 0 ){
+		$("#scontoP").html("Enter a positive number!")
+		return false;
+	} else if(parseFloat(toCheck) <= 0 && parseFloat(toCheck) >= 100 && $("input[name=tipoP]").val() == "%") {
+		$("#scontoP").html("Enter a positive number between 0 and 100!")
+		return false;
+	}
+	toCheck = $("input[name=inizioP]").val();
+	if(toCheck.length != 10){
+		$("#inizioP").html("Enter a valid date! (yyy-MM-dd)")
+		return false;
+	}
+	toCheck = $("input[name=fineP]").val();
+	if(toCheck.length != 10){
+		$("#fineP").html("Enter a valid date! (yyy-MM-dd)")
+		return false;
+	}
+	return true;
+}
+function isDouble(n) {
+	return parseFloat(n) == n
+};

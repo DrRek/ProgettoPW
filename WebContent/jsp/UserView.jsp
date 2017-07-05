@@ -282,7 +282,7 @@
 					href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a>
 			</tr>
 			<%
-				}
+						}
 					}
 			%>
 		</table>
@@ -347,19 +347,22 @@
 		<label>Description:</label>
 		<input class="form-control" name="descrizioneP" type="text" /><span class="help-block" id="descrizioneP"></span><br>
 		<label>Subtract type:</label><br>
-		<input type="radio" name="tipoP" value="%"> Percent (%) <input
-			type="radio" name="tipoP" value="s"> Subtract (-)
-			<span class="help-block" id="tipoP"></span><br>
+		<input type="radio" name="tipoP" value="%" checked> Percent (%)
+		<input type="radio" name="tipoP" value="s"> Subtract (-)
+		<span class="help-block" id="tipoP"></span><br>
+		<label class="cumulativeP">Cumulative:</label>
+		<input class="cumulativeP" name="cumulabileP" type="checkbox"><span class="cumulativeP help-block" id="cumulabileP"></span><br>
 		<label>Subtract amount:</label>
 		<input class="form-control" name="scontoP" type="number" /><span class="help-block" id="scontoP"></span><br>
 		<label>Start date:</label>
 		<input class="form-control" name="inizioP" type="date" size="35" /><span class="help-block" id="inizioP"></span> <br>
 		<label>End date:</label>
 		<input class="form-control" name="fineP" type="date" size="35" /><span class="help-block" id="fineP"></span> <br> 
-		<input name="cumulabileP" type="checkbox"> Cumulative<br> <br>
 			
 		<input name="submitP" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
 		</div>
+		
+		
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
 		<hr>
