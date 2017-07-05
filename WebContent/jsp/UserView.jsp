@@ -317,7 +317,7 @@
 						for (PromotionBean bean : promozioni) {
 			%>
 			<tr>
-				<td data-th=Name"><%=bean.getNome()%></td>
+				<td data-th="Name"><%=bean.getNome()%></td>
 				<td data-th="Description"><%=bean.getDescrizione()%></td>
 				<td data-th="Value"><%=bean.getSconto()%></td>
 				<td data-th="Type"><%=bean.getTipo()%></td>
@@ -365,8 +365,8 @@
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
 		<div class="form-group">
-		<label>Products:</label>
-		<select name="tipo" class="form-control" onchange="setSearchField()">
+		<label>Products:</label><br>
+		<select name="tipo" class="btn btn-outline-secondary" onchange="setSearchField()">
 			<option selected value="O">Glasses</option>
 			<option value="L">Contact lenses</option>
 		</select>
@@ -378,8 +378,8 @@
 			<label>Name:</label>
 			<input class="form-control" type="text" name="nome" value="name" />
 			<br>
-			<label>Brand:</label>
-			<select name="marca form-control">
+			<label>Brand:</label><br>
+			<select name="marca" class="btn btn-outline-secondary">
 				<option value="GreenVision">GreenVision</option>
 				<option value="Lindberg">Lindberg</option>
 				<option value="Oakley">Oakley</option>
@@ -397,8 +397,8 @@
 			<label>Description:</label>
 			<input class="form-control" type="text" name="descrizione" value="Description" />
 			<br>
-			<label>Sex:</label>
-			<select name="sesso form-control">
+			<label>Sex:</label><br>
+			<select name="sesso" class="btn btn-outline-secondary">
 				<option value="U">Unisex</option>
 				<option value="M">Male</option>
 				<option value="F">Female</option>
@@ -427,8 +427,8 @@
 			<label>Name:</label>
 			<input class="form-control" type="text" name="nome" value="name" />
 			<br>
-			<label>Brand:</label>
-			<select name="marca form-control">
+			<label>Brand:</label><br>
+			<select name="marca" class="btn btn-outline-secondary">
 				<option value="Acuvue">Acuvue</option>
 				<option value="Alcon">Alcon</option>
 				<option value="Biodivue">Biodivue</option>
@@ -443,8 +443,8 @@
 			<label>Available number:</label>
 			<input class="form-control" type="number" step="1" min="1" name="quantita" />
 			<br>
-			<label>Gradation:</label>
-			<select name="gradazione">
+			<label>Gradation:</label><br>
+			<select name="gradazione" class="btn btn-outline-secondary">
 				<option value="+8.00">+8.00</option>
 				<option value="+7.50">+7.50</option>
 				<option value="+7.00">+7.00</option>
@@ -480,8 +480,8 @@
 				<option value="-8.00">-8.00</option>
 			</select>
 			<br>
-			<label>Duration:</label>
-			<select name="tipologia">
+			<label>Duration:</label><br>
+			<select name="tipologia" class="btn btn-outline-secondary"><br>
 				<option value="G">Daily</option>
 				<option value="Q">15-days</option>
 				<option value="M">Monthly</option>
@@ -494,9 +494,9 @@
 			<input class="form-control" type="number" min="10" name="diametro" placeholder="mm"
 				value="" />
 			<br>
-			<label>Color:</label>
-			<select class="specificiPerLentine form-control" name="colore">
-				<option selected value="/N">divansparent</option>
+			<label>Color:</label><br>
+			<select class="specificiPerLentine btn btn-outline-secondary" name="colore">
+				<option selected value="/N">Transparent</option>
 				<option value="Ve">Green</option>
 				<option value="Bl">Blue</option>
 				<option value="Ma">Brown</option>
@@ -523,11 +523,13 @@
 		<table class="table table-condensed">
 			<thead>
 				<tr>
-					<th>Codice</th>
+					<th >Codice</th>
 					<th>Prezzo</th>
 					<th>Data Esecuzione</th>
+					<th></th>
 				</tr>
 			</thead>
+			<tbody>
 			<%
 				Collection<OrderBean> orders = admin.getOrders();
 					if (orders != null && orders.size() != 0) {
@@ -536,9 +538,9 @@
 							OrderBean bean = (OrderBean) it.next();
 			%>
 			<tr>
-				<td><%=bean.getCodice()%></td>
-				<td><%=bean.getCosto()%></td>
-				<td><%=bean.getDataEsecuzione()%></td>
+				<td data-th="Codice"><%=bean.getCodice()%></td>
+				<td data-th="Prezzo"><%=bean.getCosto()%></td>
+				<td data-th="Data Esecuzione"><%=bean.getDataEsecuzione()%></td>
 				<td><a
 					href="user?action=viewOldCheckout&codice=<%=bean.getCodice()%>">Info</a></td>
 			</tr>
@@ -546,6 +548,7 @@
 				}
 					}
 			%>
+			</tbody>
 		</table>
 	</div>
 	<%
