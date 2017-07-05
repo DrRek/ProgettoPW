@@ -18,6 +18,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
+<link href="css/UserView.css" type="text/css" rel="stylesheet"
+	media="screen,projection" />
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet"
 	media="screen,projection" />
 
@@ -30,29 +32,40 @@
 
 <body>
 	<%@ include file="../jsp/header.jsp"%>
-	<br><br>
+	<br><br><br><br>
 	<div class="container">
-		<h2>Codice Ordine: <%=order.getCodice() %></h2>
-		<h3>Costo Ordine: <%=order.getCosto() %></h3>
-		<h3>Data Esecuzione Ordine: <%=order.getDataEsecuzione() %></h3>
+		<div><span style="font-size:35px">Ordine </span><span style="font-size:25px">"<%=order.getCodice() %>"</span></div>
+		<br>
+		<div class="row">
+		<div class="col-sm-4">
+		<h3>Totale: <%=order.getCosto() %> €</h3>
+		</div>
+		<div class="col-sm-4">
+		<h3>Data Esecuzione: <%=order.getDataEsecuzione() %></h3>
+		</div>
+		<div class="col-sm-4">
+		<h3>Acquisto di: <%=order.getCliente().getUser() %></h3>
+		</div>
+		</div><hr>
 		<h3>Oggetti nell'ordine:</h3><br>
 		<table class="table table-condensed">
-		<thead>
-			<th>Nome Occhiale/Lente</th>
-			<th>Marca Occhiale/Lente</th>
-			<th>Quantita</th>
+		<thead><tr>
+			<th>Nome Prodotto</th>
+			<th>Marca Prodotto</th>
+			<th>Quantita</th></tr></thead><tbody>
 		<%  int i = 0;
 			ArrayList<CartArticle> ordinati = order.getOrdinati();
 			for (i=0; i < ordinati.size(); i++){
 		%>
 			<tr>
-			<td><a href="articlePage?nome=<%=ordinati.get(i).getArticle().getNome()%>&marca=<%=ordinati.get(i).getArticle().getMarca()%>"><%=ordinati.get(i).getArticle().getNome() %></a></td>
-			<td><%=ordinati.get(i).getArticle().getMarca() %></td>
-			<td><%=ordinati.get(i).getQuantity() %>
+			<td data-th="Nome Prodotto"><a href="articlePage?nome=<%=ordinati.get(i).getArticle().getNome()%>&marca=<%=ordinati.get(i).getArticle().getMarca()%>"><%=ordinati.get(i).getArticle().getNome() %></a></td>
+			<td data-th="Marca Prodotto"><%=ordinati.get(i).getArticle().getMarca() %></td>
+			<td data-th="Quantita"><%=ordinati.get(i).getQuantity() %>
 			</tr>
 		<%
 			}
 		%>
+		</tbody>
 		</table>
 	</div>
 </body>

@@ -105,7 +105,7 @@
 						</span>
 
 						<%
-							if (admin == null) {
+							if (admin == null && occhiali.getDisponibilita()>0) {
 						%>
 						
 						<div style="margin-left:10px"class="btn-group cart" >
@@ -113,7 +113,7 @@
 								class="btn btn-outline-secondary">Add to cart</button>
 						</div>
 						<%
-							} else {
+							} else if(admin != null) {
 						%>
 						<div>
 						<hr>
@@ -221,9 +221,11 @@
 							<div style="float:right">
 							<select class="product-stock btn btn-outline-secondary" id="gradazione">
 								<%
-									for (ArticleBean e : lentine) {
+								boolean selectIsEmpty = true;
+								for (ArticleBean e : lentine) {
 								%>
-							
+								<% if (e.getDisponibilita()>0 || admin!=null){ 
+									selectIsEmpty = false; %>
 								<option 
 									value="<%=((ContactLensesBean) e).getGradazione()%>">
 									<%=((ContactLensesBean) e).getGradazione()%> 
@@ -231,11 +233,12 @@
 								</option>
 
 								<%
-									}
+								}}
 								%>
 							</select>
 							<%
 								if (admin == null) {
+									if(!selectIsEmpty){
 							%>
 
 							<input style="margin-left:10px"class="btn btn-outline-secondary" type="submit"
@@ -244,7 +247,8 @@
 
 
 							<%
-								} else {
+									}
+									} else {
 							%>
 							<hr><select class="btn btn-outline-secondary product-stock" name="lGradazione">
 								<option value="8.0">+8.00</option>
