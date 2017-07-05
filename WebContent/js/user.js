@@ -416,36 +416,36 @@ function formatDataPromotion(responseText) {
 }
 
 function promotionValidation(){
-	var toCheck = $("input[name=nomeP]").val();
+	var toCheck = $("input[name=nomePr]").val();
 	if(toCheck.length<=0||toCheck.length>=21){
-		$("#nomeP").html("Enter minimum 0 characters and maximum 20 characters!")
+		$("#nomePr").html("Enter minimum 0 characters and maximum 20 characters!")
 		return false;
 	}
-	toCheck = $("input[name=descrizioneP]").val();
+	toCheck = $("input[name=descrizionePr]").val();
 	if(toCheck.length<=0||toCheck.length>=51){
-		$("#descrizioneP").html("Enter minimum 0 characters and maximum 50 characters!")
+		$("#descrizionePr").html("Enter minimum 0 characters and maximum 50 characters!")
 		return false;
 	}
-	toCheck = $("input[name=scontoP]").val();
+	toCheck = $("input[name=scontoPr]").val();
 	alert(toCheck)
 	if(toCheck==""){
-		$("#scontoP").html("Enter a positive number!")
+		$("#scontoPr").html("Enter a positive number!")
 		return false;
 	} else if(!isDouble(toCheck) || parseFloat(toCheck) <= 0 ){
-		$("#scontoP").html("Enter a positive number!")
+		$("#scontoPr").html("Enter a positive number!")
 		return false;
-	} else if(parseFloat(toCheck) <= 0 && parseFloat(toCheck) >= 100 && $("input[name=tipoP]").val() == "%") {
-		$("#scontoP").html("Enter a positive number between 0 and 100!")
-		return false;
-	}
-	toCheck = $("input[name=inizioP]").val();
-	if(toCheck.length != 10){
-		$("#inizioP").html("Enter a valid date! (yyy-MM-dd)")
+	} else if(parseFloat(toCheck) <= 0 && parseFloat(toCheck) >= 100 && $("input[name=tipoPr]").val() == "%") {
+		$("#scontoPr").html("Enter a positive number between 0 and 100!")
 		return false;
 	}
-	toCheck = $("input[name=fineP]").val();
+	toCheck = $("input[name=inizioPr]").val();
 	if(toCheck.length != 10){
-		$("#fineP").html("Enter a valid date! (yyy-MM-dd)")
+		$("#inizioPr").html("Enter a valid date! (yyy-MM-dd)")
+		return false;
+	}
+	toCheck = $("input[name=finePr]").val();
+	if(toCheck.length != 10){
+		$("#finePr").html("Enter a valid date! (yyy-MM-dd)")
 		return false;
 	}
 	return true;

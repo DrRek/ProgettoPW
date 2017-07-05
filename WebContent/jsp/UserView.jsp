@@ -341,23 +341,23 @@
 		<h3>Add promotion</h3>
 		<div class="form-group">
 		<label>Name:</label>
-		<input class="form-control" name="nomeP" type="text" /><span class="help-block" id="nomeP"></span><br>
+		<input class="form-control" name="nomePr" type="text" /><span class="help-block" id="nomePr"></span><br>
 		<label>Description:</label>
-		<input class="form-control" name="descrizioneP" type="text" /><span class="help-block" id="descrizioneP"></span><br>
+		<input class="form-control" name="descrizionePr" type="text" /><span class="help-block" id="descrizionePr"></span><br>
 		<label>Subtract type:</label><br>
 		<input type="radio" name="tipoP" value="%" checked> Percent (%)
 		<input type="radio" name="tipoP" value="s"> Subtract (-)
 		<span class="help-block" id="tipoP"></span><br>
 		<label class="cumulativeP">Cumulative:</label>
-		<input class="cumulativeP" name="cumulabileP" type="checkbox"><span class="cumulativeP help-block" id="cumulabileP"></span><br>
+		<input class="cumulativeP" name="cumulabilePr" type="checkbox"><span class="cumulativeP help-block" id="cumulabilerP"></span><br>
 		<label>Subtract amount:</label>
-		<input class="form-control" name="scontoP" type="number" /><span class="help-block" id="scontoP"></span><br>
+		<input class="form-control" name="scontoPr" type="number" /><span class="help-block" id="scontoPr"></span><br>
 		<label>Start date:</label>
-		<input class="form-control" name="inizioP" type="date" size="35" /><span class="help-block" id="inizioP"></span> <br>
+		<input class="form-control" name="inizioPr" type="date" size="35" /><span class="help-block" id="inizioPr"></span> <br>
 		<label>End date:</label>
-		<input class="form-control" name="fineP" type="date" size="35" /><span class="help-block" id="fineP"></span> <br> 
+		<input class="form-control" name="finePr" type="date" size="35" /><span class="help-block" id="finePr"></span> <br> 
 			
-		<input name="submitP" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
+		<input name="submitPr " type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
 		</div>
 		<hr>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
