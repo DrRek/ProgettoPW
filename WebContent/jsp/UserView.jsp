@@ -374,10 +374,10 @@
 			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
 				type="hidden" name="tipo" value="O" />
 			<label>Name:</label>
-			<input class="form-control" type="text" name="nome" value="name" />
+			<input class="form-control" type="text" name="nomeProd" placeholder="name" /><span class="help-block" id="nomeProd"></span>
 			<br>
 			<label>Brand:</label><br>
-			<select name="marca" class="btn btn-outline-secondary">
+			<select name="marcaProd" class="btn btn-outline-secondary">
 				<option value="GreenVision">GreenVision</option>
 				<option value="Lindberg">Lindberg</option>
 				<option value="Oakley">Oakley</option>
@@ -386,18 +386,18 @@
 			</select>
 			<br>
 			<label>Price:</label>
-			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzo"
-				placeholder="Price" /><br>
+			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzoProd"
+				placeholder="Price" /><span class="help-block" id="prezzoProd"></span><br>
 			<br>
 			<label>Available number:</label>
-			<input class="form-control" type="number" step="1" min="1" name="quantita" />
+			<input class="form-control" type="number" step="1" min="1" name="quantitaOc" /><span class="help-block" id="quantitaOc"></span>
 			<br>
 			<label>Description:</label>
-			<input class="form-control" type="text" name="descrizione" value="Description" />
+			<input class="form-control" type="text" name="descrizioneOc" placeholder="Description" /><span id="descrizioneOc" class="help-block"></span>
 			<br>
 			<label>Sex:</label><br>
-			<select name="sesso" class="btn btn-outline-secondary">
-				<option value="U">Unisex</option>
+			<select name="sessoOc" class="btn btn-outline-secondary">
+				<option selected value="U">Unisex</option>
 				<option value="M">Male</option>
 				<option value="F">Female</option>
 			</select>
@@ -414,32 +414,32 @@
 			<input class="btn btn-outline-secondary" name="img3" type="file" multiple
 				class="img,file-loading specificiPerOcchiali">
 			<div class="help-block"></div>
-			<h6>To change available number of an existing product visit the
-				product's webpage</h6>
+			<h6>To change available number of an existing Product visit the
+				Product's webpage</h6>
 			<input class="btn btn-outline-secondary" id="addProduct" type='submit' value='Add' />
 		</form>
 		<form class="specificiPerLentine" action="article" method='post'
 			enctype="multipart/form-data">
-			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
+			<input class="form-control" type="hidden" name="toDo" value="addOcuct" /> <input
 				type="hidden" name="tipo" value="L" />
 			<label>Name:</label>
-			<input class="form-control" type="text" name="nome" value="name" />
+			<input class="form-control" type="text" name="nomeProd" placeholder="name" /><span id="nomeProd" class="help-block"></span>
 			<br>
 			<label>Brand:</label><br>
-			<select name="marca" class="btn btn-outline-secondary">
+			<select name="marcaProd" class="btn btn-outline-secondary">
 				<option value="Acuvue">Acuvue</option>
 				<option value="Alcon">Alcon</option>
-				<option value="Biodivue">Biodivue</option>
+				<option value="Biotrue">Biotrue</option>
 				<option value="Frequency">Frequency</option>
 				<option value="GreenVision">GreenVision</option>
 			</select>
 			<br>
 			<label>Price:</label>
-			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzo"
-				placeholder="Price" /><br>
+			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzoProd"
+				placeholder="Price" /><span id="prezzoProd" class="help-block"></span><br>
 			<br>
 			<label>Available number:</label>
-			<input class="form-control" type="number" step="1" min="1" name="quantita" />
+			<input class="form-control" type="number" step="1" min="1" name="quantitaL" /><span id="quantitaL" class="help-block"></span>
 			<br>
 			<label>Gradation:</label><br>
 			<select name="gradazione" class="btn btn-outline-secondary">
@@ -479,18 +479,18 @@
 			</select>
 			<br>
 			<label>Duration:</label><br>
-			<select name="tipologia" class="btn btn-outline-secondary"><br>
+			<select name="tipologia" class="btn btn-outline-secondary">
 				<option value="G">Daily</option>
 				<option value="Q">15-days</option>
 				<option value="M">Monthly</option>
 			</select>
 			<br>
 			<label>Radius:</label>
-			<input class="form-control" type="number" min="5" name="raggio" placeholder="mm" value="" />
+			<input class="form-control" type="number" min="5" name="raggioL" placeholder="mm" value="" /><span id="raggioL" class="help-block"></span>
 			<br>
 			<label>Diameter:</label>
-			<input class="form-control" type="number" min="10" name="diametro" placeholder="mm"
-				value="" />
+			<input class="form-control" type="number" min="10" name="diametroL" placeholder="mm"
+				value="" /><span id="diametroL" class="help-block"></span>
 			<br>
 			<label>Color:</label><br>
 			<select class="specificiPerLentine btn btn-outline-secondary" name="colore">
@@ -504,7 +504,7 @@
 			</select>
 			<br>
 			<label>Lenses per pack:</label>
-			<input class="form-control" type="number" step="1" min="1" name="pezziPerPacco" />
+			<input class="form-control" type="number" step="1" min="1" name="pezziPerPacco" /><span id="pezziPerPacco" class="help-block"></span>
 			<label class="control-label">First image:</label>
 			<input id="img1" name="img1" type="file" multiple
 				class="img,file-loading btn btn-outline-secondary">

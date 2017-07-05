@@ -138,18 +138,18 @@ public class ArticleControl extends HttpServlet {
 		response.setContentType("text/plain");
 		ArticleBean toAdd = null;
 		try{
-			String nome = request.getParameter("nome");
-			String marca = request.getParameter("marca");
+			String nome = request.getParameter("nomeProd");
+			String marca = request.getParameter("marcaProd");
 			String tipo = request.getParameter("tipo");
-			Double prezzo = Double.parseDouble(request.getParameter("prezzo"));
+			Double prezzo = Double.parseDouble(request.getParameter("prezzoProd"));
 	        Part img1 = request.getPart("img1");
 	        String fileName = new File(nome+"_"+marca+"_1."+img1.getSubmittedFileName().substring(img1.getSubmittedFileName().lastIndexOf('.')+1)).getName();
 	        img1.write(SAVE_DIR + fileName);
 	        if(tipo.equalsIgnoreCase("O")){
 				toAdd = new GlassesBean();
-	    		String descrizione = request.getParameter("descrizione");
-	    		String sesso = request.getParameter("sesso");
-	    		int quantita = Integer.parseInt(request.getParameter("quantita"));
+	    		String descrizione = request.getParameter("descrizioneOc");
+	    		String sesso = request.getParameter("sessoOc");
+	    		int quantita = Integer.parseInt(request.getParameter("quantitaOc"));
 	            Part img2 = request.getPart("img2");
 	            Part img3 = request.getPart("img3");
 				toAdd.setNome(nome);
@@ -170,10 +170,10 @@ public class ArticleControl extends HttpServlet {
 				toAdd = new ContactLensesBean();
 	    		Double gradazione = Double.parseDouble(request.getParameter("gradazione"));
 	    		String tipologia = request.getParameter("tipologia");
-	    		Double raggio = Double.parseDouble(request.getParameter("raggio"));
-	    		Double diametro = Double.parseDouble(request.getParameter("diametro"));
+	    		Double raggio = Double.parseDouble(request.getParameter("raggioL"));
+	    		Double diametro = Double.parseDouble(request.getParameter("diametroL"));
 	    		String colore = request.getParameter("colore");
-	    		int quantita = Integer.parseInt(request.getParameter("quantita"));
+	    		int quantita = Integer.parseInt(request.getParameter("quantitaL"));
 	    		int pezziPerPacco = Integer.parseInt(request.getParameter("pezziPerPacco"));
 				toAdd.setNome(nome);
 				toAdd.setMarca(marca);
