@@ -345,11 +345,11 @@
 		<label>Description:</label>
 		<input class="form-control" name="descrizionePr" type="text" /><span class="help-block" id="descrizionePr"></span><br>
 		<label>Subtract type:</label><br>
-		<input type="radio" name="tipoP" value="%" checked> Percent (%)
-		<input type="radio" name="tipoP" value="s"> Subtract (-)
-		<span class="help-block" id="tipoP"></span><br>
-		<label class="cumulativeP">Cumulative:</label>
-		<input class="cumulativeP" name="cumulabilePr" type="checkbox"><span class="cumulativeP help-block" id="cumulabilerP"></span><br>
+		<input type="radio" name="tipoPr" value="%" checked> Percent (%)
+		<input type="radio" name="tipoPr" value="s"> Subtract (-)
+		<span class="help-block" id="tipoPr"></span><br>
+		<label class="cumulativePr">Cumulative:</label>
+		<input class="cumulativePr" name="cumulabilePr" type="checkbox"><span class="cumulativeP help-block" id="cumulabilerP"></span><br>
 		<label>Subtract amount:</label>
 		<input class="form-control" name="scontoPr" type="number" /><span class="help-block" id="scontoPr"></span><br>
 		<label>Start date:</label>
@@ -357,7 +357,7 @@
 		<label>End date:</label>
 		<input class="form-control" name="finePr" type="date" size="35" /><span class="help-block" id="finePr"></span> <br> 
 			
-		<input name="submitPr " type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
+		<input name="submitPr" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
 		</div>
 		<hr>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->

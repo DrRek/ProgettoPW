@@ -21,7 +21,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("input[name=submitP]").click(function(event) {
+	$("input[name=submitPr]").click(function(event) {
 		$("span.help-block").html("");
 		if(promotionValidation())
 			addPromotion();
@@ -363,13 +363,13 @@ function allLetter(input, id) {
 }
 
 function addPromotion() {
-	var nome = $("input[name=nomeP]").val();
-	var descrizione = $("input[name=descrizioneP]").val();
-	var sconto = $("input[name=scontoP]").val();
-	var tipo = $("input[name=tipoP]:checked").val();
-	var inizio = $("input[name=inizioP]").val();
-	var fine = $("input[name=fineP]").val();
-	if ($("input[name=cumulabileP]").is(':checked')) {
+	var nome = $("input[name=nomePr]").val();
+	var descrizione = $("input[name=descrizionePr]").val();
+	var sconto = $("input[name=scontoPr]").val();
+	var tipo = $("input[name=tipoPr]:checked").val();
+	var inizio = $("input[name=inizioPr]").val();
+	var fine = $("input[name=finePr]").val();
+	if ($("input[name=cumulabilePr]").is(':checked')) {
 		var cumulabile = true;
 	} else {
 		var cumulabile = false;
@@ -427,7 +427,6 @@ function promotionValidation(){
 		return false;
 	}
 	toCheck = $("input[name=scontoPr]").val();
-	alert(toCheck)
 	if(toCheck==""){
 		$("#scontoPr").html("Enter a positive number!")
 		return false;

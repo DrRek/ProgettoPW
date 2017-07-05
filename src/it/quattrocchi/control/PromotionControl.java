@@ -45,7 +45,7 @@ public class PromotionControl extends HttpServlet {
 		        try {
 					String nome = request.getParameter("nome");
 					String desc = request.getParameter("descrizione");
-					Double sconto = Double.parseDouble(request.getParameter("sconto"));
+					Double sconto = Double.parseDouble(request.getParameter("sconto").replaceAll(",", "."));
 					String tipo = request.getParameter("tipo");
 			        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 			        Date parsed = format.parse(request.getParameter("inizio"));
