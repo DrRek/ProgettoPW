@@ -435,7 +435,7 @@
 			</select>
 			<br>
 			<label>Price:</label>
-			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzoProd"
+			<input class="form-control" type="number" step="0.01" min="0.01" name="prezzoProd"
 				placeholder="Price" /><span id="prezzoProd" class="help-block"></span><br>
 			<br>
 			<label>Available number:</label>
@@ -486,11 +486,10 @@
 			</select>
 			<br>
 			<label>Radius:</label>
-			<input class="form-control" type="number" min="5" name="raggioL" placeholder="mm" value="" /><span id="raggioL" class="help-block"></span>
+			<input class="form-control" type="number" min="5" name="raggioL" placeholder="mm" step="0.01" value="" /><span id="raggioL" class="help-block"></span>
 			<br>
 			<label>Diameter:</label>
-			<input class="form-control" type="number" min="10" name="diametroL" placeholder="mm"
-				value="" /><span id="diametroL" class="help-block"></span>
+			<input class="form-control" type="number" min="10" name="diametroL" placeholder="mm" step="0.01" value="" /><span id="diametroL" class="help-block"></span>
 			<br>
 			<label>Color:</label><br>
 			<select class="specificiPerLentine btn btn-outline-secondary" name="colore">
