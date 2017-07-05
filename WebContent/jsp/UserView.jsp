@@ -420,7 +420,7 @@
 		</form>
 		<form class="specificiPerLentine" action="article" method='post'
 			enctype="multipart/form-data">
-			<input class="form-control" type="hidden" name="toDo" value="addOcuct" /> <input
+			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
 				type="hidden" name="tipo" value="L" />
 			<label>Name:</label>
 			<input class="form-control" type="text" name="nomeProd" placeholder="name" /><span id="nomeProd" class="help-block"></span>
