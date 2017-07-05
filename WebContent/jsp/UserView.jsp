@@ -126,7 +126,6 @@
 	</div>
 	<div class="container">
 		<h2>Aggiungi carta</h2>
-		<script type="text/javascript" src="js/creditcard-validation.js"></script>
 		<div class="form-group">
 		
 		<input type="hidden" name="action" value="addCard"> 
@@ -194,7 +193,6 @@
 
 	<div class="container">
 		<h2>Aggiungi Prescrizione</h2>
-		<script type="text/javascript" src="js/prescription-validation.js"></script>
 		<div class="form-group">
 		<label for="nomeP">Nome:</label> <input class="form-control"  name="nomeP" type="text"
 			maxlength="50" placeholder="ES. di Mario per vicinanza"> <span class="help-block" 
