@@ -15,9 +15,9 @@ $(document).ready(function() {
 			},
 			dataType : "json",
 			success : function(responseText) {
-				$("#oDisp").html(oQuantita + " left");
 			}
 		});
+		$("#oDisp").html(oQuantita + " left");
 	});
 	
 	$("#AddLenseToStorage").click(function(event) {
@@ -25,7 +25,6 @@ $(document).ready(function() {
 		var marca = $('#lMarca').html();
 		var gradazione = $('select[name=lGradazione]').val();
 		var quantita = $('input[name=lQuantita]').val();
-		alert("ok"+nome+marca+gradazione+quantita);
 		$.ajax({
 			type : "GET",
 			url : "articlePage",
@@ -38,8 +37,9 @@ $(document).ready(function() {
 			},
 			dataType : "json",
 			success : function(responseText) {
-				alert("Success!");
 			}
 		});
+		var optionGiusto = $('select#gradazione option[value="' + gradazione + '"]');
+		optionGiusto.html(gradazione+" ("+quantita+" left)")
 	});
 });

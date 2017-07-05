@@ -247,39 +247,39 @@
 								} else {
 							%>
 							<hr><select class="btn btn-outline-secondary product-stock" name="lGradazione">
-								<option value="+8.00">+8.00</option>
-								<option value="+7.50">+7.50</option>
-								<option value="+7.00">+7.00</option>
-								<option value="+6.50">+6.50</option>
-								<option value="+6.00">+6.00</option>
-								<option value="+5.50">+5.50</option>
-								<option value="+5.00">+5.00</option>
-								<option value="+4.50">+4.50</option>
-								<option value="+4.00">+4.00</option>
-								<option value="+3.50">+3.50</option>
-								<option value="+3.00">+3.00</option>
-								<option value="+2.50">+2.50</option>
-								<option value="+2.00">+2.00</option>
-								<option value="+1.50">+1.50</option>
-								<option value="+1.00">+1.00</option>
-								<option value="+0.50">+0.50</option>
-								<option value="0" selected>±0.00</option>
-								<option value="-0.50">-0.50</option>
-								<option value="-1.00">-1.00</option>
-								<option value="-1.50">-1.50</option>
-								<option value="-2.00">-2.00</option>
-								<option value="-2.50">-2.50</option>
-								<option value="-3.00">-3.00</option>
-								<option value="-3.50">-3.50</option>
-								<option value="-4.00">-4.00</option>
-								<option value="-4.50">-4.50</option>
-								<option value="-5.00">-5.00</option>
-								<option value="-5.50">-5.50</option>
-								<option value="-6.00">-6.00</option>
-								<option value="-6.50">-6.50</option>
-								<option value="-7.00">-7.00</option>
-								<option value="-8.50">-7.50</option>
-								<option value="-8.00">-8.00</option>
+								<option value="8.0">+8.00</option>
+								<option value="7.5">+7.50</option>
+								<option value="7.0">+7.00</option>
+								<option value="6.5">+6.50</option>
+								<option value="6.0">+6.00</option>
+								<option value="5.5">+5.50</option>
+								<option value="5.0">+5.00</option>
+								<option value="4.5">+4.50</option>
+								<option value="4.0">+4.00</option>
+								<option value="3.5">+3.50</option>
+								<option value="3.0">+3.00</option>
+								<option value="2.5">+2.50</option>
+								<option value="2.0">+2.00</option>
+								<option value="1.5">+1.50</option>
+								<option value="1.0">+1.00</option>
+								<option value="0.5">+0.50</option>
+								<option value="0.0" selected>±0.00</option>
+								<option value="-0.5">-0.50</option>
+								<option value="-1.0">-1.00</option>
+								<option value="-1.5">-1.50</option>
+								<option value="-2.0">-2.00</option>
+								<option value="-2.5">-2.50</option>
+								<option value="-3.0">-3.00</option>
+								<option value="-3.5">-3.50</option>
+								<option value="-4.0">-4.00</option>
+								<option value="-4.5">-4.50</option>
+								<option value="-5.0">-5.00</option>
+								<option value="-5.5">-5.50</option>
+								<option value="-6.0">-6.00</option>
+								<option value="-6.5">-6.50</option>
+								<option value="-7.0">-7.00</option>
+								<option value="-7.5">-7.50</option>
+								<option value="-8.0">-8.00</option>
 							</select> <input class="btn btn-outline-secondary product-stock" type="number" step="1"
 								min="1" name="lQuantita" /> <input class="btn btn-outline-secondary" id="AddLenseToStorage"
 								type="button" value="update" />

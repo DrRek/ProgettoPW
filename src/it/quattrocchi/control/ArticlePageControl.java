@@ -68,7 +68,6 @@ public class ArticlePageControl extends HttpServlet {
 		try {
 			ArticleBean toUpdate =  model.doRetrieveContactLenses(nome, marca, gradazione);
 			toUpdate.setDisponibilita(Integer.parseInt((String)request.getParameter("quantita")));
-			System.out.println(toUpdate.getNome()+toUpdate.getDisponibilita());
 			model.doSave(toUpdate);
 		} catch (SQLException e) {
 			e.printStackTrace();
