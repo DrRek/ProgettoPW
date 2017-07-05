@@ -3,7 +3,7 @@ $(document).ready(function() {
 	updateTable();
 	//initializeCart();
 
-	$("body").on("change","input[name='numeroPezziDisponibili']",
+	$("body").on("change","input[name='quantitaPezzi']",
 			function() {
 		var valore = $(this).val();
 		var val = parseInt(valore);
@@ -50,6 +50,7 @@ $(document).ready(function() {
 			}
 		};
 		updateTable();
+		updateCartNumber();
 	});
 
 	$("body").on("click","input[name='removeCart']", function() {
@@ -63,6 +64,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				url : "checkout",
+				async: false,
 				data : {
 					action : "removeCart",
 					nome : nomeArt,
@@ -78,6 +80,7 @@ $(document).ready(function() {
 			$.ajax({
 				type : "POST",
 				url : "checkout",
+				async : false,
 				data : {
 					action : "removeCart",
 					nome : nomeArt,
@@ -89,6 +92,7 @@ $(document).ready(function() {
 			});
 		}
 		updateTable();
+		updateCartNumber();
 	});
 
 	$("body").on("blur","select.gradazioneArt", function(){
@@ -199,7 +203,7 @@ $(document).ready(function() {
 
 			toAppend += '</td>';
 
-			toAppend+='<td><input  data-th="Numero Prodotti" name="numeroPezziDisponibili" class="form-control "  type="number" min="1"value="'+prod.numero+'"></td>';
+			toAppend+='<td><input  data-th="Numero Prodotti" name="quantitaPezzi" class="form-control "  type="number" min="1"value="'+prod.numero+'"></td>';
 
 			var prezzo = prod.articolo.prezzo*prod.numero;
 			toAppend+='<td data-th="Subtotal" class="prezzoArt ">'+prezzo+'€</td>';
@@ -220,3 +224,11 @@ $(document).ready(function() {
 		$("#tot").html("Prezzo totale: " + tot + "€" );
 	}
 });
+
+function updateCartNumber(){
+	var sum = 0;
+	$("input[name=quantitaPezzi]").each(function(){
+		sum += parseInt(this.value);
+	});
+	$("a#count").html(sum);
+}
