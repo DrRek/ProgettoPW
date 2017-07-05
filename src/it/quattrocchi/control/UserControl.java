@@ -147,7 +147,8 @@ public class UserControl extends HttpServlet{
 		}else {
 			ccModel.doUpdate(bean);
 		}
-
+		
+		request.getSession().removeAttribute("user");
 		user.setCards(ccModel.doRetrieveByCliente(user));
 		request.getSession().setAttribute("user", user);
 		response.setContentType("application/json");
@@ -165,6 +166,7 @@ public class UserControl extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+		request.getSession().removeAttribute("user");
 		user.setCards(ccModel.doRetrieveByCliente(user));
 		request.getSession().setAttribute("user", user);
 		response.setContentType("application/json");

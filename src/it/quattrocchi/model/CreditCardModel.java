@@ -59,6 +59,8 @@ public class CreditCardModel {
 			conn = DriverManagerConnectionPool.getConnection();
 			stm = conn.prepareStatement(query);
 			stm.setString(1, user.getUser());
+			
+			System.out.println(stm);
 
 			ResultSet rs = stm.executeQuery();
 			
@@ -71,6 +73,7 @@ public class CreditCardModel {
 				bean.setCvcCvv(rs.getString("CvcCvv"));
 				bean.setCliente(null);
 				
+				System.out.println(bean.getNumeroCC());
 				cc.add(bean);
 			}
 		}
@@ -83,6 +86,8 @@ public class CreditCardModel {
 				DriverManagerConnectionPool.releaseConnection(conn);
 			}
 		}
+		
+		user.setCards(cc);
 		
 		return cc;
 	}
