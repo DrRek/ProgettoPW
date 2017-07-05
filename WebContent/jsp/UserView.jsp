@@ -386,7 +386,7 @@
 			</select>
 			<br>
 			<label>Price:</label>
-			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzoProd"
+			<input class="form-control" type="number" step="0.01" min="0.00" name="prezzoProd"
 				placeholder="Price" /><span class="help-block" id="prezzoProd"></span><br>
 			<br>
 			<label>Available number:</label>
