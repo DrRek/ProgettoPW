@@ -360,88 +360,89 @@
 			
 		<input name="submitP" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
 		</div>
+		<hr>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
-		<hr>
-		<h4>Products:</h4>
-		<select name="tipo" onchange="setSearchField()">
+		<div class="form-group">
+		<label>Products:</label>
+		<select name="tipo" class="form-control" onchange="setSearchField()">
 			<option selected value="O">Glasses</option>
 			<option value="L">Contact lenses</option>
 		</select>
-		<hr>
+		<br>
 		<form class="specificiPerOcchiali" action="article" method='post'
 			enctype="multipart/form-data">
-			<input type="hidden" name="toDo" value="addProduct" /> <input
+			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
 				type="hidden" name="tipo" value="O" />
-			<h4>Name:</h4>
-			<input type="text" name="nome" value="name" />
-			<hr>
-			<h4>Brand:</h4>
-			<select name="marca">
+			<label>Name:</label>
+			<input class="form-control" type="text" name="nome" value="name" />
+			<br>
+			<label>Brand:</label>
+			<select name="marca form-control">
 				<option value="GreenVision">GreenVision</option>
 				<option value="Lindberg">Lindberg</option>
 				<option value="Oakley">Oakley</option>
 				<option value="Persol">Persol</option>
 				<option value="RayBan">RayBan</option>
 			</select>
-			<hr>
-			<h4>Price:</h4>
-			<input type="number" step="1.00" min="0.00" name="prezzo"
+			<br>
+			<label>Price:</label>
+			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzo"
 				placeholder="Price" /><br>
-			<hr>
-			<h4>Available number:</h4>
-			<input type="number" step="1" min="1" name="quantita" />
-			<hr>
-			<h4>Description:</h4>
-			<input type="text" name="descrizione" value="Description" />
-			<hr>
-			<h4>Sex:</h4>
-			<select name="sesso">
+			<br>
+			<label>Available number:</label>
+			<input class="form-control" type="number" step="1" min="1" name="quantita" />
+			<br>
+			<label>Description:</label>
+			<input class="form-control" type="text" name="descrizione" value="Description" />
+			<br>
+			<label>Sex:</label>
+			<select name="sesso form-control">
 				<option value="U">Unisex</option>
 				<option value="M">Male</option>
 				<option value="F">Female</option>
 			</select>
-			<hr>
-			<h4 class="condivol-label">First image:</h4>
-			<input id="img1" name="img1" type="file" multiple
+			<br>
+			<label class="control-label">First image:</label>
+			<input class="btn btn-outline-secondary" id="img1" name="img1" type="file" multiple
 				class="img,file-loading">
 			<div class="help-block"></div>
-			<h4 class="condivol-label">Second image:</h4>
-			<input name="img2" type="file" multiple
+			<label class="control-label">Second image:</label>
+			<input class="btn btn-outline-secondary" name="img2" type="file" multiple
 				class="img,file-loading,specificiPerOcchiali">
 			<div class="help-block"></div>
-			<h4 class="condivol-label">Third image:</h4>
-			<input name="img3" type="file" multiple
+			<label class="control-label">Third image:</label>
+			<input class="btn btn-outline-secondary" name="img3" type="file" multiple
 				class="img,file-loading specificiPerOcchiali">
 			<div class="help-block"></div>
 			<h6>To change available number of an existing product visit the
 				product's webpage</h6>
-			<input id="addProduct" type='submit' value='Add glass!' />
+			<input class="btn btn-outline-secondary" id="addProduct" type='submit' value='Add' />
 		</form>
 		<form class="specificiPerLentine" action="article" method='post'
 			enctype="multipart/form-data">
-			<input type="hidden" name="toDo" value="addProduct" /> <input
+			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
 				type="hidden" name="tipo" value="L" />
-			<h4>Name:</h4>
-			<input type="text" name="nome" value="name" />
-			<hr>
-			<h4>Brand:</h4>
-			<select name="marca">
+			<label>Name:</label>
+			<input class="form-control" type="text" name="nome" value="name" />
+			<br>
+			<label>Brand:</label>
+			<select name="marca form-control">
 				<option value="Acuvue">Acuvue</option>
 				<option value="Alcon">Alcon</option>
 				<option value="Biodivue">Biodivue</option>
 				<option value="Frequency">Frequency</option>
 				<option value="GreenVision">GreenVision</option>
 			</select>
-			<hr>
-			<h4>Price:</h4>
-			<input type="number" step="1.00" min="0.00" name="prezzo"
+			<br>
+			<label>Price:</label>
+			<input class="form-control" type="number" step="1.00" min="0.00" name="prezzo"
 				placeholder="Price" /><br>
-			<hr>
-			<h4>Available number:</h4>
-			<input type="number" step="1" min="1" name="quantita" />
-			<hr>
-			<h4>Gradation:</h4>
+			<br>
+			<label>Available number:</label>
+			<input class="form-control" type="number" step="1" min="1" name="quantita" />
+			<br>
+			<label>Gradation:</label>
 			<select name="gradazione">
 				<option value="+8.00">+8.00</option>
 				<option value="+7.50">+7.50</option>
@@ -477,23 +478,23 @@
 				<option value="-8.50">-7.50</option>
 				<option value="-8.00">-8.00</option>
 			</select>
-			<hr>
-			<h4>Duration:</h4>
+			<br>
+			<label>Duration:</label>
 			<select name="tipologia">
 				<option value="G">Daily</option>
 				<option value="Q">15-days</option>
 				<option value="M">Monthly</option>
 			</select>
-			<hr>
-			<h4>Radius:</h4>
-			<input type="number" min="5" name="raggio" placeholder="mm" value="" />
-			<hr>
-			<h4>Diameter:</h4>
-			<input type="number" min="10" name="diamedivo" placeholder="mm"
+			<br>
+			<label>Radius:</label>
+			<input class="form-control" type="number" min="5" name="raggio" placeholder="mm" value="" />
+			<br>
+			<label>Diameter:</label>
+			<input class="form-control" type="number" min="10" name="diametro" placeholder="mm"
 				value="" />
-			<hr>
-			<h4>Color:</h4>
-			<select class="specificiPerLentine" name="colore">
+			<br>
+			<label>Color:</label>
+			<select class="specificiPerLentine form-control" name="colore">
 				<option selected value="/N">divansparent</option>
 				<option value="Ve">Green</option>
 				<option value="Bl">Blue</option>
@@ -502,21 +503,22 @@
 				<option value="Ro">Red</option>
 				<option value="Pa">Special</option>
 			</select>
-			<hr>
-			<h4>Lenses per pack:</h4>
-			<input type="number" step="1" min="1" name="pezziPerPacco" />
-			<h4 class="condivol-label">First image:</h4>
+			<br>
+			<label>Lenses per pack:</label>
+			<input class="form-control" type="number" step="1" min="1" name="pezziPerPacco" />
+			<label class="control-label">First image:</label>
 			<input id="img1" name="img1" type="file" multiple
-				class="img,file-loading">
+				class="img,file-loading btn btn-outline-secondary">
 			<div class="help-block"></div>
 			<h6>To change available number or the gradation availability of
 				an existing product visit the product's webpage</h6>
-			<input id="addProduct" type='submit' value='Add contact lense!' />
+			<input class="btn btn-outline-secondary" id="addProduct" type='submit' value='Add' />
 		</form>
+		</div>
 	</div>
 
 	<div class="container">
-		<h2>Ordini passati</h2>
+		<h2>Storico ordini</h2>
 		<table class="table table-condensed">
 			<thead>
 				<tr>
