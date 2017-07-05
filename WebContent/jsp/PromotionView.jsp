@@ -63,7 +63,7 @@
 		<input class="form-control" id="aBrand" type="text" placeholder="Article Brand"/>
 		<input class="btn btn-outline-secondary" id="aSubmit" type="button" value="Add article"/>
 		<br><hr>
-		<h3>Included product list</h3>
+		<h3>Included products</h3>
 		<table id="tableIncludedArticle" class="table table-condensed">
 			<thead>
 				<tr>

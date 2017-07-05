@@ -4,7 +4,15 @@ $(document).ready(function() {
 
 	initialize();
 	setSearchField();
-
+	
+	$(document).ready(function(){
+	    $('.block').hover(function() {
+	        $(this).addClass('transition');
+	    }, function() {
+	        $(this).removeClass('transition');
+	    });
+	});
+	    
 	$("#advancedSearch").on("click", function(event) {
 		toDoD = 'asyncSpecificSearch'
 		advancedSearch();
