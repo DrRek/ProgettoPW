@@ -149,6 +149,7 @@ public class UserControl extends HttpServlet{
 		}
 
 		user.setCards(ccModel.doRetrieveByCliente(user));
+		request.getSession().setAttribute("user", user);
 		response.setContentType("application/json");
 		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(ccModel.doRetrieveByCliente(user)));
@@ -165,6 +166,7 @@ public class UserControl extends HttpServlet{
 		}
 		
 		user.setCards(ccModel.doRetrieveByCliente(user));
+		request.getSession().setAttribute("user", user);
 		response.setContentType("application/json");
 		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(ccModel.doRetrieveByCliente(user)));
@@ -203,6 +205,7 @@ public class UserControl extends HttpServlet{
 		ArrayList<PrescriptionBean> prescriptions = user.getPrescriptions();
 		prescriptions.add(pres);
 		user.setPrescriptions(prescriptions);
+		request.getSession().setAttribute("user", user);
 		response.setContentType("application/json");
 		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(pModel.doRetrieveByCliente(user)));
@@ -215,6 +218,7 @@ public class UserControl extends HttpServlet{
 		pModel.doDelete(codice, user);
 		
 		user.setPrescriptions(pModel.doRetrieveByCliente(user));
+		request.getSession().setAttribute("user", user);
 		response.setContentType("application/json");
 		response.setHeader("Cache-Control", "no-cache");
 		response.getWriter().write(new Gson().toJson(pModel.doRetrieveByCliente(user)));
