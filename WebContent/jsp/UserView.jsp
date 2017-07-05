@@ -145,7 +145,7 @@
 			placeholder="ES. Mastercard"><span class="help-block" id="circuito"></span> 
 			
 			<br><label for="scadenza">Scadenza:</label> <input  class="form-control" name="scadenza"
-			type="text" maxlength="50" placeholder="ES. 2017-07-06"><span
+			type="date" maxlength="50" placeholder="ES. 2017-07-06"><span
 			class="help-block" id="scadenza"></span> 
 			
 			<br> <label for="cvv">Cvv:</label> <input
@@ -543,8 +543,8 @@
 		}
 	%>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/user.js"></script>
+	<script src="js/util.js"></script>
 </body>
 </html>

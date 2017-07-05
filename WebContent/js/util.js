@@ -1,6 +1,5 @@
 $(document).ready(function() {
 	$("input[type=date]").on("keyup", function(e) {
-		console.log(e.keyCode);
 		len = this.value.length
 		if(( len == 5 || len == 8 ) && codeIsNumber(e.keyCode)){
 			this.value=this.value.substring(0,len-1)+"-"+this.value.substring(len-1,len)
