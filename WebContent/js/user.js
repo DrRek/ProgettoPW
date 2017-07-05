@@ -1,13 +1,15 @@
 $(document).ready(function() {
 	
 	setSearchField();
-	$(".cumulativeP").hide();
+	$(".cumulativePr").hide();
 	
-	$("input[name=tipoP]").on("click", function(){
+	$("input[name=tipoPr]").on("click", function(){
 		if(this.value=="s")
-			$(".cumulativeP").show();
-		else
-			$(".cumulativeP").hide();
+			$(".cumulativePr").show();
+		else{
+			$(".cumulativePr").hide();
+			$('input.cumulativePr').prop('checked', false);
+		}
 	});
 	
 	$("#addCard").on("click", function(event) {
