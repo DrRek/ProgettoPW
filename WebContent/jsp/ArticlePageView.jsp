@@ -91,12 +91,13 @@
 					<div class="col-sm-6">
 						<div class="product-title" id="oNome"><%=occhiali.getNome()%></div>
 						<h4 id="oMarca"><%=occhiali.getMarca()%></h4>
-						<div class="product-desc"><%=((GlassesBean) occhiali).getDescrizione()%></div>
 						<hr>
+						<div class="product-desc"><%=((GlassesBean) occhiali).getDescrizione()%></div>
+
 						<div class="product-price"><%=occhiali.getPrezzo()%>
 							€
 						</div>
-						<hr>
+						<br><br>
 						<div style="float:right">
 						<span class="product-stock" id="oDisp" >
 							<%=occhiali.getDisponibilita()%>
@@ -217,7 +218,6 @@
 							<br><%=l.getPrezzo()%> €
 							</div>
 						</div>
-							<hr>
 							<div style="float:right">
 							<select class="product-stock btn btn-outline-secondary" id="gradazione">
 								<%
