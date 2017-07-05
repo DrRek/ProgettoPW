@@ -1,7 +1,7 @@
 $(document).ready(function() {
-
+	
 	setSearchField();
-
+	
 	$("#addCard").on("click", function(event) {
 		if (ccValidation())
 			addCard();
@@ -13,7 +13,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#submitP").click(function(event) {
+	$("input[name=submitP]").click(function(event) {
 		addPromotion();
 	});
 
@@ -353,13 +353,13 @@ function allLetter(input, id) {
 }
 
 function addPromotion() {
-	var nome = $("#nomeP").val();
-	var descrizione = $("#descrizioneP").val();
-	var sconto = $("#scontoP").val();
+	var nome = $("input[name=nomeP]").val();
+	var descrizione = $("input[name=descrizioneP]").val();
+	var sconto = $("input[name=scontoP]").val();
 	var tipo = $("input[name=tipoP]:checked").val();
-	var inizio = $("#inizioP").val();
-	var fine = $("#fineP").val();
-	if ($('#cumulabileP').is(':checked')) {
+	var inizio = $("input[name=inizioP]").val();
+	var fine = $("input[name=fineP]").val();
+	if ($("input[name=cumulabileP]").is(':checked')) {
 		var cumulabile = true;
 	} else {
 		var cumulabile = false;

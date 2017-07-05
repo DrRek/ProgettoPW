@@ -297,7 +297,7 @@
 			Ciao,
 			<%=admin.getUser()%></h2>
 
-		<h2>Active and future promotion list</h2>
+		<h3>Current and future promotions</h3>
 		<table id="tablePromotion" class="table table-condensed">
 			<thead>
 				<tr>
@@ -311,49 +311,55 @@
 					<th></th>
 				</tr>
 			</thead>
+			<tbody>
 			<%
 				if (promozioni != null && promozioni.size() != 0) {
 						for (PromotionBean bean : promozioni) {
 			%>
 			<tr>
-				<td><%=bean.getNome()%></td>
-				<td><%=bean.getDescrizione()%></td>
-				<td><%=bean.getSconto()%></td>
-				<td><%=bean.getTipo()%></td>
-				<td><%=bean.getDataInizio()%></td>
-				<td><%=bean.getDataFine()%></td>
-				<td>
+				<td data-th=Name"><%=bean.getNome()%></td>
+				<td data-th="Description"><%=bean.getDescrizione()%></td>
+				<td data-th="Value"><%=bean.getSconto()%></td>
+				<td data-th="Type"><%=bean.getTipo()%></td>
+				<td data-th="Start"><%=bean.getDataInizio()%></td>
+				<td data-th="End"><%=bean.getDataFine()%></td>
+				<td data-th="Cumulative">
 					<%
 						if (bean.isCumulabile()) {
-					%>divue<%
+					%>true<%
 						} else {
 					%>false<%
 						}
 					%>
 				</td>
-				<td><a href="promotion?nome=<%=bean.getNome()%>">info/edit</a></td>
+				<td data-th=""><a href="promotion?nome=<%=bean.getNome()%>">info/edit</a></td>
 			</tr>
 			<%
 				}
 					}
 			%>
+			</tbody>
 		</table>
 		<h3>Add promotion</h3>
-		<h4>Name:</h4>
-		<input id="nomeP" type="text" />
-		<h4>Description:</h4>
-		<input id="descrizioneP" type="text" />
-		<h4>Subdivact type</h4>
+		<div class="form-group">
+		<label>Name:</label>
+		<input class="form-control" name="nomeP" type="text" /><span class="help-block" id="nomeP"></span><br>
+		<label>Description:</label>
+		<input class="form-control" name="descrizioneP" type="text" /><span class="help-block" id="descrizioneP"></span><br>
+		<label>Subtract type:</label><br>
 		<input type="radio" name="tipoP" value="%"> Percent (%) <input
-			type="radio" name="tipoP" value="s"> Subdivact (-)
-		<h4>Subdivact ammount:</h4>
-		<input id="scontoP" type="number" /> <br>
-		<h4>Start date:</h4>
-		<input id="inizioP" type="date" size="35" /> <br>
-		<h4>End date:</h4>
-		<input id="fineP" type="date" size="35" /> <br> <input
-			id="cumulabileP" type="checkbox"> Cumulabile<br> <input
-			id="submitP" type="button" value="Add promotion!" /> <br>
+			type="radio" name="tipoP" value="s"> Subtract (-)
+			<span class="help-block" id="tipoP"></span><br>
+		<label>Subtract amount:</label>
+		<input class="form-control" name="scontoP" type="number" /><span class="help-block" id="scontoP"></span><br>
+		<label>Start date:</label>
+		<input class="form-control" name="inizioP" type="date" size="35" /><span class="help-block" id="inizioP"></span> <br>
+		<label>End date:</label>
+		<input class="form-control" name="fineP" type="date" size="35" /><span class="help-block" id="fineP"></span> <br> 
+		<input name="cumulabileP" type="checkbox"> Cumulative<br> <br>
+			
+		<input name="submitP" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
+		</div>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
 		<h3>Add product</h3>
 		<hr>
