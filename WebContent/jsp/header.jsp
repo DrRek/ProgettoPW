@@ -45,11 +45,11 @@
 				<%
 						if (crt == null) {
 					%>
-				<span id="count" style="color:white"><a href="checkout">0</a></span></li>
+				<span style="color:white"><a id="count" href="checkout">0</a></span></li>
 				<%
 						} else {
 					%>
-				<span id="count" style="color:white"><a href="checkout"><%=crt.getNumberOfProducts()%></span></a></li>
+				<span style="color:white"><a id="count" href="checkout"><%=crt.getNumberOfProducts()%></span></a></li>
 				<%
 						}
 						}
