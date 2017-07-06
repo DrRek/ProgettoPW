@@ -116,7 +116,6 @@ public class ArticleControl extends HttpServlet {
 				}
 			}
 		}
-
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/ArticleView.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -138,14 +137,14 @@ public class ArticleControl extends HttpServlet {
 		response.setContentType("text/plain");
 		ArticleBean toAdd = null;
 		try{
-			String nome = request.getParameter("nomeProd");
-			String marca = request.getParameter("marcaProd");
 			String tipo = request.getParameter("tipo");
-			Double prezzo = Double.parseDouble(request.getParameter("prezzoProd"));
-	        Part img1 = request.getPart("img1");
-	        String fileName = new File(nome+"_"+marca+"_1."+img1.getSubmittedFileName().substring(img1.getSubmittedFileName().lastIndexOf('.')+1)).getName();
-	        img1.write(SAVE_DIR + fileName);
 	        if(tipo.equalsIgnoreCase("O")){
+				String nome = request.getParameter("nomeOc");
+				String marca = request.getParameter("marcaProd");
+				Double prezzo = Double.parseDouble(request.getParameter("prezzoOc"));
+		        Part img1 = request.getPart("img1");
+		        String fileName = new File(nome+"_"+marca+"_1."+img1.getSubmittedFileName().substring(img1.getSubmittedFileName().lastIndexOf('.')+1)).getName();
+		        img1.write(SAVE_DIR + fileName);
 				toAdd = new GlassesBean();
 	    		String descrizione = request.getParameter("descrizioneOc");
 	    		String sesso = request.getParameter("sessoOc");
@@ -167,6 +166,12 @@ public class ArticleControl extends HttpServlet {
 	            img3.write(SAVE_DIR + fileName);
 	            ((GlassesBean)toAdd).setImg3(fileName);
 	        }else{
+				String nome = request.getParameter("nomeCo");
+				String marca = request.getParameter("marcaProd");
+				Double prezzo = Double.parseDouble(request.getParameter("prezzoCo"));
+		        Part img1 = request.getPart("img1");
+		        String fileName = new File(nome+"_"+marca+"_1."+img1.getSubmittedFileName().substring(img1.getSubmittedFileName().lastIndexOf('.')+1)).getName();
+		        img1.write(SAVE_DIR + fileName);
 				toAdd = new ContactLensesBean();
 	    		Double gradazione = Double.parseDouble(request.getParameter("gradazione"));
 	    		String tipologia = request.getParameter("tipologia");

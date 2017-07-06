@@ -20,6 +20,7 @@ function addArticleToPromotion(){
 		},
 		dataType : "json",
 		error : function(xhr, status, errorThrown) {
+			alert("No article matching this value!")
 			console.log(JSON.stringify(xhr));
 			console.log("AJAX error: " + status + ' : ' + errorThrown);
 		},

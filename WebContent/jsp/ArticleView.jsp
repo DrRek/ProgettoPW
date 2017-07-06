@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	Collection<?> products = (Collection<?>) request.getAttribute("articoli");
 	String daCercare = (String) request.getAttribute("daCercare");
 	String cercaPerTipo = (String) request.getAttribute("cercaPerTipo");
 	Cart cart = (Cart) request.getSession().getAttribute("cart");

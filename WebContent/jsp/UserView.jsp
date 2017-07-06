@@ -194,59 +194,112 @@
 	<div class="container">
 		<h2>Aggiungi Prescrizione</h2>
 		<div class="form-group">
-		<label for="nomeP">Nome:</label> <input class="form-control"  name="nomeP" type="text"
-			maxlength="50" placeholder="ES. di Mario per vicinanza"> <span class="help-block" 
-			id="tipoP"></span><br> <label for="sferaSX">Sfera
-			Sinistra:</label> <input class="form-control"  name="sferaSX" type="number" step="0.01"
-			step="0.01" min="-10" max="10" placeholder="Gradazione Occhio SX"><span class="help-block" 
-			id="sferaSX"></span> <br> <label for="cilindroSX">Cilindro
-			Sinistra:</label> <input class="form-control"  name="cilindroSX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Valore Astigmatismo SX"><span class="help-block" 
-			id="cilindroSX"></span> <br> <label for="asseSX">Asse
-			Sinistra:</label> <input class="form-control"  name="asseSX" type="number" step="0.01" min="0"
-			max="180" placeholder="Gradi Orientamento Lente"><span class="help-block" 
-			id="asseSX"></span> <br> <label for="sferaDX">Sfera
-			Destra:</label> <input class="form-control"  name="sferaDX" type="number" step="0.01" min="-10"
-			max="10" placeholder="Gradazione Occhio DX"><span class="help-block" 
-			id="sferaDX"></span> <br> <label for="cilindroDX">Cilindro
-			Destra:</label> <input class="form-control"  name="cilindroDX" type="number" type="number"
-			step="0.01" min="-10" max="10" placeholder="Valore Astigmatismo DX"><span class="help-block" 
-			id="cilindroDX"></span> <br> <label for="asseDX">Asse
-			Destra:</label> <input class="form-control"  name="asseDX" type="number" step="0.01" min="0"
-			max="180" placeholder="Gradi Orientamento Lente"><span class="help-block" 
-			id="asseDX"></span> <br> <label for="addVicinanza">Addizione
-			Vicinanza</label> <input class="form-control"  name="addVicinanza" type="number" step="0.01"
-			min="-10" max="10" placeholder="Aggiunta Diotdivie Positive">
-		<span class="help-block"  id="addVicinanza"></span> <br> <label for="prismaOrizSX">Prisma
-			Orizzontale SX:</label> <input class="form-control"  name="prismaOrizSX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Oriz SX"><span class="help-block" 
-			id="prismaOrizSX"></span> <br> <label for="prismaOrizSXBD">Prisma
-			Oriz SX BaseDirection:</label> <input class="form-control"  name="prismaOrizSXBD" type="text"
-			maxlength="3" placeholder="PrismaOrizSXBaseDirection"><span class="help-block" 
-			id="prismaOrizSXBD"></span> <br> <label for="prismaOrizDX">Prisma
-			Orizzontale DX:</label> <input class="form-control"  name="prismaOrizDX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Oriz DX"><span class="help-block" 
-			id="prismaOrizDX"></span> <br> <label for="prismaOrizDXBD">Prisma
-			Oriz DX BaseDirection:</label> <input class="form-control"  name="prismaOrizDXBD" type="text"
-			maxlength="3" placeholder="PrismaOrizDXBaseDirection"><span class="help-block" 
-			id="prismaOrizDXBD"></span> <br> <label for="prismaVertSX">Prisma
-			Verticale SX:</label> <input class="form-control"  name="prismaVertSX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Vert SX"><span class="help-block" 
-			id="prismaVertSX"></span> <br> <label for="prismaVertSXBD">Prisma
-			Vert SX BaseDirection:</label> <input class="form-control"  name="prismaVertSXBD" type="text"
-			maxlength="3" placeholder="PrismaVertSXBaseDirection"><span class="help-block" 
-			id="prismaVertSXBD"></span> <br> <label for="prismaVertDX">Prisma
-			Verticale DX:</label> <input class="form-control"  name="prismaVertDX" type="number" step="0.01"
-			min="-10" max="10" placeholder="Prisma Vert DX"><span class="help-block" 
-			id="prismaVertDX"></span> <br> <label for="prismaVertSXBD">Prisma
-			Vert DX BaseDirection:</label> <input class="form-control"  name="prismaVertDXBD" type="text"
-			maxlength="3" placeholder="PrismaVertDXBaseDirection"><span class="help-block" 
-			id="prismaVertDXBD"></span> <br> <label for="pdSX">Pupillar
-			Distance SX: </label> <input class="form-control"  name="pdSX" type="number" step="0.01" min="-10"
-			max="10" placeholder="Pupillar Distance"><span class="help-block"  id="pdSX"></span>
-		<br> <label for="pdDX">Pupillar Distance DX: </label> <input class="form-control" 
-			name="pdDX" type="number" step="0.01" min="-10" max="10"
-			placeholder="Pupillar Distance"><span class="help-block"  id="pdDX"></span> <br>
+		<label for="nomeP">Nome:</label>
+		<input class="form-control"  name="nomeP" type="text"
+			maxlength="50" placeholder="ES. di Mario per vicinanza">
+		<span class="help-block" 
+			id="tipoP"></span><br>
+		<label for="sferaSX">Sfera Sinistra:</label>
+		<input class="form-control"  name="sferaSX" type="number"
+			step="0.05" min="-20" max="12" placeholder="Gradazione Occhio SX">
+		<span class="help-block" 
+			id="sferaSX"></span> <br>
+		<label for="cilindroSX">Cilindro Sinistra:</label>
+		<input class="form-control"  name="cilindroSX" type="number" step="0.05" min="-6" max="6" placeholder="Valore Astigmatismo SX">
+		<span class="help-block" 
+			id="cilindroSX"></span> <br>
+		<label for="asseSX">Asse
+			Sinistra:</label>
+		<input class="form-control"  name="asseSX" type="number" step="1" min="0" max="180" placeholder="Gradi Orientamento Lente">
+		<span class="help-block" 
+			id="asseSX"></span> <br>
+		<label for="sferaDX">Sfera
+			Destra:</label>
+		<input class="form-control" min="-20" max="12" name="sferaDX" type="number" step="0.05" placeholder="Gradazione Occhio DX">
+		<span class="help-block" 
+			id="sferaDX"></span> <br>
+		<label for="cilindroDX">Cilindro
+			Destra:</label>
+		<input class="form-control"  name="cilindroDX" type="number" type="number"
+			step="0.05" min="-6" max="6" placeholder="Valore Astigmatismo DX">
+		<span class="help-block" 
+			id="cilindroDX"></span> <br>
+		<label for="asseDX">Asse
+			Destra:</label>
+		<input class="form-control"  name="asseDX" type="number" step="1" min="0"
+			max="180" placeholder="Gradi Orientamento Lente">
+		<span class="help-block" 
+			id="asseDX"></span> <br>
+		<label for="addVicinanza">Addizione
+			Vicinanza</label>
+		<input class="form-control"  name="addVicinanza" type="number" step="0.5"
+			min="0" max="3.5" placeholder="Aggiunta Diotdivie Positive">
+		<span class="help-block"  id="addVicinanza"></span> <br>
+		<label for="prismaOrizSX">Prisma
+			Orizzontale SX:</label>
+		<input class="form-control"  name="prismaOrizSX" type="number" step="0.05"
+			min="0" max="5" placeholder="Prisma Oriz SX">
+		<span class="help-block" 
+			id="prismaOrizSX"></span> <br>
+		<label for="prismaOrizSXBD">Prisma
+			Oriz SX BaseDirection:</label>
+		<select class="form-control"  name="prismaOrizSXBD">
+			<option value="in">in</option>
+			<option value="out">out</option>
+		</select>
+		<span class="help-block" 
+			id="prismaOrizSXBD"></span> <br>
+		<label for="prismaOrizDX">Prisma
+			Orizzontale DX:</label>
+		<input class="form-control"  name="prismaOrizDX" type="number" step="0.05"
+			min="0" max="5" placeholder="Prisma Oriz DX">
+		<span class="help-block" 
+			id="prismaOrizDX"></span> <br>
+		<label for="prismaOrizDXBD">Prisma
+			Oriz DX BaseDirection:</label>
+		<select class="form-control"  name="prismaOrizDXBD">
+			<option value="in">in</option>
+			<option value="out">out</option>
+		</select>
+		<span class="help-block" 
+			id="prismaOrizDXBD"></span> <br>
+		<label for="prismaVertSX">Prisma
+			Verticale SX:</label>
+		<input class="form-control"  name="prismaVertSX" type="number" step="0.05"
+			min="0" max="5" placeholder="Prisma Vert SX">
+		<span class="help-block" 
+			id="prismaVertSX"></span> <br>
+		<label for="prismaVertSXBD">Prisma
+			Vert SX BaseDirection:</label>
+		<select class="form-control"  name="prismaVertSXBD">
+			<option value="in">in</option>
+			<option value="out">out</option>
+		</select>
+		<span class="help-block" 
+			id="prismaVertSXBD"></span> <br>
+		<label for="prismaVertDX">Prisma
+			Verticale DX:</label>
+		<input class="form-control"  name="prismaVertDX" type="number" step="0.05"
+			min="0" max="5" placeholder="Prisma Vert DX">
+		<span class="help-block" 
+			id="prismaVertDX"></span> <br>
+		<label for="prismaVertSXBD">Prisma
+			Vert DX BaseDirection:</label>
+		<select class="form-control"  name="prismaVertDXBD">
+			<option value="in">in</option>
+			<option value="out">out</option>
+		</select>
+		<span class="help-block" 
+			id="prismaVertDXBD"></span> <br>
+		<label for="pdSX">Pupillar
+			Distance SX: </label> <input class="form-control"  name="pdSX" type="number" step="0.5" min="17.5" max="40"
+			placeholder="Pupillar Distance">
+		<span class="help-block" id="pdSX"></span><br>
+		<label for="pdDX">Pupillar Distance DX: </label>
+		<input class="form-control" 
+			name="pdDX" type="number" step="0.5" min="17.5" max="40"
+			placeholder="Pupillar Distance">
+		<span class="help-block" id="pdDX"></span> <br>
 
 		<input class="btn btn-outline-secondary"  id="addPrescription" name="addPrescription" value="Aggiungi"
 			type="button">
@@ -357,7 +410,7 @@
 		<label>End date:</label>
 		<input class="form-control" name="finePr" type="date" size="35" /><span class="help-block" id="finePr"></span> <br> 
 			
-		<input name="submitPr" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
+		<input id="submitPr" type="button" class="btn btn-outline-secondary" value="Add promotion!" /> <br>
 		</div>
 		<hr>
 		<!-- da gestire il caso di eventuali update di prodotti già nel database-->
@@ -369,12 +422,11 @@
 			<option value="L">Contact lenses</option>
 		</select>
 		<br>
-		<form class="specificiPerOcchiali" action="article" method='post'
-			enctype="multipart/form-data">
+		<form class="specificiPerOcchiali" action="article" method='post' onSubmit="return validate_insert_glass()" enctype="multipart/form-data">
 			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
 				type="hidden" name="tipo" value="O" />
 			<label>Name:</label>
-			<input class="form-control" type="text" name="nomeProd" placeholder="name" /><span class="help-block" id="nomeProd"></span>
+			<input class="form-control" type="text" name="nomeOc" placeholder="name" /><span class="help-block" id="nomeOc"></span>
 			<br>
 			<label>Brand:</label><br>
 			<select name="marcaProd" class="btn btn-outline-secondary">
@@ -386,8 +438,8 @@
 			</select>
 			<br>
 			<label>Price:</label>
-			<input class="form-control" type="number" step="0.01" min="0.00" name="prezzoProd"
-				placeholder="Price" /><span class="help-block" id="prezzoProd"></span><br>
+			<input class="form-control" type="number" step="0.01" min="0.00" name="prezzoOc"
+				placeholder="Price" /><span class="help-block" id="prezzoOc"></span><br>
 			<br>
 			<label>Available number:</label>
 			<input class="form-control" type="number" step="1" min="1" name="quantitaOc" /><span class="help-block" id="quantitaOc"></span>
@@ -418,12 +470,12 @@
 				Product's webpage</h6>
 			<input class="btn btn-outline-secondary" id="addProduct" type='submit' value='Add' />
 		</form>
-		<form class="specificiPerLentine" action="article" method='post'
+		<form class="specificiPerLentine" onSubmit="return validate_insert_contact()" action="article" method='post'
 			enctype="multipart/form-data">
 			<input class="form-control" type="hidden" name="toDo" value="addProduct" /> <input
 				type="hidden" name="tipo" value="L" />
 			<label>Name:</label>
-			<input class="form-control" type="text" name="nomeProd" placeholder="name" /><span id="nomeProd" class="help-block"></span>
+			<input class="form-control" type="text" name="nomeCo" placeholder="name" /><span id="nomeCo" class="help-block"></span>
 			<br>
 			<label>Brand:</label><br>
 			<select name="marcaProd" class="btn btn-outline-secondary">
@@ -435,8 +487,8 @@
 			</select>
 			<br>
 			<label>Price:</label>
-			<input class="form-control" type="number" step="0.01" min="0.01" name="prezzoProd"
-				placeholder="Price" /><span id="prezzoProd" class="help-block"></span><br>
+			<input class="form-control" type="number" step="0.01" min="0.01" name="prezzoCo"
+				placeholder="Price" /><span id="prezzoCo" class="help-block"></span><br>
 			<br>
 			<label>Available number:</label>
 			<input class="form-control" type="number" step="1" min="1" name="quantitaL" /><span id="quantitaL" class="help-block"></span>
@@ -486,10 +538,10 @@
 			</select>
 			<br>
 			<label>Radius:</label>
-			<input class="form-control" type="number" min="5" name="raggioL" placeholder="mm" step="0.01" value="" /><span id="raggioL" class="help-block"></span>
+			<input class="form-control" type="number" min="5" max="10" name="raggioL" placeholder="mm" step="0.1" value="" /><span id="raggioL" class="help-block"></span>
 			<br>
 			<label>Diameter:</label>
-			<input class="form-control" type="number" min="10" name="diametroL" placeholder="mm" step="0.01" value="" /><span id="diametroL" class="help-block"></span>
+			<input class="form-control" type="number" min="10" max="20" name="diametroL" placeholder="mm" step="0.1" value="" /><span id="diametroL" class="help-block"></span>
 			<br>
 			<label>Color:</label><br>
 			<select class="specificiPerLentine btn btn-outline-secondary" name="colore">
@@ -503,7 +555,7 @@
 			</select>
 			<br>
 			<label>Lenses per pack:</label>
-			<input class="form-control" type="number" step="1" min="1" name="pezziPerPacco" /><span id="pezziPerPacco" class="help-block"></span>
+			<input class="form-control" type="number" step="1" min="1" max="30" name="pezziPerPacco" /><span id="pezziPerPacco" class="help-block"></span>
 			<label class="control-label">First image:</label>
 			<input id="img1" name="img1" type="file" multiple
 				class="img,file-loading btn btn-outline-secondary">

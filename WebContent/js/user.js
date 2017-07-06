@@ -23,7 +23,7 @@ $(document).ready(function() {
 		}
 	});
 
-	$("input[name=submitPr]").click(function(event) {
+	$("#submitPr").click(function(event) {
 		$("span.help-block").html("");
 		if(promotionValidation())
 			addPromotion();
@@ -130,13 +130,13 @@ function addPrescription() {
 	var asseDX = $("input[name='asseDX']").val();
 	var addVicinanza = $("input[name='addVicinanza']").val();
 	var prismaOrizSX = $("input[name='prismaOrizSX']").val();
-	var prismaOrizSXBD = $("input[name='prismaOrizSXBD']").val();
+	var prismaOrizSXBD = $("select[name='prismaOrizSXBD']").val();
 	var prismaOrizDX = $("input[name='prismaOrizDX']").val();
-	var prismaOrizDXBD = $("input[name='prismaOrizDXBD']").val();
+	var prismaOrizDXBD = $("select[name='prismaOrizDXBD']").val();
 	var prismaVertSX = $("input[name='prismaVertSX']").val();
-	var prismaVertSXBD = $("input[name='prismaVertSXBD']").val();
+	var prismaVertSXBD = $("select[name='prismaVertSXBD']").val();
 	var prismaVertDX = $("input[name='prismaVertDX']").val();
-	var prismaVertDXBD = $("input[name='prismaVertDXBD']").val();
+	var prismaVertDXBD = $("select[name='prismaVertDXBD']").val();
 	var pdSX = $("input[name='pdSX']").val();
 	var pdDX = $("input[name='pdDX']").val();
 	$.ajax({
@@ -302,33 +302,25 @@ function presValidation() {
 	var asseDX = $("input[name='asseDX']");
 	var addVicinanza = $("input[name='addVicinanza']");
 	var prismaOrizSX = $("input[name='prismaOrizSX']");
-	var prismaOrizSXBD = $("input[name='prismaOrizSXBD']");
 	var prismaOrizDX = $("input[name='prismaOrizDX']");
-	var prismaOrizDXBD = $("input[name='prismaOrizDXBD']");
 	var prismaVertSX = $("input[name='prismaVertSX']");
-	var prismaVertSXBD = $("input[name='prismaVertSXBD']");
 	var prismaVertDX = $("input[name='prismaVertDX']");
-	var prismaVertDXBD = $("input[name='prismaVertDXBD']");
 	var pdSX = $("input[name='pdSX']");
 	var pdDX = $("input[name='pdSX']");
-
-	if (allLetter(tipoP, "#tipoP") && isNumber(sferaSX, -10, 10, "#sferaSX")
-			&& isNumber(cilindroSX, -10, 10, "#cilindroSX")
+	if (allLetterOrSpace(tipoP, "#tipoP") 
+			&& isNumber(sferaSX, -20, 12, "#sferaSX")
+			&& isNumber(cilindroSX, -6, 6, "#cilindroSX")
 			&& isNumber(asseSX, 0, 180, "#asseSX")
-			&& isNumber(sferaDX, -10, 10, "#sferaDX")
-			&& isNumber(cilindroDX, -10, 10, "#cilindroDX")
+			&& isNumber(sferaDX, -20, 12, "#sferaDX")
+			&& isNumber(cilindroDX, -6, 6, "#cilindroDX")
 			&& isNumber(asseDX, 0, 180, "#asseDX")
-			&& isNumber(addVicinanza, -10, 10, "#addVicinanza")
-			&& isNumber(prismaOrizSX, -10, 10, "#prismaOrizSX")
-			&& allLetter(prismaOrizSXBD, "#prismaOrizSXBD")
-			&& isNumber(prismaOrizDX, -10, 10, "#prismaOrizDX")
-			&& allLetter(prismaOrizDXBD, "#prismaOrizDXBD")
-			&& isNumber(prismaVertSX, -10, 10, "#prismaVertSX")
-			&& allLetter(prismaVertSXBD, "#prismaVertSXBD")
-			&& isNumber(prismaVertDX, -10, 10, "#prismVertDX")
-			&& allLetter(prismaVertDXBD, "#prismaVertDXBD")
-			&& isNumber(pdSX, -10, 10, "#pdSX")
-			&& isNumber(pdDX, -10, 10, "#pdDX"))
+			&& isNumber(addVicinanza, 0, 3.5, "#addVicinanza")
+			&& isNumber(prismaOrizSX, 0, 5, "#prismaOrizSX")
+			&& isNumber(prismaOrizDX, 0, 5, "#prismaOrizDX")
+			&& isNumber(prismaVertSX, 0, 5, "#prismaVertSX")
+			&& isNumber(prismaVertDX, 0, 5, "#prismVertDX")
+			&& isNumber(pdSX, 17.5, 40, "#pdSX")
+			&& isNumber(pdDX, 17.5, 40, "#pdDX"))
 		return true;
 	else
 		return false;
@@ -337,7 +329,7 @@ function presValidation() {
 function isNumber(input, min, max, id) {
 	var numbers = /^-?\d+(\.\d+)?$/;
 	if (input.val().match(numbers)) {
-		if (input.val() >= min && input.val() <= max) {
+		if (input.val() >= min && input.val() <= max && input.val().length>0) {
 			$(id).empty();
 			return true
 		} else {
@@ -352,8 +344,8 @@ function isNumber(input, min, max, id) {
 	}
 }
 
-function allLetter(input, id) {
-	var letters = /^[A-Za-z]+$/;
+function allLetterOrSpace(input, id) {
+	var letters = /^[A-Za-z ]+$/;
 	if (input.val().match(letters)) {
 		$(id).empty();
 		return true;
@@ -432,10 +424,7 @@ function promotionValidation(){
 	if(toCheck==""){
 		$("#scontoPr").html("Enter a positive number!")
 		return false;
-	} else if(!isDouble(toCheck) || parseFloat(toCheck) <= 0 ){
-		$("#scontoPr").html("Enter a positive number!")
-		return false;
-	} else if(parseFloat(toCheck) <= 0 && parseFloat(toCheck) >= 100 && $("input[name=tipoPr]").val() == "%") {
+	} else if(parseFloat(toCheck) <= 0 || parseFloat(toCheck) >= 100) {
 		$("#scontoPr").html("Enter a positive number between 0 and 100!")
 		return false;
 	}
@@ -451,6 +440,67 @@ function promotionValidation(){
 	}
 	return true;
 }
+
 function isDouble(n) {
 	return parseFloat(n) == n
 };
+
+function validate_insert_glass(){
+	$("span").html("");
+	var toCheck = $("input[name=nomeOc]").val();
+	if(toCheck.length<=0||toCheck.length>=40){
+		$("#nomeOc").html("Enter a valid name between 0 and 40 character!")
+		return false;
+	}
+	toCheck = $("input[name=prezzoOc]").val();
+	if(toCheck.length<=0){
+		$("#prezzoOc").html("Enter a valid price!")
+		return false;
+	}
+	toCheck = $("input[name=quantitaOc]").val();
+	if(toCheck.length<=0){
+		$("#quantitaOc").html("Enter a valid quantity!")
+		return false;
+	}
+	toCheck = $("input[name=descrizioneOc]").val();
+	if(toCheck.length<=0||toCheck.length>=200){
+		$("#descrizioneOc").html("Enter a valid description between 0 and 200 character!")
+		return false;
+	}
+	return true
+}
+
+function validate_insert_contact(){
+	$("span").html("");
+	var toCheck = $("input[name=nomeCo]").val();
+	if(toCheck.length<=0||toCheck.length>=40){
+		$("#nomeCo").html("Enter a valid name between 0 and 40 character!")
+		return false;
+	}
+	toCheck = $("input[name=prezzoCo]").val();
+	if(toCheck.length<=0){
+		$("#prezzoCo").html("Enter a valid price!")
+		return false;
+	}
+	toCheck = $("input[name=quantitaL]").val();
+	if(toCheck.length<=0){
+		$("#quantitaL").html("Enter a valid quantity!")
+		return false;
+	}
+	toCheck = $("input[name=raggioL]").val();
+	if(toCheck.length<=0){
+		$("#raggioL").html("Enter a radius!")
+		return false;
+	}
+	toCheck = $("input[name=diametroL]").val();
+	if(toCheck.length<=0){
+		$("#diametroL").html("Enter a diameter!")
+		return false;
+	}
+	toCheck = $("input[name=pezziPerPacco]").val();
+	if(toCheck.length<=0){
+		$("#pezziPerPacco").html("Enter the number of contact lenses in a single box!")
+		return false;
+	}
+	return true;
+}
