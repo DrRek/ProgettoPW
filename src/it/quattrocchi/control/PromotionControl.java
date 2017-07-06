@@ -81,8 +81,8 @@ public class PromotionControl extends HttpServlet {
 						toadd.setMarca(marca);
 						toUpdate.addToValidi(toadd);
 						model.doSave(toUpdate);
+						response.getWriter().write(new Gson().toJson(toUpdate.getValidi()));
 					}
-					response.getWriter().write(new Gson().toJson(toUpdate.getValidi()));
 				}catch(Exception e){
 					e.printStackTrace();
 				}
