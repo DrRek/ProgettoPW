@@ -40,16 +40,16 @@
 				<%
 						if (adm == null) {
 					%>
-				<li><a href="checkout"><span><img src="image/cart.png" alt="carrello:"
+				<li><span><img src="image/cart.png" alt="carrello:"
 					style="max-height: 50px;"></span>
 				<%
 						if (crt == null) {
 					%>
-				<span id="count">0</span></a></li>
+				<span id="count" style="color:white"><a href="checkout">0</a></span></li>
 				<%
 						} else {
 					%>
-				<span id="count"><%=crt.getNumberOfProducts()%></span></a></li>
+				<span id="count" style="color:white"><a href="checkout"><%=crt.getNumberOfProducts()%></span></a></li>
 				<%
 						}
 						}
