@@ -41,7 +41,7 @@ function formatData(responseText)
 						 +  '<div class="bottom">'
 	    	   			 + '<div class="heading">'+ articleObject.nome +'</div>'
 	    	   			 + '<div class="info">' + articleObject.disponibilita + ' pezzi disponibili</div>' 
-	    	   			 + '<div class="price">' + parseInt(articleObject.prezzo*100)/100 + ' €</div>' 
+	    	   			 + '<div class="price">' + parseInt(articleObject.prezzo*100)/100 + ' € <span class="old-price">$45.00</span></div>' 
 	    	   			 + '<div><a href="articlePage?nome=' + articleObject.nome
 	    	   				+ '&marca=' + articleObject.marca + '">Mostra</a></div>'
 	    	   			 + '</div>'
