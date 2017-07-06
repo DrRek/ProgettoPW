@@ -40,7 +40,7 @@
 				<%
 						if (adm == null) {
 					%>
-				<li><span><img src="image/cart.png" alt="carrello:"
+				<li style="margin-right:10px"><span><img src="image/cart.png" alt="carrello:"
 					style="max-height: 50px;"></span>
 				<%
 						if (crt == null) {

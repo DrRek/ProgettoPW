@@ -103,3 +103,7 @@
 .service-image-left > center > img,.service-image-right > center > img{
 	max-height: 155px;
 }
+.old-price {
+  color: #f00;
+  text-decoration: line-through;
+}
