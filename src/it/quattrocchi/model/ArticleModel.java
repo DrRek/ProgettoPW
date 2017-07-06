@@ -250,7 +250,7 @@ public class ArticleModel {
 		return found;
 	}
 
-	//si mette la disponibilità a zero, per non perdere la tracciabilità degli ordini passati
+	//si mette la disponibilitï¿½ a zero, per non perdere la tracciabilitï¿½ degli ordini passati
 	public void doDelete(String nome, String marca) throws SQLException
 	{
 		Connection conn = null;
@@ -477,7 +477,7 @@ public class ArticleModel {
 		return lentine;
 	}
 
-	//prende qualsiasi prodotto con disponibilità cumulativa nel caso delle lenti a contatto
+	//prende qualsiasi prodotto con disponibilitï¿½ cumulativa nel caso delle lenti a contatto
 	public Collection<ArticleBean> doRetrieveAll(String order) throws SQLException{
 		Connection conn = null;
 		PreparedStatement preparedStatement = null;

@@ -33,11 +33,10 @@ function formatData(responseText)
 								+ '</ul>'
 								+'</div>';
 				toAppend += '<div class="middle">';
-			
-				if(articleObject.tipo == 'O')
-					toAppend += '<img src="image/placeholder_occhiali.jpg" alt="pic" />';
-				else
-					toAppend += '<img src="image/placeholder_lentine.jpg" alt="pic" />';
+				
+				console.log(articleObject.img1)
+				toAppend += '<img src= \"/catalogoPW/'+articleObject.img1.trim().replace(/ /g,"_")+'\" alt="pic" />';
+				//toAppend += '<img src="/catalogoPW/1-Day_Acuvue_TrueEye_Acuvue_1.jpg" alt="pic" />';
 				toAppend += '</div>'
 						 +  '<div class="bottom">'
 	    	   			 + '<div class="heading">'+ articleObject.nome +'</div>'
