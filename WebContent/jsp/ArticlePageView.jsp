@@ -93,7 +93,14 @@
 						<hr>
 						<div class="product-desc"><%=((GlassesBean) occhiali).getDescrizione()%></div>
 
-						<div class="product-price"><%=occhiali.getPrezzo()%>€
+						<div> <span class="product-price"><%=occhiali.getPrezzo()%> € </span>
+						<%if(occhiali.getSconto() > 0){
+								if(occhiali.getRealPrezzo()!= occhiali.getPrezzo()){
+								
+								%>
+							<span class="old price"><%=occhiali.getRealPrezzo()%> € </span>
+	    	   		
+							<%}} %>
 						</div>
 						<br><br>
 						<div style="float:right">
@@ -212,8 +219,15 @@
 						</div>
 
 							
-							<div class="product-price col-sm-2">
-							<br><%=l.getPrezzo()%> €
+							<div class="col-sm-2">
+							<br><span class="product-price"><%=l.getPrezzo()%> € </span>
+							<%if(l.getSconto() > 0){
+								if(l.getRealPrezzo()!= l.getPrezzo()){
+								
+								%>
+							<span class="old price"><%=l.getRealPrezzo()%> € </span>
+	    	   		
+							<%}} %>
 							</div>
 						</div>
 							<div style="float:right">
