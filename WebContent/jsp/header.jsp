@@ -27,28 +27,29 @@
 				<li><a href="article?toDo=searchLente">Lentine</a>
 				<li>
 					<form class="navbar-form" action="article" method="get">
-						<div class="form-group">
+						<div class="input-group">
 							<input type="hidden" name="toDo" value="searchFromOtherPage">
 							<input name="daCercare" type="text" class="form-control"
-								placeholder="Cerca" />
+								placeholder="Cerca"/>
+								<span class="input-group-btn">
+						<button type="submit" class="btn btn-default">Submit</button></span>
 						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
 					</form>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<%
 						if (adm == null) {
 					%>
-				<li><img src="image/cart.png" alt="carrello:"
-					style="max-height: 50px;"></li>
+				<li><a href="checkout"><span><img src="image/cart.png" alt="carrello:"
+					style="max-height: 50px;"></span>
 				<%
 						if (crt == null) {
 					%>
-				<li><a id="count" href="checkout">0</a></li>
+				<span id="count">0</span></a></li>
 				<%
 						} else {
 					%>
-				<li><a id="count" href="checkout"><%=crt.getNumberOfProducts()%></a></li>
+				<span id="count"><%=crt.getNumberOfProducts()%></span></a></li>
 				<%
 						}
 						}
@@ -58,14 +59,12 @@
 				<%
 						} else if (usr != null) {
 					%>
-				<li><a href="user">Benvenuto, <%=usr.getUser()%>
-				</a></li>
+				<li><a href="user">Benvenuto, <%=usr.getUser()%></a></li>
 				<li><a href="user?action=logout">logout</a></li>
 				<%
 						} else if (adm != null) {
 					%>
-				<li><a href="user">Benvenuto, <%=adm.getUser()%>
-				</a></li>
+				<li><a href="user">Benvenuto, <%=adm.getUser()%></a></li>
 				<li><a href="user?action=logout">logout</a></li>
 				<%
 						}
@@ -73,4 +72,5 @@
 			</ul>
 		</div>
 	</div>
+	<script src="js/bootstrap.js"></script>
 </nav>

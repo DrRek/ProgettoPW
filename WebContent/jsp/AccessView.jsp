@@ -145,6 +145,7 @@
 		</form>
 	</div>
 	<% } %>
+	<%@ include file="../jsp/footer.jsp"%>
 	<script type="text/javascript" src="js/access-validation.js"></script>
 	<script src="js/util.js"></script>
 </body>

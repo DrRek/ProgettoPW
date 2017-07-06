@@ -71,7 +71,6 @@
 				<div class="container">
 					<div>
 						<div class="product col-sm-3 service-image-left">
-
 							<center>
 								<img src="image/placeholder_occhiali.jpg" alt="pic1"></img>
 							</center>
@@ -94,8 +93,7 @@
 						<hr>
 						<div class="product-desc"><%=((GlassesBean) occhiali).getDescrizione()%></div>
 
-						<div class="product-price"><%=occhiali.getPrezzo()%>
-							€
+						<div class="product-price"><%=occhiali.getPrezzo()%>€
 						</div>
 						<br><br>
 						<div style="float:right">
@@ -300,6 +298,7 @@
 		<%
 			}
 		%>
+		<%@ include file="../jsp/footer.jsp"%>	
 		<script src="js/article-page.js"></script>
 </body>
 </html>

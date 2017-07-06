@@ -3,27 +3,27 @@
 -- luca desktop C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\
 
 use quattrocchiDB;
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Articolo.csv'
+LOAD DATA LOCAL INFILE '//Users//luca//Desktop//ProgettoPW//sql//csv//Articolo.csv'
 	INTO TABLE Articolo
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
 	();
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Occhiale.csv'
+LOAD DATA LOCAL INFILE '//Users//luca//Desktop//ProgettoPW//sql//csv//Occhiale.csv'
 	INTO TABLE Occhiale
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
 	();
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Lentine.csv'
+LOAD DATA LOCAL INFILE '//Users//luca//Desktop//ProgettoPW//sql//csv//Lentine.csv'
 	INTO TABLE Lentine
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
 	();
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Amministratore.csv'
+LOAD DATA LOCAL INFILE '//Users//luca//Desktop//ProgettoPW//sql//csv//Amministratore.csv'
 	INTO TABLE Amministratore
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
 	();
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Cliente.csv'
+LOAD DATA LOCAL INFILE '//Users//luca//Desktop//ProgettoPW//sql//csv//Cliente.csv'
 	INTO TABLE Cliente
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
 	();
-LOAD DATA LOCAL INFILE 'C:\\Users\\Luca\\Desktop\\ProgettoPW\\sql\\csv\\Disponibilita.csv'
+LOAD DATA LOCAL INFILE '//Users//luca//Desktop//ProgettoPW//sql//csv//Disponibilita.csv'
 	INTO TABLE Disponibilita
-		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\r\n'
+		FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n'
 	();
