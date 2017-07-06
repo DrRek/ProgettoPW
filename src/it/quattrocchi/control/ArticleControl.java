@@ -27,7 +27,7 @@ maxRequestSize=1024*1024*50)   // 50MB
 public class ArticleControl extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SAVE_DIR = "C://catalogoPW//";
+	private static final String SAVE_DIR = "catalogoPW//";
 
 	static ArticleModel model = new ArticleModel();
 

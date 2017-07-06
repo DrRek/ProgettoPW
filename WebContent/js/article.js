@@ -34,17 +34,26 @@ function formatData(responseText)
 								+'</div>';
 				toAppend += '<div class="middle">';
 				
-				console.log(articleObject.img1)
 				toAppend += '<img src= \"/catalogoPW/'+articleObject.img1.trim().replace(/ /g,"_")+'\" alt="pic" />';
 				//toAppend += '<img src="/catalogoPW/1-Day_Acuvue_TrueEye_Acuvue_1.jpg" alt="pic" />';
 				toAppend += '</div>'
 						 +  '<div class="bottom">'
 	    	   			 + '<div class="heading">'+ articleObject.nome +'</div>'
-	    	   			 + '<div class="info">' + articleObject.disponibilita + ' pezzi disponibili</div>' 
-	    	   			 + '<div class="price">' + parseInt(articleObject.prezzo*100)/100 + ' € <span class="old-price">$45.00</span></div>' 
-	    	   			 + '<div><a href="articlePage?nome=' + articleObject.nome
-	    	   				+ '&marca=' + articleObject.marca + '">Mostra</a></div>'
-	    	   			 + '</div>'
+	    	   			 + '<div class="info">' + articleObject.disponibilita + ' pezzi disponibili</div>';
+				console.log(articleObject)
+				if(articleObject.sconto > 0){
+					if(articleObject.tipoSconto == "%"){
+						var sconto = parseInt(((articleObject.prezzo)-(articleObject.prezzo*articleObject.sconto/100))*100)/100;
+					}else{
+						var sconto = parseInt(articleObjec.prezzo-articleObject.sconto*100)/100;
+					}
+					toAppend += '<div class="price">' +sconto + ' € <span class="old-price">'+parseInt(articleObject.prezzo*100)/100+'€</span></div>';
+				} else {
+					toAppend += '<div class="price">' + parseInt(articleObject.prezzo*100)/100 + '€</div>';
+				}
+	    	   	toAppend +='<div><a href="articlePage?nome=' + articleObject.nome
+	    	   			+ '&marca=' + articleObject.marca + '">Mostra</a></div>'
+	    	   			+ '</div>'
 						+'</div>';
 		}
 	});
