@@ -72,16 +72,16 @@
 					<div>
 						<div class="product col-sm-3 service-image-left">
 							<center>
-								<img src="image/placeholder_occhiali.jpg" alt="pic1"></img>
+								<img src="/catalogoPW/<%=occhiali.getImg1().replaceAll(" ", "_").trim()%>" alt="pic1"></img>
 							</center>
 						</div>
 
 						<div class="container service1-items col-sm-2 col-sm-2 pull-left">
 							<center>
 								<a class="service1-item"> <img
-									src="image/placeholder_occhiali.jpg" alt="pic2"></img>
+									src="/catalogoPW/<%=((GlassesBean) occhiali).getImg2().replaceAll(" ", "_").trim()%>" alt="img"></img>
 								</a> <a class="service1-item"> <img
-									src="image/placeholder_occhiali.jpg" alt="pic3"></img>
+									src="/catalogoPW/<%=((GlassesBean) occhiali).getImg3().replaceAll(" ", "_").trim()%>" alt="img"></img>
 								</a>
 							</center>
 						</div>
@@ -170,7 +170,7 @@
 						<div class="product col-sm-3 service-image-left">
 
 							<center>
-								<img src="image/placeholder_lentine.jpg" alt="pic1"></img>
+								<img src="/catalogoPW/<%=l.getImg1().replaceAll(" ", "_").trim()%>" alt="pic1"></img>
 							</center>
 						</div>
 						<div class="product-title" id="lNome"><%=l.getNome()%></div>
