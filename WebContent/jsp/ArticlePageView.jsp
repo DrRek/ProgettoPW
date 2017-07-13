@@ -31,6 +31,13 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<style type="text/css">
+.enlarge:hover {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+}</style>
 </head>
 
 <body>
@@ -70,17 +77,17 @@
 			<div class="item-container">
 				<div class="container">
 					<div>
-						<div class="product col-sm-3 service-image-left">
+						<div class="enlarge product col-sm-3 service-image-left">
 							<center>
-								<img src="/catalogoPW/<%=occhiali.getImg1().replaceAll(" ", "_").trim()%>" alt="pic1"></img>
+								<img class="enlarge" src="/catalogoPW/<%=occhiali.getImg1().replaceAll(" ", "_").trim()%>" alt="pic1"></img>
 							</center>
 						</div>
 
 						<div class="container service1-items col-sm-2 col-sm-2 pull-left">
 							<center>
-								<a class="service1-item"> <img
+								<a class="service1-item"> <img 
 									src="/catalogoPW/<%=((GlassesBean) occhiali).getImg2().replaceAll(" ", "_").trim()%>" alt="img"></img>
-								</a> <a class="service1-item"> <img
+								</a> <a class="service1-item"> <img 
 									src="/catalogoPW/<%=((GlassesBean) occhiali).getImg3().replaceAll(" ", "_").trim()%>" alt="img"></img>
 								</a>
 							</center>
@@ -93,12 +100,12 @@
 						<hr>
 						<div class="product-desc"><%=((GlassesBean) occhiali).getDescrizione()%></div>
 
-						<div> <span class="product-price"><%=occhiali.getPrezzo()%> € </span>
+						<div> <span class="product-price"><%=occhiali.getRealPrezzo()%> € </span>
 						<%if(occhiali.getSconto() > 0){
 								if(occhiali.getRealPrezzo()!= occhiali.getPrezzo()){
 								
 								%>
-							<span class="old price"><%=occhiali.getRealPrezzo()%> € </span>
+							<span class="old-price"><%=occhiali.getPrezzo()%> € </span>
 	    	   		
 							<%}} %>
 						</div>
@@ -174,10 +181,9 @@
 			<div class="item-container">
 				<div class="container">
 
-						<div class="product col-sm-3 service-image-left">
-
+						<div class="enlarge product col-sm-3 service-image-left">
 							<center>
-								<img src="/catalogoPW/<%=l.getImg1().replaceAll(" ", "_").trim()%>" alt="pic1"></img>
+								<img class="enlarge" src="/catalogoPW/<%=l.getImg1().replaceAll(" ", "_").trim()%>" alt="pic1"></img>
 							</center>
 						</div>
 						<div class="product-title" id="lNome"><%=l.getNome()%></div>
@@ -220,12 +226,12 @@
 
 							
 							<div class="col-sm-2">
-							<br><span class="product-price"><%=l.getPrezzo()%> € </span>
+							<br><span class="product-price"><%=l.getRealPrezzo()%> € </span>
 							<%if(l.getSconto() > 0){
 								if(l.getRealPrezzo()!= l.getPrezzo()){
 								
 								%>
-							<span class="old price"><%=l.getRealPrezzo()%> € </span>
+							<span class="old-price"><%=l.getPrezzo()%> € </span>
 	    	   		
 							<%}} %>
 							</div>

@@ -5,13 +5,6 @@ $(document).ready(function() {
 	initialize();
 	setSearchField();
 	
-	$(document).ready(function(){
-	    $('.block').hover(function() {
-	        $(this).addClass('transition');
-	    }, function() {
-	        $(this).removeClass('transition');
-	    });
-	});
 	    
 	$("#advancedSearch").on("click", function(event) {
 		toDoD = 'asyncSpecificSearch'
@@ -24,7 +17,7 @@ function formatData(responseText)
 	var toAppend = '';
 	$.each(responseText, function(i, articleObject) {
 		if(articleObject.disponibilita > 0){
-			toAppend += '<div class="block">'
+			toAppend += '<div class="block enlarge">'
 							+'<div class="top">'
 								+ '<ul>'
 								+ '<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>'
